@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>مدير الدواجن - لوحة القيادة</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Outfit:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#00201c",
+                      "on-tertiary-fixed-variant": "#005228",
+                      "inverse-primary": "#7dd6c7",
+                      "dark-warning": "#F1C40F",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-high": "#e0e9f4",
+                      "outline-variant": "#bdc9c5",
+                      "secondary-fixed": "#ffddb9",
+                      "surface": "#f7f9ff",
+                      "dark-primary": "#2ECC71",
+                      "tertiary": "#006a35",
+                      "light-background": "#F5F7F8",
+                      "surface-tint": "#006b5f",
+                      "surface-bright": "#f7f9ff",
+                      "dark-surface": "#171F26",
+                      "primary-fixed-dim": "#7dd6c7",
+                      "on-background": "#131d24",
+                      "light-surface": "#EDEFF1",
+                      "light-surface-variant": "#E1E4E7",
+                      "tertiary-fixed": "#8af9a9",
+                      "on-tertiary-fixed": "#00210c",
+                      "surface-variant": "#dae3ee",
+                      "on-primary-fixed-variant": "#005047",
+                      "on-error": "#ffffff",
+                      "primary-container": "#1e8275",
+                      "on-surface-variant": "#3e4946",
+                      "on-tertiary-container": "#f4fff2",
+                      "on-secondary": "#ffffff",
+                      "secondary": "#865300",
+                      "inverse-on-surface": "#e8f2fd",
+                      "background": "#f7f9ff",
+                      "on-error-container": "#93000a",
+                      "dark-background": "#0C1013",
+                      "dark-danger": "#E74C3C",
+                      "surface-container": "#e6effa",
+                      "error": "#ba1a1a",
+                      "outline": "#6e7976",
+                      "surface-container-highest": "#dae3ee",
+                      "tertiary-container": "#008645",
+                      "on-tertiary": "#ffffff",
+                      "dark-surface-variant": "#242F3A",
+                      "success": "#229954",
+                      "dark-success": "#27AE60",
+                      "inverse-surface": "#28313a",
+                      "secondary-container": "#fcae49",
+                      "on-surface": "#131d24",
+                      "dark-secondary": "#F39C12",
+                      "surface-dim": "#d2dbe6",
+                      "tertiary-fixed-dim": "#6edc8f",
+                      "on-secondary-container": "#6e4300",
+                      "surface-container-low": "#ecf4ff",
+                      "primary": "#00685c",
+                      "on-primary-container": "#f2fffb",
+                      "danger": "#CB4335",
+                      "secondary-fixed-dim": "#ffb963",
+                      "on-secondary-fixed-variant": "#663e00",
+                      "on-primary": "#ffffff",
+                      "primary-fixed": "#99f3e3",
+                      "on-secondary-fixed": "#2b1700",
+                      "error-container": "#ffdad6",
+                      "warning": "#D4AC0D"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "medium": "16px",
+                      "micro": "4px",
+                      "baseline": "8px",
+                      "small": "8px",
+                      "large": "24px"
+              },
+              "fontFamily": {
+                      "numeric-data": ["Inter"],
+                      "title-md": ["Outfit"],
+                      "display-lg": ["Outfit"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "numeric-data": ["15px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                      "title-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+                      "display-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                      "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                      "body-lg": ["16px", { "lineHeight": "22px", "fontWeight": "400" }],
+                      "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24 font-body-md text-body-md">
+<!-- TopAppBar from JSON -->
+<header class="bg-surface w-full top-0 sticky shadow-sm z-40">
+<div class="flex flex-row-reverse justify-between items-center px-medium py-small w-full">
+<button class="text-primary hover:bg-surface-container-high rounded-full p-small scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-title-md text-title-md text-primary">مدير الدواجن</h1>
+<button class="text-primary hover:bg-surface-container-high rounded-full p-small scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="h-px w-full bg-surface-container"></div>
+</header>
+<!-- Main Canvas -->
+<main class="p-medium space-y-large max-w-4xl mx-auto">
+<!-- Search Bar -->
+<section class="relative">
+<div class="absolute inset-y-0 right-0 flex items-center pr-medium pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full bg-surface-container-low border-none rounded-full py-3 pr-12 pl-medium text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary font-body-md text-body-md shadow-sm" placeholder="البحث عن مبنى، دفعة، أو مشروع..." type="text"/>
+</section>
+<!-- Stats Dashboard (Bento Grid) -->
+<section>
+<h2 class="font-title-md text-title-md text-on-surface mb-medium">نظرة عامة على المزارع</h2>
+<div class="grid grid-cols-2 gap-medium">
+<!-- Total Birds (Spans 2 columns) -->
+<div class="col-span-2 bg-primary-container rounded-xl p-medium flex items-center justify-between shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full opacity-10 -translate-y-8 translate-x-8"></div>
+<div class="z-10">
+<p class="font-label-sm text-label-sm text-on-primary-container opacity-80 mb-micro">إجمالي الطيور الحية</p>
+<p class="font-display-lg text-display-lg text-on-primary-container">12,450</p>
+</div>
+<div class="z-10 bg-surface-container-lowest/20 p-small rounded-full">
+<span class="material-symbols-outlined text-on-primary-container" style="font-size: 32px;">cruelty_free</span>
+</div>
+</div>
+<!-- Avg Temp -->
+<div class="bg-surface-container rounded-xl p-medium shadow-sm flex flex-col justify-center items-start">
+<div class="flex items-center gap-micro mb-small">
+<span class="material-symbols-outlined text-warning">device_thermostat</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">متوسط الحرارة</p>
+</div>
+<div class="flex items-baseline gap-micro">
+<p class="font-display-lg text-display-lg text-on-surface">32</p>
+<p class="font-numeric-data text-numeric-data text-outline">°C</p>
+</div>
+</div>
+<!-- Ventilation -->
+<div class="bg-surface-container rounded-xl p-medium shadow-sm flex flex-col justify-center items-start">
+<div class="flex items-center gap-micro mb-small">
+<span class="material-symbols-outlined text-tertiary">air</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">التهوية الإجمالية</p>
+</div>
+<div class="flex items-baseline gap-micro">
+<p class="font-display-lg text-display-lg text-on-surface">85</p>
+<p class="font-numeric-data text-numeric-data text-outline">%</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Projects -->
+<section>
+<div class="flex justify-between items-center mb-medium">
+<h2 class="font-title-md text-title-md text-on-surface">المشاريع النشطة</h2>
+<button class="font-label-sm text-label-sm text-primary flex items-center gap-micro">
+                    عرض الكل
+                    <span class="material-symbols-outlined" style="font-size: 16px;">arrow_back_ios_new</span>
+</button>
+</div>
+<div class="space-y-medium">
+<!-- Project Card 1: Completed -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant overflow-hidden flex flex-row">
+<div class="w-32 h-auto relative shrink-0">
+<img class="w-full h-full object-cover" data-alt="A modern, high-tech poultry farming facility in the rural landscape of Sétif, Algeria. The building features clean metallic siding, large ventilation fans, and solar panels on the roof. The scene is illuminated by bright, clear daytime sunlight, creating a highly professional and industrial agricultural aesthetic. Wide shot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvqx6Il9UIL11D70jrwYh1GUDIXLsngvPyrPWAYNyOF9bS_djhwGbE0iiOZl2XvEK9CCvXxkkh6cEaRfMkim408XepLTXiIifogIZz-r5I7mjkovf99y9Pv8aQV3FVMVmYlKzS509SjWS3gmdsL1jP54GNZptO8QLHi8B7KgaOOjd23vUbhIh4a6PXv98wx8IDQHVb6vsLx2TSUG-35i_d-iHw3XMxlAop1LzXxHgfBZyeN7AfeDsqv6OkrkHEuDip-NMX_3X95-Ao"/>
+</div>
+<div class="p-medium flex flex-col justify-between flex-grow">
+<div>
+<div class="flex justify-between items-start mb-small">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">المبنى الشرقي</h3>
+<p class="font-body-md text-body-md text-outline flex items-center gap-micro">
+<span class="material-symbols-outlined" style="font-size: 14px;">location_on</span>
+                                        Sétif
+                                    </p>
+</div>
+<span class="bg-primary text-on-primary font-label-sm text-label-sm px-small py-micro rounded-full whitespace-nowrap">مكتمل</span>
+</div>
+<div class="flex gap-medium">
+<div class="flex items-center gap-micro">
+<span class="material-symbols-outlined text-outline" style="font-size: 16px;">payments</span>
+<span class="font-numeric-data text-numeric-data text-on-surface-variant">450k DZD</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Project Card 2: Planning -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant overflow-hidden flex flex-row">
+<div class="w-32 h-auto relative shrink-0">
+<img class="w-full h-full object-cover" data-alt="An architectural blueprint laid out on a rugged field table in the arid region of Batna, Algeria. The blueprint shows the expansion of an agricultural building. The scene includes surveying tools, a digital tablet displaying terrain data, and warm, dusty afternoon sunlight. The mood is constructive and preparatory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvwSwzxGYIW9AylTFbcnkAxUWxbG_Qt4nJri-CMrl5-0FC6B3vPER_fla9zZ6mH0nkj46fKCoU4EdDinRRwBxZmTaw6ys7AJtmm6papda_2d_wS-gOx2u7SSBTAMfnjFxx9CXxE2sJt91oXENJ5lMGBhgkAqVxtLPBhSCwUzTnb6X3zj_sJUnjRUwCfeGjBYI_TN7V2NTKSuLTHTCy7eorLYSKHTJEfLtK58db-ky8-yFC8fn-CP0MQxbUuqydS45Kab-VMLLfm3-S"/>
+</div>
+<div class="p-medium flex flex-col justify-between flex-grow">
+<div>
+<div class="flex justify-between items-start mb-small">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">توسعة الجنوب</h3>
+<p class="font-body-md text-body-md text-outline flex items-center gap-micro">
+<span class="material-symbols-outlined" style="font-size: 14px;">location_on</span>
+                                        Batna
+                                    </p>
+</div>
+<span class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-small py-micro rounded-full whitespace-nowrap">قيد التخطيط</span>
+</div>
+<div class="flex gap-medium">
+<div class="flex items-center gap-micro">
+<span class="material-symbols-outlined text-outline" style="font-size: 16px;">architecture</span>
+<span class="font-numeric-data text-numeric-data text-on-surface-variant">المرحلة 1</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar from JSON -->
+<nav class="bg-surface-container fixed bottom-0 w-full z-50 rounded-t-xl shadow-lg">
+<div class="h-px w-full bg-surface-container-highest"></div>
+<div class="flex flex-row-reverse justify-around items-center w-full h-16 px-small">
+<!-- Tab 1: Dashboard (Active) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-98 transition-all duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-sm text-label-sm mt-micro">لوحة القيادة</span>
+</button>
+<!-- Tab 2: Blueprint (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary scale-98 transition-all duration-150">
+<span class="material-symbols-outlined">architecture</span>
+<span class="font-label-sm text-label-sm mt-micro">المخطط</span>
+</button>
+<!-- Tab 3: Finance (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary scale-98 transition-all duration-150">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-sm text-label-sm mt-micro">المالية</span>
+</button>
+<!-- Tab 4: Risks (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary scale-98 transition-all duration-150">
+<span class="material-symbols-outlined">warning</span>
+<span class="font-label-sm text-label-sm mt-micro">المخاطر</span>
+</button>
+<!-- Tab 5: Reports (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary scale-98 transition-all duration-150">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-sm text-label-sm mt-micro">التقارير</span>
+</button>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>مخطط المبنى - مدير الدواجن</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Outfit:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#00201c",
+                        "on-tertiary-fixed-variant": "#005228",
+                        "inverse-primary": "#7dd6c7",
+                        "dark-warning": "#F1C40F",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e0e9f4",
+                        "outline-variant": "#bdc9c5",
+                        "secondary-fixed": "#ffddb9",
+                        "surface": "#f7f9ff",
+                        "dark-primary": "#2ECC71",
+                        "tertiary": "#006a35",
+                        "light-background": "#F5F7F8",
+                        "surface-tint": "#006b5f",
+                        "surface-bright": "#f7f9ff",
+                        "dark-surface": "#171F26",
+                        "primary-fixed-dim": "#7dd6c7",
+                        "on-background": "#131d24",
+                        "light-surface": "#EDEFF1",
+                        "light-surface-variant": "#E1E4E7",
+                        "tertiary-fixed": "#8af9a9",
+                        "on-tertiary-fixed": "#00210c",
+                        "surface-variant": "#dae3ee",
+                        "on-primary-fixed-variant": "#005047",
+                        "on-error": "#ffffff",
+                        "primary-container": "#1e8275",
+                        "on-surface-variant": "#3e4946",
+                        "on-tertiary-container": "#f4fff2",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#865300",
+                        "inverse-on-surface": "#e8f2fd",
+                        "background": "#f7f9ff",
+                        "on-error-container": "#93000a",
+                        "dark-background": "#0C1013",
+                        "dark-danger": "#E74C3C",
+                        "surface-container": "#e6effa",
+                        "error": "#ba1a1a",
+                        "outline": "#6e7976",
+                        "surface-container-highest": "#dae3ee",
+                        "tertiary-container": "#008645",
+                        "on-tertiary": "#ffffff",
+                        "dark-surface-variant": "#242F3A",
+                        "success": "#229954",
+                        "dark-success": "#27AE60",
+                        "inverse-surface": "#28313a",
+                        "secondary-container": "#fcae49",
+                        "on-surface": "#131d24",
+                        "dark-secondary": "#F39C12",
+                        "surface-dim": "#d2dbe6",
+                        "tertiary-fixed-dim": "#6edc8f",
+                        "on-secondary-container": "#6e4300",
+                        "surface-container-low": "#ecf4ff",
+                        "primary": "#00685c",
+                        "on-primary-container": "#f2fffb",
+                        "danger": "#CB4335",
+                        "secondary-fixed-dim": "#ffb963",
+                        "on-secondary-fixed-variant": "#663e00",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#99f3e3",
+                        "on-secondary-fixed": "#2b1700",
+                        "error-container": "#ffdad6",
+                        "warning": "#D4AC0D"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "medium": "16px",
+                        "micro": "4px",
+                        "baseline": "8px",
+                        "small": "8px",
+                        "large": "24px"
+                    },
+                    "fontFamily": {
+                        "numeric-data": ["Inter", "sans-serif"],
+                        "title-md": ["Outfit", "sans-serif"],
+                        "display-lg": ["Outfit", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "numeric-data": ["15px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "22px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .blueprint-grid {
+            background-image: 
+                linear-gradient(to right, #bdc9c5 1px, transparent 1px),
+                linear-gradient(to bottom, #bdc9c5 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-dark-surface shadow-sm w-full top-0 sticky z-50 flex flex-row-reverse justify-between items-center px-medium py-small border-b border-surface-container-high transition-colors duration-300">
+<div class="flex items-center gap-medium">
+<button class="material-symbols-outlined text-primary dark:text-dark-primary scale-95 transition-transform duration-200 hover:bg-surface-container-high dark:hover:bg-surface-variant p-2 rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary">menu</button>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary dark:text-dark-primary select-none truncate px-4 text-center flex-1">مدير الدواجن</h1>
+<div class="flex items-center gap-medium">
+<button class="material-symbols-outlined text-primary dark:text-dark-primary scale-95 transition-transform duration-200 hover:bg-surface-container-high dark:hover:bg-surface-variant p-2 rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary">settings</button>
+</div>
+<!-- Desktop Nav Placeholder (Active state: المخطط) -->
+<nav class="hidden md:flex flex-row-reverse gap-large items-center absolute right-24 left-24 justify-center h-full pointer-events-none">
+<div class="flex items-center gap-6 pointer-events-auto">
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2 px-3 py-2 rounded-lg font-title-md text-title-md" href="#"><span class="material-symbols-outlined text-xl">dashboard</span>لوحة القيادة</a>
+<a class="text-primary bg-primary-container text-on-primary-container transition-colors flex items-center gap-2 px-4 py-2 rounded-full font-title-md text-title-md" href="#"><span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">architecture</span>المخطط</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2 px-3 py-2 rounded-lg font-title-md text-title-md" href="#"><span class="material-symbols-outlined text-xl">payments</span>المالية</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2 px-3 py-2 rounded-lg font-title-md text-title-md" href="#"><span class="material-symbols-outlined text-xl">warning</span>المخاطر</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2 px-3 py-2 rounded-lg font-title-md text-title-md" href="#"><span class="material-symbols-outlined text-xl">description</span>التقارير</a>
+</div>
+</nav>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-7xl mx-auto pb-24 md:pb-medium pt-medium flex flex-col gap-medium">
+<!-- Warning Banner -->
+<section class="mx-medium px-medium py-small bg-secondary-container rounded-lg shadow-sm border border-secondary flex items-center gap-small animate-pulse-slow relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">warning</span>
+<p class="font-body-lg text-body-lg font-bold text-on-secondary-container">الكثافة الحالية تقترب من الحد الأقصى 38 kg/m²</p>
+</section>
+<!-- Context Header -->
+<header class="px-medium flex justify-between items-end">
+<div>
+<h2 class="font-title-md text-title-md text-on-surface">مخطط المبنى</h2>
+<p class="font-body-md text-body-md text-outline mt-1">الأبعاد: 120م × 10م (عرض علوي)</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container hover:bg-surface-container-high text-primary px-3 py-1.5 rounded-lg border border-outline-variant text-label-sm font-label-sm shadow-sm transition-all flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">zoom_in</span> تكبير</button>
+<button class="bg-primary hover:bg-primary-container text-on-primary hover:text-on-primary-container px-3 py-1.5 rounded-lg text-label-sm font-label-sm shadow-sm transition-all flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">edit</span> تعديل</button>
+</div>
+</header>
+<!-- 2D Blueprint Canvas Container -->
+<section class="mx-medium bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="w-full overflow-x-auto overflow-y-hidden custom-scrollbar bg-surface-container p-medium" dir="ltr">
+<!-- The House Canvas (Scaled 120:10 ratio approximately for UI visualization) -->
+<div class="relative min-w-[1000px] h-[160px] bg-white border-4 border-outline blueprint-grid rounded-sm shadow-inner mx-auto my-4 transition-transform hover:scale-[1.01] duration-300 ease-out origin-left">
+<!-- Wall Outlines -->
+<div class="absolute inset-0 border-2 border-primary/20 pointer-events-none"></div>
+<!-- Environment Control End (Fans) -->
+<div class="absolute top-0 bottom-0 left-0 w-16 bg-surface-container-low border-r border-outline border-dashed flex flex-col justify-around py-2 items-center z-10 group cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors rotate-180" style="font-variation-settings: 'FILL' 1;">mode_fan</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors rotate-180" style="font-variation-settings: 'FILL' 1;">mode_fan</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors rotate-180" style="font-variation-settings: 'FILL' 1;">mode_fan</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors rotate-180" style="font-variation-settings: 'FILL' 1;">mode_fan</span>
+<div class="absolute -left-2 inset-y-0 w-1 bg-gradient-to-r from-transparent to-primary/10 pointer-events-none"></div>
+</div>
+<!-- Air Intake End (Cooling Pads) -->
+<div class="absolute top-0 bottom-0 right-0 w-4 bg-tertiary/20 border-l border-tertiary-fixed border-dashed z-10 flex items-center justify-center">
+<div class="h-full w-full bg-[repeating-linear-gradient(45deg,transparent,transparent_2px,#006a3533_2px,#006a3533_4px)]"></div>
+</div>
+<!-- Infrastructure Lines (Feed & Water) -->
+<div class="absolute top-0 bottom-0 left-16 right-4 flex flex-col justify-evenly py-6 z-0">
+<!-- Water Line 1 -->
+<div class="w-full h-1 bg-tertiary-fixed opacity-80 rounded-full relative group">
+<div class="absolute inset-0 bg-tertiary opacity-0 group-hover:opacity-30 transition-opacity blur-sm"></div>
+</div>
+<!-- Feed Line 1 -->
+<div class="w-full h-2 bg-secondary opacity-70 relative group">
+<div class="absolute inset-0 bg-secondary-fixed opacity-0 group-hover:opacity-50 transition-opacity blur-sm"></div>
+</div>
+<!-- Water Line 2 -->
+<div class="w-full h-1 bg-tertiary-fixed opacity-80 rounded-full relative group">
+<div class="absolute inset-0 bg-tertiary opacity-0 group-hover:opacity-30 transition-opacity blur-sm"></div>
+</div>
+<!-- Feed Line 2 -->
+<div class="w-full h-2 bg-secondary opacity-70 relative group">
+<div class="absolute inset-0 bg-secondary-fixed opacity-0 group-hover:opacity-50 transition-opacity blur-sm"></div>
+</div>
+<!-- Water Line 3 -->
+<div class="w-full h-1 bg-tertiary-fixed opacity-80 rounded-full relative group">
+<div class="absolute inset-0 bg-tertiary opacity-0 group-hover:opacity-30 transition-opacity blur-sm"></div>
+</div>
+</div>
+<!-- Heaters Distribution -->
+<div class="absolute inset-0 left-20 right-10 flex justify-evenly items-center z-20 pointer-events-none">
+<div class="flex flex-col justify-between h-full py-8 pointer-events-auto">
+<span class="material-symbols-outlined text-danger bg-surface-container-lowest rounded-full p-1 shadow-md border border-danger/50 cursor-pointer hover:scale-110 hover:shadow-lg transition-all" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="material-symbols-outlined text-danger bg-surface-container-lowest rounded-full p-1 shadow-md border border-danger/50 cursor-pointer hover:scale-110 hover:shadow-lg transition-all" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div class="flex flex-col justify-center h-full py-8 pointer-events-auto">
+<span class="material-symbols-outlined text-danger bg-surface-container-lowest rounded-full p-1 shadow-md border border-danger/50 cursor-pointer hover:scale-110 hover:shadow-lg transition-all" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div class="flex flex-col justify-between h-full py-8 pointer-events-auto">
+<span class="material-symbols-outlined text-danger bg-surface-container-lowest rounded-full p-1 shadow-md border border-danger/50 cursor-pointer hover:scale-110 hover:shadow-lg transition-all" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="material-symbols-outlined text-danger bg-surface-container-lowest rounded-full p-1 shadow-md border border-danger/50 cursor-pointer hover:scale-110 hover:shadow-lg transition-all" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div class="flex flex-col justify-center h-full py-8 pointer-events-auto">
+<span class="material-symbols-outlined text-danger bg-surface-container-lowest rounded-full p-1 shadow-md border border-danger/50 cursor-pointer hover:scale-110 hover:shadow-lg transition-all" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Axis/Scale Indicator -->
+<div class="bg-surface-container-highest px-medium py-2 border-t border-outline-variant flex justify-between items-center text-label-sm font-label-sm text-on-surface-variant font-numeric-data">
+<span>مدخل الهواء (0م)</span>
+<div class="flex-1 mx-4 h-px bg-outline/30 relative flex items-center justify-center">
+<span class="bg-surface-container-highest px-2 text-outline">طول المبنى 120م</span>
+</div>
+<span>مراوح الشفط (120م)</span>
+</div>
+</section>
+<!-- Legend (Bento style grid) -->
+<section class="mx-medium mt-small grid grid-cols-1 sm:grid-cols-3 gap-medium">
+<div class="bg-surface-container-lowest p-medium rounded-xl border border-surface-container-highest shadow-sm flex items-center gap-medium hover:border-primary/30 transition-colors">
+<div class="bg-surface-container p-2 rounded-lg text-outline">
+<span class="material-symbols-outlined block" style="font-variation-settings: 'FILL' 1;">mode_fan</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">مراوح الشفط</span>
+<span class="font-label-sm text-label-sm text-outline">4 وحدات تهوية نفقية</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-medium rounded-xl border border-surface-container-highest shadow-sm flex items-center gap-medium hover:border-danger/30 transition-colors">
+<div class="bg-error-container text-on-error-container p-2 rounded-lg">
+<span class="material-symbols-outlined block" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">دفايات</span>
+<span class="font-label-sm text-label-sm text-outline">6 وحدات تدفئة مركزية</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-medium rounded-xl border border-surface-container-highest shadow-sm flex flex-col justify-center gap-3 hover:border-secondary/30 transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-2 bg-secondary rounded-sm"></div>
+<span class="font-title-md text-title-md text-on-surface leading-none">خطوط العلف</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-1 bg-tertiary-fixed rounded-full"></div>
+<span class="font-title-md text-title-md text-on-surface leading-none">خطوط الماء</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface-container dark:bg-dark-surface-variant fixed bottom-0 w-full z-50 rounded-t-xl shadow-lg flex flex-row-reverse justify-around items-center h-16 px-small">
+<!-- Tab 1: Inactive -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 w-[72px]" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1 truncate w-full text-center">لوحة القيادة</span>
+</a>
+<!-- Tab 2: Active (المخطط) -->
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-tertiary-container text-on-primary-container dark:text-on-tertiary-container rounded-full px-4 py-1 scale-98 transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">architecture</span>
+<span class="font-label-sm text-label-sm mt-1 truncate w-full text-center">المخطط</span>
+</a>
+<!-- Tab 3: Inactive -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 w-[72px]" href="#">
+<span class="material-symbols-outlined text-[24px]">payments</span>
+<span class="font-label-sm text-label-sm mt-1 truncate w-full text-center">المالية</span>
+</a>
+<!-- Tab 4: Inactive -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 w-[72px]" href="#">
+<span class="material-symbols-outlined text-[24px]">warning</span>
+<span class="font-label-sm text-label-sm mt-1 truncate w-full text-center">المخاطر</span>
+</a>
+<!-- Tab 5: Inactive -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 w-[72px]" href="#">
+<span class="material-symbols-outlined text-[24px]">description</span>
+<span class="font-label-sm text-label-sm mt-1 truncate w-full text-center">التقارير</span>
+</a>
+</nav>
+<style>
+        /* Hide scrollbar for clean canvas presentation but allow scrolling */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-highest');
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: theme('colors.outline-variant');
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline');
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</body></html>

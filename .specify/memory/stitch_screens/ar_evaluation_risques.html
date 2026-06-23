@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تقييم المخاطر - مدير الدواجن</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Outfit:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom Styles for Gauge */
+        .gauge-circle {
+            stroke-dasharray: 283; /* 2 * pi * r (r=45) */
+            stroke-dashoffset: 85; /* 283 - (283 * 0.70) */
+            transition: stroke-dashoffset 1s ease-out;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#00201c",
+                        "on-tertiary-fixed-variant": "#005228",
+                        "inverse-primary": "#7dd6c7",
+                        "dark-warning": "#F1C40F",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e0e9f4",
+                        "outline-variant": "#bdc9c5",
+                        "secondary-fixed": "#ffddb9",
+                        "surface": "#f7f9ff",
+                        "dark-primary": "#2ECC71",
+                        "tertiary": "#006a35",
+                        "light-background": "#F5F7F8",
+                        "surface-tint": "#006b5f",
+                        "surface-bright": "#f7f9ff",
+                        "dark-surface": "#171F26",
+                        "primary-fixed-dim": "#7dd6c7",
+                        "on-background": "#131d24",
+                        "light-surface": "#EDEFF1",
+                        "light-surface-variant": "#E1E4E7",
+                        "tertiary-fixed": "#8af9a9",
+                        "on-tertiary-fixed": "#00210c",
+                        "surface-variant": "#dae3ee",
+                        "on-primary-fixed-variant": "#005047",
+                        "on-error": "#ffffff",
+                        "primary-container": "#1e8275",
+                        "on-surface-variant": "#3e4946",
+                        "on-tertiary-container": "#f4fff2",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#865300",
+                        "inverse-on-surface": "#e8f2fd",
+                        "background": "#f7f9ff",
+                        "on-error-container": "#93000a",
+                        "dark-background": "#0C1013",
+                        "dark-danger": "#E74C3C",
+                        "surface-container": "#e6effa",
+                        "error": "#ba1a1a",
+                        "outline": "#6e7976",
+                        "surface-container-highest": "#dae3ee",
+                        "tertiary-container": "#008645",
+                        "on-tertiary": "#ffffff",
+                        "dark-surface-variant": "#242F3A",
+                        "success": "#229954",
+                        "dark-success": "#27AE60",
+                        "inverse-surface": "#28313a",
+                        "secondary-container": "#fcae49",
+                        "on-surface": "#131d24",
+                        "dark-secondary": "#F39C12",
+                        "surface-dim": "#d2dbe6",
+                        "tertiary-fixed-dim": "#6edc8f",
+                        "on-secondary-container": "#6e4300",
+                        "surface-container-low": "#ecf4ff",
+                        "primary": "#00685c",
+                        "on-primary-container": "#f2fffb",
+                        "danger": "#CB4335",
+                        "secondary-fixed-dim": "#ffb963",
+                        "on-secondary-fixed-variant": "#663e00",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#99f3e3",
+                        "on-secondary-fixed": "#2b1700",
+                        "error-container": "#ffdad6",
+                        "warning": "#D4AC0D"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "medium": "16px",
+                        "micro": "4px",
+                        "baseline": "8px",
+                        "small": "8px",
+                        "large": "24px"
+                    },
+                    "fontFamily": {
+                        "numeric-data": ["Inter"],
+                        "title-md": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "numeric-data": ["15px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "22px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky shadow-sm bg-surface flex flex-row-reverse justify-between items-center px-medium py-small z-40 bg-surface-container">
+<button class="hover:bg-surface-container-high transition-transform duration-200 scale-95 p-2 rounded-full text-primary">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<h1 class="font-title-md text-title-md text-primary font-display-lg text-display-lg">مدير الدواجن</h1>
+<button class="hover:bg-surface-container-high transition-transform duration-200 scale-95 p-2 rounded-full text-primary">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="p-large max-w-4xl mx-auto space-y-large">
+<!-- Page Header -->
+<div class="mb-medium">
+<h2 class="font-display-lg text-display-lg text-on-surface">تقييم المخاطر</h2>
+<p class="text-on-surface-variant font-body-md text-body-md mt-micro">نظرة عامة على عوامل الخطر الحالية والامتثال.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-medium">
+<!-- Overall Risk Gauge -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm p-medium flex flex-col items-center justify-center border border-surface-container">
+<h3 class="font-title-md text-title-md text-on-surface w-full text-right mb-medium">المخاطر الكلية</h3>
+<div class="relative w-40 h-40 flex items-center justify-center">
+<svg class="transform -rotate-90 w-full h-full" viewbox="0 0 100 100">
+<!-- Background Circle -->
+<circle class="text-surface-container" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-width="10"></circle>
+<!-- Progress Arc (70%) -->
+<circle class="text-warning gauge-circle" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-numeric-data text-[32px] font-bold text-on-surface">70%</span>
+<span class="font-label-sm text-label-sm text-warning mt-micro bg-warning/10 px-2 py-1 rounded-full">متوسط</span>
+</div>
+</div>
+</section>
+<!-- Environmental Factors -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm p-medium border border-surface-container flex flex-col justify-between">
+<h3 class="font-title-md text-title-md text-on-surface mb-small">العوامل البيئية</h3>
+<div class="space-y-small">
+<!-- Temp -->
+<div class="flex justify-between items-center p-small bg-error-container/20 rounded-lg border border-error-container/30">
+<div class="flex items-center gap-small text-danger">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">thermostat</span>
+<span class="font-body-md text-body-md font-medium text-on-surface">درجة الحرارة</span>
+</div>
+<div class="text-left flex items-center gap-small">
+<span class="font-numeric-data text-numeric-data font-bold text-danger">32°C</span>
+<span class="font-label-sm text-label-sm bg-danger text-on-error px-2 py-0.5 rounded-sm">مرتفع</span>
+</div>
+</div>
+<!-- Humidity -->
+<div class="flex justify-between items-center p-small bg-surface-container rounded-lg">
+<div class="flex items-center gap-small text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">humidity_percentage</span>
+<span class="font-body-md text-body-md font-medium text-on-surface">الرطوبة</span>
+</div>
+<div class="text-left">
+<span class="font-numeric-data text-numeric-data font-bold text-on-surface">65%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Mortality Risk Factors -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm p-medium border border-surface-container md:col-span-2">
+<h3 class="font-title-md text-title-md text-on-surface mb-small">عوامل خطر الوفيات</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-medium">
+<!-- Density -->
+<div class="p-medium rounded-lg border border-warning/30 bg-warning/5 flex items-start gap-medium">
+<div class="p-2 bg-warning/20 rounded-full text-warning">
+<span class="material-symbols-outlined">group</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface mb-micro">الكثافة</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">الكثافة الحالية تقترب من الحد الأقصى المسموح به للرعاية الصحية.</p>
+<div class="mt-small h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-warning w-4/5 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Heat Stress -->
+<div class="p-medium rounded-lg border border-danger/30 bg-danger/5 flex items-start gap-medium">
+<div class="p-2 bg-danger/20 rounded-full text-danger">
+<span class="material-symbols-outlined">local_fire_department</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface mb-micro">الإجهاد الحراري</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">ارتفاع درجات الحرارة مع التهوية الحالية قد يؤدي إلى إجهاد حراري.</p>
+<div class="mt-small h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-danger w-[85%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- EU Compliance Checklist -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm p-medium border border-surface-container md:col-span-2">
+<h3 class="font-title-md text-title-md text-on-surface mb-medium flex items-center gap-small">
+<span class="material-symbols-outlined text-primary">verified</span>
+                    قائمة التحقق من الامتثال لمعايير الاتحاد الأوروبي
+                </h3>
+<ul class="space-y-baseline">
+<li class="flex items-center justify-between p-small bg-surface rounded-lg border border-surface-container">
+<span class="font-body-md text-body-md text-on-surface">كثافة التخزين متوافقة</span>
+<span class="material-symbols-outlined text-warning">error</span>
+</li>
+<li class="flex items-center justify-between p-small bg-surface rounded-lg border border-surface-container">
+<span class="font-body-md text-body-md text-on-surface">مستويات الأمونيا أقل من 20 جزء في المليون</span>
+<span class="material-symbols-outlined text-success">check_circle</span>
+</li>
+<li class="flex items-center justify-between p-small bg-surface rounded-lg border border-surface-container">
+<span class="font-body-md text-body-md text-on-surface">تسجيل درجات الحرارة اليومية</span>
+<span class="material-symbols-outlined text-success">check_circle</span>
+</li>
+<li class="flex items-center justify-between p-small bg-surface rounded-lg border border-surface-container">
+<span class="font-body-md text-body-md text-on-surface">إضاءة كافية (20 لوكس كحد أدنى)</span>
+<span class="material-symbols-outlined text-success">check_circle</span>
+</li>
+</ul>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container shadow-lg flex flex-row-reverse justify-around items-center h-16 px-small bg-surface-container-highest">
+<!-- Tab 0 -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary scale-98 transition-all duration-150 w-16" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">لوحة القيادة</span>
+</a>
+<!-- Tab 1 -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary scale-98 transition-all duration-150 w-16" href="#">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+<span class="font-label-sm text-label-sm mt-1">المخطط</span>
+</a>
+<!-- Tab 2 -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary scale-98 transition-all duration-150 w-16" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-sm text-label-sm mt-1">المالية</span>
+</a>
+<!-- Tab 3 (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-98 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="font-label-sm text-label-sm mt-1">المخاطر</span>
+</a>
+<!-- Tab 4 -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary scale-98 transition-all duration-150 w-16" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-label-sm text-label-sm mt-1">التقارير</span>
+</a>
+</nav>
+</body></html>

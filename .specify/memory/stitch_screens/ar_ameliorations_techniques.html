@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تحسينات - مبنى ألفا</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Outfit:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#00201c",
+                        "on-tertiary-fixed-variant": "#005228",
+                        "inverse-primary": "#7dd6c7",
+                        "dark-warning": "#F1C40F",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e0e9f4",
+                        "outline-variant": "#bdc9c5",
+                        "secondary-fixed": "#ffddb9",
+                        "surface": "#f7f9ff",
+                        "dark-primary": "#2ECC71",
+                        "tertiary": "#006a35",
+                        "light-background": "#F5F7F8",
+                        "surface-tint": "#006b5f",
+                        "surface-bright": "#f7f9ff",
+                        "dark-surface": "#171F26",
+                        "primary-fixed-dim": "#7dd6c7",
+                        "on-background": "#131d24",
+                        "light-surface": "#EDEFF1",
+                        "light-surface-variant": "#E1E4E7",
+                        "tertiary-fixed": "#8af9a9",
+                        "on-tertiary-fixed": "#00210c",
+                        "surface-variant": "#dae3ee",
+                        "on-primary-fixed-variant": "#005047",
+                        "on-error": "#ffffff",
+                        "primary-container": "#1e8275",
+                        "on-surface-variant": "#3e4946",
+                        "on-tertiary-container": "#f4fff2",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#865300",
+                        "inverse-on-surface": "#e8f2fd",
+                        "background": "#f7f9ff",
+                        "on-error-container": "#93000a",
+                        "dark-background": "#0C1013",
+                        "dark-danger": "#E74C3C",
+                        "surface-container": "#e6effa",
+                        "error": "#ba1a1a",
+                        "outline": "#6e7976",
+                        "surface-container-highest": "#dae3ee",
+                        "tertiary-container": "#008645",
+                        "on-tertiary": "#ffffff",
+                        "dark-surface-variant": "#242F3A",
+                        "success": "#229954",
+                        "dark-success": "#27AE60",
+                        "inverse-surface": "#28313a",
+                        "secondary-container": "#fcae49",
+                        "on-surface": "#131d24",
+                        "dark-secondary": "#F39C12",
+                        "surface-dim": "#d2dbe6",
+                        "tertiary-fixed-dim": "#6edc8f",
+                        "on-secondary-container": "#6e4300",
+                        "surface-container-low": "#ecf4ff",
+                        "primary": "#00685c",
+                        "on-primary-container": "#f2fffb",
+                        "danger": "#CB4335",
+                        "secondary-fixed-dim": "#ffb963",
+                        "on-secondary-fixed-variant": "#663e00",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#99f3e3",
+                        "on-secondary-fixed": "#2b1700",
+                        "error-container": "#ffdad6",
+                        "warning": "#D4AC0D"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "medium": "16px",
+                        "micro": "4px",
+                        "baseline": "8px",
+                        "small": "8px",
+                        "large": "24px"
+                    },
+                    "fontFamily": {
+                        "numeric-data": ["Inter", "sans-serif"],
+                        "title-md": ["Outfit", "sans-serif"],
+                        "display-lg": ["Outfit", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "numeric-data": ["15px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "22px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-dark-surface text-primary dark:text-dark-primary font-title-md text-title-md w-full top-0 sticky bg-surface-container dark:bg-dark-surface-variant shadow-sm flex flex-row-reverse justify-between items-center px-medium py-small z-40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined hover:bg-surface-container-high dark:hover:bg-surface-variant scale-95 transition-transform duration-200 cursor-pointer rounded-full p-2">menu</span>
+<h1 class="font-display-lg text-display-lg text-primary dark:text-dark-primary">مدير الدواجن</h1>
+</div>
+<div>
+<span class="material-symbols-outlined hover:bg-surface-container-high dark:hover:bg-surface-variant scale-95 transition-transform duration-200 cursor-pointer rounded-full p-2">settings</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="p-large max-w-4xl mx-auto space-y-large">
+<!-- Page Title -->
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface">تحسينات - مبنى ألفا</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-micro">استعراض وتخطيط الترقيات التقنية الحرجة للمبنى.</p>
+</div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-2 gap-medium">
+<div class="bg-surface-container-low rounded-xl p-medium shadow-sm flex flex-col justify-center border border-surface-container-highest">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-micro">التكلفة الإجمالية المقدرة</span>
+<div class="flex items-baseline gap-1">
+<span class="font-numeric-data text-numeric-data text-on-surface text-2xl font-bold">610,000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">DZD</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-medium shadow-sm flex flex-col justify-center border border-surface-container-highest">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-micro">العائد على الاستثمار المتوقع</span>
+<div class="flex items-baseline gap-1">
+<span class="font-numeric-data text-numeric-data text-success text-2xl font-bold">+12%</span>
+<span class="material-symbols-outlined text-success text-sm">trending_up</span>
+</div>
+</div>
+</div>
+<!-- Upgrades List -->
+<div class="space-y-medium">
+<h3 class="font-title-md text-title-md text-on-surface">الترقيات المقترحة</h3>
+<!-- Upgrade Item 1 -->
+<div class="bg-surface rounded-xl p-medium shadow-sm border border-surface-variant hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-small">
+<div class="flex items-center gap-small">
+<div class="bg-surface-container p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mode_fan</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface">ترقية سعة مراوح الشفط</h4>
+</div>
+<span class="bg-danger text-on-error font-label-sm text-label-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">priority_high</span>
+                        عالي الأهمية
+                    </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-medium">استبدال المراوح القديمة لزيادة تدفق الهواء بنسبة 30% وتقليل إجهاد الحرارة على الطيور خلال فصل الصيف.</p>
+<div class="flex items-center justify-between border-t border-surface-variant pt-small">
+<span class="font-numeric-data text-numeric-data text-on-surface font-semibold">250,000 DZD</span>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-full hover:bg-surface-tint transition-colors">مراجعة التفاصيل</button>
+</div>
+</div>
+<!-- Upgrade Item 2 -->
+<div class="bg-surface rounded-xl p-medium shadow-sm border border-surface-variant hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-small">
+<div class="flex items-center gap-small">
+<div class="bg-surface-container p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home_repair_service</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface">تحسين عزل الجدران</h4>
+</div>
+<span class="bg-warning text-on-surface font-label-sm text-label-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                        متوسط الأهمية
+                    </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-medium">تركيب ألواح عزل حراري إضافية للحفاظ على استقرار درجات الحرارة الداخلية وتقليل تكاليف التدفئة شتاءً.</p>
+<div class="flex items-center justify-between border-t border-surface-variant pt-small">
+<span class="font-numeric-data text-numeric-data text-on-surface font-semibold">360,000 DZD</span>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-full hover:bg-surface-tint transition-colors">مراجعة التفاصيل</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface-container dark:bg-dark-surface-variant font-label-sm text-label-sm fixed bottom-0 w-full z-50 rounded-t-xl shadow-lg flex flex-row-reverse justify-around items-center h-16 px-small border-t-0 md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 cursor-pointer">
+<span class="material-symbols-outlined mb-micro">dashboard</span>
+<span>لوحة القيادة</span>
+</div>
+<!-- Active Tab: المخطط -->
+<div class="flex flex-col items-center justify-center bg-primary-container dark:bg-tertiary-container text-on-primary-container dark:text-on-tertiary-container rounded-full px-4 py-1 hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 cursor-pointer">
+<span class="material-symbols-outlined mb-micro" style="font-variation-settings: 'FILL' 1;">architecture</span>
+<span>المخطط</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 cursor-pointer">
+<span class="material-symbols-outlined mb-micro">payments</span>
+<span>المالية</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 cursor-pointer">
+<span class="material-symbols-outlined mb-micro">warning</span>
+<span>المخاطر</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 cursor-pointer">
+<span class="material-symbols-outlined mb-micro">description</span>
+<span>التقارير</span>
+</div>
+</nav>
+</body></html>

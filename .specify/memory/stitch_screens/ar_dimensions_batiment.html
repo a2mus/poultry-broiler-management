@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>أبعاد المبنى - معالج المشروع الجديد</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#00201c",
+                        "on-tertiary-fixed-variant": "#005228",
+                        "inverse-primary": "#7dd6c7",
+                        "dark-warning": "#F1C40F",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e0e9f4",
+                        "outline-variant": "#bdc9c5",
+                        "secondary-fixed": "#ffddb9",
+                        "surface": "#f7f9ff",
+                        "dark-primary": "#2ECC71",
+                        "tertiary": "#006a35",
+                        "light-background": "#F5F7F8",
+                        "surface-tint": "#006b5f",
+                        "surface-bright": "#f7f9ff",
+                        "dark-surface": "#171F26",
+                        "primary-fixed-dim": "#7dd6c7",
+                        "on-background": "#131d24",
+                        "light-surface": "#EDEFF1",
+                        "light-surface-variant": "#E1E4E7",
+                        "tertiary-fixed": "#8af9a9",
+                        "on-tertiary-fixed": "#00210c",
+                        "surface-variant": "#dae3ee",
+                        "on-primary-fixed-variant": "#005047",
+                        "on-error": "#ffffff",
+                        "primary-container": "#1e8275",
+                        "on-surface-variant": "#3e4946",
+                        "on-tertiary-container": "#f4fff2",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#865300",
+                        "inverse-on-surface": "#e8f2fd",
+                        "background": "#f7f9ff",
+                        "on-error-container": "#93000a",
+                        "dark-background": "#0C1013",
+                        "dark-danger": "#E74C3C",
+                        "surface-container": "#e6effa",
+                        "error": "#ba1a1a",
+                        "outline": "#6e7976",
+                        "surface-container-highest": "#dae3ee",
+                        "tertiary-container": "#008645",
+                        "on-tertiary": "#ffffff",
+                        "dark-surface-variant": "#242F3A",
+                        "success": "#229954",
+                        "dark-success": "#27AE60",
+                        "inverse-surface": "#28313a",
+                        "secondary-container": "#fcae49",
+                        "on-surface": "#131d24",
+                        "dark-secondary": "#F39C12",
+                        "surface-dim": "#d2dbe6",
+                        "tertiary-fixed-dim": "#6edc8f",
+                        "on-secondary-container": "#6e4300",
+                        "surface-container-low": "#ecf4ff",
+                        "primary": "#00685c",
+                        "on-primary-container": "#f2fffb",
+                        "danger": "#CB4335",
+                        "secondary-fixed-dim": "#ffb963",
+                        "on-secondary-fixed-variant": "#663e00",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#99f3e3",
+                        "on-secondary-fixed": "#2b1700",
+                        "error-container": "#ffdad6",
+                        "warning": "#D4AC0D"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "medium": "16px",
+                        "micro": "4px",
+                        "baseline": "8px",
+                        "small": "8px",
+                        "large": "24px"
+                    },
+                    "fontFamily": {
+                        "numeric-data": ["Inter", "sans-serif"],
+                        "title-md": ["Outfit", "sans-serif"],
+                        "display-lg": ["Outfit", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "numeric-data": ["15px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "26px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "22px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom styles for range slider to ensure visual hierarchy */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #00685c;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #dae3ee;
+            border-radius: 4px;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        input[type=range]:focus::-webkit-slider-thumb {
+            box-shadow: 0 0 0 4px rgba(0, 104, 92, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg antialiased">
+<!-- Top App Bar (Suppress Nav on mobile per instructions, but keep for top level intent. Wait, instructions say transactional flows like Wizard suppress the navigation. So TopAppBar should be minimal, maybe just a back button and title, no menus.) -->
+<header class="bg-surface sticky w-full top-0 z-10 bg-surface-container shadow-sm flex flex-row-reverse justify-between items-center px-medium py-small w-full">
+<div class="flex items-center gap-small">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<h1 class="font-title-md text-title-md text-primary">مشروع جديد</h1>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-variant px-3 py-1 rounded-full">الخطوة 1 من 4</span>
+</div>
+</header>
+<main class="max-w-3xl mx-auto px-medium py-large pb-32">
+<div class="mb-large">
+<h2 class="font-display-lg text-display-lg text-on-background mb-small">أبعاد المبنى</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">أدخل القياسات الدقيقة لضمان حسابات تهوية وتدفئة صحيحة.</p>
+</div>
+<form class="space-y-large">
+<!-- Dimensions Section -->
+<section class="bg-surface-container-low rounded-xl p-medium shadow-sm border border-surface-variant">
+<h3 class="font-title-md text-title-md text-primary mb-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">straighten</span>
+                    القياسات الأساسية
+                </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-medium">
+<!-- Length Input -->
+<div class="relative">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-micro" for="length">الطول</label>
+<div class="relative flex items-center">
+<input class="block w-full rounded-lg border-outline-variant bg-surface-container-lowest text-on-background font-numeric-data text-numeric-data focus:border-primary focus:ring-primary h-12 pl-12 pr-4" id="length" inputmode="decimal" type="number" value="120"/>
+<span class="absolute left-4 text-outline font-numeric-data">m</span>
+</div>
+</div>
+<!-- Width Input -->
+<div class="relative">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-micro" for="width">العرض</label>
+<div class="relative flex items-center">
+<input class="block w-full rounded-lg border-outline-variant bg-surface-container-lowest text-on-background font-numeric-data text-numeric-data focus:border-primary focus:ring-primary h-12 pl-12 pr-4" id="width" inputmode="decimal" type="number" value="10"/>
+<span class="absolute left-4 text-outline font-numeric-data">m</span>
+</div>
+</div>
+<!-- Height Input -->
+<div class="relative">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-micro" for="height">ارتفاع الجدار</label>
+<div class="relative flex items-center">
+<input class="block w-full rounded-lg border-outline-variant bg-surface-container-lowest text-on-background font-numeric-data text-numeric-data focus:border-primary focus:ring-primary h-12 pl-12 pr-4" id="height" inputmode="decimal" step="0.1" type="number" value="3.5"/>
+<span class="absolute left-4 text-outline font-numeric-data">m</span>
+</div>
+</div>
+</div>
+<!-- Live Area Calculation Card (Glassmorphism inspired) -->
+<div class="mt-medium bg-primary-container rounded-lg p-medium flex items-center justify-between border border-primary-fixed-dim/30 shadow-[inset_0_1px_3px_rgba(255,255,255,0.2)]">
+<div class="flex items-center gap-small">
+<div class="bg-surface-container-lowest p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">aspect_ratio</span>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-on-primary-container/80">المساحة التقديرية</span>
+<span class="block font-title-md text-title-md text-on-primary-container" id="area-display">1,200.0 <span class="font-numeric-data text-numeric-data">m²</span></span>
+</div>
+</div>
+</div>
+</section>
+<!-- Construction Details Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-medium">
+<!-- Wall Insulation Choice (Segmented Control / Radio Cards) -->
+<div class="bg-surface-container-low rounded-xl p-medium shadow-sm border border-surface-variant">
+<h3 class="font-title-md text-title-md text-on-background mb-medium">عزل الجدران</h3>
+<div class="space-y-small">
+<label class="flex items-center justify-between p-3 rounded-lg border-2 border-primary bg-primary-container/10 cursor-pointer transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="house">house</span>
+<span class="font-body-md text-body-md text-on-background font-medium">عزل مسبق الصنع (Prefab)</span>
+</div>
+<input checked="" class="text-primary focus:ring-primary h-5 w-5" name="insulation" type="radio" value="prefab"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-lg border border-surface-variant hover:bg-surface-variant cursor-pointer transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="view_module">view_module</span>
+<span class="font-body-md text-body-md text-on-background">طوب بلوك (Block)</span>
+</div>
+<input class="text-primary focus:ring-primary h-5 w-5 border-outline-variant" name="insulation" type="radio" value="block"/>
+</label>
+<label class="flex items-center justify-between p-3 rounded-lg border border-surface-variant hover:bg-surface-variant cursor-pointer transition-all">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="architecture">architecture</span>
+<span class="font-body-md text-body-md text-on-background">فولاذ (Steel)</span>
+</div>
+<input class="text-primary focus:ring-primary h-5 w-5 border-outline-variant" name="insulation" type="radio" value="steel"/>
+</label>
+</div>
+</div>
+<!-- Roof Type Choice (Visual Cards) -->
+<div class="bg-surface-container-low rounded-xl p-medium shadow-sm border border-surface-variant">
+<h3 class="font-title-md text-title-md text-on-background mb-medium">نوع السقف</h3>
+<div class="grid grid-cols-2 gap-small">
+<label class="relative flex flex-col items-center p-medium rounded-lg border-2 border-primary bg-primary-container/10 cursor-pointer transition-all text-center">
+<input checked="" class="absolute opacity-0" name="roof" type="radio" value="gable"/>
+<span class="material-symbols-outlined text-4xl text-primary mb-2" data-icon="roofing">roofing</span>
+<span class="font-body-md text-body-md font-medium text-on-background">جملون (Gable)</span>
+<div class="absolute top-2 right-2 text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+</div>
+</label>
+<label class="relative flex flex-col items-center p-medium rounded-lg border border-surface-variant hover:bg-surface-variant cursor-pointer transition-all text-center">
+<input class="absolute opacity-0" name="roof" type="radio" value="flat"/>
+<span class="material-symbols-outlined text-4xl text-outline mb-2" data-icon="rectangle">rectangle</span>
+<span class="font-body-md text-body-md text-on-surface-variant">مسطح (Flat)</span>
+</label>
+</div>
+</div>
+</section>
+</form>
+</main>
+<!-- Bottom Action Bar (Wizard Navigation) -->
+<div class="fixed bottom-0 w-full bg-surface-container shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-medium z-40 border-t border-surface-variant">
+<div class="max-w-3xl mx-auto flex justify-between items-center flex-row-reverse">
+<button class="bg-primary text-on-primary rounded-full px-8 py-3 font-body-md font-bold hover:bg-on-primary-fixed-variant transition-colors flex items-center gap-2 shadow-sm">
+                التالي
+                <span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<button class="text-on-surface-variant font-body-md px-4 py-3 hover:bg-surface-variant rounded-full transition-colors">
+                إلغاء
+            </button>
+</div>
+</div>
+<script>
+        // Simple script to update area live
+        document.addEventListener('DOMContentLoaded', () => {
+            const lengthInput = document.getElementById('length');
+            const widthInput = document.getElementById('width');
+            const areaDisplay = document.getElementById('area-display');
+
+            function updateArea() {
+                const l = parseFloat(lengthInput.value) || 0;
+                const w = parseFloat(widthInput.value) || 0;
+                const area = l * w;
+                areaDisplay.innerHTML = `${area.toLocaleString('en-US', {minimumFractionDigits: 1, maximumFractionDigits: 1})} <span class="font-numeric-data text-numeric-data">m²</span>`;
+            }
+
+            lengthInput.addEventListener('input', updateArea);
+            widthInput.addEventListener('input', updateArea);
+
+            // Simple visual selection logic for segmented controls
+            const insulationLabels = document.querySelectorAll('input[name="insulation"]');
+            insulationLabels.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    document.querySelectorAll('input[name="insulation"]').forEach(r => {
+                        const parent = r.closest('label');
+                        const icon = parent.querySelector('.material-symbols-outlined');
+                        const text = parent.querySelector('span.font-body-md');
+                        
+                        if(r.checked) {
+                            parent.classList.remove('border-surface-variant', 'hover:bg-surface-variant');
+                            parent.classList.add('border-2', 'border-primary', 'bg-primary-container/10');
+                            r.classList.remove('border-outline-variant');
+                            icon.classList.remove('text-outline');
+                            icon.classList.add('text-primary');
+                            text.classList.add('font-medium');
+                        } else {
+                            parent.classList.add('border-surface-variant', 'hover:bg-surface-variant');
+                            parent.classList.remove('border-2', 'border-primary', 'bg-primary-container/10');
+                            r.classList.add('border-outline-variant');
+                            icon.classList.add('text-outline');
+                            icon.classList.remove('text-primary');
+                            text.classList.remove('font-medium');
+                        }
+                    });
+                });
+            });
+
+            const roofLabels = document.querySelectorAll('input[name="roof"]');
+            roofLabels.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    document.querySelectorAll('input[name="roof"]').forEach(r => {
+                        const parent = r.closest('label');
+                        const icon = parent.querySelector('.material-symbols-outlined');
+                        const text = parent.querySelector('.font-body-md');
+                        
+                        // Remove existing checkmark if any
+                        const existingCheck = parent.querySelector('.absolute.top-2');
+                        if (existingCheck) existingCheck.remove();
+
+                        if(r.checked) {
+                            parent.classList.remove('border-surface-variant', 'hover:bg-surface-variant');
+                            parent.classList.add('border-2', 'border-primary', 'bg-primary-container/10');
+                            icon.classList.remove('text-outline');
+                            icon.classList.add('text-primary');
+                            text.classList.add('font-medium', 'text-on-background');
+                            text.classList.remove('text-on-surface-variant');
+                            
+                            // Add checkmark
+                            parent.insertAdjacentHTML('beforeend', `
+                                <div class="absolute top-2 right-2 text-primary">
+                                    <span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                                </div>
+                            `);
+                        } else {
+                            parent.classList.add('border-surface-variant', 'hover:bg-surface-variant');
+                            parent.classList.remove('border-2', 'border-primary', 'bg-primary-container/10');
+                            icon.classList.add('text-outline');
+                            icon.classList.remove('text-primary');
+                            text.classList.remove('font-medium', 'text-on-background');
+                            text.classList.add('text-on-surface-variant');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriManage Pro - Rapports</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Outfit:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#6e4300",
+                        "warning": "#D4AC0D",
+                        "tertiary-fixed-dim": "#6edc8f",
+                        "on-tertiary-fixed-variant": "#005228",
+                        "tertiary-fixed": "#8af9a9",
+                        "dark-background": "#0C1013",
+                        "surface-tint": "#006b5f",
+                        "outline-variant": "#bdc9c5",
+                        "on-surface-variant": "#3e4946",
+                        "primary-container": "#1e8275",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#131d24",
+                        "secondary-container": "#fcae49",
+                        "on-secondary-fixed-variant": "#663e00",
+                        "light-surface-variant": "#E1E4E7",
+                        "dark-success": "#27AE60",
+                        "outline": "#6e7976",
+                        "secondary": "#865300",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#99f3e3",
+                        "dark-primary": "#2ECC71",
+                        "dark-surface": "#171F26",
+                        "secondary-fixed-dim": "#ffb963",
+                        "on-primary-fixed-variant": "#005047",
+                        "primary-fixed-dim": "#7dd6c7",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#dae3ee",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#e6effa",
+                        "surface-bright": "#f7f9ff",
+                        "inverse-primary": "#7dd6c7",
+                        "inverse-surface": "#28313a",
+                        "on-surface": "#131d24",
+                        "dark-warning": "#F1C40F",
+                        "surface-container-low": "#ecf4ff",
+                        "on-secondary-fixed": "#2b1700",
+                        "surface": "#f7f9ff",
+                        "tertiary": "#006a35",
+                        "dark-secondary": "#F39C12",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d2dbe6",
+                        "dark-danger": "#E74C3C",
+                        "on-tertiary-fixed": "#00210c",
+                        "on-primary-container": "#f2fffb",
+                        "tertiary-container": "#008645",
+                        "background": "#f7f9ff",
+                        "primary": "#00685c",
+                        "on-tertiary-container": "#f4fff2",
+                        "error": "#ba1a1a",
+                        "light-surface": "#EDEFF1",
+                        "dark-surface-variant": "#242F3A",
+                        "secondary-fixed": "#ffddb9",
+                        "on-primary-fixed": "#00201c",
+                        "light-background": "#F5F7F8",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#dae3ee",
+                        "inverse-on-surface": "#e8f2fd",
+                        "danger": "#CB4335",
+                        "surface-container-high": "#e0e9f4",
+                        "success": "#229954"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "large": "24px",
+                        "small": "8px",
+                        "medium": "16px",
+                        "micro": "4px",
+                        "baseline": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "numeric-data": ["Inter"],
+                        "title-md": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "numeric-data": ["15px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "title-md": ["20px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "22px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .ripple-effect:active {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.3) 1%, transparent 1%);
+            background-size: 100%;
+            transition: background 0s;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .blueprint-grid {
+            background-image: radial-gradient(circle, #bdc9c5 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface shadow-sm flex justify-between items-center px-large py-medium w-full">
+<div class="flex items-center gap-medium">
+<button class="text-primary hover:bg-surface-container-high transition-colors p-small rounded-full active:scale-95 duration-150">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-display-lg text-display-lg text-primary">AgriManage Pro</h1>
+</div>
+<div class="flex items-center gap-medium">
+<button class="hidden md:flex items-center gap-small px-medium py-small text-on-surface-variant font-title-md hover:bg-surface-container-high transition-colors rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden border-2 border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a senior agricultural consultant in a clean, modern office setting. The lighting is soft and natural, emphasizing a high-integrity corporate aesthetic. The background is slightly blurred, showing architectural blueprints and modern tech equipment, consistent with the professional and technical theme of the application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnNSFHzRyTY3blB5P9N6R13vUB_Rmco2US2qAOuoD1h57RHe_iPbHmysNNASRiHg44Od1Ycd_k3U18kQNL7dxZraxhNyRQmG2Zey0DizIhv_vfZUv9tJAQ6PN03-1YsPUS8tcEpWxyS-obLya65gj_dvt13gClghxRPgiztJ3MklFK7fmXLftYddjrB0a-yzRz1c5MXASGspmOyHnCpZODX-pVOpFu9yvNCaaSVwQ5gPOtrlNWdXluNFAM7mVXfJ2QiajbsWV1GBgU"/>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto p-large">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-medium mb-large">
+<div>
+<nav class="flex items-center gap-micro text-on-surface-variant mb-micro">
+<span class="text-label-sm font-label-sm uppercase tracking-wider">Rapports</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-label-sm font-label-sm uppercase tracking-wider text-primary">Détails de l'Évaluation</span>
+</nav>
+<h2 class="font-display-lg text-display-lg text-on-surface">Résumé de l'Évaluation</h2>
+</div>
+<div class="flex flex-wrap gap-small">
+<button class="flex items-center gap-small bg-surface-container-high text-primary px-medium py-small rounded-full font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined">share</span>
+                    Partager le Lien
+                </button>
+<button class="flex items-center gap-small bg-primary text-on-primary px-large py-small rounded-full font-label-sm text-label-sm shadow-sm hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95 duration-150 ripple-effect">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+                    Exporter en PDF
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-medium">
+<!-- Key Metrics Column -->
+<div class="md:col-span-4 flex flex-col gap-medium">
+<!-- Score de Conformité -->
+<div class="bg-surface rounded-xl p-medium shadow-sm border border-outline-variant flex flex-col justify-between h-48">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-sm text-label-sm">Score de Conformité</span>
+<span class="material-symbols-outlined text-success">verified</span>
+</div>
+<div class="flex items-baseline gap-micro">
+<span class="font-display-lg text-[48px] leading-none text-on-surface">94</span>
+<span class="text-on-surface-variant font-title-md text-title-md">/100</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2">
+<div class="bg-success h-2 rounded-full w-[94%]"></div>
+</div>
+<p class="text-label-sm font-label-sm text-success flex items-center gap-micro">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +2% vs mois dernier
+                    </p>
+</div>
+<!-- Capacité Totale -->
+<div class="bg-surface rounded-xl p-medium shadow-sm border border-outline-variant flex flex-col justify-between h-48">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-sm text-label-sm">Capacité Totale</span>
+<span class="material-symbols-outlined text-primary">groups</span>
+</div>
+<div class="flex items-baseline gap-micro">
+<span class="font-display-lg text-[48px] leading-none text-on-surface">12,450</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant">Unités de bétail</p>
+<div class="flex items-center gap-small pt-small">
+<span class="px-small py-micro rounded-full bg-secondary-container text-on-secondary-container text-label-sm font-label-sm">Optimal</span>
+</div>
+</div>
+<!-- Ventilation -->
+<div class="bg-surface rounded-xl p-medium shadow-sm border border-outline-variant flex flex-col justify-between h-48">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-sm text-label-sm">Ventilation</span>
+<span class="material-symbols-outlined text-primary">air</span>
+</div>
+<div class="flex items-baseline gap-micro">
+<span class="font-display-lg text-[48px] leading-none text-on-surface">420</span>
+<span class="text-on-surface-variant font-title-md text-title-md">k m³/h</span>
+</div>
+<div class="flex gap-micro h-4 items-end overflow-hidden">
+<div class="bg-primary w-full h-[60%] rounded-t-sm"></div>
+<div class="bg-primary w-full h-[80%] rounded-t-sm"></div>
+<div class="bg-primary w-full h-[100%] rounded-t-sm"></div>
+<div class="bg-primary w-full h-[70%] rounded-t-sm"></div>
+<div class="bg-primary w-full h-[90%] rounded-t-sm"></div>
+<div class="bg-primary w-full h-[65%] rounded-t-sm"></div>
+<div class="bg-primary w-full h-[85%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- Coût Total -->
+<div class="bg-secondary text-on-secondary rounded-xl p-medium shadow-md flex flex-col justify-between h-48">
+<div class="flex justify-between items-start">
+<span class="font-label-sm text-label-sm opacity-90">Coût Total Estimé</span>
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="flex items-baseline gap-micro">
+<span class="font-display-lg text-[48px] leading-none">84.2</span>
+<span class="font-title-md text-title-md opacity-90">k€</span>
+</div>
+<div class="flex items-center justify-between border-t border-on-secondary/20 pt-small">
+<span class="text-label-sm font-label-sm">ROI estimé</span>
+<span class="text-label-sm font-label-sm font-bold">18 mois</span>
+</div>
+</div>
+</div>
+<!-- Blueprint Preview Column -->
+<div class="md:col-span-8 flex flex-col gap-medium">
+<div class="bg-surface rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col h-full min-h-[600px]">
+<div class="p-medium border-b border-outline-variant flex items-center justify-between bg-surface-container-low">
+<div class="flex items-center gap-small">
+<span class="material-symbols-outlined text-primary">architecture</span>
+<span class="font-title-md text-title-md text-on-surface">Plan Technique Interactif</span>
+</div>
+<div class="flex gap-small">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface hover:bg-surface-container-high border border-outline-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface hover:bg-surface-container-high border border-outline-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">zoom_out</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-surface hover:bg-surface-container-high border border-outline-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- 2D Canvas Container -->
+<div class="flex-grow blueprint-grid relative p-large overflow-hidden cursor-crosshair">
+<!-- Abstract Blueprint Elements -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
+<img class="w-full h-full object-contain p-large" data-alt="A clean, minimalist 2D architectural blueprint of a modern agricultural facility. The layout shows precise technical lines, vectorized icons for fans and heaters, and structural measurements. The style is professional and industrial, using a palette of slate grays and muted teals on a light, grid-textured background to ensure outdoor readability and field-readiness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7CPFnEfbV-q26PBegZehHqMhoB637aKnDNzxDkOt8_IhWIGyJSxii2trXgNWuUgQoNnsKbQDzO2PGZku3BeL67au-ITuo4NqUMrbD5oGQZuVIyZvGbxaFLRKWf_c-A8uTREWYl-m-zxhg7eV7a1bGJDssgwbM3rsRbcz5SbPjRzvLUDpQ6qFPGdwGgFWTxVZHZ7nYmzRwaq_FrKtHDf0PTg1oWIaZtqr58bv9x14eZcXulX_ekH1jMfk1nWaKoPCViY5RaaM9OO98"/>
+</div>
+<!-- Overlay Labels -->
+<div class="absolute top-10 left-10 glass-card p-small rounded-lg shadow-sm border border-primary/20">
+<div class="flex items-center gap-small mb-micro">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm">Zone A: Stable</span>
+</div>
+<div class="text-[12px] font-numeric-data text-on-surface-variant">24.5°C | 62% Hum.</div>
+</div>
+<div class="absolute bottom-10 right-10 glass-card p-small rounded-lg shadow-sm border border-secondary/20">
+<div class="flex items-center gap-small mb-micro">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm">Zone B: Nurserie</span>
+</div>
+<div class="text-[12px] font-numeric-data text-on-surface-variant">28.1°C | 55% Hum.</div>
+</div>
+<!-- Legend -->
+<div class="absolute bottom-4 left-4 flex flex-col gap-micro bg-surface/90 p-small rounded-lg border border-outline-variant text-[12px]">
+<div class="flex items-center gap-small"><span class="material-symbols-outlined text-primary text-[16px]">propane_tank</span> Chauffage Actif</div>
+<div class="flex items-center gap-small"><span class="material-symbols-outlined text-tertiary text-[16px]">mode_fan</span> Ventilation 80%</div>
+<div class="flex items-center gap-small"><span class="material-symbols-outlined text-warning text-[16px]">warning</span> Maintenance Requise</div>
+</div>
+</div>
+<div class="p-medium bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
+<p class="text-body-md font-body-md text-on-surface-variant italic">Dernière mise à jour : il y a 14 minutes</p>
+<button class="text-primary font-label-sm text-label-sm hover:underline flex items-center gap-micro">
+                            Modifier le plan <span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface border-t border-outline-variant shadow-lg flex justify-around items-center h-16 w-full max-w-md mx-auto left-0 right-0">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-medium py-micro transition-all hover:bg-surface-container-low active:scale-98 duration-200">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="font-label-sm text-label-sm">Projects</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-medium py-micro transition-all hover:bg-surface-container-low active:scale-98 duration-200">
+<span class="material-symbols-outlined">architecture</span>
+<span class="font-label-sm text-label-sm">Design</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-medium py-micro transition-all hover:bg-surface-container-low active:scale-98 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">finance_mode</span>
+<span class="font-label-sm text-label-sm">Reports</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-medium py-micro transition-all hover:bg-surface-container-low active:scale-98 duration-200">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="font-label-sm text-label-sm">Health</span>
+</div>
+</nav>
+<!-- Interactive script for demo micro-interactions -->
+<script>
+        document.querySelectorAll('.active\\:scale-95').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>

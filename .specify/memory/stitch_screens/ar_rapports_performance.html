@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تقارير - مبنى ألفا</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Outfit:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#00201c",
+                        "on-tertiary-fixed-variant": "#005228",
+                        "inverse-primary": "#7dd6c7",
+                        "dark-warning": "#F1C40F",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e0e9f4",
+                        "outline-variant": "#bdc9c5",
+                        "secondary-fixed": "#ffddb9",
+                        "surface": "#f7f9ff",
+                        "dark-primary": "#2ECC71",
+                        "tertiary": "#006a35",
+                        "light-background": "#F5F7F8",
+                        "surface-tint": "#006b5f",
+                        "surface-bright": "#f7f9ff",
+                        "dark-surface": "#171F26",
+                        "primary-fixed-dim": "#7dd6c7",
+                        "on-background": "#131d24",
+                        "light-surface": "#EDEFF1",
+                        "light-surface-variant": "#E1E4E7",
+                        "tertiary-fixed": "#8af9a9",
+                        "on-tertiary-fixed": "#00210c",
+                        "surface-variant": "#dae3ee",
+                        "on-primary-fixed-variant": "#005047",
+                        "on-error": "#ffffff",
+                        "primary-container": "#1e8275",
+                        "on-surface-variant": "#3e4946",
+                        "on-tertiary-container": "#f4fff2",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#865300",
+                        "inverse-on-surface": "#e8f2fd",
+                        "background": "#f7f9ff",
+                        "on-error-container": "#93000a",
+                        "dark-background": "#0C1013",
+                        "dark-danger": "#E74C3C",
+                        "surface-container": "#e6effa",
+                        "error": "#ba1a1a",
+                        "outline": "#6e7976",
+                        "surface-container-highest": "#dae3ee",
+                        "tertiary-container": "#008645",
+                        "on-tertiary": "#ffffff",
+                        "dark-surface-variant": "#242F3A",
+                        "success": "#229954",
+                        "dark-success": "#27AE60",
+                        "inverse-surface": "#28313a",
+                        "secondary-container": "#fcae49",
+                        "on-surface": "#131d24",
+                        "dark-secondary": "#F39C12",
+                        "surface-dim": "#d2dbe6",
+                        "tertiary-fixed-dim": "#6edc8f",
+                        "on-secondary-container": "#6e4300",
+                        "surface-container-low": "#ecf4ff",
+                        "primary": "#00685c",
+                        "on-primary-container": "#f2fffb",
+                        "danger": "#CB4335",
+                        "secondary-fixed-dim": "#ffb963",
+                        "on-secondary-fixed-variant": "#663e00",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#99f3e3",
+                        "on-secondary-fixed": "#2b1700",
+                        "error-container": "#ffdad6",
+                        "warning": "#D4AC0D"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "medium": "16px",
+                        "micro": "4px",
+                        "baseline": "8px",
+                        "small": "8px",
+                        "large": "24px"
+                    },
+                    fontFamily: {
+                        "numeric-data": ["Inter"],
+                        "title-md": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    fontSize: {
+                        "numeric-data": ["15px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "500" }],
+                        "title-md": ["20px", { lineHeight: "26px", fontWeight: "600" }],
+                        "display-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "body-lg": ["16px", { lineHeight: "22px", fontWeight: "400" }],
+                        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-dark-surface shadow-sm z-40 bg-surface-container dark:bg-dark-surface-variant">
+<div class="flex flex-row-reverse justify-between items-center px-medium py-small w-full">
+<button class="text-primary dark:text-dark-primary hover:bg-surface-container-high dark:hover:bg-surface-variant scale-95 transition-transform duration-200 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-title-md text-title-md text-primary dark:text-dark-primary font-display-lg text-display-lg">مدير الدواجن</h1>
+<button class="text-primary dark:text-dark-primary hover:bg-surface-container-high dark:hover:bg-surface-variant scale-95 transition-transform duration-200 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="px-medium pt-large">
+<!-- Page Title & Actions -->
+<div class="flex flex-col gap-medium mb-large">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface">تقارير - مبنى ألفا</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-micro">ملخص التقييم والمقاييس الرئيسية</p>
+</div>
+<div class="flex gap-small w-full">
+<button class="flex-1 bg-primary text-on-primary rounded-full py-small px-medium flex items-center justify-center gap-micro shadow-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+<span class="font-label-sm text-label-sm">تصدير بصيغة PDF</span>
+</button>
+<button class="flex-1 bg-transparent border border-outline text-primary rounded-full py-small px-medium flex items-center justify-center gap-micro hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span class="font-label-sm text-label-sm">مشاركة الرابط</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-medium">
+<!-- Compliance Score (Hero Metric) -->
+<div class="bg-primary-container rounded-xl p-medium flex flex-col justify-between relative overflow-hidden shadow-sm md:col-span-2">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/4"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-small">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">verified</span>
+<h3 class="font-title-md text-title-md text-on-primary-container">درجة الامتثال</h3>
+</div>
+<span class="bg-white/20 text-on-primary-container font-label-sm text-label-sm px-2 py-1 rounded-full">جيد جداً</span>
+</div>
+<div class="mt-large flex items-end gap-micro z-10">
+<span class="font-display-lg text-display-lg text-on-primary-container font-numeric-data text-[48px] leading-none">85</span>
+<span class="font-body-lg text-body-lg text-on-primary-container/80 font-numeric-data pb-1">/100</span>
+</div>
+<div class="w-full bg-white/20 h-2 rounded-full mt-medium z-10">
+<div class="bg-on-primary-container h-full rounded-full" style="width: 85%;"></div>
+</div>
+</div>
+<!-- Capacity -->
+<div class="bg-surface-container-lowest rounded-xl p-medium border border-outline-variant shadow-sm flex flex-col gap-medium">
+<div class="flex items-center gap-small text-on-surface-variant">
+<div class="bg-surface-container p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">cruelty_free</span>
+</div>
+<span class="font-body-lg text-body-lg">السعة</span>
+</div>
+<div>
+<div class="flex items-baseline gap-micro">
+<span class="font-display-lg text-display-lg text-on-surface font-numeric-data">28,500</span>
+<span class="font-body-md text-body-md text-on-surface-variant">طائر</span>
+</div>
+<p class="font-label-sm text-label-sm text-success mt-micro flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> ضمن الحدود الآمنة
+                    </p>
+</div>
+</div>
+<!-- Total Cost -->
+<div class="bg-surface-container-lowest rounded-xl p-medium border border-outline-variant shadow-sm flex flex-col gap-medium">
+<div class="flex items-center gap-small text-on-surface-variant">
+<div class="bg-surface-container p-2 rounded-lg">
+<span class="material-symbols-outlined text-secondary">payments</span>
+</div>
+<span class="font-body-lg text-body-lg">التكلفة الإجمالية</span>
+</div>
+<div>
+<div class="flex items-baseline gap-micro">
+<span class="font-display-lg text-display-lg text-on-surface font-numeric-data">170</span>
+<span class="font-body-md text-body-md text-on-surface-variant">مليون دج</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-micro">
+                        دورة الإنتاج الحالية
+                    </p>
+</div>
+</div>
+</div>
+<!-- Chart Placeholder / Visual Polish -->
+<div class="mt-large bg-surface-container-lowest rounded-xl p-medium border border-outline-variant shadow-sm">
+<h3 class="font-title-md text-title-md text-on-surface mb-medium">تحليل الأداء</h3>
+<div class="w-full h-48 bg-surface-container flex items-center justify-center rounded-lg border border-dashed border-outline-variant relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-multiply" data-alt="A clean, abstract line chart visualizing data trends on a soft gray background, representing agricultural metrics in a professional dashboard, modern light mode aesthetic, crisp lines." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCoHJAXNa4htCaEMaVA9RDlqMV-nCy78Fjurwxj9AdGQtIJ5NOw-jSiYWdwWweX6krG3zlPF1Nu4Rs34hgc82mFMIzq6oLiNSKfwe7Vte53k8ZcUQm7BinwDj8U6vyzJ3TtgTR2padinI-77JFsIWY9V0g_lpn5pHk625l7YLpjbhlCZNM08D-7c1yKac26zBSuVy_BWc-J6xygaWf1MOt_pWT7-jVNR6Qw1GbN3HGDo1ktn9sdVKE1mmiqBmyrMIE4EJqBD6KZx-BZ')"></div>
+<span class="material-symbols-outlined text-outline text-[48px] z-10">show_chart</span>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container dark:bg-dark-surface-variant shadow-lg bg-surface-container-highest dark:bg-dark-surface border-t border-transparent">
+<div class="flex flex-row-reverse justify-around items-center w-full h-16 px-small">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 flex-1">
+<span class="material-symbols-outlined mb-1 text-[24px]">dashboard</span>
+<span class="font-label-sm text-label-sm">لوحة القيادة</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 flex-1">
+<span class="material-symbols-outlined mb-1 text-[24px]">architecture</span>
+<span class="font-label-sm text-label-sm">المخطط</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 flex-1">
+<span class="material-symbols-outlined mb-1 text-[24px]">payments</span>
+<span class="font-label-sm text-label-sm">المالية</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 flex-1">
+<span class="material-symbols-outlined mb-1 text-[24px]">warning</span>
+<span class="font-label-sm text-label-sm">المخاطر</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-tertiary-container text-on-primary-container dark:text-on-tertiary-container rounded-full px-4 py-1 hover:text-primary dark:hover:text-dark-primary scale-98 transition-all duration-150 flex-1">
+<span class="material-symbols-outlined mb-1 text-[24px]" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-sm text-label-sm">التقارير</span>
+</button>
+</div>
+</nav>
+</body></html>

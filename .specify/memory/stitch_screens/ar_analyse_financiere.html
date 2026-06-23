@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>البيانات المالية - مدير الدواجن</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Outfit:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#00201c",
+                    "on-tertiary-fixed-variant": "#005228",
+                    "inverse-primary": "#7dd6c7",
+                    "dark-warning": "#F1C40F",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#e0e9f4",
+                    "outline-variant": "#bdc9c5",
+                    "secondary-fixed": "#ffddb9",
+                    "surface": "#f7f9ff",
+                    "dark-primary": "#2ECC71",
+                    "tertiary": "#006a35",
+                    "light-background": "#F5F7F8",
+                    "surface-tint": "#006b5f",
+                    "surface-bright": "#f7f9ff",
+                    "dark-surface": "#171F26",
+                    "primary-fixed-dim": "#7dd6c7",
+                    "on-background": "#131d24",
+                    "light-surface": "#EDEFF1",
+                    "light-surface-variant": "#E1E4E7",
+                    "tertiary-fixed": "#8af9a9",
+                    "on-tertiary-fixed": "#00210c",
+                    "surface-variant": "#dae3ee",
+                    "on-primary-fixed-variant": "#005047",
+                    "on-error": "#ffffff",
+                    "primary-container": "#1e8275",
+                    "on-surface-variant": "#3e4946",
+                    "on-tertiary-container": "#f4fff2",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#865300",
+                    "inverse-on-surface": "#e8f2fd",
+                    "background": "#f7f9ff",
+                    "on-error-container": "#93000a",
+                    "dark-background": "#0C1013",
+                    "dark-danger": "#E74C3C",
+                    "surface-container": "#e6effa",
+                    "error": "#ba1a1a",
+                    "outline": "#6e7976",
+                    "surface-container-highest": "#dae3ee",
+                    "tertiary-container": "#008645",
+                    "on-tertiary": "#ffffff",
+                    "dark-surface-variant": "#242F3A",
+                    "success": "#229954",
+                    "dark-success": "#27AE60",
+                    "inverse-surface": "#28313a",
+                    "secondary-container": "#fcae49",
+                    "on-surface": "#131d24",
+                    "dark-secondary": "#F39C12",
+                    "surface-dim": "#d2dbe6",
+                    "tertiary-fixed-dim": "#6edc8f",
+                    "on-secondary-container": "#6e4300",
+                    "surface-container-low": "#ecf4ff",
+                    "primary": "#00685c",
+                    "on-primary-container": "#f2fffb",
+                    "danger": "#CB4335",
+                    "secondary-fixed-dim": "#ffb963",
+                    "on-secondary-fixed-variant": "#663e00",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#99f3e3",
+                    "on-secondary-fixed": "#2b1700",
+                    "error-container": "#ffdad6",
+                    "warning": "#D4AC0D"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "medium": "16px",
+                    "micro": "4px",
+                    "baseline": "8px",
+                    "small": "8px",
+                    "large": "24px"
+            },
+            "fontFamily": {
+                    "numeric-data": [
+                            "Inter"
+                    ],
+                    "title-md": [
+                            "Outfit"
+                    ],
+                    "display-lg": [
+                            "Outfit"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "label-sm": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "numeric-data": [
+                            "15px",
+                            {
+                                    "lineHeight": "18px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "title-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "26px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "22px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        /* Custom Donut Chart CSS */
+        .donut-chart {
+            background: conic-gradient(
+                theme('colors.primary') 0% 55%, 
+                theme('colors.secondary-container') 55% 80%, 
+                theme('colors.surface-container-highest') 80% 100%
+            );
+            border-radius: 50%;
+            position: relative;
+        }
+        .donut-inner {
+            background-color: theme('colors.surface-container-lowest');
+            border-radius: 50%;
+            position: absolute;
+            top: 20%; left: 20%; right: 20%; bottom: 20%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-surface text-primary w-full top-0 sticky shadow-sm">
+<div class="flex flex-row-reverse justify-between items-center px-medium py-small w-full">
+<button class="text-primary hover:bg-surface-container-high transition-transform duration-200 scale-95 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-title-md text-title-md">مدير الدواجن</h1>
+<button class="text-primary hover:bg-surface-container-high transition-transform duration-200 scale-95 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="p-medium max-w-7xl mx-auto space-y-large">
+<!-- Page Header -->
+<div class="flex items-center gap-small">
+<span class="material-symbols-outlined text-primary text-3xl">account_balance_wallet</span>
+<h2 class="font-display-lg text-display-lg text-on-surface">البيانات المالية</h2>
+</div>
+<!-- KPI Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-medium">
+<!-- CapEx Card -->
+<div class="bg-surface-container-lowest p-medium rounded-xl shadow-sm border border-surface-variant flex flex-col justify-between">
+<div class="flex items-center gap-small mb-small text-on-surface-variant">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+<span class="font-body-md text-body-md">النفقات الرأسمالية (CapEx)</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-numeric-data text-[28px] font-bold text-on-surface">15,400,000</span>
+<span class="font-body-sm text-on-surface-variant">د.ج</span>
+</div>
+</div>
+<!-- OpEx Card -->
+<div class="bg-surface-container-lowest p-medium rounded-xl shadow-sm border border-surface-variant flex flex-col justify-between">
+<div class="flex items-center gap-small mb-small text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary-container">payments</span>
+<span class="font-body-md text-body-md">النفقات التشغيلية (OpEx)</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-numeric-data text-[28px] font-bold text-on-surface">3,250,000</span>
+<span class="font-body-sm text-on-surface-variant">د.ج</span>
+</div>
+</div>
+<!-- ROI Card -->
+<div class="bg-surface-container-lowest p-medium rounded-xl shadow-sm border border-surface-variant flex flex-col justify-between">
+<div class="flex items-center gap-small mb-small text-on-surface-variant">
+<span class="material-symbols-outlined text-success">trending_up</span>
+<span class="font-body-md text-body-md">عائد الاستثمار (ROI)</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-numeric-data text-[28px] font-bold text-on-surface">3.5</span>
+<span class="font-body-sm text-on-surface-variant">سنوات للتعافي</span>
+</div>
+</div>
+</section>
+<!-- Bento Grid for Charts -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-medium">
+<!-- Cost Breakdown Pie Chart -->
+<div class="bg-surface-container-lowest p-medium rounded-xl shadow-sm border border-surface-variant flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface mb-large">تفصيل التكاليف</h3>
+<div class="flex flex-col md:flex-row items-center justify-center gap-large flex-grow">
+<!-- CSS Donut Chart -->
+<div class="w-48 h-48 donut-chart shadow-inner">
+<div class="donut-inner flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-4xl text-outline">pie_chart</span>
+</div>
+</div>
+<!-- Legend -->
+<div class="flex flex-col gap-small w-full md:w-auto">
+<div class="flex items-center justify-between gap-large">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="font-body-md text-body-md text-on-surface">البنية التحتية</span>
+</div>
+<span class="font-numeric-data text-numeric-data text-on-surface-variant">55%</span>
+</div>
+<div class="flex items-center justify-between gap-large">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary-container"></div>
+<span class="font-body-md text-body-md text-on-surface">تكنولوجيا المناخ</span>
+</div>
+<span class="font-numeric-data text-numeric-data text-on-surface-variant">25%</span>
+</div>
+<div class="flex items-center justify-between gap-large">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-surface-container-highest"></div>
+<span class="font-body-md text-body-md text-on-surface">أخرى</span>
+</div>
+<span class="font-numeric-data text-numeric-data text-on-surface-variant">20%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Cycle Expenses Bar Chart -->
+<div class="bg-surface-container-lowest p-medium rounded-xl shadow-sm border border-surface-variant flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface mb-large">نفقات الدورة</h3>
+<div class="flex flex-col justify-end flex-grow gap-small h-48 mt-auto">
+<!-- Feed Bar -->
+<div class="flex items-center gap-small">
+<span class="w-20 font-body-sm text-on-surface-variant text-left">العلف</span>
+<div class="flex-grow bg-surface-variant rounded-full h-4 overflow-hidden flex">
+<div class="bg-primary h-full" style="width: 70%;"></div>
+</div>
+<span class="w-16 font-numeric-data text-numeric-data text-on-surface text-left">70%</span>
+</div>
+<!-- Electricity Bar -->
+<div class="flex items-center gap-small">
+<span class="w-20 font-body-sm text-on-surface-variant text-left">الكهرباء</span>
+<div class="flex-grow bg-surface-variant rounded-full h-4 overflow-hidden flex">
+<div class="bg-secondary-container h-full" style="width: 20%;"></div>
+</div>
+<span class="w-16 font-numeric-data text-numeric-data text-on-surface text-left">20%</span>
+</div>
+<!-- Labor Bar -->
+<div class="flex items-center gap-small">
+<span class="w-20 font-body-sm text-on-surface-variant text-left">العمالة</span>
+<div class="flex-grow bg-surface-variant rounded-full h-4 overflow-hidden flex">
+<div class="bg-tertiary h-full" style="width: 10%;"></div>
+</div>
+<span class="w-16 font-numeric-data text-numeric-data text-on-surface text-left">10%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ROI Timeline Section -->
+<section class="bg-surface-container-lowest p-medium rounded-xl shadow-sm border border-surface-variant">
+<div class="flex items-center justify-between mb-large">
+<h3 class="font-title-md text-title-md text-on-surface">الجدول الزمني لعائد الاستثمار</h3>
+<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-3 py-1 rounded-full">استرداد 3.5 سنوات</span>
+</div>
+<!-- Timeline Visualization (Stylized CSS) -->
+<div class="relative w-full h-32 flex items-end">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between border-b border-surface-variant pointer-events-none">
+<div class="border-t border-surface-variant border-dashed w-full opacity-50 h-0"></div>
+<div class="border-t border-surface-variant border-dashed w-full opacity-50 h-0"></div>
+<div class="border-t border-surface-variant border-dashed w-full opacity-50 h-0"></div>
+</div>
+<!-- Area Graph Simulation -->
+<div class="relative w-full h-full flex items-end overflow-hidden rounded-b-md z-10">
+<div class="w-1/4 h-[10%] bg-surface-container-highest border-t-2 border-outline-variant"></div>
+<div class="w-1/4 h-[35%] bg-secondary-fixed-dim border-t-2 border-secondary-container opacity-80"></div>
+<div class="w-1/4 h-[70%] bg-primary-fixed-dim border-t-2 border-primary opacity-80"></div>
+<div class="w-1/4 h-[100%] bg-success opacity-80 border-t-2 border-dark-success relative">
+<!-- Payback Marker -->
+<div class="absolute -top-3 right-0 w-3 h-3 bg-white border-2 border-success rounded-full z-20"></div>
+</div>
+</div>
+</div>
+<!-- X-Axis Labels -->
+<div class="flex justify-between w-full mt-2 text-on-surface-variant font-numeric-data text-sm">
+<span>سنة 1</span>
+<span>سنة 2</span>
+<span>سنة 3</span>
+<span class="text-success font-bold">سنة 3.5</span>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface-container fixed bottom-0 w-full z-50 rounded-t-xl shadow-lg border-t-0">
+<div class="flex flex-row-reverse justify-around items-center w-full h-16 px-small">
+<!-- Tab 1 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant w-16 group scale-98 transition-all duration-150">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">لوحة القيادة</span>
+</button>
+<!-- Tab 2 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant w-16 group scale-98 transition-all duration-150">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">architecture</span>
+<span class="font-label-sm text-label-sm mt-1">المخطط</span>
+</button>
+<!-- Tab 3 (ACTIVE) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-98 transition-all duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-label-sm text-label-sm mt-1">المالية</span>
+</button>
+<!-- Tab 4 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant w-16 group scale-98 transition-all duration-150">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">warning</span>
+<span class="font-label-sm text-label-sm mt-1">المخاطر</span>
+</button>
+<!-- Tab 5 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant w-16 group scale-98 transition-all duration-150">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">description</span>
+<span class="font-label-sm text-label-sm mt-1">التقارير</span>
+</button>
+</div>
+</nav>
+</body></html>
