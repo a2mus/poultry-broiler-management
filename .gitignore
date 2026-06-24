@@ -1,0 +1,42 @@
+# Gradle
+.gradle/
+build/
+gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+*.iml
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Android
+**/local.properties
+**/google-services.json
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# App builds
+app/build/
+app/release/
+
+# Room schema exports are checked in (needed for migration validation)
+# app/schemas/ - committed
+
+# Logs
+*.log
+*.hprof
+
+# Environment
+.env
+.env.*
+.envrc
+
+# OS
+.DS_Store
+Thumbs.db
