@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.poultry.broiler.data.local.PoultryDatabase
 import com.poultry.broiler.data.local.dao.BreedProfileDao
 import com.poultry.broiler.data.local.dao.EquipmentItemDao
+import com.poultry.broiler.data.local.dao.ProjectDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +26,7 @@ object DatabaseModule {
             "poultry.db",
         )
             .createFromAsset("seed/poultry.db")
+            .addMigrations(PoultryDatabase.MIGRATION_1_2)
             .build()
     }
 
@@ -36,5 +38,10 @@ object DatabaseModule {
     @Provides
     fun provideEquipmentItemDao(database: PoultryDatabase): EquipmentItemDao {
         return database.equipmentItemDao()
+    }
+
+    @Provides
+    fun provideProjectDao(database: PoultryDatabase): ProjectDao {
+        return database.projectDao()
     }
 }

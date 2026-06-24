@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                             currentRoute = currentRoute,
                             onNavigate = { route ->
                                 navController.navigate(route.route) {
-                                    popUpTo(NavRoute.Home.route) {
+                                    popUpTo(NavRoute.Projects.route) {
                                         saveState = true
                                     }
                                     launchSingleTop = true

@@ -1,3 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Navigation -->
+    <string name="nav_home">الرئيسية</string>
+    <string name="nav_wizard">المعالج</string>
+    <string name="nav_dashboard">لوحة التحكم</string>
+    <string name="nav_catalog">الكتالوج</string>
+    <string name="nav_settings">الإعدادات</string>
+
+    <!-- Screen Titles -->
+    <string name="screen_home">الرئيسية</string>
+    <string name="screen_wizard">معالج التكوين</string>
+    <string name="screen_dashboard">لوحة التحكم</string>
+    <string name="screen_catalog">الكتالوج</string>
+    <string name="screen_settings">الإعدادات</string>
+
+    <!-- Error Messages -->
+    <string name="error_seed_load_failed">فشل تحميل البيانات الأولية</string>
+    <string name="error_seed_reinstall">يرجى إعادة تثبيت التطبيق</string>
+    <string name="error_seed_retry">إعادة المحاولة</string>
+
+    <!-- Content Descriptions -->
+    <string name="cd_home_nav">الرئيسية</string>
+    <string name="cd_wizard_nav">المعالج</string>
+    <string name="cd_dashboard_nav">لوحة التحكم</string>
+    <string name="cd_catalog_nav">الكتالوج</string>
+    <string name="cd_settings_nav">الإعدادات</string>
+
+    <!-- Components -->
+    <string name="unit_meters">م</string>
+    <string name="unit_kilograms">كجم</string>
+    <string name="unit_square_meters">م²</string>
+
+    <!-- Navigation Tabs (Feature #002) -->
+    <string name="nav_projects">المشاريع</string>
+    <string name="nav_design">التصميم</string>
+    <string name="nav_reports">التقارير</string>
+    <string name="nav_health">الصحة</string>
+
+    <!-- Content Descriptions: Navigation -->
+    <string name="cd_projects_nav">تبويب المشاريع</string>
+    <string name="cd_design_nav">تبويب التصميم</string>
+    <string name="cd_reports_nav">تبويب التقارير</string>
+    <string name="cd_health_nav">تبويب الصحة</string>
+
+    <!-- Home Screen -->
+    <string name="screen_projects">المشاريع</string>
+    <string name="home_empty_title">لا توجد مشاريع</string>
+    <string name="home_empty_subtitle">أنشئ مشروعك الأول للبدء في تصميم مبنى الدواجن.</string>
+    <string name="home_search_placeholder">ابحث عن مشروع…</string>
+    <string name="home_search_no_results">لا توجد مشاريع مطابقة لبحثك</string>
+    <string name="home_new_project">مشروع جديد</string>
+    <string name="home_capacity">السعة</string>
+    <string name="home_compliance">الامتثال</string>
+    <string name="home_not_applicable">غير متاح</string>
+
+    <!-- Content Descriptions: Home -->
+    <string name="cd_fab_new_project">إنشاء مشروع جديد</string>
+    <string name="cd_new_project_placeholder">إنشاء مشروع جديد</string>
+    <string name="cd_search_icon">بحث</string>
+    <string name="cd_clear_search">مسح البحث</string>
+    <string name="cd_type_badge_new">تركيب جديد</string>
+    <string name="cd_type_badge_existing">تقييم موجود</string>
+    <string name="cd_project_card_menu">خيارات المشروع</string>
+
+    <!-- New Project Dialog -->
+    <string name="dialog_new_project_title">مشروع جديد</string>
+    <string name="dialog_new_project_name">اسم المشروع</string>
+    <string name="dialog_new_project_type">نوع المشروع</string>
+    <string name="dialog_new_project_type_new">تركيب جديد</string>
+    <string name="dialog_new_project_type_existing">تقييم موجود</string>
+    <string name="dialog_new_project_location">الموقع (اختياري)</string>
+
+    <!-- Edit Project Dialog -->
+    <string name="dialog_edit_project_title">تعديل المشروع</string>
+    <string name="dialog_edit_project_type_readonly">النوع (غير قابل للتعديل)</string>
+
+    <!-- Delete Confirmation -->
+    <string name="dialog_delete_title">حذف المشروع</string>
+    <string name="dialog_delete_message">هل تريد حقًا حذف «%1$s»؟\nلا يمكن التراجع عن هذا الإجراء.</string>
+
+    <!-- Validation Errors -->
+    <string name="error_name_required">اسم المشروع مطلوب</string>
+    <string name="error_name_too_long">يجب ألا يتجاوز الاسم 200 حرف</string>
+    <string name="error_location_too_long">يجب ألا يتجاوز الموقع 300 حرف</string>
+    <string name="error_loading_projects">خطأ في تحميل المشاريع</string>
+
+    <!-- Context Menu -->
+    <string name="menu_edit">تعديل</string>
+    <string name="menu_duplicate">تكرار</string>
+    <string name="menu_delete">حذف</string>
+
+    <!-- Common Actions -->
+    <string name="action_create">إنشاء</string>
+    <string name="action_save">حفظ</string>
+    <string name="action_cancel">إلغاء</string>
+    <string name="action_delete">حذف</string>
+    <string name="action_retry">إعادة المحاولة</string>
+
+    <!-- Stub Screens -->
+    <string name="screen_design_stub">التصميم\nقريبًا</string>
+    <string name="screen_reports_stub">التقارير\nقريبًا</string>
+    <string name="screen_health_stub">الصحة\nقريبًا</string>
 </resources>
