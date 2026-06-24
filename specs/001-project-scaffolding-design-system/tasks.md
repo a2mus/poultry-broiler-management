@@ -25,14 +25,14 @@
 
 **Purpose**: Gradle build system, version catalog, and project configuration files
 
-- [ ] T001 Create full Android project directory structure per plan.md: `app/src/main/java/com/poultry/broiler/{data/{local/{dao,entity,converter},repository,mapper},domain/{model,repository},presentation/{home,wizard,dashboard,catalog,settings,components,navigation,theme},di,util}`, `app/src/main/res/{values,values-fr,values-ar,font}`, `app/src/main/assets/seed/`, `app/src/test/java/com/poultry/broiler/{data,domain}`, `app/src/androidTest/java/com/poultry/broiler/{data/local,presentation}`, `app/src/dev/`, `app/src/prod/`, `.github/workflows/`
-- [ ] T002 Create Gradle Version Catalog with all pinned dependency versions (Compose BOM, Material 3, Room 2.6+, Hilt 2.51+, Navigation Compose, kotlinx-serialization, JUnit 5, MockK, Turbine, Detekt, ktlint) in `gradle/libs.versions.toml`
-- [ ] T003 [P] Create root `build.gradle.kts` with plugin declarations for Kotlin, Compose, Hilt, Room KSP, Android application, and ktlint referencing Version Catalog
-- [ ] T004 [P] Create `settings.gradle.kts` with pluginManagement, dependencyResolutionManagement (Google Maven + Maven Central repositories), and project include for `:app`
-- [ ] T005 Create `app/build.gradle.kts` with compileSdk 35, minSdk 26, targetSdk 35, Compose enabled, Room schema export, Hilt + KSP, dev/prod product flavors (dev: applicationIdSuffix `.dev`), Version Catalog library references, and test dependencies
-- [ ] T006 [P] Create `.gitignore` with Android defaults, `**/google-services.json`, IDE files, build outputs, and `local.properties`
-- [ ] T007 [P] Create `.editorconfig` with ktlint-compatible Kotlin coding conventions (indent_size=4, max_line_length=120)
-- [ ] T008 [P] Create `gradle.properties` with AndroidX opt-in, Kotlin code style, non-transitive R classes, and Compose compiler settings
+- [X] T001 Create full Android project directory structure per plan.md: `app/src/main/java/com/poultry/broiler/{data/{local/{dao,entity,converter},repository,mapper},domain/{model,repository},presentation/{home,wizard,dashboard,catalog,settings,components,navigation,theme},di,util}`, `app/src/main/res/{values,values-fr,values-ar,font}`, `app/src/main/assets/seed/`, `app/src/test/java/com/poultry/broiler/{data,domain}`, `app/src/androidTest/java/com/poultry/broiler/{data/local,presentation}`, `app/src/dev/`, `app/src/prod/`, `.github/workflows/`
+- [X] T002 Create Gradle Version Catalog with all pinned dependency versions (Compose BOM, Material 3, Room 2.6+, Hilt 2.51+, Navigation Compose, kotlinx-serialization, JUnit 5, MockK, Turbine, Detekt, ktlint) in `gradle/libs.versions.toml`
+- [X] T003 [P] Create root `build.gradle.kts` with plugin declarations for Kotlin, Compose, Hilt, Room KSP, Android application, and ktlint referencing Version Catalog
+- [X] T004 [P] Create `settings.gradle.kts` with pluginManagement, dependencyResolutionManagement (Google Maven + Maven Central repositories), and project include for `:app`
+- [X] T005 Create `app/build.gradle.kts` with compileSdk 35, minSdk 26, targetSdk 35, Compose enabled, Room schema export, Hilt + KSP, dev/prod product flavors (dev: applicationIdSuffix `.dev`), Version Catalog library references, and test dependencies
+- [X] T006 [P] Create `.gitignore` with Android defaults, `**/google-services.json`, IDE files, build outputs, and `local.properties`
+- [X] T007 [P] Create `.editorconfig` with ktlint-compatible Kotlin coding conventions (indent_size=4, max_line_length=120)
+- [X] T008 [P] Create `gradle.properties` with AndroidX opt-in, Kotlin code style, non-transitive R classes, and Compose compiler settings
 
 ---
 
@@ -42,10 +42,10 @@
 
 **CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T009 Create `app/src/main/AndroidManifest.xml` with single Activity declaration (`MainActivity`), application class reference (`PoultryApp`), theme reference, and exported launcher intent filter
-- [ ] T010 [P] Create `app/src/main/java/com/poultry/broiler/PoultryApp.kt` as `@HiltAndroidApp` annotated Application class with KDoc documentation
-- [ ] T011 Create `app/src/main/java/com/poultry/broiler/MainActivity.kt` as `@AndroidEntryPoint` Activity with `setContent {}` shell wrapping a placeholder composable (will be enhanced by US2 Theme and US3 Navigation)
-- [ ] T012 [P] Create `app/proguard-rules.pro` with default Android ProGuard rules and Room/Hilt keep rules
+- [X] T009 Create `app/src/main/AndroidManifest.xml` with single Activity declaration (`MainActivity`), application class reference (`PoultryApp`), theme reference, and exported launcher intent filter
+- [X] T010 [P] Create `app/src/main/java/com/poultry/broiler/PoultryApp.kt` as `@HiltAndroidApp` annotated Application class with KDoc documentation
+- [X] T011 Create `app/src/main/java/com/poultry/broiler/MainActivity.kt` as `@AndroidEntryPoint` Activity with `setContent {}` shell wrapping a placeholder composable (will be enhanced by US2 Theme and US3 Navigation)
+- [X] T012 [P] Create `app/proguard-rules.pro` with default Android ProGuard rules and Room/Hilt keep rules
 
 **Checkpoint**: Project compiles with `./gradlew assembleDevDebug` — empty app launches on emulator
 
@@ -63,8 +63,8 @@
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] Create `app/src/main/res/values/colors.xml` with placeholder Material 3 color resources (overridden by Compose theme in US2) and `app/src/main/res/values/themes.xml` with base Android theme for splash/launch
-- [ ] T014 [US1] Create `app/src/main/res/values/strings.xml` with minimal app_name string in French ("Bâtiment Avicole") as default resource fallback
+- [X] T013 [US1] Create `app/src/main/res/values/colors.xml` with placeholder Material 3 color resources (overridden by Compose theme in US2) and `app/src/main/res/values/themes.xml` with base Android theme for splash/launch
+- [X] T014 [US1] Create `app/src/main/res/values/strings.xml` with minimal app_name string in French ("Bâtiment Avicole") as default resource fallback
 
 **Checkpoint**: `./gradlew assembleDevDebug` succeeds, APK installs and launches showing a minimal screen
 
@@ -80,18 +80,18 @@
 
 ### Implementation for User Story 2
 
-- [ ] T015 [P] [US2] Add Outfit font files (regular, medium, semibold, bold .ttf) to `app/src/main/res/font/` — download from Google Fonts (SIL Open Font License)
-- [ ] T016 [P] [US2] Add Inter font files (regular, medium, semibold, bold .ttf) to `app/src/main/res/font/` — download from Google Fonts (SIL Open Font License)
-- [ ] T017 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Color.kt` with Forest Teal light palette (primary, secondary, tertiary, surface, background, on-* colors) and Sleek Carbon dark palette per UI spec §1.1 — all as Compose `Color` values, no dynamic color
-- [ ] T018 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Type.kt` with OutfitFontFamily and InterFontFamily definitions referencing bundled font resources, plus Material 3 Typography (displayLarge/Medium/Small → Outfit; bodyLarge/Medium/Small → Inter) per UI spec §1.2
-- [ ] T019 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Shape.kt` with design token shapes: 8dp badge corners, 16dp card corners, 24dp pill button corners, 28dp dialog corners per FR-005
-- [ ] T020 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Spacing.kt` with 8dp baseline grid CompositionLocal provider: spacing values as multiples of 4dp (xxs=4dp, xs=8dp, sm=12dp, md=16dp, lg=24dp, xl=32dp, xxl=48dp) per FR-004
-- [ ] T021 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Elevation.kt` with 4-level elevation token object: flat=0dp, card=2dp, hover=6dp, modal=12dp per FR-006
-- [ ] T022 [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Theme.kt` with `PoultryTheme` composable using `lightColorScheme()` and `darkColorScheme()` with explicit token assignments, `isSystemInDarkTheme()` detection, and CompositionLocal providers for Spacing — no `dynamicDarkColorScheme()` per R-003
-- [ ] T023 [US2] Wire `PoultryTheme` into `MainActivity.kt` `setContent` block — update `app/src/main/java/com/poultry/broiler/MainActivity.kt` to wrap all content in `PoultryTheme {}`
-- [ ] T024 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/components/StatusBadge.kt` themed shell composable with 8dp corner radius, Inter labelSmall typography, primaryContainer background, 4dp/8dp padding, @Preview annotation per contracts/composables.md
-- [ ] T025 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/components/NumericInputField.kt` themed shell composable with OutlinedTextField, trailing unitLabel, KeyboardType.Decimal, 48dp+ touch target, @Preview annotation per contracts/composables.md
-- [ ] T026 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/components/BottomSheet.kt` themed shell composable with ModalBottomSheet, 28dp top corners, 12dp modal elevation, drag handle, titleMedium Outfit title, 16dp/24dp padding, @Preview annotation per contracts/composables.md
+- [X] T015 [P] [US2] Add Outfit font files (regular, medium, semibold, bold .ttf) to `app/src/main/res/font/` — download from Google Fonts (SIL Open Font License)
+- [X] T016 [P] [US2] Add Inter font files (regular, medium, semibold, bold .ttf) to `app/src/main/res/font/` — download from Google Fonts (SIL Open Font License)
+- [X] T017 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Color.kt` with Forest Teal light palette (primary, secondary, tertiary, surface, background, on-* colors) and Sleek Carbon dark palette per UI spec §1.1 — all as Compose `Color` values, no dynamic color
+- [X] T018 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Type.kt` with OutfitFontFamily and InterFontFamily definitions referencing bundled font resources, plus Material 3 Typography (displayLarge/Medium/Small → Outfit; bodyLarge/Medium/Small → Inter) per UI spec §1.2
+- [X] T019 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Shape.kt` with design token shapes: 8dp badge corners, 16dp card corners, 24dp pill button corners, 28dp dialog corners per FR-005
+- [X] T020 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Spacing.kt` with 8dp baseline grid CompositionLocal provider: spacing values as multiples of 4dp (xxs=4dp, xs=8dp, sm=12dp, md=16dp, lg=24dp, xl=32dp, xxl=48dp) per FR-004
+- [X] T021 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Elevation.kt` with 4-level elevation token object: flat=0dp, card=2dp, hover=6dp, modal=12dp per FR-006
+- [X] T022 [US2] Create `app/src/main/java/com/poultry/broiler/presentation/theme/Theme.kt` with `PoultryTheme` composable using `lightColorScheme()` and `darkColorScheme()` with explicit token assignments, `isSystemInDarkTheme()` detection, and CompositionLocal providers for Spacing — no `dynamicDarkColorScheme()` per R-003
+- [X] T023 [US2] Wire `PoultryTheme` into `MainActivity.kt` `setContent` block — update `app/src/main/java/com/poultry/broiler/MainActivity.kt` to wrap all content in `PoultryTheme {}`
+- [X] T024 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/components/StatusBadge.kt` themed shell composable with 8dp corner radius, Inter labelSmall typography, primaryContainer background, 4dp/8dp padding, @Preview annotation per contracts/composables.md
+- [X] T025 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/components/NumericInputField.kt` themed shell composable with OutlinedTextField, trailing unitLabel, KeyboardType.Decimal, 48dp+ touch target, @Preview annotation per contracts/composables.md
+- [X] T026 [P] [US2] Create `app/src/main/java/com/poultry/broiler/presentation/components/BottomSheet.kt` themed shell composable with ModalBottomSheet, 28dp top corners, 12dp modal elevation, drag handle, titleMedium Outfit title, 16dp/24dp padding, @Preview annotation per contracts/composables.md
 
 **Checkpoint**: App launches with full design system — Forest Teal light, Sleek Carbon dark, Outfit/Inter typography, all tokens applied. US1 acceptance criteria fully satisfied.
 
@@ -107,15 +107,15 @@
 
 ### Implementation for User Story 3
 
-- [ ] T027 [US3] Create `app/src/main/java/com/poultry/broiler/presentation/navigation/NavRoute.kt` sealed class with 5 routes (Home, Wizard, Dashboard, Catalog, Settings) each defining `route: String`, `icon: ImageVector`, and `labelResId: Int` per R-002 and data-model.md NavRoute specification
-- [ ] T028 [P] [US3] Create `app/src/main/java/com/poultry/broiler/presentation/home/HomeScreen.kt` placeholder composable displaying screen title in Outfit heading, themed with PoultryTheme tokens
-- [ ] T029 [P] [US3] Create `app/src/main/java/com/poultry/broiler/presentation/wizard/WizardScreen.kt` placeholder composable displaying screen title in Outfit heading, themed with PoultryTheme tokens
-- [ ] T030 [P] [US3] Create `app/src/main/java/com/poultry/broiler/presentation/dashboard/DashboardScreen.kt` placeholder composable displaying screen title in Outfit heading, themed with PoultryTheme tokens
-- [ ] T031 [P] [US3] Create `app/src/main/java/com/poultry/broiler/presentation/catalog/CatalogScreen.kt` placeholder composable displaying screen title in Outfit heading, themed with PoultryTheme tokens
-- [ ] T032 [P] [US3] Create `app/src/main/java/com/poultry/broiler/presentation/settings/SettingsScreen.kt` placeholder composable displaying screen title in Outfit heading, themed with PoultryTheme tokens
-- [ ] T033 [US3] Create `app/src/main/java/com/poultry/broiler/presentation/navigation/BottomNavBar.kt` composable using Material 3 `NavigationBar` with `NavigationBarItem` for each NavRoute, 48dp+ touch targets, French labels from string resources
-- [ ] T034 [US3] Create `app/src/main/java/com/poultry/broiler/presentation/navigation/PoultryNavHost.kt` composable wrapping `NavHost` with all 5 routes, start destination Home, back navigation popUpTo Home per R-002
-- [ ] T035 [US3] Integrate PoultryNavHost and BottomNavBar into `app/src/main/java/com/poultry/broiler/MainActivity.kt` with Scaffold layout — bottom bar persists across all destinations
+- [X] T027 [US3] Create `app/src/main/java/com/poultry/broiler/presentation/navigation/NavRoute.kt` sealed class with 5 routes (Home, Wizard, Dashboard, Catalog, Settings) each defining `route: String`, `icon: ImageVector`, and `labelResId: Int` per R-002 and data-model.md NavRoute specification
+- [X] T028 [P] [US3] Create `app/src/main/java/com/poultry/broiler/presentation/home/HomeScreen.kt` placeholder composable displaying screen title in Outfit heading, themed with PoultryTheme tokens
+- [X] T029 [P] [US3] Create `app/src/main/java/com/poultry/broiler/presentation/wizard/WizardScreen.kt` placeholder composable displaying screen title in Outfit heading, themed with PoultryTheme tokens
+- [X] T030 [P] [US3] Create `app/src/main/java/com/poultry/broiler/presentation/dashboard/DashboardScreen.kt` placeholder composable displaying screen title in Outfit heading, themed with PoultryTheme tokens
+- [X] T031 [P] [US3] Create `app/src/main/java/com/poultry/broiler/presentation/catalog/CatalogScreen.kt` placeholder composable displaying screen title in Outfit heading, themed with PoultryTheme tokens
+- [X] T032 [P] [US3] Create `app/src/main/java/com/poultry/broiler/presentation/settings/SettingsScreen.kt` placeholder composable displaying screen title in Outfit heading, themed with PoultryTheme tokens
+- [X] T033 [US3] Create `app/src/main/java/com/poultry/broiler/presentation/navigation/BottomNavBar.kt` composable using Material 3 `NavigationBar` with `NavigationBarItem` for each NavRoute, 48dp+ touch targets, French labels from string resources
+- [X] T034 [US3] Create `app/src/main/java/com/poultry/broiler/presentation/navigation/PoultryNavHost.kt` composable wrapping `NavHost` with all 5 routes, start destination Home, back navigation popUpTo Home per R-002
+- [X] T035 [US3] Integrate PoultryNavHost and BottomNavBar into `app/src/main/java/com/poultry/broiler/MainActivity.kt` with Scaffold layout — bottom bar persists across all destinations
 
 **Checkpoint**: All 5 tabs navigable, placeholder screens render with correct labels, back returns to Home
 
@@ -131,26 +131,26 @@
 
 ### Implementation for User Story 4
 
-- [ ] T036 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/model/EquipmentCategory.kt` pure Kotlin enum with values VENTILATION, FEEDING, HEATING, LIGHTING, COOLING, WATERING per data-model.md
-- [ ] T037 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/model/GrowthTarget.kt` data class with week, targetWeightG, dailyFeedG, dailyWaterMl per data-model.md
-- [ ] T038 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/model/BreedProfile.kt` domain model with breedName, supplier, growthTargets (List<GrowthTarget>), densityRange, targetFcr, cycleDurationDays, targetWeightGrams, mortalityRatePercent, description per data-model.md
-- [ ] T039 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/model/EquipmentItem.kt` domain model with name, category (EquipmentCategory), brand, modelNumber, capacity, powerWatts, unit, coverageM2, description per data-model.md
-- [ ] T040 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/local/entity/BreedProfileEntity.kt` Room @Entity(tableName="breed_profiles") with all columns per data-model.md: id (PK auto), breed_name (UNIQUE), supplier, growth_targets_json, min/max_density_kg_m2, target_fcr, cycle_duration_days, target_weight_g, mortality_rate_pct, description. Add UNIQUE index on breed_name
-- [ ] T041 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/local/entity/EquipmentItemEntity.kt` Room @Entity(tableName="equipment_items") with all columns per data-model.md: id (PK auto), name, category, brand, model_number, capacity, power_watts, unit, coverage_m2, description. Add index on category
-- [ ] T042 [US4] Create `app/src/main/java/com/poultry/broiler/data/local/converter/GrowthTargetListConverter.kt` Room @TypeConverter for JSON ↔ List<GrowthTarget> conversion using kotlinx.serialization per data-model.md
-- [ ] T043 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/local/dao/BreedProfileDao.kt` Room @Dao interface with getAll(): Flow<List<BreedProfileEntity>>, getById(id: Long), getByName(breedName: String), count() per contracts/daos.md
-- [ ] T044 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/local/dao/EquipmentItemDao.kt` Room @Dao interface with getAll(): Flow<List<EquipmentItemEntity>>, getByCategory(category: String), getById(id: Long), count() per contracts/daos.md
-- [ ] T045 [US4] Create `app/src/main/java/com/poultry/broiler/data/local/PoultryDatabase.kt` Room @Database(version=1, entities=[BreedProfileEntity, EquipmentItemEntity], exportSchema=true) with @TypeConverters(GrowthTargetListConverter), abstract DAO accessors, and createFromAsset("seed/poultry.db") per R-001
-- [ ] T046 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/mapper/BreedProfileMapper.kt` with extension functions mapping BreedProfileEntity ↔ BreedProfile domain model including growth_targets_json deserialization to List<GrowthTarget> and density range mapping
-- [ ] T047 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/mapper/EquipmentItemMapper.kt` with extension functions mapping EquipmentItemEntity ↔ EquipmentItem domain model including String ↔ EquipmentCategory enum conversion
-- [ ] T048 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/repository/BreedRepository.kt` interface with getAllBreeds(): Flow<List<BreedProfile>>, getBreedById(id: Long): BreedProfile?, getBreedByName(breedName: String): BreedProfile? per contracts/repositories.md
-- [ ] T049 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/repository/EquipmentRepository.kt` interface with getAllEquipment(): Flow<List<EquipmentItem>>, getEquipmentByCategory(category: EquipmentCategory), getEquipmentById(id: Long) per contracts/repositories.md
-- [ ] T050 [US4] Create `app/src/main/java/com/poultry/broiler/data/repository/BreedRepositoryImpl.kt` implementing BreedRepository, @Inject constructor with BreedProfileDao, using BreedProfileMapper for entity-to-domain conversion
-- [ ] T051 [US4] Create `app/src/main/java/com/poultry/broiler/data/repository/EquipmentRepositoryImpl.kt` implementing EquipmentRepository, @Inject constructor with EquipmentItemDao, using EquipmentItemMapper for entity-to-domain conversion
-- [ ] T052 [US4] Create `app/src/main/java/com/poultry/broiler/di/DatabaseModule.kt` Hilt @Module @InstallIn(SingletonComponent) with @Provides @Singleton provideDatabase (createFromAsset), @Provides provideBreedProfileDao, @Provides provideEquipmentItemDao per contracts/daos.md
-- [ ] T053 [US4] Create `app/src/main/java/com/poultry/broiler/di/RepositoryModule.kt` Hilt @Module @InstallIn(SingletonComponent) abstract class with @Binds bindBreedRepository and @Binds bindEquipmentRepository per contracts/repositories.md
-- [ ] T054 [US4] Build pre-populated SQLite seed database file with Ross 308 and Cobb 500 breed profiles (including growth_targets_json) and 6 equipment items across all categories, placing it at `app/src/main/assets/seed/poultry.db` — schema must match Room entity definitions exactly per R-001
-- [ ] T055 [US4] Create `app/src/main/java/com/poultry/broiler/util/SeedErrorHandler.kt` with SeedLoadResult sealed class (Success, Error with retryCount), retry logic using SharedPreferences, and French error messages ("Veuillez réinstaller l'application" after 2 failures) per R-005
+- [X] T036 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/model/EquipmentCategory.kt` pure Kotlin enum with values VENTILATION, FEEDING, HEATING, LIGHTING, COOLING, WATERING per data-model.md
+- [X] T037 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/model/GrowthTarget.kt` data class with week, targetWeightG, dailyFeedG, dailyWaterMl per data-model.md
+- [X] T038 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/model/BreedProfile.kt` domain model with breedName, supplier, growthTargets (List<GrowthTarget>), densityRange, targetFcr, cycleDurationDays, targetWeightGrams, mortalityRatePercent, description per data-model.md
+- [X] T039 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/model/EquipmentItem.kt` domain model with name, category (EquipmentCategory), brand, modelNumber, capacity, powerWatts, unit, coverageM2, description per data-model.md
+- [X] T040 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/local/entity/BreedProfileEntity.kt` Room @Entity(tableName="breed_profiles") with all columns per data-model.md: id (PK auto), breed_name (UNIQUE), supplier, growth_targets_json, min/max_density_kg_m2, target_fcr, cycle_duration_days, target_weight_g, mortality_rate_pct, description. Add UNIQUE index on breed_name
+- [X] T041 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/local/entity/EquipmentItemEntity.kt` Room @Entity(tableName="equipment_items") with all columns per data-model.md: id (PK auto), name, category, brand, model_number, capacity, power_watts, unit, coverage_m2, description. Add index on category
+- [X] T042 [US4] Create `app/src/main/java/com/poultry/broiler/data/local/converter/GrowthTargetListConverter.kt` Room @TypeConverter for JSON ↔ List<GrowthTarget> conversion using kotlinx.serialization per data-model.md
+- [X] T043 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/local/dao/BreedProfileDao.kt` Room @Dao interface with getAll(): Flow<List<BreedProfileEntity>>, getById(id: Long), getByName(breedName: String), count() per contracts/daos.md
+- [X] T044 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/local/dao/EquipmentItemDao.kt` Room @Dao interface with getAll(): Flow<List<EquipmentItemEntity>>, getByCategory(category: String), getById(id: Long), count() per contracts/daos.md
+- [X] T045 [US4] Create `app/src/main/java/com/poultry/broiler/data/local/PoultryDatabase.kt` Room @Database(version=1, entities=[BreedProfileEntity, EquipmentItemEntity], exportSchema=true) with @TypeConverters(GrowthTargetListConverter), abstract DAO accessors, and createFromAsset("seed/poultry.db") per R-001
+- [X] T046 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/mapper/BreedProfileMapper.kt` with extension functions mapping BreedProfileEntity ↔ BreedProfile domain model including growth_targets_json deserialization to List<GrowthTarget> and density range mapping
+- [X] T047 [P] [US4] Create `app/src/main/java/com/poultry/broiler/data/mapper/EquipmentItemMapper.kt` with extension functions mapping EquipmentItemEntity ↔ EquipmentItem domain model including String ↔ EquipmentCategory enum conversion
+- [X] T048 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/repository/BreedRepository.kt` interface with getAllBreeds(): Flow<List<BreedProfile>>, getBreedById(id: Long): BreedProfile?, getBreedByName(breedName: String): BreedProfile? per contracts/repositories.md
+- [X] T049 [P] [US4] Create `app/src/main/java/com/poultry/broiler/domain/repository/EquipmentRepository.kt` interface with getAllEquipment(): Flow<List<EquipmentItem>>, getEquipmentByCategory(category: EquipmentCategory), getEquipmentById(id: Long) per contracts/repositories.md
+- [X] T050 [US4] Create `app/src/main/java/com/poultry/broiler/data/repository/BreedRepositoryImpl.kt` implementing BreedRepository, @Inject constructor with BreedProfileDao, using BreedProfileMapper for entity-to-domain conversion
+- [X] T051 [US4] Create `app/src/main/java/com/poultry/broiler/data/repository/EquipmentRepositoryImpl.kt` implementing EquipmentRepository, @Inject constructor with EquipmentItemDao, using EquipmentItemMapper for entity-to-domain conversion
+- [X] T052 [US4] Create `app/src/main/java/com/poultry/broiler/di/DatabaseModule.kt` Hilt @Module @InstallIn(SingletonComponent) with @Provides @Singleton provideDatabase (createFromAsset), @Provides provideBreedProfileDao, @Provides provideEquipmentItemDao per contracts/daos.md
+- [X] T053 [US4] Create `app/src/main/java/com/poultry/broiler/di/RepositoryModule.kt` Hilt @Module @InstallIn(SingletonComponent) abstract class with @Binds bindBreedRepository and @Binds bindEquipmentRepository per contracts/repositories.md
+- [X] T054 [US4] Build pre-populated SQLite seed database file with Ross 308 and Cobb 500 breed profiles (including growth_targets_json) and 6 equipment items across all categories, placing it at `app/src/main/assets/seed/poultry.db` — schema must match Room entity definitions exactly per R-001
+- [X] T055 [US4] Create `app/src/main/java/com/poultry/broiler/util/SeedErrorHandler.kt` with SeedLoadResult sealed class (Success, Error with retryCount), retry logic using SharedPreferences, and French error messages ("Veuillez réinstaller l'application" after 2 failures) per R-005
 
 **Checkpoint**: Fresh app install loads seed database — breed_profiles and equipment_items tables populated, queryable via DAOs
 
@@ -166,9 +166,9 @@
 
 ### Implementation for User Story 5
 
-- [ ] T056 [US5] Update `app/src/main/res/values/strings.xml` with all French default strings: app_name, navigation labels (nav_home="Accueil", nav_wizard="Assistant", nav_dashboard="Tableau de bord", nav_catalog="Catalogue", nav_settings="Paramètres"), placeholder screen titles, error messages for seed failure per FR-014
-- [ ] T057 [P] [US5] Create `app/src/main/res/values-fr/strings.xml` mirroring all strings from default `values/strings.xml` (identical French content) per FR-015
-- [ ] T058 [P] [US5] Create `app/src/main/res/values-ar/strings.xml` as empty stub file with XML header and empty `<resources>` element for future Arabic localization per FR-015
+- [X] T056 [US5] Update `app/src/main/res/values/strings.xml` with all French default strings: app_name, navigation labels (nav_home="Accueil", nav_wizard="Assistant", nav_dashboard="Tableau de bord", nav_catalog="Catalogue", nav_settings="Paramètres"), placeholder screen titles, error messages for seed failure per FR-014
+- [X] T057 [P] [US5] Create `app/src/main/res/values-fr/strings.xml` mirroring all strings from default `values/strings.xml` (identical French content) per FR-015
+- [X] T058 [P] [US5] Create `app/src/main/res/values-ar/strings.xml` as empty stub file with XML header and empty `<resources>` element for future Arabic localization per FR-015
 
 **Checkpoint**: App shows French text on all locales, `values-ar/` directory exists as stub
 
@@ -184,9 +184,9 @@
 
 ### Implementation for User Story 6
 
-- [ ] T059 [US6] Create `.github/workflows/ci.yml` GitHub Actions workflow: trigger on pull_request to main, ubuntu-latest runner, Java 17 setup, Gradle cache, sequential steps (ktlintCheck → detekt → lint → testDevDebugUnitTest), 15-minute timeout per R-007
-- [ ] T060 [P] [US6] Create `detekt.yml` Detekt configuration at project root with custom rules: UnsafeCallOnNullableType (ERROR), LongMethod (WARNING, threshold 30), ComplexCondition (WARNING, threshold 4) per Constitution Art 2.2
-- [ ] T061 [P] [US6] Create Detekt baseline file and configure ktlint Gradle plugin tasks in `app/build.gradle.kts` — ensure `./gradlew ktlintCheck` and `./gradlew detekt` run without errors on scaffold code
+- [X] T059 [US6] Create `.github/workflows/ci.yml` GitHub Actions workflow: trigger on pull_request to main, ubuntu-latest runner, Java 17 setup, Gradle cache, sequential steps (ktlintCheck → detekt → lint → testDevDebugUnitTest), 15-minute timeout per R-007
+- [X] T060 [P] [US6] Create `detekt.yml` Detekt configuration at project root with custom rules: UnsafeCallOnNullableType (ERROR), LongMethod (WARNING, threshold 30), ComplexCondition (WARNING, threshold 4) per Constitution Art 2.2
+- [X] T061 [P] [US6] Create Detekt baseline file and configure ktlint Gradle plugin tasks in `app/build.gradle.kts` — ensure `./gradlew ktlintCheck` and `./gradlew detekt` run without errors on scaffold code
 
 **Checkpoint**: `./gradlew ktlintCheck && ./gradlew detekt && ./gradlew lint && ./gradlew testDevDebugUnitTest` all pass locally
 
@@ -202,8 +202,8 @@
 
 ### Implementation for User Story 7
 
-- [ ] T062 [US7] Create placeholder README files in `app/src/dev/` and `app/src/prod/` source set directories documenting that `google-services.json` must be placed here for Firebase configuration, plus `.gitkeep` files to preserve directory structure per R-008
-- [ ] T063 [US7] Verify build flavor configuration in `app/build.gradle.kts`: dev flavor has `applicationIdSuffix = ".dev"` with `resValue("string", "app_name", "Bâtiment Avicole Dev")`, prod flavor has production app name, and google-services plugin is conditionally applied only when `google-services.json` is present per R-008
+- [X] T062 [US7] Create placeholder README files in `app/src/dev/` and `app/src/prod/` source set directories documenting that `google-services.json` must be placed here for Firebase configuration, plus `.gitkeep` files to preserve directory structure per R-008
+- [X] T063 [US7] Verify build flavor configuration in `app/build.gradle.kts`: dev flavor has `applicationIdSuffix = ".dev"` with `resValue("string", "app_name", "Bâtiment Avicole Dev")`, prod flavor has production app name, and google-services plugin is conditionally applied only when `google-services.json` is present per R-008
 
 **Checkpoint**: Both `assembleDevDebug` and `assembleProdDebug` compile; `dev` has distinct applicationId
 
@@ -213,10 +213,10 @@
 
 **Purpose**: Accessibility compliance, preview annotations, and final validation
 
-- [ ] T064 [P] Verify all interactive elements meet 48dp × 48dp minimum touch target per FR-019 — audit BottomNavBar items, NumericInputField, and any buttons in `app/src/main/java/com/poultry/broiler/presentation/`
-- [ ] T065 [P] Verify WCAG AA contrast ratios (body text ≥ 4.5:1, critical warnings ≥ 7:1) for both Forest Teal light and Sleek Carbon dark palettes in `app/src/main/java/com/poultry/broiler/presentation/theme/Color.kt` per FR-020
-- [ ] T066 [P] Add `contentDescription` to all navigation icons (French resource strings) and set decorative icons to `contentDescription = null` per Constitution Art 3.3
-- [ ] T067 Run full quickstart.md validation: Scenarios 1-10 (clean build, theme, navigation, seed data, localization, domain purity, CI pipeline, build flavors, accessibility, shared composables)
+- [X] T064 [P] Verify all interactive elements meet 48dp × 48dp minimum touch target per FR-019 — audit BottomNavBar items, NumericInputField, and any buttons in `app/src/main/java/com/poultry/broiler/presentation/`
+- [X] T065 [P] Verify WCAG AA contrast ratios (body text ≥ 4.5:1, critical warnings ≥ 7:1) for both Forest Teal light and Sleek Carbon dark palettes in `app/src/main/java/com/poultry/broiler/presentation/theme/Color.kt` per FR-020
+- [X] T066 [P] Add `contentDescription` to all navigation icons (French resource strings) and set decorative icons to `contentDescription = null` per Constitution Art 3.3
+- [X] T067 Run full quickstart.md validation: Scenarios 1-10 (clean build, theme, navigation, seed data, localization, domain purity, CI pipeline, build flavors, accessibility, shared composables)
 
 ---
 

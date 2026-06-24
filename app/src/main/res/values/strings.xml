@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bâtiment Avicole</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Accueil</string>
+    <string name="nav_wizard">Assistant</string>
+    <string name="nav_dashboard">Tableau de bord</string>
+    <string name="nav_catalog">Catalogue</string>
+    <string name="nav_settings">Paramètres</string>
+
+    <!-- Screen Titles -->
+    <string name="screen_home">Accueil</string>
+    <string name="screen_wizard">Assistant de configuration</string>
+    <string name="screen_dashboard">Tableau de bord</string>
+    <string name="screen_catalog">Catalogue</string>
+    <string name="screen_settings">Paramètres</string>
+
+    <!-- Error Messages -->
+    <string name="error_seed_load_failed">Échec du chargement des données initiales</string>
+    <string name="error_seed_reinstall">Veuillez réinstaller l\'application</string>
+    <string name="error_seed_retry">Réessayer</string>
+
+    <!-- Content Descriptions -->
+    <string name="cd_home_nav">Accueil</string>
+    <string name="cd_wizard_nav">Assistant</string>
+    <string name="cd_dashboard_nav">Tableau de bord</string>
+    <string name="cd_catalog_nav">Catalogue</string>
+    <string name="cd_settings_nav">Paramètres</string>
+
+    <!-- Components -->
+    <string name="unit_meters">m</string>
+    <string name="unit_kilograms">kg</string>
+    <string name="unit_square_meters">m²</string>
+</resources>

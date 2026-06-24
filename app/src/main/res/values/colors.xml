@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="forest_teal_primary">#FF2E7D32</color>
+    <color name="forest_teal_on_primary">#FFFFFFFF</color>
+    <color name="forest_teal_primary_container">#FFB3F0B7</color>
+    <color name="forest_teal_on_primary_container">#FF002109</color>
+    <color name="forest_teal_secondary">#FF526350</color>
+    <color name="forest_teal_on_secondary">#FFFFFFFF</color>
+    <color name="forest_teal_surface">#FFFDF9EC</color>
+    <color name="forest_teal_on_surface">#FF1A1C19</color>
+    <color name="forest_teal_background">#FFFDF9EC</color>
+    <color name="forest_teal_on_background">#FF1A1C19</color>
+</resources>
