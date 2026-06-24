@@ -101,4 +101,94 @@
     <string name="screen_design_stub">التصميم\nقريبًا</string>
     <string name="screen_reports_stub">التقارير\nقريبًا</string>
     <string name="screen_health_stub">الصحة\nقريبًا</string>
+
+    <!-- Wizard (Feature #003) -->
+    <string name="wizard_step_indicator">الخطوة %1$d/%2$d</string>
+    <string name="wizard_button_previous">السابق</string>
+    <string name="wizard_button_next">التالي</string>
+
+    <!-- Wizard Step 1: House Dimensions -->
+    <string name="wizard_step1_title">أبعاد المبنى</string>
+    <string name="wizard_section_structure">البنية</string>
+    <string name="wizard_section_roof">السقف</string>
+    <string name="wizard_section_walls">الجدران</string>
+    <string name="wizard_section_floor">الأرضية</string>
+    <string name="wizard_section_insulation">العزل</string>
+    <string name="wizard_section_orientation">الاتجاه</string>
+    <string name="wizard_section_preview">معاينة 2D</string>
+
+    <string name="wizard_field_length">الطول</string>
+    <string name="wizard_field_width">العرض</string>
+    <string name="wizard_field_wall_height">ارتفاع الجدران</string>
+    <string name="wizard_field_ridge_height">ارتفاع القمة</string>
+    <string name="wizard_field_insulation_thickness">السماكة</string>
+    <string name="wizard_field_floor_area">مساحة الأرضية</string>
+
+    <string name="wizard_unit_meters">م</string>
+    <string name="wizard_unit_millimeters">مم</string>
+    <string name="wizard_unit_square_meters">م²</string>
+
+    <string name="wizard_floor_area_format">%1$.2f م²</string>
+
+    <!-- Wizard Roof Type Selectors -->
+    <string name="wizard_roof_type_flat">سقف مسطح</string>
+    <string name="wizard_roof_type_pitched">سقف جملون</string>
+    <string name="wizard_roof_type_arched">سقف مقوس</string>
+
+    <!-- Wizard Wall Material Selectors -->
+    <string name="wizard_wall_material_block">الطوب</string>
+    <string name="wizard_wall_material_steel">الفولاذ</string>
+    <string name="wizard_wall_material_prefab">جاهز مسبقًا</string>
+
+    <!-- Wizard Floor Type Selectors -->
+    <string name="wizard_floor_type_concrete">خرسانة</string>
+    <string name="wizard_floor_type_dirt">ترابية</string>
+    <string name="wizard_floor_type_slat">شبكية</string>
+
+    <!-- Wizard Insulation Type Selectors -->
+    <string name="wizard_insulation_type_none">بدون</string>
+    <string name="wizard_insulation_type_polystyrene">بوليسترين</string>
+    <string name="wizard_insulation_type_polyurethane">بولي يوريثان</string>
+    <string name="wizard_insulation_type_mineral_wool">صوف معدني</string>
+
+    <!-- Wizard Orientation -->
+    <string name="wizard_orientation_n">ش</string>
+    <string name="wizard_orientation_ne">ش.ش</string>
+    <string name="wizard_orientation_e">ش</string>
+    <string name="wizard_orientation_se">ج.ش</string>
+    <string name="wizard_orientation_s">ج</string>
+    <string name="wizard_orientation_sw">ج.غ</string>
+    <string name="wizard_orientation_w">غ</string>
+    <string name="wizard_orientation_nw">ش.غ</string>
+    <string name="wizard_orientation_selector">محدد الاتجاه</string>
+
+    <!-- Wizard Validation Errors -->
+    <string name="wizard_error_length_required">الطول مطلوب</string>
+    <string name="wizard_error_width_required">العرض مطلوب</string>
+    <string name="wizard_error_wall_height_required">ارتفاع الجدران مطلوب</string>
+    <string name="wizard_error_ridge_height_required">ارتفاع القمة مطلوب للأسقفة الجملون</string>
+    <string name="wizard_error_ridge_height_not_allowed">ارتفاع القمة ينطبق فقط على الأسقفة الجملون</string>
+    <string name="wizard_error_insulation_thickness_required">سماكة العزل مطلوبة</string>
+    <string name="wizard_error_insulation_thickness_not_allowed">لا توجد سماكة مطلوبة لنوع «بدون»</string>
+    <string name="wizard_error_roof_type_required">نوع السقف مطلوب</string>
+    <string name="wizard_error_wall_material_required">مادة الجدران مطلوبة</string>
+    <string name="wizard_error_floor_type_required">نوع الأرضية مطلوب</string>
+    <string name="wizard_error_insulation_type_required">نوع العزل مطلوب</string>
+    <string name="wizard_error_orientation_required">الاتجاه مطلوب</string>
+    <string name="wizard_error_value_must_be_positive">يجب أن تكون القيمة أكبر من 0</string>
+    <string name="wizard_error_length_exceeds_max">يجب ألا تتجاوز القيمة 500م</string>
+    <string name="wizard_error_width_exceeds_max">يجب ألا تتجاوز القيمة 100م</string>
+    <string name="wizard_error_wall_height_exceeds_max">يجب ألا يتجاوز ارتفاع الجدران 15م</string>
+    <string name="wizard_error_ridge_height_exceeds_max">يجب ألا يتجاوز ارتفاع القمة 20م</string>
+    <string name="wizard_error_insulation_thickness_exceeds_max">يجب ألا تتجاوز السماكة 500مم</string>
+
+    <!-- Wizard Persistence Errors -->
+    <string name="wizard_save_error">فشل الحفظ. حاول مرة أخرى.</string>
+
+    <!-- Wizard Content Descriptions -->
+    <string name="cd_wizard_step_indicator">الخطوة الحالية</string>
+    <string name="cd_wizard_previous_button">العودة إلى الخطوة السابقة</string>
+    <string name="cd_wizard_next_button">الانتقال إلى الخطوة التالية</string>
+    <string name="cd_wizard_preview_canvas">معاينة 2D للمبنى</string>
+    <string name="cd_wizard_compass">بوصلة الاتجاه</string>
 </resources>
