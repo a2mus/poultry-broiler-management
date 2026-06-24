@@ -126,10 +126,17 @@ A developer can build the app with either the `dev` or `prod` Gradle build flavo
 ### Edge Cases
 
 - What happens when the app runs on an API level below 26? The app must declare `minSdk = 26` and the Play Store must filter incompatible devices.
-- What happens if the seed database asset file is corrupted or missing? The app must fail gracefully with a user-friendly error message rather than crashing on first launch.
+- What happens if the seed database asset file is corrupted or missing? The app must display a user-friendly error screen with a "Retry" button that reattempts seed loading. If the retry also fails, the app must display a message directing the user to reinstall the application.
 - What happens when switching between light and dark mode rapidly? Theme transitions must remain smooth without visual artifacts or state loss.
 - What happens when the device language is set to Arabic (before Arabic translations are added)? The app must fall back to French strings without crashing, while the RTL layout direction flag may activate.
 - What happens if a dependency version in `libs.versions.toml` becomes unavailable? The build must fail with a clear dependency resolution error, never silently substituting a different version.
+
+## Clarifications
+
+### Session 2026-06-24
+
+- Q: What level of functionality should shared composable stubs (FR-018) include? → A: Themed shells — accept content parameters and apply design tokens, but no interactive behavior or state callbacks.
+- Q: What recovery behavior after corrupt/missing seed database? → A: Retry + reinstall guidance — show error with retry button; on second failure, prompt user to reinstall the app.
 
 ## Requirements *(mandatory)*
 
@@ -152,7 +159,7 @@ A developer can build the app with either the `dev` or `prod` Gradle build flavo
 - **FR-015**: The resource directory structure MUST include `values/`, `values-fr/`, and `values-ar/` directories, with Arabic prepared as empty stubs
 - **FR-016**: Gradle build MUST define `dev` and `prod` product flavors that switch Firebase project configuration
 - **FR-017**: A CI/CD pipeline (GitHub Actions) MUST run ktlint, Detekt, Android Lint, and unit tests on every Pull Request
-- **FR-018**: The app MUST provide shared reusable composables: StatusBadge, NumericInputField (with trailing unit label and numeric keypad), and BottomSheet
+- **FR-018**: The app MUST provide shared reusable composables: StatusBadge, NumericInputField (with trailing unit label and numeric keypad), and BottomSheet. These MUST be themed shells that accept content parameters and apply design tokens, but without interactive behavior or state callbacks (full interactivity deferred to consuming features)
 - **FR-019**: All interactive elements MUST have a minimum touch target of 48dp × 48dp per WCAG AA compliance
 - **FR-020**: All text MUST meet WCAG AA contrast ratios (≥ 4.5:1 for body, ≥ 7:1 for critical warnings)
 
@@ -185,5 +192,5 @@ A developer can build the app with either the `dev` or `prod` Gradle build flavo
 - Breed profiles and equipment catalog seed data are static reference data that will not be modified by users; updates will come via app version updates
 - The Weather API key referenced in the constitution is not needed for this scaffolding feature and will be configured when the weather-dependent features are implemented
 - Network connectivity is not required for any functionality in this feature — all operations are offline-first
-- Shared composables (StatusBadge, NumericInputField, BottomSheet) are stubbed with basic functionality; full interactive behavior will be refined as consuming features are built
+- Shared composables (StatusBadge, NumericInputField, BottomSheet) are themed shells that accept content parameters and apply design tokens; full interactive behavior and state callbacks will be added by consuming features
 - Tablet adaptive layouts (8-column grid) are prepared in the theme system but detailed per-screen tablet optimizations will be handled in individual feature specs
