@@ -65,8 +65,13 @@ fun PoultryNavHost(
             arguments = listOf(
                 navArgument(NavRoute.ARG_PROJECT_ID) { type = NavType.StringType },
             ),
-        ) {
-            WizardScreen()
+        ) { backStackEntry ->
+            val projectId = backStackEntry.arguments
+                ?.getString(NavRoute.ARG_PROJECT_ID).orEmpty()
+            WizardScreen(
+                projectId = projectId,
+                onNavigateBack = { navController.popBackStack() },
+            )
         }
 
         composable(

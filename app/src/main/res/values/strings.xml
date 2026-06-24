@@ -103,4 +103,94 @@
     <string name="screen_design_stub">Conception\nBientôt disponible</string>
     <string name="screen_reports_stub">Rapports\nBientôt disponible</string>
     <string name="screen_health_stub">Santé\nBientôt disponible</string>
+
+    <!-- Wizard (Feature #003) -->
+    <string name="wizard_step_indicator">Étape %1$d/%2$d</string>
+    <string name="wizard_button_previous">Précédent</string>
+    <string name="wizard_button_next">Suivant</string>
+
+    <!-- Wizard Step 1: House Dimensions -->
+    <string name="wizard_step1_title">Dimensions du bâtiment</string>
+    <string name="wizard_section_structure">Structure</string>
+    <string name="wizard_section_roof">Toiture</string>
+    <string name="wizard_section_walls">Murs</string>
+    <string name="wizard_section_floor">Sol</string>
+    <string name="wizard_section_insulation">Isolation</string>
+    <string name="wizard_section_orientation">Orientation</string>
+    <string name="wizard_section_preview">Aperçu 2D</string>
+
+    <string name="wizard_field_length">Longueur</string>
+    <string name="wizard_field_width">Largeur</string>
+    <string name="wizard_field_wall_height">Hauteur des murs</string>
+    <string name="wizard_field_ridge_height">Hauteur de faîtage</string>
+    <string name="wizard_field_insulation_thickness">Épaisseur</string>
+    <string name="wizard_field_floor_area">Surface au sol</string>
+
+    <string name="wizard_unit_meters">m</string>
+    <string name="wizard_unit_millimeters">mm</string>
+    <string name="wizard_unit_square_meters">m²</string>
+
+    <string name="wizard_floor_area_format">%1$.2f m²</string>
+
+    <!-- Wizard Roof Type Selectors -->
+    <string name="wizard_roof_type_flat">Toit plat</string>
+    <string name="wizard_roof_type_pitched">Toit à pignon</string>
+    <string name="wizard_roof_type_arched">Toit voûté</string>
+
+    <!-- Wizard Wall Material Selectors -->
+    <string name="wizard_wall_material_block">Parpaing</string>
+    <string name="wizard_wall_material_steel">Acier</string>
+    <string name="wizard_wall_material_prefab">Préfabriqué</string>
+
+    <!-- Wizard Floor Type Selectors -->
+    <string name="wizard_floor_type_concrete">Béton</string>
+    <string name="wizard_floor_type_dirt">Terre</string>
+    <string name="wizard_floor_type_slat">Caillebotis</string>
+
+    <!-- Wizard Insulation Type Selectors -->
+    <string name="wizard_insulation_type_none">Aucune</string>
+    <string name="wizard_insulation_type_polystyrene">Polystyrène</string>
+    <string name="wizard_insulation_type_polyurethane">Polyuréthane</string>
+    <string name="wizard_insulation_type_mineral_wool">Laine minérale</string>
+
+    <!-- Wizard Orientation -->
+    <string name="wizard_orientation_n">N</string>
+    <string name="wizard_orientation_ne">NE</string>
+    <string name="wizard_orientation_e">E</string>
+    <string name="wizard_orientation_se">SE</string>
+    <string name="wizard_orientation_s">S</string>
+    <string name="wizard_orientation_sw">SW</string>
+    <string name="wizard_orientation_w">W</string>
+    <string name="wizard_orientation_nw">NW</string>
+    <string name="wizard_orientation_selector">Sélecteur d\'orientation</string>
+
+    <!-- Wizard Validation Errors -->
+    <string name="wizard_error_length_required">La longueur est requise</string>
+    <string name="wizard_error_width_required">La largeur est requise</string>
+    <string name="wizard_error_wall_height_required">La hauteur des murs est requise</string>
+    <string name="wizard_error_ridge_height_required">La hauteur de faîtage est requise pour les toits à pignon</string>
+    <string name="wizard_error_ridge_height_not_allowed">La hauteur de faîtage ne s\'applique qu\'aux toits à pignon</string>
+    <string name="wizard_error_insulation_thickness_required">L\'épaisseur d\'isolation est requise</string>
+    <string name="wizard_error_insulation_thickness_not_allowed">Aucune épaisseur n\'est requise pour le type « Aucune »</string>
+    <string name="wizard_error_roof_type_required">Le type de toiture est requis</string>
+    <string name="wizard_error_wall_material_required">Le matériau des murs est requis</string>
+    <string name="wizard_error_floor_type_required">Le type de sol est requis</string>
+    <string name="wizard_error_insulation_type_required">Le type d\'isolation est requis</string>
+    <string name="wizard_error_orientation_required">L\'orientation est requise</string>
+    <string name="wizard_error_value_must_be_positive">La valeur doit être supérieure à 0</string>
+    <string name="wizard_error_length_exceeds_max">La valeur ne doit pas dépasser 500m</string>
+    <string name="wizard_error_width_exceeds_max">La valeur ne doit pas dépasser 100m</string>
+    <string name="wizard_error_wall_height_exceeds_max">La hauteur des murs ne doit pas dépasser 15m</string>
+    <string name="wizard_error_ridge_height_exceeds_max">La hauteur de faîtage ne doit pas dépasser 20m</string>
+    <string name="wizard_error_insulation_thickness_exceeds_max">L\'épaisseur ne doit pas dépasser 500mm</string>
+
+    <!-- Wizard Persistence Errors -->
+    <string name="wizard_save_error">Échec de l\'enregistrement. Réessayez.</string>
+
+    <!-- Wizard Content Descriptions -->
+    <string name="cd_wizard_step_indicator">Étape actuelle du wizard</string>
+    <string name="cd_wizard_previous_button">Revenir à l\'étape précédente</string>
+    <string name="cd_wizard_next_button">Passer à l\'étape suivante</string>
+    <string name="cd_wizard_preview_canvas">Aperçu 2D du bâtiment</string>
+    <string name="cd_wizard_compass">Boussole d\'orientation</string>
 </resources>
