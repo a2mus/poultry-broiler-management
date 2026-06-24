@@ -1,0 +1,68 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build Debug APKs
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Generate Gradle Wrapper (if missing)
+        run: |
+          if [ ! -f "gradlew" ]; then
+            echo "⚠️ gradlew not found — generating wrapper..."
+            gradle wrapper --gradle-version 8.7
+          fi
+
+      - name: Build Dev Debug APK
+        run: ./gradlew assembleDevDebug --no-daemon --stacktrace
+
+      - name: Build Prod Debug APK
+        run: ./gradlew assembleProdDebug --no-daemon --stacktrace
+
+      - name: Upload Dev Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: dev-debug-apk
+          path: app/build/outputs/apk/dev/debug/*.apk
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Upload Prod Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: prod-debug-apk
+          path: app/build/outputs/apk/prod/debug/*.apk
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Print APK sizes
+        run: |
+          echo "📦 Built APKs:"
+          find app/build/outputs/apk -name "*.apk" -exec ls -lh {} \;
