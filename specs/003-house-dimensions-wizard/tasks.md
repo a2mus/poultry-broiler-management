@@ -211,9 +211,10 @@
 
 **Purpose**: Fix build failure caused by missing Room Gradle Plugin registration. The `room { schemaDirectory(...) }` DSL block at `app/build.gradle.kts:55-56` requires the `androidx.room` Gradle plugin to be applied.
 
-- [X] T063 [REOPEN] [FIX] Register and apply Room Gradle Plugin: (1) Add `room = { id = "androidx.room", version.ref = "room" }` to the `[plugins]` section in `gradle/libs.versions.toml`, (2) Add `alias(libs.plugins.room) apply false` to root `build.gradle.kts`, (3) Add `alias(libs.plugins.room)` to the plugins block in `app/build.gradle.kts` — re-opened: `room {}` block was placed inside `android {}` instead of at top level
+- [X] T063 [REOPEN] [FIX] Register and apply Room Gradle Plugin: (1) Add `room = { id = "androidx.room", version.ref = "room" }` to the `[plugins]` section in `gradle/libs.versions.toml`, (2) Add `alias(libs.plugins.room) apply false` to root `build.gradle.kts`, (3) Add `alias(libs.plugins.room)` to the plugins block in `app/build.gradle.kts` — re-opened again: Room Gradle Plugin marker is not resolvable in CI environment
 
-- [X] T064 [FIX] Move `room { schemaDirectory("$projectDir/schemas") }` block from inside `android { }` to the top level of `app/build.gradle.kts` (same level as `android { }`, `dependencies { }`, `detekt { }`) so the Room Gradle Plugin extension is in scope
+- [X] T064 [REOPEN] [FIX] Move `room { schemaDirectory("$projectDir/schemas") }` block from inside `android { }` to the top level of `app/build.gradle.kts` (same level as `android { }`, `dependencies { }`, `detekt { }`) so the Room Gradle Plugin extension is in scope — re-opened: Room Gradle Plugin approach is not viable in CI environment
+- [X] T065 [FIX] Switch Room schema directory configuration to KSP argument: (1) Remove `room {}` block from `app/build.gradle.kts`, (2) Remove `alias(libs.plugins.room)` from `app/build.gradle.kts`, (3) Remove `alias(libs.plugins.room) apply false` from root `build.gradle.kts`, (4) Remove `room` plugin entry from `gradle/libs.versions.toml`, (5) Add `ksp { arg("room.schemaLocation", "$projectDir/schemas") }` to top level of `app/build.gradle.kts`
 
 **Checkpoint**: Run `./gradlew assembleDevDebug --no-daemon` — build must pass configuration phase without `Unresolved reference: room` or `Unresolved reference: schemaDirectory` errors.
 

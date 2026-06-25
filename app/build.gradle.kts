@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.ktlint)
     alias(libs.plugins.detekt)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.room)
 }
 
 android {
@@ -58,8 +57,8 @@ android {
     }
 }
 
-room {
-    schemaDirectory("$projectDir/schemas")
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
 }
 
 detekt {

@@ -146,6 +146,69 @@ app/src/androidTest/java/com/poultry/broiler/
 
 > No constitution violations detected. No complexity justifications needed.
 
+## Iteration Session 2026-06-25 (4)
+
+### User Feedback
+
+Build failure persists on `./gradlew assembleDevDebug`: identical `ScriptCompilationError(message=Unresolved reference: room)` and `ScriptCompilationError(message=Unresolved reference: schemaDirectory)` errors at `app/build.gradle.kts` lines 55–56.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | BUILD / DELIVERY | P0 | Fix applied in working tree but not committed — CI runs on last committed version |
+
+**Root Cause**: The current working tree no longer contains a `room {}` block at `app/build.gradle.kts:55-56`; those lines are now the `lint {}` block. `git status` shows uncommitted modifications to the build files, plan.md, and tasks.md. The CI failure report is from the last committed revision, which still contains the original `room { schemaDirectory(...) }` block. The code fix is complete; it only needs to be committed and pushed.
+
+### Amendments
+
+None — the KSP argument approach documented in Iteration Session 2026-06-25 (3) remains the correct fix.
+
+### New Tasks
+
+None — all corrective tasks (T063–T065) are complete in the working tree.
+
+### Constitution Compliance
+
+- Art 1.4 (Pinned deps): PASS — uses existing KSP setup, no new dependencies
+- All other articles: unaffected
+
+## Iteration Session 2026-06-25 (3)
+
+### User Feedback
+
+Build failure persists on `./gradlew assembleDevDebug`: same `ScriptCompilationError(message=Unresolved reference: room)` and `ScriptCompilationError(message=Unresolved reference: schemaDirectory)` errors at `app/build.gradle.kts` lines 55–56, even after the Room Gradle Plugin was registered and the `room {}` block was moved to the top level.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | BUILD | P0 | Environment/config issue + Plan design gap — Room Gradle Plugin marker is not resolvable in the CI environment |
+
+**Root Cause**: The Room Gradle Plugin (`androidx.room`) was correctly registered in the version catalog, root build file, and app module, and the `room {}` block was placed at the top level. Despite this, Gradle still cannot resolve the `room` extension in the CI environment. This indicates the plugin marker/artifact (`androidx.room:room.gradle.plugin`) is not resolvable from the configured repositories in this environment. The project already uses KSP for Room annotation processing, so the standard KSP argument approach is the reliable alternative.
+
+### Amendments
+
+<!-- Amended 2026-06-25: Do not use Room Gradle Plugin; configure schema directory via KSP argument instead -->
+The previous amendments relying on the Room Gradle Plugin are superseded. The Room schema directory must be configured using the KSP `room.schemaLocation` argument, which does not require the `androidx.room` Gradle plugin and is compatible with the existing KSP-based Room setup:
+
+```kotlin
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+```
+
+### New Tasks
+
+- T063 and T064 re-opened: Room Gradle Plugin approach does not work in CI
+- T065 added: remove Room Gradle Plugin and switch to KSP schemaLocation argument
+
+### Constitution Compliance
+
+- Art 1.4 (Pinned deps, Maven Central/Google Maven): PASS — no new dependencies or repositories; uses existing KSP setup
+- Art 2.2 (ktlint + Detekt): PASS — build script change only
+- All other articles: unaffected
+
 ## Iteration Session 2026-06-25 (2)
 
 ### User Feedback
