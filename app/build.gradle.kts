@@ -52,13 +52,13 @@ android {
         jvmTarget = "17"
     }
 
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
-
     lint {
         abortOnError = false
     }
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
 }
 
 detekt {
