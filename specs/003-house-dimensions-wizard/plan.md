@@ -146,6 +146,34 @@ app/src/androidTest/java/com/poultry/broiler/
 
 > No constitution violations detected. No complexity justifications needed.
 
+## Iteration Session 2026-06-25 (5)
+
+### User Feedback
+
+Build failure during execution phase on task `:app:mergeDevDebugResources`: `Error: The file name must end with .xml, .ttf, .ttc or .otf` for `app/src/main/res/font/README.md`.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | BUILD | P0 | Environment/config issue — documentation file placed inside AAPT2-enforced resource directory |
+
+**Root Cause**: AAPT2 only allows `.xml`, `.ttf`, `.ttc`, or `.otf` files inside `res/font/`. The `README.md` file in that directory contains font download instructions but is treated as an invalid resource by the Android build tools, causing `:app:mergeDevDebugResources` to fail.
+
+### Amendments
+
+None — no architecture or design changes needed.
+
+### New Tasks
+
+- T066 added: move `app/src/main/res/font/README.md` out of the `res/` hierarchy to resolve AAPT2 resource merge failure
+
+### Constitution Compliance
+
+- Art 1.4 (Pinned deps): PASS — no dependency changes
+- Art 7.1 (Directory structure): PASS — moving documentation does not affect source structure
+- All other articles: unaffected
+
 ## Iteration Session 2026-06-25 (4)
 
 ### User Feedback
