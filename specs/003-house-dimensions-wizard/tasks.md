@@ -49,7 +49,7 @@
 - [X] T011 [P] Create HouseDimensionsDao Room DAO interface with getByProjectId (Flow), upsert (REPLACE), and deleteByProjectId methods in `app/src/main/java/com/poultry/broiler/data/local/dao/HouseDimensionsDao.kt`
 - [X] T012 [P] Create HouseDimensionsRepository domain interface with getDimensionsByProjectId (Flow), saveDimensions, and deleteDimensionsByProjectId methods in `app/src/main/java/com/poultry/broiler/domain/repository/HouseDimensionsRepository.kt`
 - [X] T013 Create HouseDimensionsMapper with toDomain() and toEntity() extension functions (enum string ↔ enum conversion, value class wrapping) in `app/src/main/java/com/poultry/broiler/data/mapper/HouseDimensionsMapper.kt`
-- [X] T014 Create Room MIGRATION_2_3 (CREATE TABLE house_dimensions with all columns, foreign key, unique index) and update PoultryDatabase: bump version to 3, register HouseDimensionsEntity, add migration, expose houseDimensionsDao() abstract function in existing database class
+- [X] T014 [REOPEN] Create Room MIGRATION_2_3 (CREATE TABLE house_dimensions with all columns, foreign key, unique index) and update PoultryDatabase: bump version to 3, register HouseDimensionsEntity, add migration, expose houseDimensionsDao() abstract function in existing database class — re-opened: Room Gradle Plugin was not registered, causing `room {}` DSL to fail
 - [X] T015 Create HouseDimensionsRepositoryImpl implementing HouseDimensionsRepository using HouseDimensionsDao and HouseDimensionsMapper in `app/src/main/java/com/poultry/broiler/data/repository/HouseDimensionsRepositoryImpl.kt`
 - [X] T016 [P] Create WizardUiState sealed interface (Loading, Active with currentStep/totalSteps/dimensions/canGoNext/canGoPrevious/saveError, Error) and DimensionsFormState data class with all form fields and fieldErrors map in `app/src/main/java/com/poultry/broiler/presentation/wizard/WizardUiState.kt`
 - [X] T017 [P] Create WizardIntent sealed interface with all intent subclasses (UpdateLength, UpdateWidth, UpdateWallHeight, UpdateRidgeHeight, SelectRoofType, SelectWallMaterial, SelectFloorType, SelectInsulationType, UpdateInsulationThickness, SelectOrientation, GoNext, GoPrevious) in `app/src/main/java/com/poultry/broiler/presentation/wizard/WizardIntent.kt`
@@ -204,6 +204,18 @@
 - [X] T060 Handle edge cases across all stories: preserve all values across device rotation (configuration changes per FR-022), render visible preview for extreme small dimensions (length=0.1, width=0.1), smooth animation on rapid roof type switching without visual glitches, display floor area with many decimal places rounded to 2 decimal places (FR-021), show error Snackbar on Room persistence failure with values retained in form
 - [X] T061 Verify responsive layout on phone (compact 4-column grid, single-column fields, full-width scrollable) and tablet (expanded 8-column grid, 2-column input pairs, full-width canvas) form factors — no content clipping or overlapping (SC-006)
 - [X] T062 Run quickstart.md validation scenarios (all 10 scenarios) and verify all 7 success criteria pass; run `./gradlew ktlintCheck detekt lint` for code quality; add KDoc documentation to all public interfaces per Constitution Art 2.5
+
+---
+
+## Phase 11: Iteration — 2026-06-25
+
+**Purpose**: Fix build failure caused by missing Room Gradle Plugin registration. The `room { schemaDirectory(...) }` DSL block at `app/build.gradle.kts:55-56` requires the `androidx.room` Gradle plugin to be applied.
+
+- [X] T063 [REOPEN] [FIX] Register and apply Room Gradle Plugin: (1) Add `room = { id = "androidx.room", version.ref = "room" }` to the `[plugins]` section in `gradle/libs.versions.toml`, (2) Add `alias(libs.plugins.room) apply false` to root `build.gradle.kts`, (3) Add `alias(libs.plugins.room)` to the plugins block in `app/build.gradle.kts` — re-opened: `room {}` block was placed inside `android {}` instead of at top level
+
+- [X] T064 [FIX] Move `room { schemaDirectory("$projectDir/schemas") }` block from inside `android { }` to the top level of `app/build.gradle.kts` (same level as `android { }`, `dependencies { }`, `detekt { }`) so the Room Gradle Plugin extension is in scope
+
+**Checkpoint**: Run `./gradlew assembleDevDebug --no-daemon` — build must pass configuration phase without `Unresolved reference: room` or `Unresolved reference: schemaDirectory` errors.
 
 ---
 

@@ -145,3 +145,66 @@ app/src/androidTest/java/com/poultry/broiler/
 ## Complexity Tracking
 
 > No constitution violations detected. No complexity justifications needed.
+
+## Iteration Session 2026-06-25 (2)
+
+### User Feedback
+
+Build failure persists on `./gradlew assembleDevDebug`: same `ScriptCompilationError(message=Unresolved reference: room)` and `ScriptCompilationError(message=Unresolved reference: schemaDirectory)` errors at `app/build.gradle.kts` lines 55–56, even after registering the `androidx.room` plugin in the previous iteration.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | BUILD | P0 | Incorrect implementation — `room {}` block placed inside `android {}` instead of at project top level |
+
+**Root Cause**: The Room Gradle Plugin registers the `room` extension on the `Project` object. In `app/build.gradle.kts` the `room { schemaDirectory(...) }` block was placed inside the `android { }` block, where the `room` extension is not in scope. The plugin itself was correctly registered and applied in the previous iteration, but the DSL block was in the wrong lexical scope, so Gradle still reported `Unresolved reference: room`.
+
+### Amendments
+
+<!-- Amended 2026-06-25: Room Gradle Plugin room {} block must be at top level, not inside android {} -->
+The amendments from the first 2026-06-25 iteration are correct, but incomplete. In addition to registering the plugin, the `room {}` extension block in `app/build.gradle.kts` must be moved from inside `android { }` to the top level of the build script (same level as `android { }`, `dependencies { }`, and `detekt { }`).
+
+### New Tasks
+
+- T063 re-opened: plugin was registered but `room {}` block was placed in wrong scope
+- T064 added: move `room {}` block to top level of `app/build.gradle.kts`
+
+### Constitution Compliance
+
+- Art 1.4 (Pinned deps, Maven Central/Google Maven): PASS — no new dependencies or repositories
+- Art 2.2 (ktlint + Detekt): PASS — moving a DSL block does not affect code quality tooling
+- All other articles: unaffected
+
+## Iteration Session 2026-06-25
+
+### User Feedback
+
+Build failure on `./gradlew assembleDevDebug`: `ScriptCompilationError(message=Unresolved reference: room)` and `ScriptCompilationError(message=Unresolved reference: schemaDirectory)` at `app/build.gradle.kts` lines 55–56. The `room { schemaDirectory(...) }` DSL block requires the Room Gradle Plugin (`androidx.room`) which was never registered in `libs.versions.toml` or applied in the build scripts.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | BUILD | P0 | Environment/config issue — Room Gradle Plugin not registered or applied |
+
+**Root Cause**: The `room {}` extension block (introduced in Room 2.6.0+) requires the `androidx.room` Gradle plugin to be applied to the module. The project uses Room `2.6.1` (which supports the plugin) but the plugin was never declared in `gradle/libs.versions.toml` `[plugins]` section, never listed in the root `build.gradle.kts`, and never applied in `app/build.gradle.kts`. Task T014 created the migration and updated `PoultryDatabase` but missed the plugin registration needed for the `room {}` DSL.
+
+### Amendments
+
+<!-- Amended 2026-06-25: Room Gradle Plugin must be registered and applied for room {} DSL support -->
+The Technical Context section's "Primary Dependencies" implicitly assumes Room plugin availability via the `room {}` DSL used in `app/build.gradle.kts`. The fix requires three file changes:
+1. `gradle/libs.versions.toml` — Add `room` plugin entry under `[plugins]`
+2. `build.gradle.kts` (root) — Add `alias(libs.plugins.room) apply false`
+3. `app/build.gradle.kts` — Add `alias(libs.plugins.room)` to the plugins block
+
+### New Tasks
+
+- T014 re-opened: Room database setup was incomplete (missing plugin registration)
+- T063 added: Register and apply the Room Gradle Plugin across all three build files
+
+### Constitution Compliance
+
+- Art 1.4 (Pinned deps, Maven Central/Google Maven): PASS — `androidx.room` plugin is from Google Maven, version pinned to existing `room = "2.6.1"` in version catalog
+- Art 1.2.2 (Offline-first data flow): PASS — fix is config-only, no behavioral change
+- All other articles: unaffected by this config fix

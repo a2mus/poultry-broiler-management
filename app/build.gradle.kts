@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.ktlint)
     alias(libs.plugins.detekt)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.room)
 }
 
 android {
@@ -52,13 +53,13 @@ android {
         jvmTarget = "17"
     }
 
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
-
     lint {
         abortOnError = false
     }
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 detekt {
