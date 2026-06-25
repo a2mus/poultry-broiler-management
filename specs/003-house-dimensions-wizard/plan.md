@@ -146,6 +146,35 @@ app/src/androidTest/java/com/poultry/broiler/
 
 > No constitution violations detected. No complexity justifications needed.
 
+## Iteration Session 2026-06-25 (5)
+
+### User Feedback
+
+Build failure on `./gradlew assembleDevDebug` in CI: `:app:mergeDevDebugResources FAILED` with error `app/src/main/res/font/README.md: Error: The file name must end with .xml, .ttf, .ttc or .otf`. This is a new failure distinct from the prior Room Gradle Plugin iterations (resolved at commit `2f4a63a`).
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | BUILD | P0 | Environment/config issue — non-resource documentation file placed inside Android resource directory |
+
+**Root Cause**: `app/src/main/res/font/README.md` is a git-tracked placeholder from Feature #001 scaffolding that documents the required Outfit/Inter fonts. AAPT2's resource merger scans `res/font/` and requires every file to have a font-family extension (`.xml`, `.ttf`, `.ttc`, `.otf`). The `.md` file fails this check, so resource merging aborts before any #003 code compiles. The documentation is useful (it lists fonts mandated by the Constitution typography tokens) and must be preserved in a non-resource location rather than deleted outright.
+
+### Amendments
+
+None — the file is outside #003's plan.md source structure (it is a #001 scaffolding artifact). No existing #003 plan section changes.
+
+### New Tasks
+
+- T066 added: remove `app/src/main/res/font/README.md` from the resource directory and relocate its contents to `docs/FONTS.md`.
+
+### Constitution Compliance
+
+- Typography tokens (Outfit/Inter): PASS — font documentation preserved via relocation to `docs/FONTS.md`.
+- Art 7.1 (Directory structure): PASS — removes an invalid file from `res/`.
+- Art 1.4, 2.2: unaffected.
+- All other articles: unaffected.
+
 ## Iteration Session 2026-06-25 (4)
 
 ### User Feedback

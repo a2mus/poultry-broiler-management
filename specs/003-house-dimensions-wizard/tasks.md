@@ -220,6 +220,16 @@
 
 ---
 
+## Phase 12: Iteration — 2026-06-25 (5)
+
+**Purpose**: Fix build failure caused by a non-resource file inside an Android resource directory. AAPT2 rejects `app/src/main/res/font/README.md` because every file in `res/font/` must end with `.xml`, `.ttf`, `.ttc`, or `.otf`, causing `:app:mergeDevDebugResources` to fail before any feature code compiles.
+
+- [X] T066 [FIX] Remove invalid resource file and relocate font documentation: (1) Delete `app/src/main/res/font/README.md` (AAPT2 rejects non-font files in `res/font/` — only `.xml`/`.ttf`/`.ttc`/`.otf` are allowed), (2) Create `docs/FONTS.md` with the relocated content documenting the required Outfit (weights 400/500/600/700) and Inter (weights 400/500/600/700) `.ttf` files per Constitution typography tokens, (3) Do NOT add `.gitkeep` to `res/font/` (it would also be rejected by AAPT2) — the directory will be recreated by the developer when actual `.ttf` files are dropped in
+
+**Checkpoint**: Run `./gradlew assembleDevDebug --no-daemon` — `:app:mergeDevDebugResources` must pass with no `The file name must end with .xml, .ttf, .ttc or .otf` error. Verify `docs/FONTS.md` exists and `res/font/` is either absent or contains only font-family files.
+
+---
+
 ## Dependencies & Execution Order
 
 ### Phase Dependencies
