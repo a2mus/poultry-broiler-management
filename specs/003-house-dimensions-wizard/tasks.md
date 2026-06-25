@@ -215,7 +215,7 @@
 
 - [X] T064 [REOPEN] [FIX] Move `room { schemaDirectory("$projectDir/schemas") }` block from inside `android { }` to the top level of `app/build.gradle.kts` (same level as `android { }`, `dependencies { }`, `detekt { }`) so the Room Gradle Plugin extension is in scope — re-opened: Room Gradle Plugin approach is not viable in CI environment
 - [X] T065 [FIX] Switch Room schema directory configuration to KSP argument: (1) Remove `room {}` block from `app/build.gradle.kts`, (2) Remove `alias(libs.plugins.room)` from `app/build.gradle.kts`, (3) Remove `alias(libs.plugins.room) apply false` from root `build.gradle.kts`, (4) Remove `room` plugin entry from `gradle/libs.versions.toml`, (5) Add `ksp { arg("room.schemaLocation", "$projectDir/schemas") }` to top level of `app/build.gradle.kts`
-- [ ] T066 [FIX] Move `app/src/main/res/font/README.md` out of the `res/` directory hierarchy (e.g., to `app/FONTS.md` or `app/README.md`) so AAPT2 no longer rejects it during `:app:mergeDevDebugResources`
+- [X] T066 [FIX] Move `app/src/main/res/font/README.md` out of the `res/` directory hierarchy (e.g., to `app/FONTS.md` or `app/README.md`) so AAPT2 no longer rejects it during `:app:mergeDevDebugResources`
 
 **Checkpoint**: Run `./gradlew assembleDevDebug --no-daemon` — build must pass configuration phase without `Unresolved reference: room` or `Unresolved reference: schemaDirectory` errors.
 
