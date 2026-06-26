@@ -195,7 +195,7 @@ private fun FloorAreaRow(form: DimensionsFormState) {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Text(
-            text = formState.floorArea?.let {
+            text = form.floorArea?.let {
                 stringResource(R.string.wizard_floor_area_format, it.value)
             } ?: stringResource(R.string.wizard_unit_square_meters),
             style = MaterialTheme.typography.titleMedium,

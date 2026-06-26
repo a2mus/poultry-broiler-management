@@ -1,19 +1,3 @@
-#!/bin/bash
-# Script to build the seed SQLite database for Poultry Broiler Management
-# Run this script to generate app/src/main/assets/seed/poultry.db
-#
-# Prerequisites: sqlite3 command-line tool installed
-# Usage: bash scripts/build-seed-db.sh
-
-set -e
-
-OUTPUT_DIR="app/src/main/assets/seed"
-DB_FILE="$OUTPUT_DIR/poultry.db"
-
-mkdir -p "$OUTPUT_DIR"
-rm -f "$DB_FILE"
-
-sqlite3 "$DB_FILE" <<EOF
 PRAGMA journal_mode=WAL;
 PRAGMA foreign_keys=OFF;
 
@@ -101,15 +85,3 @@ VALUES ('Rampe de brumisation', 'COOLING', 'Lubing', 'MIST-4L', '4 L/h', 50.0, '
 -- WATERING
 INSERT INTO equipment_items (name, category, brand, model_number, capacity, power_watts, unit, coverage_m2, description)
 VALUES ('Pipette abreuvoir', 'WATERING', 'Plasson', 'NIP-12', '12 oiseaux', NULL, 'unité', NULL, 'Abreuvoir à pipette pour poulets. Débit d''eau constant et hygiénique.');
-EOF
-
-echo "Seed database created at $DB_FILE"
-echo "Tables:"
-sqlite3 "$DB_FILE" ".tables"
-echo ""
-echo "Breed profiles count:"
-sqlite3 "$DB_FILE" "SELECT COUNT(*) FROM breed_profiles;"
-echo "Equipment items count:"
-sqlite3 "$DB_FILE" "SELECT COUNT(*) FROM equipment_items;"
-echo "Equipment categories:"
-sqlite3 "$DB_FILE" "SELECT DISTINCT category FROM equipment_items ORDER BY category;"

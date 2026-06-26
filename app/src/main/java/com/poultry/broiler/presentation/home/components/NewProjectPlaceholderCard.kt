@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
@@ -66,7 +67,7 @@ fun NewProjectPlaceholderCard(
                                 0f,
                             ),
                         ),
-                        cornerRadius = androidx.compose.ui.graphics.CornerRadius(cornerRadius),
+                        cornerRadius = CornerRadius(cornerRadius),
                     )
                 }
                 .padding(spacing.lg),
