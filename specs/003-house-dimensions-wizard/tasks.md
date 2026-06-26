@@ -347,3 +347,10 @@ P1 stories first (US1 → US2 → US5 → US6), then P2 stories (US3 → US4 →
 - Domain layer MUST NOT import Android framework classes (Constitution Art 7.3)
 - All interactive elements MUST have 48dp touch targets (Constitution Art 3.3)
 - NumericInputField enhancement (T023) is backward-compatible — verify no regressions in existing usages
+
+## Phase 12: Iteration - 2026-06-26
+
+**Purpose**: Fix Room Database Schema Mismatch in the pre-packaged seed database.
+
+- [ ] T067 [FIX] Update \scripts/build-seed-db.sh\: add \NOT NULL\ to the \id\ column for \reed_profiles\ and rename the index from \idx_breed_name\ to \index_breed_profiles_breed_name\. Update \quipment_items\ ID to \NOT NULL\ proactively as well.
+- [ ] T068 [FIX] Regenerate the pre-packaged database \pp/src/main/assets/seed/poultry.db\ by running \scripts/build-seed-db.sh\.

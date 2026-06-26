@@ -299,3 +299,39 @@ The Technical Context section's "Primary Dependencies" implicitly assumes Room p
 - Art 1.4 (Pinned deps, Maven Central/Google Maven): PASS — `androidx.room` plugin is from Google Maven, version pinned to existing `room = "2.6.1"` in version catalog
 - Art 1.2.2 (Offline-first data flow): PASS — fix is config-only, no behavioral change
 - All other articles: unaffected by this config fix
+
+## Iteration Session 2026-06-26
+
+### User Feedback
+
+Crash Summary: Room Database Schema Mismatch
+Exception: \java.lang.IllegalStateException\
+Error Message: Pre-packaged database has an invalid schema for the \reed_profiles\ table mapped to \com.poultry.broiler.data.local.entity.BreedProfileEntity\.
+
+Root Cause:
+1. \id\ Column Nullability: Expected \
+otNull=true\, Found \
+otNull=false\
+2. Unexpected Index: Found extra \idx_breed_name\, Expected \index_breed_profiles_breed_name\
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | DATA | P0 | Incorrect implementation - Seed database gen script doesn't match Room schema |
+
+**Root Cause**: The bash script (\scripts/build-seed-db.sh\) generating the pre-packaged SQLite database (\poultry.db\) didn't explicitly add the \NOT NULL\ constraint on the \id\ column (which Room requires even for PRIMARY KEY in SQLite) and named the unique index \idx_breed_name\ instead of matching Room's default name \index_breed_profiles_breed_name\. Room's strict startup verification caught the mismatch and crashed.
+
+### Amendments
+
+None to existing analytical/architectural sections.
+
+### New Tasks
+
+- T067 added: Fix \scripts/build-seed-db.sh\ schema definitions to match Room exactly.
+- T068 added: Regenerate \pp/src/main/assets/seed/poultry.db\ by executing the fixed script.
+
+### Constitution Compliance
+
+- Art 1.2.2 (Offline-First Data Flow): PASS - Ensuring SQLite schemas exactly match the Room declarative specs guarantees safe offline access.
+- All other articles: unaffected.
