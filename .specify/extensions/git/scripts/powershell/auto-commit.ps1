@@ -81,7 +81,9 @@ foreach ($candidate in @($env:SPECKIT_PYTHON, "python3", "python")) {
 }
 
 if ($python) {
-    $parsed = & $python - $ConfigFile $EventName 2>$null @"
+    # NOTE: the Python source MUST be piped to stdin (python - reads stdin).
+    # A trailing here-string is an argument, not stdin, so pipe it explicitly.
+    $pyScript = @"
 import sys, yaml
 cfg_path, event = sys.argv[1], sys.argv[2]
 try:
@@ -103,6 +105,7 @@ if not isinstance(message, str):
 print('1' if enabled else '0')
 print(message)
 "@
+    $parsed = $pyScript | & $python - $ConfigFile $EventName 2>$null
     if ($LASTEXITCODE -eq 0 -and $parsed) {
         $lines = $parsed -split "`n"
         if ($lines.Count -ge 1) { $enabled = ($lines[0].Trim() -eq "1") }
