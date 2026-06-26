@@ -361,3 +361,39 @@ None to existing analytical/architectural sections.
 
 - Art 1.2.2 (Offline-First Data Flow): PASS - Ensuring SQLite schemas exactly match the Room declarative specs guarantees safe offline access.
 - All other articles: unaffected.
+
+## Iteration Session 2026-06-26 (2)
+
+### User Feedback
+
+App installed and launched from the emulator, but crashed on startup with `java.lang.IllegalStateException: Pre-packaged database has an invalid schema: equipment_items(...)`. Room expected indices `[index_equipment_items_category]` but the shipped `poultry.db` contained an extra/mismatched index `idx_equipment_category`.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | DATA | P0 | Incomplete implementation — prior Iteration Session (1) created T067/T068 for seed-DB schema alignment but T067's scope missed the `equipment_items` index mismatch |
+
+**Root Cause**: The previous iteration session (2026-06-26) correctly diagnosed the pre-packaged DB schema-mismatch class of bug and created T067 (fix the script) + T068 (regenerate the DB). However, T067's description only addressed the `breed_profiles` index rename (`idx_breed_name` → `index_breed_profiles_breed_name`) and `id` NOT NULL constraints. It **omitted the `equipment_items` index**: the script created `idx_equipment_category` while the Room entity (`EquipmentItemEntity`) + schema export (`3.json`) expect `index_equipment_items_category`. Room's strict pre-packaged DB validation rejects the mismatch on first open, crashing the app every launch. On inspection, `breed_profiles` was already correct in the working tree (its part of T067 had been applied) and both `id` columns already carried `NOT NULL`; only the `equipment_items` index name was outstanding.
+
+### Amendments
+
+None to existing architectural/design sections. T067's scope is clarified in-place in `tasks.md` to record the actual change applied (equipment_items index rename) and the fact that the breed_profiles/index work was already present.
+
+### New Tasks
+
+None — T067 and T068 (both from the prior session) are now completed and marked `[X]`.
+
+### Constitution Compliance
+
+- Art 1.2.2 (Offline-First Data Flow): PASS — pre-packaged seed DB schema now exactly matches the Room declarative schema (3.json), so offline-first reads/writes are safe.
+- Art 1.4 (Pinned deps): PASS — no dependency or repository changes; used existing `sqlite3` from the Android SDK `platform-tools`.
+- All other articles: unaffected.
+
+### Verification
+
+Regenerated `poultry.db` indices verified against Room expectations:
+- `breed_profiles` → `index_breed_profiles_breed_name` (unique) ✓
+- `equipment_items` → `index_equipment_items_category` ✓
+- Row counts preserved: 2 breed profiles, 6 equipment items ✓
+- App rebuilt (`:app:assembleDevDebug` SUCCESSFUL), data cleared, reinstalled, launched: `MainActivity` reached `topResumedActivity`, process alive, zero `FATAL EXCEPTION` in logcat. UI rendered the projects dashboard empty state ("Aucun projet" / "Nouveau projet").

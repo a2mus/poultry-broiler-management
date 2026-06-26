@@ -352,5 +352,5 @@ P1 stories first (US1 → US2 → US5 → US6), then P2 stories (US3 → US4 →
 
 **Purpose**: Fix Room Database Schema Mismatch in the pre-packaged seed database.
 
-- [ ] T067 [FIX] Update \scripts/build-seed-db.sh\: add \NOT NULL\ to the \id\ column for \reed_profiles\ and rename the index from \idx_breed_name\ to \index_breed_profiles_breed_name\. Update \quipment_items\ ID to \NOT NULL\ proactively as well.
-- [ ] T068 [FIX] Regenerate the pre-packaged database \pp/src/main/assets/seed/poultry.db\ by running \scripts/build-seed-db.sh\.
+- [X] T067 [FIX] Updated scripts/build-seed-db.sh: equipment_items category index renamed from `idx_equipment_category` to `index_equipment_items_category` to match Room schema 3.json. (breed_profiles index and both `id` NOT NULL constraints were already correct in the working tree; only the equipment_items index name was outstanding.)
+- [X] T068 [FIX] Regenerated the pre-packaged database app/src/main/assets/seed/poultry.db by running scripts/build-seed-db.sh. Verified indices (`index_breed_profiles_breed_name`, `index_equipment_items_category`) and row counts (2 breed profiles, 6 equipment items) match Room schema 3.json.

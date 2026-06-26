@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS equipment_items (
     description TEXT
 );
 
-CREATE INDEX IF NOT EXISTS idx_equipment_category ON equipment_items(category);
+CREATE INDEX IF NOT EXISTS index_equipment_items_category ON equipment_items(category);
 
 -- Ross 308 breed profile with weekly growth targets
 INSERT INTO breed_profiles (breed_name, supplier, growth_targets_json, min_density_kg_m2, max_density_kg_m2, target_fcr, cycle_duration_days, target_weight_g, mortality_rate_pct, description)
