@@ -146,6 +146,32 @@ app/src/androidTest/java/com/poultry/broiler/
 
 > No constitution violations detected. No complexity justifications needed.
 
+## Iteration Session 2026-06-25 (6)
+
+### User Feedback
+
+CI build failure on `./gradlew assembleDevDebug`: `ERROR: app/src/main/res/font/README.md: Resource and asset merger: The file name must end with .xml, .ttf, .ttc or .otf` — task `:app:mergeDevDebugResources` FAILED.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | BUILD / DELIVERY | P0 | Fix applied in working tree but not committed — CI runs on last committed version |
+
+**Root Cause**: T066 (move `README.md` out of `res/font/`) was already completed locally — `app/src/main/res/font/README.md` no longer exists in the working tree. However, the CI pipeline ran against the last committed revision which still contains the offending file. This is the same delivery pattern as Iteration Session (4): the code fix is complete; it only needs to be committed and pushed.
+
+### Amendments
+
+None — no architecture or design changes needed. T066 fix is correct.
+
+### New Tasks
+
+None — T066 is already completed in the working tree.
+
+### Constitution Compliance
+
+- All articles: unaffected — this is a delivery gap, not a code or architecture issue
+
 ## Iteration Session 2026-06-25 (5)
 
 ### User Feedback
