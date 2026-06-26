@@ -1,5 +1,6 @@
 installed:
 - agent-context
+- git
 settings:
   auto_execute_hooks: true
 hooks:
@@ -12,6 +13,14 @@ hooks:
     prompt: Execute speckit.agent-context.update?
     description: Refresh agent context after specification
     condition: null
+  - extension: git
+    command: speckit.git.commit
+    enabled: true
+    optional: true
+    priority: 20
+    prompt: Auto-commit changes after specification?
+    description: Stage and commit changes after specification
+    condition: null
   after_plan:
   - extension: agent-context
     command: speckit.agent-context.update
@@ -20,4 +29,39 @@ hooks:
     priority: 10
     prompt: Execute speckit.agent-context.update?
     description: Refresh agent context after planning
+    condition: null
+  - extension: git
+    command: speckit.git.commit
+    enabled: true
+    optional: true
+    priority: 20
+    prompt: Auto-commit changes after planning?
+    description: Stage and commit changes after planning
+    condition: null
+  after_tasks:
+  - extension: git
+    command: speckit.git.commit
+    enabled: true
+    optional: true
+    priority: 20
+    prompt: Auto-commit changes after task breakdown?
+    description: Stage and commit changes after task breakdown
+    condition: null
+  after_implement:
+  - extension: git
+    command: speckit.git.commit
+    enabled: true
+    optional: true
+    priority: 20
+    prompt: Auto-commit changes after implementation?
+    description: Stage and commit changes after implementation
+    condition: null
+  after_iterate:
+  - extension: git
+    command: speckit.git.commit
+    enabled: true
+    optional: true
+    priority: 20
+    prompt: Auto-commit changes after iteration?
+    description: Stage and commit changes after iteration
     condition: null
