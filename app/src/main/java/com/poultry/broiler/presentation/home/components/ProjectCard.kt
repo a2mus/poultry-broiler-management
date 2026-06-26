@@ -46,8 +46,8 @@ import com.poultry.broiler.domain.model.ProjectStatus
 import com.poultry.broiler.domain.model.ProjectType
 import com.poultry.broiler.presentation.theme.BadgeCornerRadius
 import com.poultry.broiler.presentation.theme.CardCornerRadius
-import com.poultry.broiler.presentation.theme.PoultryElevation
 import com.poultry.broiler.presentation.theme.LocalSpacing
+import com.poultry.broiler.presentation.theme.PoultryElevation
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -81,16 +81,17 @@ fun ProjectCard(
     )
 
     Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .scale(scale)
-            .combinedClickable(
-                onClick = onClick,
-                onLongClick = {
-                    isPressed = true
-                    onLongClick()
-                },
-            ),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .scale(scale)
+                .combinedClickable(
+                    onClick = onClick,
+                    onLongClick = {
+                        isPressed = true
+                        onLongClick()
+                    },
+                ),
         elevation = CardDefaults.cardElevation(defaultElevation = PoultryElevation.card),
         shape = RoundedCornerShape(CardCornerRadius),
     ) {
@@ -175,25 +176,28 @@ private fun MetadataRow(
 @Composable
 private fun TypeBadge(type: ProjectType) {
     val spacing = LocalSpacing.current
-    val (containerColor, contentColor) = when (type) {
-        ProjectType.NEW_INSTALLATION ->
-            MaterialTheme.colorScheme.primaryContainer to MaterialTheme.colorScheme.onPrimaryContainer
-        ProjectType.EXISTING_ASSESSMENT ->
-            MaterialTheme.colorScheme.tertiaryContainer to MaterialTheme.colorScheme.onTertiaryContainer
-    }
+    val (containerColor, contentColor) =
+        when (type) {
+            ProjectType.NEW_INSTALLATION ->
+                MaterialTheme.colorScheme.primaryContainer to MaterialTheme.colorScheme.onPrimaryContainer
+            ProjectType.EXISTING_ASSESSMENT ->
+                MaterialTheme.colorScheme.tertiaryContainer to MaterialTheme.colorScheme.onTertiaryContainer
+        }
 
-    val cdRes = when (type) {
-        ProjectType.NEW_INSTALLATION -> R.string.cd_type_badge_new
-        ProjectType.EXISTING_ASSESSMENT -> R.string.cd_type_badge_existing
-    }
+    val cdRes =
+        when (type) {
+            ProjectType.NEW_INSTALLATION -> R.string.cd_type_badge_new
+            ProjectType.EXISTING_ASSESSMENT -> R.string.cd_type_badge_existing
+        }
     val badgeContentDescription = stringResource(cdRes)
 
     Box(
-        modifier = Modifier
-            .clip(RoundedCornerShape(BadgeCornerRadius))
-            .background(containerColor)
-            .padding(horizontal = spacing.sm, vertical = spacing.xxs)
-            .semantics { contentDescription = badgeContentDescription },
+        modifier =
+            Modifier
+                .clip(RoundedCornerShape(BadgeCornerRadius))
+                .background(containerColor)
+                .padding(horizontal = spacing.sm, vertical = spacing.xxs)
+                .semantics { contentDescription = badgeContentDescription },
     ) {
         Text(
             text = type.badgeText,
@@ -207,18 +211,20 @@ private fun TypeBadge(type: ProjectType) {
 @Composable
 private fun StatusIndicator(status: ProjectStatus) {
     val spacing = LocalSpacing.current
-    val dotColor = when (status) {
-        ProjectStatus.DRAFT -> MaterialTheme.colorScheme.outline
-        ProjectStatus.IN_PROGRESS -> MaterialTheme.colorScheme.primary
-        ProjectStatus.COMPLETED -> MaterialTheme.colorScheme.tertiary
-    }
+    val dotColor =
+        when (status) {
+            ProjectStatus.DRAFT -> MaterialTheme.colorScheme.outline
+            ProjectStatus.IN_PROGRESS -> MaterialTheme.colorScheme.primary
+            ProjectStatus.COMPLETED -> MaterialTheme.colorScheme.tertiary
+        }
 
     Row(verticalAlignment = Alignment.CenterVertically) {
         Box(
-            modifier = Modifier
-                .size(8.dp)
-                .clip(CircleShape)
-                .background(dotColor),
+            modifier =
+                Modifier
+                    .size(8.dp)
+                    .clip(CircleShape)
+                    .background(dotColor),
         )
         Spacer(modifier = Modifier.width(spacing.xxs))
         Text(
@@ -234,10 +240,11 @@ private fun ComplianceIndicator() {
     val circleColor = MaterialTheme.colorScheme.surfaceVariant
 
     Box(
-        modifier = Modifier
-            .size(48.dp)
-            .clip(CircleShape)
-            .background(circleColor),
+        modifier =
+            Modifier
+                .size(48.dp)
+                .clip(CircleShape)
+                .background(circleColor),
         contentAlignment = Alignment.Center,
     ) {
         Text(
@@ -250,9 +257,10 @@ private fun ComplianceIndicator() {
 
 private fun Long.toFormattedDate(): String {
     val instant = Instant.ofEpochMilli(this)
-    val formatter = DateTimeFormatter
-        .ofLocalizedDate(FormatStyle.MEDIUM)
-        .withLocale(Locale.getDefault())
-        .withZone(ZoneId.systemDefault())
+    val formatter =
+        DateTimeFormatter
+            .ofLocalizedDate(FormatStyle.MEDIUM)
+            .withLocale(Locale.getDefault())
+            .withZone(ZoneId.systemDefault())
     return formatter.format(instant)
 }

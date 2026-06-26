@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.Flow
  * suspending one-shot operations.
  */
 interface ProjectRepository {
-
     /**
      * Returns all projects ordered by [Project.updatedAt] descending
      * (most recently modified first). Emits a new list on any table change.

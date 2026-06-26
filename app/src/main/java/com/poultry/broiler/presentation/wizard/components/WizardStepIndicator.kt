@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.unit.dp
 import com.poultry.broiler.R
 import com.poultry.broiler.presentation.theme.BadgeCornerRadius
 import com.poultry.broiler.presentation.theme.LocalSpacing
@@ -32,11 +31,12 @@ fun WizardStepIndicator(
 ) {
     val spacing = LocalSpacing.current
     Surface(
-        modifier = modifier
-            .padding(horizontal = spacing.xs)
-            .semantics {
-                contentDescription = "Étape $currentStep sur $totalSteps"
-            },
+        modifier =
+            modifier
+                .padding(horizontal = spacing.xs)
+                .semantics {
+                    contentDescription = "Étape $currentStep sur $totalSteps"
+                },
         shape = RoundedCornerShape(BadgeCornerRadius),
         color = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -44,10 +44,11 @@ fun WizardStepIndicator(
         Text(
             text = stringResource(R.string.wizard_step_indicator, currentStep, totalSteps),
             style = MaterialTheme.typography.labelSmall,
-            modifier = Modifier.padding(
-                horizontal = spacing.md,
-                vertical = spacing.xs,
-            ),
+            modifier =
+                Modifier.padding(
+                    horizontal = spacing.md,
+                    vertical = spacing.xs,
+                ),
         )
     }
 }

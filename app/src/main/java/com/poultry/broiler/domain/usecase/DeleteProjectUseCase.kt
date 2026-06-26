@@ -10,12 +10,13 @@ import javax.inject.Inject
  *
  * @return [Result.success] on completion.
  */
-class DeleteProjectUseCase @Inject constructor(
-    private val repository: ProjectRepository,
-) {
-
-    suspend operator fun invoke(projectId: String): Result<Unit> {
-        repository.deleteProject(projectId)
-        return Result.success(Unit)
+class DeleteProjectUseCase
+    @Inject
+    constructor(
+        private val repository: ProjectRepository,
+    ) {
+        suspend operator fun invoke(projectId: String): Result<Unit> {
+            repository.deleteProject(projectId)
+            return Result.success(Unit)
+        }
     }
-}

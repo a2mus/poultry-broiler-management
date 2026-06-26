@@ -28,6 +28,8 @@ import kotlin.math.cos
 import kotlin.math.min
 import kotlin.math.sin
 
+private const val TABLET_MIN_WIDTH_DP = 600
+
 /**
  * Live 2D top-down preview of the building envelope with ruler markers and an
  * optional compass indicator (research.md §3).
@@ -55,7 +57,7 @@ fun DimensionPreviewCanvas(
     modifier: Modifier = Modifier,
 ) {
     val configuration = LocalConfiguration.current
-    val isTablet = configuration.smallestScreenWidthDp >= 600
+    val isTablet = configuration.smallestScreenWidthDp >= TABLET_MIN_WIDTH_DP
     val canvasHeight = if (isTablet) 280.dp else 200.dp
     val spacing = LocalSpacing.current
 
@@ -65,10 +67,11 @@ fun DimensionPreviewCanvas(
     val previewDescription = stringResource(R.string.cd_wizard_preview_canvas)
 
     Canvas(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(canvasHeight)
-            .semantics { contentDescription = previewDescription },
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(canvasHeight)
+                .semantics { contentDescription = previewDescription },
     ) {
         val density = this
         val canvasWidth = size.width
@@ -86,25 +89,26 @@ fun DimensionPreviewCanvas(
         val usableWidth = canvasWidth - 2 * paddingPx
         val usableHeight = canvasHeightPx - 2 * paddingPx
 
-        val rect: Rect = if (length != null && width != null && length > 0.0 && width > 0.0) {
-            val aspect = (length / width).toFloat()
-            var rectWidth = usableWidth
-            var rectHeight = usableWidth / aspect
-            if (rectHeight > usableHeight) {
-                rectHeight = usableHeight
-                rectWidth = usableHeight * aspect
+        val rect: Rect =
+            if (length != null && width != null && length > 0.0 && width > 0.0) {
+                val aspect = (length / width).toFloat()
+                var rectWidth = usableWidth
+                var rectHeight = usableWidth / aspect
+                if (rectHeight > usableHeight) {
+                    rectHeight = usableHeight
+                    rectWidth = usableHeight * aspect
+                }
+                if (rectWidth < minDimPx) rectWidth = minDimPx
+                if (rectHeight < minDimPx) rectHeight = minDimPx
+                val left = (canvasWidth - rectWidth) / 2f
+                val top = (canvasHeightPx - rectHeight) / 2f
+                Rect(left, top, left + rectWidth, top + rectHeight)
+            } else {
+                val side = min(usableWidth, usableHeight)
+                val left = (canvasWidth - side) / 2f
+                val top = (canvasHeightPx - side) / 2f
+                Rect(left, top, left + side, top + side)
             }
-            if (rectWidth < minDimPx) rectWidth = minDimPx
-            if (rectHeight < minDimPx) rectHeight = minDimPx
-            val left = (canvasWidth - rectWidth) / 2f
-            val top = (canvasHeightPx - rectHeight) / 2f
-            Rect(left, top, left + rectWidth, top + rectHeight)
-        } else {
-            val side = min(usableWidth, usableHeight)
-            val left = (canvasWidth - side) / 2f
-            val top = (canvasHeightPx - side) / 2f
-            Rect(left, top, left + side, top + side)
-        }
 
         // Outline
         drawRect(
@@ -123,34 +127,57 @@ fun DimensionPreviewCanvas(
 
             drawText(
                 textLayoutResult = lengthText,
-                topLeft = Offset(
-                    x = rect.center.x - lengthText.size.width / 2f,
-                    y = rect.top - dpPx(16.dp),
-                ),
+                topLeft =
+                    Offset(
+                        x = rect.center.x - lengthText.size.width / 2f,
+                        y = rect.top - dpPx(16.dp),
+                    ),
             )
             drawText(
                 textLayoutResult = widthText,
-                topLeft = Offset(
-                    x = rect.left - dpPx(32.dp),
-                    y = rect.center.y - widthText.size.height / 2f,
-                ),
+                topLeft =
+                    Offset(
+                        x = rect.left - dpPx(32.dp),
+                        y = rect.center.y - widthText.size.height / 2f,
+                    ),
             )
 
             val tick = dpPx(8.dp)
             val stroke = dpPx(1.dp)
-            drawLine(colorScheme.onSurface, Offset(rect.left, rect.top - tick), Offset(rect.right, rect.top - tick), stroke)
-            drawLine(colorScheme.onSurface, Offset(rect.left - tick, rect.top), Offset(rect.left - tick, rect.bottom), stroke)
-            drawLine(colorScheme.onSurface, Offset(rect.left, rect.bottom + tick), Offset(rect.right, rect.bottom + tick), stroke)
-            drawLine(colorScheme.onSurface, Offset(rect.right + tick, rect.top), Offset(rect.right + tick, rect.bottom), stroke)
+            drawLine(
+                colorScheme.onSurface,
+                Offset(rect.left, rect.top - tick),
+                Offset(rect.right, rect.top - tick),
+                stroke,
+            )
+            drawLine(
+                colorScheme.onSurface,
+                Offset(rect.left - tick, rect.top),
+                Offset(rect.left - tick, rect.bottom),
+                stroke,
+            )
+            drawLine(
+                colorScheme.onSurface,
+                Offset(rect.left, rect.bottom + tick),
+                Offset(rect.right, rect.bottom + tick),
+                stroke,
+            )
+            drawLine(
+                colorScheme.onSurface,
+                Offset(rect.right + tick, rect.top),
+                Offset(rect.right + tick, rect.bottom),
+                stroke,
+            )
         }
 
         // Compass indicator
         if (orientation != null) {
             val compassRadius = dpPx(20.dp)
-            val compassCenter = Offset(
-                x = canvasWidth - paddingPx - compassRadius,
-                y = paddingPx + compassRadius,
-            )
+            val compassCenter =
+                Offset(
+                    x = canvasWidth - paddingPx - compassRadius,
+                    y = paddingPx + compassRadius,
+                )
             drawCircle(
                 color = colorScheme.onSurface,
                 radius = compassRadius,
@@ -158,10 +185,11 @@ fun DimensionPreviewCanvas(
                 style = Stroke(width = dpPx(2.dp)),
             )
             val radians = Math.toRadians(orientation.degrees.toDouble()) - Math.PI / 2
-            val needle = Offset(
-                x = compassCenter.x + (compassRadius * cos(radians)).toFloat() * 0.8f,
-                y = compassCenter.y + (compassRadius * sin(radians)).toFloat() * 0.8f,
-            )
+            val needle =
+                Offset(
+                    x = compassCenter.x + (compassRadius * cos(radians)).toFloat() * 0.8f,
+                    y = compassCenter.y + (compassRadius * sin(radians)).toFloat() * 0.8f,
+                )
             drawLine(
                 color = colorScheme.primary,
                 start = compassCenter,
@@ -173,10 +201,11 @@ fun DimensionPreviewCanvas(
             val labelText = textMeasurer.measure(label, labelStyle.copy(color = colorScheme.onSurfaceVariant))
             drawText(
                 textLayoutResult = labelText,
-                topLeft = Offset(
-                    x = compassCenter.x - labelText.size.width / 2f,
-                    y = compassCenter.y + compassRadius + dpPx(2.dp),
-                ),
+                topLeft =
+                    Offset(
+                        x = compassCenter.x - labelText.size.width / 2f,
+                        y = compassCenter.y + compassRadius + dpPx(2.dp),
+                    ),
             )
         }
     }

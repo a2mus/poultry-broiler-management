@@ -17,27 +17,30 @@ import javax.inject.Inject
  * @return [Result.success] with the new [Project], or
  *         [Result.failure] if the source project is not found.
  */
-class DuplicateProjectUseCase @Inject constructor(
-    private val repository: ProjectRepository,
-) {
+class DuplicateProjectUseCase
+    @Inject
+    constructor(
+        private val repository: ProjectRepository,
+    ) {
+        suspend operator fun invoke(sourceProjectId: String): Result<Project> {
+            val source =
+                repository.getProjectById(sourceProjectId).first()
+                    ?: return Result.failure(ProjectValidationException.NotFound)
 
-    suspend operator fun invoke(sourceProjectId: String): Result<Project> {
-        val source = repository.getProjectById(sourceProjectId).first()
-            ?: return Result.failure(ProjectValidationException.NotFound)
+            val now = System.currentTimeMillis()
+            val copy =
+                Project(
+                    id = UUID.randomUUID().toString(),
+                    name = "${source.name} (Copy)",
+                    type = source.type,
+                    status = ProjectStatus.DRAFT,
+                    location = source.location,
+                    createdAt = now,
+                    updatedAt = now,
+                    syncTimestamp = null,
+                )
 
-        val now = System.currentTimeMillis()
-        val copy = Project(
-            id = UUID.randomUUID().toString(),
-            name = "${source.name} (Copy)",
-            type = source.type,
-            status = ProjectStatus.DRAFT,
-            location = source.location,
-            createdAt = now,
-            updatedAt = now,
-            syncTimestamp = null,
-        )
-
-        repository.insertProject(copy)
-        return Result.success(copy)
+            repository.insertProject(copy)
+            return Result.success(copy)
+        }
     }
-}

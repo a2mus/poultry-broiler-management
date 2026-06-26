@@ -30,21 +30,21 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class HouseDimensionsDaoTest {
-
     private lateinit var database: PoultryDatabase
     private lateinit var dao: HouseDimensionsDao
     private lateinit var projectDao: ProjectDao
 
-    private val project = ProjectEntity(
-        id = "project-1",
-        name = "Test project",
-        type = "NEW_INSTALLATION",
-        status = "DRAFT",
-        location = null,
-        createdAt = 1L,
-        updatedAt = 1L,
-        syncTimestamp = null,
-    )
+    private val project =
+        ProjectEntity(
+            id = "project-1",
+            name = "Test project",
+            type = "NEW_INSTALLATION",
+            status = "DRAFT",
+            location = null,
+            createdAt = 1L,
+            updatedAt = 1L,
+            syncTimestamp = null,
+        )
 
     private fun dimensionsEntity(
         id: String = "dim-1",
@@ -67,16 +67,18 @@ class HouseDimensionsDaoTest {
     )
 
     @Before
-    fun setUp() = runTest {
-        val context = ApplicationProvider.getApplicationContext<android.content.Context>()
-        database = Room.inMemoryDatabaseBuilder(
-            context,
-            PoultryDatabase::class.java,
-        ).allowMainThreadQueries().build()
-        dao = database.houseDimensionsDao()
-        projectDao = database.projectDao()
-        projectDao.insert(project)
-    }
+    fun setUp() =
+        runTest {
+            val context = ApplicationProvider.getApplicationContext<android.content.Context>()
+            database =
+                Room.inMemoryDatabaseBuilder(
+                    context,
+                    PoultryDatabase::class.java,
+                ).allowMainThreadQueries().build()
+            dao = database.houseDimensionsDao()
+            projectDao = database.projectDao()
+            projectDao.insert(project)
+        }
 
     @After
     fun tearDown() {
@@ -84,47 +86,53 @@ class HouseDimensionsDaoTest {
     }
 
     @Test
-    fun getByProjectId_emitsNullWhenAbsent() = runTest {
-        assertNull(dao.getByProjectId("missing").first())
-    }
-
-    @Test
-    fun upsert_thenGet_byProjectId_returnsPersistedEntity() = runTest {
-        dao.upsert(dimensionsEntity())
-        dao.getByProjectId(project.id).test {
-            val entity = awaitItem()
-            assertEquals("dim-1", entity?.id)
-            assertEquals(100.0, entity?.length)
-            assertEquals(RoofType.PITCHED.name, entity?.roofType)
-            awaitComplete()
+    fun getByProjectId_emitsNullWhenAbsent() =
+        runTest {
+            assertNull(dao.getByProjectId("missing").first())
         }
-    }
 
     @Test
-    fun upsert_replaces_whenSamePrimaryKey() = runTest {
-        dao.upsert(dimensionsEntity())
-        dao.upsert(dimensionsEntity().copy(length = 200.0, width = 24.0))
-        val result = dao.getByProjectId(project.id).first()
-        assertEquals(200.0, result?.length)
-        assertEquals(24.0, result?.width)
-    }
+    fun upsert_thenGet_byProjectId_returnsPersistedEntity() =
+        runTest {
+            dao.upsert(dimensionsEntity())
+            dao.getByProjectId(project.id).test {
+                val entity = awaitItem()
+                assertEquals("dim-1", entity?.id)
+                assertEquals(100.0, entity?.length)
+                assertEquals(RoofType.PITCHED.name, entity?.roofType)
+                awaitComplete()
+            }
+        }
 
     @Test
-    fun deleteByProjectId_removesRecord() = runTest {
-        dao.upsert(dimensionsEntity())
-        dao.deleteByProjectId(project.id)
-        assertNull(dao.getByProjectId(project.id).first())
-    }
+    fun upsert_replaces_whenSamePrimaryKey() =
+        runTest {
+            dao.upsert(dimensionsEntity())
+            dao.upsert(dimensionsEntity().copy(length = 200.0, width = 24.0))
+            val result = dao.getByProjectId(project.id).first()
+            assertEquals(200.0, result?.length)
+            assertEquals(24.0, result?.width)
+        }
+
+    @Test
+    fun deleteByProjectId_removesRecord() =
+        runTest {
+            dao.upsert(dimensionsEntity())
+            dao.deleteByProjectId(project.id)
+            assertNull(dao.getByProjectId(project.id).first())
+        }
 
     @Test(expected = Exception::class)
-    fun upsert_whenProjectForeignKeyMissing_throws() = runTest {
-        dao.upsert(dimensionsEntity(projectId = "no-such-project"))
-    }
+    fun upsert_whenProjectForeignKeyMissing_throws() =
+        runTest {
+            dao.upsert(dimensionsEntity(projectId = "no-such-project"))
+        }
 
     @Test
-    fun deletingProject_cascadesTodimensions() = runTest {
-        dao.upsert(dimensionsEntity())
-        projectDao.deleteById(project.id)
-        assertNull(dao.getByProjectId(project.id).first())
-    }
+    fun deletingProject_cascadesTodimensions() =
+        runTest {
+            dao.upsert(dimensionsEntity())
+            projectDao.deleteById(project.id)
+            assertNull(dao.getByProjectId(project.id).first())
+        }
 }

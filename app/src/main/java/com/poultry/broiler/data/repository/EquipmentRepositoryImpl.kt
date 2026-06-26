@@ -11,23 +11,24 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class EquipmentRepositoryImpl @Inject constructor(
-    private val equipmentItemDao: EquipmentItemDao,
-) : EquipmentRepository {
+class EquipmentRepositoryImpl
+    @Inject
+    constructor(
+        private val equipmentItemDao: EquipmentItemDao,
+    ) : EquipmentRepository {
+        override fun getAllEquipment(): Flow<List<EquipmentItem>> {
+            return equipmentItemDao.getAll().map { entities ->
+                entities.map { it.toDomain() }
+            }
+        }
 
-    override fun getAllEquipment(): Flow<List<EquipmentItem>> {
-        return equipmentItemDao.getAll().map { entities ->
-            entities.map { it.toDomain() }
+        override fun getEquipmentByCategory(category: EquipmentCategory): Flow<List<EquipmentItem>> {
+            return equipmentItemDao.getByCategory(category.name).map { entities ->
+                entities.map { it.toDomain() }
+            }
+        }
+
+        override suspend fun getEquipmentById(id: Long): EquipmentItem? {
+            return equipmentItemDao.getById(id)?.toDomain()
         }
     }
-
-    override fun getEquipmentByCategory(category: EquipmentCategory): Flow<List<EquipmentItem>> {
-        return equipmentItemDao.getByCategory(category.name).map { entities ->
-            entities.map { it.toDomain() }
-        }
-    }
-
-    override suspend fun getEquipmentById(id: Long): EquipmentItem? {
-        return equipmentItemDao.getById(id)?.toDomain()
-    }
-}

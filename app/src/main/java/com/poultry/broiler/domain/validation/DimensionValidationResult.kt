@@ -32,7 +32,6 @@ enum class DimensionField {
  * domain layer remains pure Kotlin with no Android imports (Constitution Art 7.3).
  */
 sealed interface DimensionValidationResult {
-
     /** All fields satisfy the rules defined in the domain. */
     data object Valid : DimensionValidationResult
 

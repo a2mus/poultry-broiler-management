@@ -50,11 +50,12 @@ fun WizardNavigationBar(
             onClick = onPrevious,
             enabled = canGoPrevious,
             shape = RoundedCornerShape(ButtonCornerRadius),
-            modifier = m
-                .defaultMinSize(minHeight = 48.dp)
-                .semantics {
-                    contentDescription = "Revenir à l'étape précédente Navigation Button"
-                },
+            modifier =
+                m
+                    .defaultMinSize(minHeight = 48.dp)
+                    .semantics {
+                        contentDescription = "Revenir à l'étape précédente Navigation Button"
+                    },
         ) {
             Box(modifier = Modifier.defaultMinSize(minHeight = 48.dp)) {
                 Text(text = stringResource(R.string.wizard_button_previous))
@@ -66,11 +67,12 @@ fun WizardNavigationBar(
             onClick = onNext,
             enabled = canGoNext,
             shape = RoundedCornerShape(ButtonCornerRadius),
-            modifier = m
-                .defaultMinSize(minHeight = 48.dp)
-                .semantics {
-                    contentDescription = "Passer à l'étape suivante Navigation Button"
-                },
+            modifier =
+                m
+                    .defaultMinSize(minHeight = 48.dp)
+                    .semantics {
+                        contentDescription = "Passer à l'étape suivante Navigation Button"
+                    },
         ) {
             Box(modifier = Modifier.defaultMinSize(minHeight = 48.dp)) {
                 Text(text = stringResource(R.string.wizard_button_next))
@@ -79,9 +81,10 @@ fun WizardNavigationBar(
     }
 
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(spacing.md),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(spacing.md),
         horizontalArrangement = Arrangement.spacedBy(spacing.md),
     ) {
         if (isRtl) {

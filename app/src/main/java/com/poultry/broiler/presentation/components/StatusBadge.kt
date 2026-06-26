@@ -22,12 +22,13 @@ fun StatusBadge(
         text = text,
         style = MaterialTheme.typography.labelSmall,
         color = MaterialTheme.colorScheme.onPrimaryContainer,
-        modifier = modifier
-            .background(
-                color = color,
-                shape = RoundedCornerShape(8.dp),
-            )
-            .padding(vertical = 4.dp, horizontal = 8.dp),
+        modifier =
+            modifier
+                .background(
+                    color = color,
+                    shape = RoundedCornerShape(8.dp),
+                )
+                .padding(vertical = 4.dp, horizontal = 8.dp),
     )
 }
 

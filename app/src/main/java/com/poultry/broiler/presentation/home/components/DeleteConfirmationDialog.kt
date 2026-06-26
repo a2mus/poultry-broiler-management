@@ -49,9 +49,10 @@ fun DeleteConfirmationDialog(
         confirmButton = {
             TextButton(
                 onClick = onConfirm,
-                colors = androidx.compose.material3.ButtonDefaults.textButtonColors(
-                    contentColor = MaterialTheme.colorScheme.error,
-                ),
+                colors =
+                    androidx.compose.material3.ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error,
+                    ),
             ) {
                 Text(
                     text = stringResource(R.string.action_delete),

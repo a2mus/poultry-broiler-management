@@ -14,8 +14,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.poultry.broiler.R
-import com.poultry.broiler.presentation.theme.PoultryTheme
 import com.poultry.broiler.presentation.theme.LocalSpacing
+import com.poultry.broiler.presentation.theme.PoultryTheme
 
 /**
  * Numeric text field with a trailing unit label and optional inline error.
@@ -74,10 +74,11 @@ fun NumericInputField(
                 text = errorMessage,
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.labelSmall,
-                modifier = Modifier.padding(
-                    start = spacing.md,
-                    top = spacing.xs,
-                ),
+                modifier =
+                    Modifier.padding(
+                        start = spacing.md,
+                        top = spacing.xs,
+                    ),
             )
         }
     }

@@ -2,9 +2,9 @@ package com.poultry.broiler.presentation.wizard
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithSubstring
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextInput
-import androidx.compose.ui.test.onNodeWithSubstring
 import com.poultry.broiler.domain.model.RoofType
 import com.poultry.broiler.presentation.theme.PoultryTheme
 import org.junit.Rule
@@ -20,7 +20,6 @@ import org.junit.Test
  * Constitution Art 2.1 SHOULD write Compose UI tests for critical user flows.
  */
 class HouseDimensionsStepTest {
-
     @get:Rule
     val composeRule = createComposeRule()
 

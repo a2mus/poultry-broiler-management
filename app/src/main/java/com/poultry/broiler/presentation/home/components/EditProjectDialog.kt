@@ -51,11 +51,12 @@ fun EditProjectDialog(
     val isLocationTooLong = location.length > CreateProjectUseCase.MAX_LOCATION_LENGTH
     val isFormValid = !isNameBlank && !isNameTooLong && !isLocationTooLong
 
-    val nameError: String? = when {
-        isNameBlank -> stringResource(R.string.error_name_required)
-        isNameTooLong -> stringResource(R.string.error_name_too_long)
-        else -> null
-    }
+    val nameError: String? =
+        when {
+            isNameBlank -> stringResource(R.string.error_name_required)
+            isNameTooLong -> stringResource(R.string.error_name_too_long)
+            else -> null
+        }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -69,10 +70,11 @@ fun EditProjectDialog(
                     isError = nameError != null,
                     supportingText = nameError?.let { { Text(it) } },
                     singleLine = true,
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Words,
-                        imeAction = ImeAction.Next,
-                    ),
+                    keyboardOptions =
+                        KeyboardOptions(
+                            capitalization = KeyboardCapitalization.Words,
+                            imeAction = ImeAction.Next,
+                        ),
                     modifier = Modifier.fillMaxWidth(),
                 )
 
@@ -95,16 +97,18 @@ fun EditProjectDialog(
                     onValueChange = { location = it },
                     label = { Text(stringResource(R.string.dialog_new_project_location)) },
                     isError = isLocationTooLong,
-                    supportingText = if (isLocationTooLong) {
-                        { Text(stringResource(R.string.error_location_too_long)) }
-                    } else {
-                        null
-                    },
+                    supportingText =
+                        if (isLocationTooLong) {
+                            { Text(stringResource(R.string.error_location_too_long)) }
+                        } else {
+                            null
+                        },
                     singleLine = true,
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Words,
-                        imeAction = ImeAction.Done,
-                    ),
+                    keyboardOptions =
+                        KeyboardOptions(
+                            capitalization = KeyboardCapitalization.Words,
+                            imeAction = ImeAction.Done,
+                        ),
                     modifier = Modifier.fillMaxWidth(),
                 )
             }

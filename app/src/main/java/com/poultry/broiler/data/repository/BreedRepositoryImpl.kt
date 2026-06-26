@@ -10,21 +10,22 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BreedRepositoryImpl @Inject constructor(
-    private val breedProfileDao: BreedProfileDao,
-) : BreedRepository {
+class BreedRepositoryImpl
+    @Inject
+    constructor(
+        private val breedProfileDao: BreedProfileDao,
+    ) : BreedRepository {
+        override fun getAllBreeds(): Flow<List<BreedProfile>> {
+            return breedProfileDao.getAll().map { entities ->
+                entities.map { it.toDomain() }
+            }
+        }
 
-    override fun getAllBreeds(): Flow<List<BreedProfile>> {
-        return breedProfileDao.getAll().map { entities ->
-            entities.map { it.toDomain() }
+        override suspend fun getBreedById(id: Long): BreedProfile? {
+            return breedProfileDao.getById(id)?.toDomain()
+        }
+
+        override suspend fun getBreedByName(breedName: String): BreedProfile? {
+            return breedProfileDao.getByName(breedName)?.toDomain()
         }
     }
-
-    override suspend fun getBreedById(id: Long): BreedProfile? {
-        return breedProfileDao.getById(id)?.toDomain()
-    }
-
-    override suspend fun getBreedByName(breedName: String): BreedProfile? {
-        return breedProfileDao.getByName(breedName)?.toDomain()
-    }
-}

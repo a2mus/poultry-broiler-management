@@ -18,9 +18,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class WizardModule {
-
     @Binds
-    abstract fun bindHouseDimensionsRepository(
-        impl: HouseDimensionsRepositoryImpl,
-    ): HouseDimensionsRepository
+    abstract fun bindHouseDimensionsRepository(impl: HouseDimensionsRepositoryImpl): HouseDimensionsRepository
 }

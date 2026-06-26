@@ -16,22 +16,23 @@ import com.poultry.broiler.domain.model.WallMaterial
  * Enum values are decoded with `valueOf` against their persisted `.name`; raw
  * numeric columns are wrapped in the domain primitives [Meters] / [Millimeters].
  */
-fun HouseDimensionsEntity.toDomain(): HouseDimensions = HouseDimensions(
-    id = id,
-    projectId = projectId,
-    length = Meters(length),
-    width = Meters(width),
-    wallHeight = Meters(wallHeight),
-    roofType = RoofType.valueOf(roofType),
-    ridgeHeight = ridgeHeight?.let(::Meters),
-    wallMaterial = WallMaterial.valueOf(wallMaterial),
-    floorType = FloorType.valueOf(floorType),
-    insulationType = InsulationType.valueOf(insulationType),
-    insulationThickness = insulationThickness?.let(::Millimeters),
-    orientation = HouseOrientation.valueOf(orientation),
-    createdAt = createdAt,
-    updatedAt = updatedAt,
-)
+fun HouseDimensionsEntity.toDomain(): HouseDimensions =
+    HouseDimensions(
+        id = id,
+        projectId = projectId,
+        length = Meters(length),
+        width = Meters(width),
+        wallHeight = Meters(wallHeight),
+        roofType = RoofType.valueOf(roofType),
+        ridgeHeight = ridgeHeight?.let(::Meters),
+        wallMaterial = WallMaterial.valueOf(wallMaterial),
+        floorType = FloorType.valueOf(floorType),
+        insulationType = InsulationType.valueOf(insulationType),
+        insulationThickness = insulationThickness?.let(::Millimeters),
+        orientation = HouseOrientation.valueOf(orientation),
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+    )
 
 /**
  * Maps a domain [HouseDimensions] to its [HouseDimensionsEntity] representation
@@ -40,19 +41,20 @@ fun HouseDimensionsEntity.toDomain(): HouseDimensions = HouseDimensions(
  * Enum values are stored via `.name` (never ordinal) and the primitives are
  * unwrapped to their raw `Double` columns.
  */
-fun HouseDimensions.toEntity(): HouseDimensionsEntity = HouseDimensionsEntity(
-    id = id,
-    projectId = projectId,
-    length = length.value,
-    width = width.value,
-    wallHeight = wallHeight.value,
-    roofType = roofType.name,
-    ridgeHeight = ridgeHeight?.value,
-    wallMaterial = wallMaterial.name,
-    floorType = floorType.name,
-    insulationType = insulationType.name,
-    insulationThickness = insulationThickness?.value,
-    orientation = orientation.name,
-    createdAt = createdAt,
-    updatedAt = updatedAt,
-)
+fun HouseDimensions.toEntity(): HouseDimensionsEntity =
+    HouseDimensionsEntity(
+        id = id,
+        projectId = projectId,
+        length = length.value,
+        width = width.value,
+        wallHeight = wallHeight.value,
+        roofType = roofType.name,
+        ridgeHeight = ridgeHeight?.value,
+        wallMaterial = wallMaterial.name,
+        floorType = floorType.name,
+        insulationType = insulationType.name,
+        insulationThickness = insulationThickness?.value,
+        orientation = orientation.name,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+    )

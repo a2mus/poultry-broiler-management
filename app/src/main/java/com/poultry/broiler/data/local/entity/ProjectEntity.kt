@@ -20,25 +20,18 @@ import androidx.room.PrimaryKey
 data class ProjectEntity(
     @PrimaryKey
     val id: String,
-
     @ColumnInfo(name = "name")
     val name: String,
-
     @ColumnInfo(name = "type")
     val type: String,
-
     @ColumnInfo(name = "status", defaultValue = "DRAFT")
     val status: String,
-
     @ColumnInfo(name = "location")
     val location: String?,
-
     @ColumnInfo(name = "createdAt")
     val createdAt: Long,
-
     @ColumnInfo(name = "updatedAt")
     val updatedAt: Long,
-
     @ColumnInfo(name = "syncTimestamp")
     val syncTimestamp: Long?,
 )

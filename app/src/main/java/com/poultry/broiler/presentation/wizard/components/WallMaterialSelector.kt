@@ -3,16 +3,16 @@ package com.poultry.broiler.presentation.wizard.components
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Apartment
+import androidx.compose.material.icons.filled.Gavel
+import androidx.compose.material.icons.filled.House
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.poultry.broiler.R
 import com.poultry.broiler.domain.model.WallMaterial
 import com.poultry.broiler.presentation.theme.LocalSpacing
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Apartment
-import androidx.compose.material.icons.filled.House
-import androidx.compose.material.icons.filled.Gavel
 
 /**
  * Segmented selector for wall material (Block, Steel, Prefab).

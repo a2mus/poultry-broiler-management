@@ -4,9 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
@@ -125,14 +123,16 @@ fun HomeScreen(
         },
     ) { innerPadding ->
         when (val state = uiState) {
-            is HomeUiState.Loading -> LoadingContent(
-                modifier = Modifier.padding(innerPadding),
-            )
+            is HomeUiState.Loading ->
+                LoadingContent(
+                    modifier = Modifier.padding(innerPadding),
+                )
 
-            is HomeUiState.Empty -> EmptyContent(
-                onNewProject = { showNewProjectDialog = true },
-                modifier = Modifier.padding(innerPadding),
-            )
+            is HomeUiState.Empty ->
+                EmptyContent(
+                    onNewProject = { showNewProjectDialog = true },
+                    modifier = Modifier.padding(innerPadding),
+                )
 
             is HomeUiState.Content -> {
                 Column(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
@@ -159,10 +159,11 @@ fun HomeScreen(
                 }
             }
 
-            is HomeUiState.Error -> ErrorContent(
-                message = state.message,
-                modifier = Modifier.padding(innerPadding),
-            )
+            is HomeUiState.Error ->
+                ErrorContent(
+                    message = state.message,
+                    modifier = Modifier.padding(innerPadding),
+                )
         }
     }
 }
@@ -184,9 +185,10 @@ private fun EmptyContent(
 ) {
     val spacing = LocalSpacing.current
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(spacing.lg),
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(spacing.lg),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -257,10 +259,11 @@ private fun ProjectBentoGrid(
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Adaptive(MinColumnWidth),
         modifier = Modifier.fillMaxSize(),
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(
-            horizontal = spacing.md,
-            vertical = spacing.sm,
-        ),
+        contentPadding =
+            androidx.compose.foundation.layout.PaddingValues(
+                horizontal = spacing.md,
+                vertical = spacing.sm,
+            ),
         verticalItemSpacing = spacing.sm,
         horizontalArrangement = Arrangement.spacedBy(spacing.sm),
     ) {

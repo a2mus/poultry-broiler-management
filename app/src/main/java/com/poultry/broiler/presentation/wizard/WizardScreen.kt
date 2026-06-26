@@ -11,8 +11,8 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -62,24 +62,26 @@ fun WizardScreen(
 
     val currentState = state
     when (currentState) {
-        WizardUiState.Loading -> Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(
-                text = "…",
-                color = MaterialTheme.colorScheme.onBackground,
-            )
-        }
-        is WizardUiState.Error -> Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(
-                text = currentState.message,
-                color = MaterialTheme.colorScheme.error,
-            )
-        }
+        WizardUiState.Loading ->
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(
+                    text = "…",
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
+            }
+        is WizardUiState.Error ->
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(
+                    text = currentState.message,
+                    color = MaterialTheme.colorScheme.error,
+                )
+            }
         is WizardUiState.Active -> {
             val active = currentState
             // If the user navigates back to Step 1 from a future step
@@ -113,13 +115,15 @@ fun WizardScreen(
                 },
             ) { padding ->
                 when (active.currentStep) {
-                    1 -> HouseDimensionsStep(
-                        formState = active.dimensions,
-                        onIntent = { intent -> viewModel.onIntent(intent, projectId) },
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(padding),
-                    )
+                    1 ->
+                        HouseDimensionsStep(
+                            formState = active.dimensions,
+                            onIntent = { intent -> viewModel.onIntent(intent, projectId) },
+                            modifier =
+                                Modifier
+                                    .fillMaxSize()
+                                    .padding(padding),
+                        )
                     else -> PlaceholderStep(contentPadding = padding)
                 }
             }
@@ -130,9 +134,10 @@ fun WizardScreen(
 @Composable
 private fun PlaceholderStep(contentPadding: PaddingValues) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(contentPadding),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(contentPadding),
         contentAlignment = Alignment.Center,
     ) {
         Text(

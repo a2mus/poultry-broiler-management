@@ -11,7 +11,6 @@ import androidx.compose.material.icons.filled.TrendingFlat
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.poultry.broiler.R
 import com.poultry.broiler.domain.model.RoofType
 import com.poultry.broiler.presentation.theme.LocalSpacing

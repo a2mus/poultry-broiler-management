@@ -39,9 +39,10 @@ fun ProjectSearchBar(
     OutlinedTextField(
         value = query,
         onValueChange = onQueryChange,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = spacing.md, vertical = spacing.sm),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = spacing.md, vertical = spacing.sm),
         placeholder = {
             Text(text = stringResource(R.string.home_search_placeholder))
         },
@@ -65,9 +66,10 @@ fun ProjectSearchBar(
         },
         singleLine = true,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-        keyboardActions = KeyboardActions(
-            onSearch = { keyboardController?.hide() },
-        ),
+        keyboardActions =
+            KeyboardActions(
+                onSearch = { keyboardController?.hide() },
+            ),
         shape = MaterialTheme.shapes.large,
     )
 }

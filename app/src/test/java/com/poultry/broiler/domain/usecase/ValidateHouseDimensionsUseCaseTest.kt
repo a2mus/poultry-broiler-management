@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class ValidateHouseDimensionsUseCaseTest {
-
     private val useCase = ValidateHouseDimensionsUseCase()
 
     private fun validDimensions(
@@ -88,9 +87,10 @@ class ValidateHouseDimensionsUseCaseTest {
 
     @Test
     fun invoke_givenPitchedWithoutRidgeHeight_returnsRequiredForPitched() {
-        val result = useCase(
-            validDimensions(roofType = RoofType.PITCHED, ridgeHeight = null),
-        )
+        val result =
+            useCase(
+                validDimensions(roofType = RoofType.PITCHED, ridgeHeight = null),
+            )
         assertInvalid(
             result,
             DimensionField.RIDGE_HEIGHT,
@@ -100,9 +100,10 @@ class ValidateHouseDimensionsUseCaseTest {
 
     @Test
     fun invoke_givenPitchedRidgeHeightExceedsMax_returnsExceedsMax() {
-        val result = useCase(
-            validDimensions(roofType = RoofType.PITCHED, ridgeHeight = Meters(21.0)),
-        )
+        val result =
+            useCase(
+                validDimensions(roofType = RoofType.PITCHED, ridgeHeight = Meters(21.0)),
+            )
         assertInvalid(
             result,
             DimensionField.RIDGE_HEIGHT,
@@ -112,9 +113,10 @@ class ValidateHouseDimensionsUseCaseTest {
 
     @Test
     fun invoke_givenFlatRoofWithRidgeHeight_returnsNotAllowed() {
-        val result = useCase(
-            validDimensions(roofType = RoofType.FLAT, ridgeHeight = Meters(5.0)),
-        )
+        val result =
+            useCase(
+                validDimensions(roofType = RoofType.FLAT, ridgeHeight = Meters(5.0)),
+            )
         assertInvalid(
             result,
             DimensionField.RIDGE_HEIGHT,
@@ -124,12 +126,13 @@ class ValidateHouseDimensionsUseCaseTest {
 
     @Test
     fun invoke_givenNonNoneInsulationWithoutThickness_returnsRequired() {
-        val result = useCase(
-            validDimensions(
-                insulationType = InsulationType.POLYSTYRENE,
-                insulationThickness = null,
-            ),
-        )
+        val result =
+            useCase(
+                validDimensions(
+                    insulationType = InsulationType.POLYSTYRENE,
+                    insulationThickness = null,
+                ),
+            )
         assertInvalid(
             result,
             DimensionField.INSULATION_THICKNESS,
@@ -139,12 +142,13 @@ class ValidateHouseDimensionsUseCaseTest {
 
     @Test
     fun invoke_givenNoneInsulationWithThickness_returnsNotAllowed() {
-        val result = useCase(
-            validDimensions(
-                insulationType = InsulationType.NONE,
-                insulationThickness = Millimeters(50.0),
-            ),
-        )
+        val result =
+            useCase(
+                validDimensions(
+                    insulationType = InsulationType.NONE,
+                    insulationThickness = Millimeters(50.0),
+                ),
+            )
         assertInvalid(
             result,
             DimensionField.INSULATION_THICKNESS,
@@ -154,16 +158,17 @@ class ValidateHouseDimensionsUseCaseTest {
 
     @Test
     fun invoke_givenMultipleViolations_returnsAllFieldErrors() {
-        val result = useCase(
-            validDimensions(
-                length = 0.0,
-                width = 0.0,
-                roofType = RoofType.PITCHED,
-                ridgeHeight = null,
-                insulationType = InsulationType.POLYSTYRENE,
-                insulationThickness = null,
-            ),
-        )
+        val result =
+            useCase(
+                validDimensions(
+                    length = 0.0,
+                    width = 0.0,
+                    roofType = RoofType.PITCHED,
+                    ridgeHeight = null,
+                    insulationType = InsulationType.POLYSTYRENE,
+                    insulationThickness = null,
+                ),
+            )
         assertTrue(result is DimensionValidationResult.Invalid)
         val invalid = result as DimensionValidationResult.Invalid
         assertEquals(4, invalid.fieldErrors.size)

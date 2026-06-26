@@ -14,10 +14,11 @@ val CardCornerRadius = 16.dp
 val ButtonCornerRadius = 24.dp
 val DialogCornerRadius = 28.dp
 
-val PoultryShapes = Shapes(
-    extraSmall = RoundedCornerShape(4.dp),
-    small = RoundedCornerShape(BadgeCornerRadius),
-    medium = RoundedCornerShape(CardCornerRadius),
-    large = RoundedCornerShape(ButtonCornerRadius),
-    extraLarge = RoundedCornerShape(DialogCornerRadius),
-)
+val PoultryShapes =
+    Shapes(
+        extraSmall = RoundedCornerShape(4.dp),
+        small = RoundedCornerShape(BadgeCornerRadius),
+        medium = RoundedCornerShape(CardCornerRadius),
+        large = RoundedCornerShape(ButtonCornerRadius),
+        extraLarge = RoundedCornerShape(DialogCornerRadius),
+    )

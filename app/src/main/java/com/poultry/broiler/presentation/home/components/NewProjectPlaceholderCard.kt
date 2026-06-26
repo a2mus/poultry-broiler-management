@@ -24,8 +24,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.poultry.broiler.R
 import com.poultry.broiler.presentation.theme.CardCornerRadius
-import com.poultry.broiler.presentation.theme.PoultryElevation
 import com.poultry.broiler.presentation.theme.LocalSpacing
+import com.poultry.broiler.presentation.theme.PoultryElevation
 
 /**
  * Dashed-border placeholder card displayed in the empty state and as the first
@@ -46,31 +46,35 @@ fun NewProjectPlaceholderCard(
         onClick = onClick,
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.elevatedCardColors(containerColor = cardColor),
-        elevation = CardDefaults.elevatedCardElevation(
-            defaultElevation = PoultryElevation.flat,
-        ),
+        elevation =
+            CardDefaults.elevatedCardElevation(
+                defaultElevation = PoultryElevation.flat,
+            ),
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .drawWithContent {
-                    drawContent()
-                    val dashWidth = 12.dp.toPx()
-                    val gapWidth = 8.dp.toPx()
-                    val cornerRadius = CardCornerRadius.toPx()
-                    drawRoundRect(
-                        color = borderColor,
-                        style = Stroke(
-                            width = 2.dp.toPx(),
-                            pathEffect = PathEffect.dashPathEffect(
-                                floatArrayOf(dashWidth, gapWidth),
-                                0f,
-                            ),
-                        ),
-                        cornerRadius = CornerRadius(cornerRadius),
-                    )
-                }
-                .padding(spacing.lg),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .drawWithContent {
+                        drawContent()
+                        val dashWidth = 12.dp.toPx()
+                        val gapWidth = 8.dp.toPx()
+                        val cornerRadius = CardCornerRadius.toPx()
+                        drawRoundRect(
+                            color = borderColor,
+                            style =
+                                Stroke(
+                                    width = 2.dp.toPx(),
+                                    pathEffect =
+                                        PathEffect.dashPathEffect(
+                                            floatArrayOf(dashWidth, gapWidth),
+                                            0f,
+                                        ),
+                                ),
+                            cornerRadius = CornerRadius(cornerRadius),
+                        )
+                    }
+                    .padding(spacing.lg),
         ) {
             Column(
                 modifier = Modifier.fillMaxWidth(),

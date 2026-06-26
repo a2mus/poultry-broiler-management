@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.poultry.broiler.R
 import com.poultry.broiler.domain.model.RoofType
+import com.poultry.broiler.domain.validation.DimensionField
 import com.poultry.broiler.presentation.components.NumericInputField
 import com.poultry.broiler.presentation.theme.LocalSpacing
 import com.poultry.broiler.presentation.wizard.components.DimensionPreviewCanvas
@@ -49,15 +50,16 @@ fun HouseDimensionsStep(
     val spacing = LocalSpacing.current
 
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
-            .padding(
-                start = spacing.md,
-                end = spacing.md,
-                top = spacing.md,
-                bottom = spacing.xxl,
-            ),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .padding(
+                    start = spacing.md,
+                    end = spacing.md,
+                    top = spacing.md,
+                    bottom = spacing.xxl,
+                ),
         verticalArrangement = Arrangement.spacedBy(spacing.md),
     ) {
         SectionCard(title = stringResource(R.string.wizard_section_structure)) {
@@ -67,21 +69,21 @@ fun HouseDimensionsStep(
                     onValueChange = { onIntent(WizardIntent.UpdateLength(it)) },
                     label = stringResource(R.string.wizard_field_length),
                     unitLabel = stringResource(R.string.wizard_unit_meters),
-                    errorMessage = formState.fieldErrors[com.poultry.broiler.domain.validation.DimensionField.LENGTH],
+                    errorMessage = formState.fieldErrors[DimensionField.LENGTH],
                 )
                 NumericInputField(
                     value = formState.width,
                     onValueChange = { onIntent(WizardIntent.UpdateWidth(it)) },
                     label = stringResource(R.string.wizard_field_width),
                     unitLabel = stringResource(R.string.wizard_unit_meters),
-                    errorMessage = formState.fieldErrors[com.poultry.broiler.domain.validation.DimensionField.WIDTH],
+                    errorMessage = formState.fieldErrors[DimensionField.WIDTH],
                 )
                 NumericInputField(
                     value = formState.wallHeight,
                     onValueChange = { onIntent(WizardIntent.UpdateWallHeight(it)) },
                     label = stringResource(R.string.wizard_field_wall_height),
                     unitLabel = stringResource(R.string.wizard_unit_meters),
-                    errorMessage = formState.fieldErrors[com.poultry.broiler.domain.validation.DimensionField.WALL_HEIGHT],
+                    errorMessage = formState.fieldErrors[DimensionField.WALL_HEIGHT],
                 )
                 FloorAreaRow(formState)
             }
@@ -111,9 +113,7 @@ fun HouseDimensionsStep(
                         onValueChange = { onIntent(WizardIntent.UpdateRidgeHeight(it)) },
                         label = stringResource(R.string.wizard_field_ridge_height),
                         unitLabel = stringResource(R.string.wizard_unit_meters),
-                        errorMessage = formState.fieldErrors[
-                            com.poultry.broiler.domain.validation.DimensionField.RIDGE_HEIGHT,
-                        ],
+                        errorMessage = formState.fieldErrors[DimensionField.RIDGE_HEIGHT],
                     )
                 }
             }
@@ -146,9 +146,7 @@ fun HouseDimensionsStep(
                 onSelectType = { onIntent(WizardIntent.SelectInsulationType(it)) },
                 thickness = formState.insulationThickness,
                 onThicknessChange = { onIntent(WizardIntent.UpdateInsulationThickness(it)) },
-                thicknessError = formState.fieldErrors[
-                    com.poultry.broiler.domain.validation.DimensionField.INSULATION_THICKNESS
-                ],
+                thicknessError = formState.fieldErrors[DimensionField.INSULATION_THICKNESS],
             )
         }
     }
@@ -166,9 +164,10 @@ private fun SectionCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(spacing.md),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(spacing.md),
             verticalArrangement = Arrangement.spacedBy(spacing.sm),
         ) {
             Text(
@@ -195,9 +194,10 @@ private fun FloorAreaRow(form: DimensionsFormState) {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Text(
-            text = form.floorArea?.let {
-                stringResource(R.string.wizard_floor_area_format, it.value)
-            } ?: stringResource(R.string.wizard_unit_square_meters),
+            text =
+                form.floorArea?.let {
+                    stringResource(R.string.wizard_floor_area_format, it.value)
+                } ?: stringResource(R.string.wizard_unit_square_meters),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(end = spacing.sm),

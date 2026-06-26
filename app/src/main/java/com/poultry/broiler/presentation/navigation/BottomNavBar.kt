@@ -38,9 +38,10 @@ fun BottomNavBar(
                     )
                 },
                 label = { Text(stringResource(navItem.labelResId)) },
-                modifier = Modifier.semantics {
-                    contentDescription = cd
-                },
+                modifier =
+                    Modifier.semantics {
+                        contentDescription = cd
+                    },
             )
         }
     }

@@ -27,12 +27,13 @@ fun BottomSheet(
     ModalBottomSheet(
         onDismissRequest = {},
         sheetState = sheetState,
-        shape = RoundedCornerShape(
-            topStart = 28.dp,
-            topEnd = 28.dp,
-            bottomStart = 0.dp,
-            bottomEnd = 0.dp,
-        ),
+        shape =
+            RoundedCornerShape(
+                topStart = 28.dp,
+                topEnd = 28.dp,
+                bottomStart = 0.dp,
+                bottomEnd = 0.dp,
+            ),
         containerColor = MaterialTheme.colorScheme.surface,
         tonalElevation = 12.dp,
         dragHandle = {},
@@ -43,10 +44,11 @@ fun BottomSheet(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .padding(top = 24.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                        .padding(top = 24.dp),
             )
         }
         content()

@@ -18,7 +18,6 @@ import com.poultry.broiler.domain.validation.DimensionField
  * Constitution Art 2.3 requires sealed interfaces for finite state sets.
  */
 sealed interface WizardUiState {
-
     /** Initial state while the persisted dimensions for the project are being read. */
     data object Loading : WizardUiState
 

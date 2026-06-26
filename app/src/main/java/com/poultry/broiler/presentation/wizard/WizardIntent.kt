@@ -14,7 +14,6 @@ import com.poultry.broiler.domain.model.WallMaterial
  * ViewModel where the dual-layer field validation is applied.
  */
 sealed interface WizardIntent {
-
     /** User changed the length field. */
     data class UpdateLength(val value: String) : WizardIntent
 

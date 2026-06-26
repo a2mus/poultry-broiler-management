@@ -2,7 +2,6 @@ package com.poultry.broiler.presentation.wizard.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -52,23 +51,27 @@ internal fun SelectableCard(
     val spacing = LocalSpacing.current
     val colorScheme = MaterialTheme.colorScheme
     Card(
-        modifier = modifier
-            .defaultMinSize(minHeight = 48.dp)
-            .fillMaxWidth()
-            .semantics { this.contentDescription = contentDescription ?: label },
+        modifier =
+            modifier
+                .defaultMinSize(minHeight = 48.dp)
+                .fillMaxWidth()
+                .semantics { this.contentDescription = contentDescription ?: label },
         shape = RoundedCornerShape(CardCornerRadius),
-        colors = CardDefaults.cardColors(
-            containerColor = if (selected) colorScheme.primaryContainer else colorScheme.surface,
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = if (selected) PoultryElevation.card else PoultryElevation.flat,
-        ),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = if (selected) colorScheme.primaryContainer else colorScheme.surface,
+            ),
+        elevation =
+            CardDefaults.cardElevation(
+                defaultElevation = if (selected) PoultryElevation.card else PoultryElevation.flat,
+            ),
         onClick = onClick,
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(spacing.md),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(spacing.md),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(spacing.sm),
         ) {

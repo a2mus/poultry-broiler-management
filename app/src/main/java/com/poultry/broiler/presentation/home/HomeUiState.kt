@@ -9,7 +9,6 @@ import com.poultry.broiler.domain.model.Project
  * `when` handling in the composable.
  */
 sealed interface HomeUiState {
-
     /** Initial loading state. */
     data object Loading : HomeUiState
 

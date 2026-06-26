@@ -7,15 +7,16 @@ import kotlinx.serialization.json.Json
 
 private val json = Json { ignoreUnknownKeys = true }
 
-fun BreedProfileEntity.toDomain(): BreedProfile = BreedProfile(
-    id = id,
-    breedName = breedName,
-    supplier = supplier,
-    growthTargets = json.decodeFromString<List<GrowthTarget>>(growthTargetsJson),
-    densityRange = minDensityKgM2..maxDensityKgM2,
-    targetFcr = targetFcr,
-    cycleDurationDays = cycleDurationDays,
-    targetWeightGrams = targetWeightG,
-    mortalityRatePercent = mortalityRatePct,
-    description = description,
-)
+fun BreedProfileEntity.toDomain(): BreedProfile =
+    BreedProfile(
+        id = id,
+        breedName = breedName,
+        supplier = supplier,
+        growthTargets = json.decodeFromString<List<GrowthTarget>>(growthTargetsJson),
+        densityRange = minDensityKgM2..maxDensityKgM2,
+        targetFcr = targetFcr,
+        cycleDurationDays = cycleDurationDays,
+        targetWeightGrams = targetWeightG,
+        mortalityRatePercent = mortalityRatePct,
+        description = description,
+    )

@@ -6,7 +6,6 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class GrowthTargetListConverter {
-
     private val json = Json { ignoreUnknownKeys = true }
 
     @TypeConverter
