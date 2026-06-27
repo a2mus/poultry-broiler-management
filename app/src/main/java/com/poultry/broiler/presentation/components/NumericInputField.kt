@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Height
-import androidx.compose.material.icons.outlined.Straighten
 import androidx.compose.material.icons.outlined.LineWeight
+import androidx.compose.material.icons.outlined.Straighten
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -55,23 +55,25 @@ fun NumericInputField(
     // Select appropriate icon based on unit label
     val leadingIcon = @Composable {
         Icon(
-            imageVector = when {
-                label.contains("Longueur", ignoreCase = true) ||
-                label.contains("Length", ignoreCase = true) -> Icons.Outlined.Straighten
-                label.contains("Largeur", ignoreCase = true) ||
-                label.contains("Width", ignoreCase = true) -> Icons.Outlined.LineWeight
-                label.contains("Hauteur", ignoreCase = true) ||
-                label.contains("Height", ignoreCase = true) ||
-                label.contains("Crêt", ignoreCase = true) ||
-                label.contains("Ridge", ignoreCase = true) -> Icons.Outlined.Height
-                else -> Icons.Outlined.Straighten
-            },
+            imageVector =
+                when {
+                    label.contains("Longueur", ignoreCase = true) ||
+                        label.contains("Length", ignoreCase = true) -> Icons.Outlined.Straighten
+                    label.contains("Largeur", ignoreCase = true) ||
+                        label.contains("Width", ignoreCase = true) -> Icons.Outlined.LineWeight
+                    label.contains("Hauteur", ignoreCase = true) ||
+                        label.contains("Height", ignoreCase = true) ||
+                        label.contains("Crêt", ignoreCase = true) ||
+                        label.contains("Ridge", ignoreCase = true) -> Icons.Outlined.Height
+                    else -> Icons.Outlined.Straighten
+                },
             contentDescription = null,
-            tint = if (errorMessage != null) {
-                MaterialTheme.colorScheme.error
-            } else {
-                MaterialTheme.colorScheme.primary
-            }
+            tint =
+                if (errorMessage != null) {
+                    MaterialTheme.colorScheme.error
+                } else {
+                    MaterialTheme.colorScheme.primary
+                },
         )
     }
 
@@ -85,11 +87,12 @@ fun NumericInputField(
                 Text(
                     text = unitLabel,
                     style = MaterialTheme.typography.labelLarge,
-                    color = if (errorMessage != null) {
-                        MaterialTheme.colorScheme.error
-                    } else {
-                        MaterialTheme.colorScheme.onSurfaceVariant
-                    },
+                    color =
+                        if (errorMessage != null) {
+                            MaterialTheme.colorScheme.error
+                        } else {
+                            MaterialTheme.colorScheme.onSurfaceVariant
+                        },
                 )
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
@@ -98,18 +101,20 @@ fun NumericInputField(
             enabled = enabled,
             singleLine = true,
             modifier = Modifier.defaultMinSize(minHeight = 56.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = MaterialTheme.colorScheme.primary,
-                unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-                errorBorderColor = MaterialTheme.colorScheme.error,
-                focusedLabelColor = MaterialTheme.colorScheme.primary,
-                focusedLeadingIconColor = MaterialTheme.colorScheme.primary,
-                focusedTrailingIconColor = MaterialTheme.colorScheme.primary,
-                cursorColor = MaterialTheme.colorScheme.primary,
-                focusedContainerColor = MaterialTheme.colorScheme.primaryContainer.copy(
-                    alpha = 0.05f
+            colors =
+                OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                    errorBorderColor = MaterialTheme.colorScheme.error,
+                    focusedLabelColor = MaterialTheme.colorScheme.primary,
+                    focusedLeadingIconColor = MaterialTheme.colorScheme.primary,
+                    focusedTrailingIconColor = MaterialTheme.colorScheme.primary,
+                    cursorColor = MaterialTheme.colorScheme.primary,
+                    focusedContainerColor =
+                        MaterialTheme.colorScheme.primaryContainer.copy(
+                            alpha = 0.05f,
+                        ),
                 ),
-            ),
             shape = MaterialTheme.shapes.large,
         )
         if (!errorMessage.isNullOrEmpty()) {

@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -16,16 +16,15 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.poultry.broiler.R
@@ -71,20 +70,21 @@ fun WizardNavigationBar(
                         contentDescription = "Revenir à l'étape précédente"
                     },
             tonalElevation = PoultryElevation.card,
-            border = androidx.compose.foundation.BorderStroke(
-                1.dp,
-                if (canGoPrevious) {
-                    MaterialTheme.colorScheme.outline
-                } else {
-                    MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
-                }
-            ),
+            border =
+                androidx.compose.foundation.BorderStroke(
+                    1.dp,
+                    if (canGoPrevious) {
+                        MaterialTheme.colorScheme.outline
+                    } else {
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
+                    },
+                ),
             color = MaterialTheme.colorScheme.surface,
         ) {
             Row(
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -111,17 +111,20 @@ fun WizardNavigationBar(
                     .semantics {
                         contentDescription = "Passer à l'étape suivante"
                     },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
-                disabledContainerColor = MaterialTheme.colorScheme.primaryContainer.copy(
-                    alpha = 0.5f
+            colors =
+                ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                    disabledContainerColor =
+                        MaterialTheme.colorScheme.primaryContainer.copy(
+                            alpha = 0.5f,
+                        ),
                 ),
-            ),
-            elevation = ButtonDefaults.buttonElevation(
-                defaultElevation = PoultryElevation.card,
-                pressedElevation = PoultryElevation.hover,
-            ),
+            elevation =
+                ButtonDefaults.buttonElevation(
+                    defaultElevation = PoultryElevation.card,
+                    pressedElevation = PoultryElevation.hover,
+                ),
         ) {
             Text(
                 text = stringResource(R.string.wizard_button_next),
