@@ -44,15 +44,6 @@ function Test-GitAvailable {
     catch { return $false }
 }
 
-function Get-ConfigValue {
-    param([AllowNull()][object]$Object, [Parameter(Mandatory)][string]$Key)
-    if ($null -eq $Object) { return $null }
-    if ($Object -is [System.Collections.IDictionary]) { return $Object[$Key] }
-    $prop = $Object.PSObject.Properties[$Key]
-    if ($prop) { return $prop.Value }
-    return $null
-}
-
 # --- Not a git repo? ------------------------------------------------------
 if (-not (Test-GitAvailable)) {
     Write-Warning "git: not a git repository; skipping auto-commit."
@@ -65,32 +56,42 @@ if (-not (Test-Path $ConfigFile)) {
     return
 }
 
-# --- Parse YAML config ----------------------------------------------------
-# Try PyYAML via python first (matches bash variant); fall back to a simple
-# parser if python/PyYAML is unavailable.
+# --- Parse YAML config and resolve feature slug in one Python call -------
+# Combine Python discovery, YAML parsing, and feature slug resolution into
+# a single subprocess call for efficiency.
 $enabled = $false
 $message = ""
+$featureSlug = ""
 
+# Find Python and parse all config at once
 $python = $null
 foreach ($candidate in @($env:SPECKIT_PYTHON, "python3", "python")) {
     if (-not $candidate) { continue }
     try {
-        $probe = & $candidate -c "import sys, yaml; sys.exit(0 if sys.version_info[0]==3 else 1)" 2>$null
+        $null = & $candidate -c "import sys, yaml; sys.exit(0 if sys.version_info[0]==3 else 1)" 2>$null
         if ($LASTEXITCODE -eq 0) { $python = $candidate; break }
     } catch { }
 }
 
-if ($python) {
-    # NOTE: the Python source MUST be piped to stdin (python - reads stdin).
-    # A trailing here-string is an argument, not stdin, so pipe it explicitly.
-    $pyScript = @"
+if (-not $python) {
+    Write-Warning "git: Python 3 with PyYAML not found; skipping auto-commit."
+    return
+}
+
+# Single Python script handles YAML parsing and feature slug resolution
+$pyScript = @"
 import sys, yaml
-cfg_path, event = sys.argv[1], sys.argv[2]
+from pathlib import Path
+
+cfg_path, event, project_root = sys.argv[1], sys.argv[2], sys.argv[3]
+
+# Parse YAML config
 try:
     with open(cfg_path, 'r', encoding='utf-8') as fh:
         data = yaml.safe_load(fh) or {}
 except Exception:
     data = {}
+
 ac = data.get('auto_commit') or {}
 default_enabled = bool(ac.get('default', False))
 event_cfg = ac.get(event) or {}
@@ -100,47 +101,39 @@ if isinstance(event_cfg, dict):
 else:
     enabled = default_enabled
     message = ''
+
 if not isinstance(message, str):
     message = ''
+
+# Emit enabled, message, and feature slug
 print('1' if enabled else '0')
-print(message)
+print(message if message else '')
+
+# Resolve feature slug from most recently modified plan.md
+specs_dir = Path(project_root) / 'specs'
+plans = sorted(
+    specs_dir.glob('*/plan.md'),
+    key=lambda p: p.stat().st_mtime,
+    reverse=True,
+) if specs_dir.exists() else []
+feature_slug = plans[0].parent.name if plans else ''
+print(feature_slug)
 "@
-    $parsed = $pyScript | & $python - $ConfigFile $EventName 2>$null
-    if ($LASTEXITCODE -eq 0 -and $parsed) {
-        $lines = $parsed -split "`n"
-        if ($lines.Count -ge 1) { $enabled = ($lines[0].Trim() -eq "1") }
-        if ($lines.Count -ge 2) { $message = $lines[1].Trim() }
-    }
+
+$parsed = $pyScript | & $python - $ConfigFile $EventName $ProjectRoot 2>$null
+if ($LASTEXITCODE -eq 0 -and $parsed) {
+    $lines = $parsed -split "`n"
+    if ($lines.Count -ge 1) { $enabled = ($lines[0].Trim() -eq "1") }
+    if ($lines.Count -ge 2) { $message = $lines[1].Trim() }
+    if ($lines.Count -ge 3) { $featureSlug = $lines[2].Trim() }
 } else {
-    Write-Warning "git: Python 3 with PyYAML not found; skipping auto-commit."
+    Write-Warning "git: failed to parse config; skipping auto-commit."
     return
 }
 
 if (-not $enabled) {
     Write-Warning "git: auto-commit disabled for event '$EventName'; skipping."
     return
-}
-
-# --- Resolve the active feature slug --------------------------------------
-$featureSlug = ""
-if (Test-Path "$ProjectRoot/.specify/scripts/powershell/check-prerequisites.ps1") {
-    try {
-        $json = & pwsh -NoProfile -File "$ProjectRoot/.specify/scripts/powershell/check-prerequisites.ps1" -Json 2>$null
-        if ($json) {
-            $obj = $json | ConvertFrom-Json -ErrorAction Stop
-            $fp  = Get-ConfigValue $obj "FEATURE_DIR"
-            if (-not $fp) { $fp = Get-ConfigValue $obj "featureDir" }
-            if ($fp) { $featureSlug = ([System.IO.Path]::GetFileName($fp.TrimEnd('/\'))) }
-        }
-    } catch { }
-}
-if (-not $featureSlug) {
-    $specsDir = Join-Path $ProjectRoot "specs"
-    if (Test-Path $specsDir) {
-        $latest = Get-ChildItem -Path $specsDir -Filter "plan.md" -Recurse -File -ErrorAction SilentlyContinue |
-            Sort-Object LastWriteTime -Descending | Select-Object -First 1
-        if ($latest) { $featureSlug = $latest.Directory.Name }
-    }
 }
 
 # --- Compose the commit message ------------------------------------------
@@ -164,12 +157,6 @@ if (-not $status) {
 
 # --- Stage and commit -----------------------------------------------------
 git add -A *> $null
-$stageStatus = git status --porcelain 2>&1
-if (-not $stageStatus) {
-    Write-Warning "git: staged changes result in no diff; skipping auto-commit."
-    return
-}
-
 git commit -m $commitMessage *> $null
 if ($LASTEXITCODE -eq 0) {
     Write-Host "git: committed ($EventName) -> $commitMessage"

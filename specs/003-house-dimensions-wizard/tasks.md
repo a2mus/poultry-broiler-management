@@ -354,3 +354,15 @@ P1 stories first (US1 → US2 → US5 → US6), then P2 stories (US3 → US4 →
 
 - [X] T067 [FIX] Updated scripts/build-seed-db.sh: equipment_items category index renamed from `idx_equipment_category` to `index_equipment_items_category` to match Room schema 3.json. (breed_profiles index and both `id` NOT NULL constraints were already correct in the working tree; only the equipment_items index name was outstanding.)
 - [X] T068 [FIX] Regenerated the pre-packaged database app/src/main/assets/seed/poultry.db by running scripts/build-seed-db.sh. Verified indices (`index_breed_profiles_breed_name`, `index_equipment_items_category`) and row counts (2 breed profiles, 6 equipment items) match Room schema 3.json.
+
+**Checkpoint**: Run `./gradlew assembleDevDebug` — APK builds successfully with corrected seed database.
+
+---
+
+## Phase 13: Iteration - 2026-06-27
+
+**Purpose**: Verify database fix by reinstalling the app on the device.
+
+- [ ] T069 [FIX] Verify app launches successfully: (1) Uninstall old APK from device/emulator via `adb uninstall com.poultry.broiler`, (2) Install latest APK from `app/build/outputs/apk/dev/debug/app-dev-debug.apk`, (3) Launch app and verify it reaches the home screen without crash, (4) Confirm database schema validation passes in logcat.
+
+**Checkpoint**: App launches successfully with zero `FATAL EXCEPTION` in logcat, home screen displays correctly.
