@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriManage Pro - Rapports Financiers</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#6e4300",
+                    "warning": "#D4AC0D",
+                    "tertiary-fixed-dim": "#6edc8f",
+                    "on-tertiary-fixed-variant": "#005228",
+                    "tertiary-fixed": "#8af9a9",
+                    "dark-background": "#0C1013",
+                    "surface-tint": "#006b5f",
+                    "outline-variant": "#bdc9c5",
+                    "on-surface-variant": "#3e4946",
+                    "primary-container": "#1e8275",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#131d24",
+                    "secondary-container": "#fcae49",
+                    "on-secondary-fixed-variant": "#663e00",
+                    "light-surface-variant": "#E1E4E7",
+                    "dark-success": "#27AE60",
+                    "outline": "#6e7976",
+                    "secondary": "#865300",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#99f3e3",
+                    "dark-primary": "#2ECC71",
+                    "dark-surface": "#171F26",
+                    "secondary-fixed-dim": "#ffb963",
+                    "on-primary-fixed-variant": "#005047",
+                    "primary-fixed-dim": "#7dd6c7",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#dae3ee",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#e6effa",
+                    "surface-bright": "#f7f9ff",
+                    "inverse-primary": "#7dd6c7",
+                    "inverse-surface": "#28313a",
+                    "on-surface": "#131d24",
+                    "dark-warning": "#F1C40F",
+                    "surface-container-low": "#ecf4ff",
+                    "on-secondary-fixed": "#2b1700",
+                    "surface": "#f7f9ff",
+                    "tertiary": "#006a35",
+                    "dark-secondary": "#F39C12",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#d2dbe6",
+                    "dark-danger": "#E74C3C",
+                    "on-tertiary-fixed": "#00210c",
+                    "on-primary-container": "#f2fffb",
+                    "tertiary-container": "#008645",
+                    "background": "#f7f9ff",
+                    "primary": "#00685c",
+                    "on-tertiary-container": "#f4fff2",
+                    "error": "#ba1a1a",
+                    "light-surface": "#EDEFF1",
+                    "dark-surface-variant": "#242F3A",
+                    "secondary-fixed": "#ffddb9",
+                    "on-primary-fixed": "#00201c",
+                    "light-background": "#F5F7F8",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dae3ee",
+                    "inverse-on-surface": "#e8f2fd",
+                    "danger": "#CB4335",
+                    "surface-container-high": "#e0e9f4",
+                    "success": "#229954"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "large": "24px",
+                    "small": "8px",
+                    "medium": "16px",
+                    "micro": "4px",
+                    "baseline": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "numeric-data": ["Inter"],
+                    "title-md": ["Outfit"],
+                    "display-lg": ["Outfit"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "numeric-data": ["15px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "title-md": ["20px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "22px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f7f9ff;
+            font-family: 'Inter', sans-serif;
+            color: #131d24;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .chart-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 3s linear forwards;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #bdc9c5;
+            border-radius: 3px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #00685c;
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -7px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface shadow-sm flex justify-between items-center px-large py-medium">
+<div class="flex items-center gap-medium">
+<span class="material-symbols-outlined text-primary">menu</span>
+<h1 class="font-display-lg text-display-lg text-primary">AgriManage Pro</h1>
+</div>
+<div class="flex items-center gap-medium">
+<div class="hidden md:flex gap-small">
+<span class="text-on-surface-variant font-title-md hover:bg-surface-container-high px-small py-micro rounded-lg transition-colors cursor-pointer">Projects</span>
+<span class="text-on-surface-variant font-title-md hover:bg-surface-container-high px-small py-micro rounded-lg transition-colors cursor-pointer">Design</span>
+<span class="text-primary font-bold font-title-md px-small py-micro rounded-lg transition-colors cursor-pointer">Reports</span>
+<span class="text-on-surface-variant font-title-md hover:bg-surface-container-high px-small py-micro rounded-lg transition-colors cursor-pointer">Health</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden border-2 border-primary">
+<img class="w-full h-full object-cover" data-alt="A professional close-up portrait of a Mediterranean farm manager wearing a neutral linen shirt, looking confident and competent. The lighting is bright and natural, mimicking late afternoon sun on a farm. High-quality corporate photography style with a blurred background of green fields." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUoyhqOeA8z0oBeXZh_y1pM4sSXdkowUkH4I1fYP7IxZxf0bFN9gYt8kYM2Xvr2NaodOaU0C5dN2LGT6VU2HVPLFt3hWNFFbWvIH_osGquAgBt3N0FZbn9xTh4dzLYWABVzs49L0hoIym4fZXUv0b0IYqYzLt5ZFeOE5VyHFaKKQYRrN7Zh6etU3a8rMHcz-RqCGGhGTWboq0nm6d4PyOekI7ML8XPDMZap_0OoB5RHN5RSy1e8t7FTR88Q83tnWnWV6m9U0AfQmVh"/>
+</div>
+</div>
+</header>
+<main class="flex-grow p-large max-w-7xl mx-auto w-full space-y-large pb-32">
+<!-- Header Section -->
+<section class="flex flex-col md:flex-row justify-between items-start md:items-center gap-medium">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-background">Tableau de Bord Financier</h2>
+<p class="text-on-surface-variant font-body-lg">Analyse approfondie et projection du ROI • DZD</p>
+</div>
+<button class="bg-primary text-on-primary px-large py-small rounded-full font-label-sm flex items-center gap-micro hover:scale-105 active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined">download</span>
+                Exporter le Rapport
+            </button>
+</section>
+<!-- Top Bento Section (CapEx & OpEx) -->
+<section class="bento-grid">
+<!-- CapEx Card -->
+<div class="bg-surface-container-lowest p-large rounded-xl shadow-sm border border-outline-variant flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-wider">Investissement (CapEx)</p>
+<h3 class="font-display-lg text-display-lg text-primary mt-micro">4.250.000 DZD</h3>
+</div>
+<div class="bg-primary-container p-small rounded-lg">
+<span class="material-symbols-outlined text-on-primary-container">account_balance</span>
+</div>
+</div>
+<div class="mt-large">
+<div class="flex justify-between text-body-md mb-micro">
+<span>Allocation d'Infrastructure</span>
+<span class="font-bold">75%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-3/4"></div>
+</div>
+</div>
+</div>
+<!-- OpEx Card -->
+<div class="bg-surface-container-lowest p-large rounded-xl shadow-sm border border-outline-variant flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-wider">OpEx par Cycle</p>
+<h3 class="font-display-lg text-display-lg text-secondary mt-micro">840.000 DZD</h3>
+</div>
+<div class="bg-secondary-container p-small rounded-lg">
+<span class="material-symbols-outlined text-on-secondary-container">trending_up</span>
+</div>
+</div>
+<div class="mt-large flex items-center gap-small text-success">
+<span class="material-symbols-outlined">arrow_downward</span>
+<span class="font-numeric-data">-4.2% par rapport au cycle précédent</span>
+</div>
+</div>
+</section>
+<!-- Middle Section: Breakdown -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-medium">
+<!-- Feed Breakdown -->
+<div class="bg-surface-container-low p-medium rounded-xl border border-outline-variant hover:shadow-md transition-shadow">
+<div class="flex items-center gap-small mb-medium">
+<div class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-container">restaurant</span>
+</div>
+<h4 class="font-title-md">Alimentation</h4>
+</div>
+<div class="space-y-small">
+<div class="flex justify-between font-numeric-data">
+<span class="text-on-surface-variant">Coût/Unit</span>
+<span class="font-bold">120 DZD</span>
+</div>
+<div class="flex justify-between font-numeric-data">
+<span class="text-on-surface-variant">Volume Total</span>
+<span class="font-bold">4.500 kg</span>
+</div>
+<p class="text-display-lg font-display-lg mt-small">540k <span class="text-body-md font-normal">DZD</span></p>
+</div>
+</div>
+<!-- Electricity Breakdown -->
+<div class="bg-surface-container-low p-medium rounded-xl border border-outline-variant hover:shadow-md transition-shadow">
+<div class="flex items-center gap-small mb-medium">
+<div class="w-10 h-10 rounded-full bg-warning flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">bolt</span>
+</div>
+<h4 class="font-title-md">Électricité</h4>
+</div>
+<div class="space-y-small">
+<div class="flex justify-between font-numeric-data">
+<span class="text-on-surface-variant">Consommation</span>
+<span class="font-bold">2.400 kWh</span>
+</div>
+<div class="flex justify-between font-numeric-data">
+<span class="text-on-surface-variant">Tarif Industriel</span>
+<span class="font-bold">G1</span>
+</div>
+<p class="text-display-lg font-display-lg mt-small">180k <span class="text-body-md font-normal">DZD</span></p>
+</div>
+</div>
+<!-- Labor Breakdown -->
+<div class="bg-surface-container-low p-medium rounded-xl border border-outline-variant hover:shadow-md transition-shadow">
+<div class="flex items-center gap-small mb-medium">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container">groups</span>
+</div>
+<h4 class="font-title-md">Main-d'œuvre</h4>
+</div>
+<div class="space-y-small">
+<div class="flex justify-between font-numeric-data">
+<span class="text-on-surface-variant">Effectif</span>
+<span class="font-bold">4 pers.</span>
+</div>
+<div class="flex justify-between font-numeric-data">
+<span class="text-on-surface-variant">Heures/Cycle</span>
+<span class="font-bold">720h</span>
+</div>
+<p class="text-display-lg font-display-lg mt-small">120k <span class="text-body-md font-normal">DZD</span></p>
+</div>
+</div>
+</section>
+<!-- ROI & Slider Section -->
+<section class="bg-surface-container-lowest p-large rounded-xl shadow-sm border border-outline-variant">
+<div class="flex flex-col md:flex-row gap-large items-center">
+<!-- Chart Area -->
+<div class="flex-grow w-full h-64 relative">
+<div class="absolute top-0 left-0 flex flex-col gap-micro">
+<h4 class="font-title-md">Délai de Récupération (ROI)</h4>
+<p class="text-on-surface-variant font-body-md italic">Projection basée sur les cycles annuels</p>
+</div>
+<svg class="w-full h-full mt-8" viewbox="0 0 400 200">
+<defs>
+<lineargradient id="chartGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#00685c" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#00685c" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines -->
+<line stroke="#bdc9c5" stroke-width="1" x1="0" x2="400" y1="180" y2="180"></line>
+<line stroke="#dae3ee" stroke-width="1" x1="0" x2="400" y1="120" y2="120"></line>
+<line stroke="#dae3ee" stroke-width="1" x1="0" x2="400" y1="60" y2="60"></line>
+<!-- Path -->
+<path class="chart-line" d="M0,180 Q100,160 200,100 T400,20" fill="none" stroke="#00685c" stroke-width="3"></path>
+<path d="M0,180 Q100,160 200,100 T400,20 L400,200 L0,200 Z" fill="url(#chartGrad)"></path>
+<!-- ROI Point -->
+<circle cx="200" cy="100" fill="#00685c" r="6"></circle>
+<text class="font-numeric-data font-bold text-primary fill-primary" font-size="14" x="215" y="95">Seuil de Rentabilité</text>
+</svg>
+<div class="absolute bottom-0 w-full flex justify-between text-label-sm text-on-surface-variant mt-2 px-2">
+<span>An 0</span>
+<span>An 1</span>
+<span>An 2 (ROI)</span>
+<span>An 3</span>
+<span>An 4</span>
+</div>
+</div>
+<!-- Simulation Control -->
+<div class="w-full md:w-80 bg-surface p-medium rounded-xl border border-outline-variant">
+<h5 class="font-title-md mb-small">Simulation de Rendement</h5>
+<div class="space-y-large">
+<div>
+<div class="flex justify-between mb-small">
+<label class="font-body-md text-on-surface">Cycles par An</label>
+<span class="font-bold text-primary" id="cycle-val">5</span>
+</div>
+<input class="w-full" id="cycle-slider" max="7" min="4" type="range" value="5"/>
+<div class="flex justify-between text-label-sm text-outline mt-micro">
+<span>4 cycles</span>
+<span>7 cycles</span>
+</div>
+</div>
+<div class="pt-medium border-t border-outline-variant">
+<p class="text-label-sm uppercase text-on-surface-variant mb-micro">Profit Annuel Estimé</p>
+<p class="text-display-lg font-display-lg text-primary" id="annual-profit">2.840.000 <span class="text-body-md font-normal">DZD</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Decorative Image for Context -->
+<div class="relative h-48 w-full rounded-xl overflow-hidden shadow-lg">
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent z-10 flex items-center px-large">
+<div class="max-w-md text-on-primary">
+<h3 class="font-display-lg text-display-lg">Gestion Industrielle</h3>
+<p class="font-body-lg opacity-90">Optimisation des flux financiers pour une agriculture durable et rentable en Algérie.</p>
+</div>
+</div>
+<img class="w-full h-full object-cover" data-alt="A wide-angle, cinematic view of high-tech modern greenhouse interior in the Algerian countryside. Pristine rows of verdant plants are illuminated by advanced LED lighting systems. The aesthetic is professional, sharp, and high-contrast with industrial teal and warm gold morning light reflecting off metal structures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe8YoV7GG-hj02FE0_2VqyPO0Xa0comcjS6DQK-C9qJKVqYqY9XK9DjnweECekBQHBp6lFehNlrewesHcuuN-NVsXhodjpgoaMMSYCT8NtzhpcKYzaiavrxnyO59k73X4PLd_AUOTc5xzoSRrGswG0rbb5VteY0YUivwLCp7QvDY8ywvr4QVNr_KdsS265R6FFqQxDbuHYKgHdwe1Q60iBYnXpOweoJpzxbqJbhzQquzgHcJAA3pEgPQjU7PqElqI7xMdvWoAjMpxS"/>
+</div>
+</main>
+<!-- BottomNavBar (Fixed for Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface border-t border-outline-variant shadow-lg flex justify-around items-center h-16 max-w-md mx-auto left-0 right-0">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-medium py-micro transition-all hover:bg-surface-container-low">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="font-label-sm">Projects</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-medium py-micro transition-all hover:bg-surface-container-low">
+<span class="material-symbols-outlined">architecture</span>
+<span class="font-label-sm">Design</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-medium py-micro transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">finance_mode</span>
+<span class="font-label-sm">Reports</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-medium py-micro transition-all hover:bg-surface-container-low">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="font-label-sm">Health</span>
+</div>
+</nav>
+<script>
+        const slider = document.getElementById('cycle-slider');
+        const cycleVal = document.getElementById('cycle-val');
+        const profitVal = document.getElementById('annual-profit');
+
+        slider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            cycleVal.textContent = val;
+            
+            // Dummy logic for financial simulation
+            const baseProfit = 568000; // Profit per cycle
+            const newProfit = (baseProfit * val).toLocaleString('fr-FR');
+            profitVal.innerHTML = `${newProfit} <span class="text-body-md font-normal">DZD</span>`;
+        });
+    </script>
+</body></html>
