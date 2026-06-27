@@ -68,34 +68,44 @@ private fun InsulationTypeRow(
     onSelect: (InsulationType) -> Unit,
 ) {
     val spacing = LocalSpacing.current
-    Row(
+    Column(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(spacing.xs),
+        verticalArrangement = Arrangement.spacedBy(spacing.xs),
     ) {
-        InsulationChip(
-            modifier = Modifier.weight(1f),
-            label = stringResource(R.string.wizard_insulation_type_none),
-            selected = selectedType == InsulationType.NONE,
-            onClick = { onSelect(InsulationType.NONE) },
-        )
-        InsulationChip(
-            modifier = Modifier.weight(1f),
-            label = stringResource(R.string.wizard_insulation_type_polystyrene),
-            selected = selectedType == InsulationType.POLYSTYRENE,
-            onClick = { onSelect(InsulationType.POLYSTYRENE) },
-        )
-        InsulationChip(
-            modifier = Modifier.weight(1f),
-            label = stringResource(R.string.wizard_insulation_type_polyurethane),
-            selected = selectedType == InsulationType.POLYURETHANE,
-            onClick = { onSelect(InsulationType.POLYURETHANE) },
-        )
-        InsulationChip(
-            modifier = Modifier.weight(1f),
-            label = stringResource(R.string.wizard_insulation_type_mineral_wool),
-            selected = selectedType == InsulationType.MINERAL_WOOL,
-            onClick = { onSelect(InsulationType.MINERAL_WOOL) },
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(spacing.xs),
+        ) {
+            InsulationChip(
+                modifier = Modifier.weight(1f),
+                label = stringResource(R.string.wizard_insulation_type_none),
+                selected = selectedType == InsulationType.NONE,
+                onClick = { onSelect(InsulationType.NONE) },
+            )
+            InsulationChip(
+                modifier = Modifier.weight(1f),
+                label = stringResource(R.string.wizard_insulation_type_polystyrene),
+                selected = selectedType == InsulationType.POLYSTYRENE,
+                onClick = { onSelect(InsulationType.POLYSTYRENE) },
+            )
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(spacing.xs),
+        ) {
+            InsulationChip(
+                modifier = Modifier.weight(1f),
+                label = stringResource(R.string.wizard_insulation_type_polyurethane),
+                selected = selectedType == InsulationType.POLYURETHANE,
+                onClick = { onSelect(InsulationType.POLYURETHANE) },
+            )
+            InsulationChip(
+                modifier = Modifier.weight(1f),
+                label = stringResource(R.string.wizard_insulation_type_mineral_wool),
+                selected = selectedType == InsulationType.MINERAL_WOOL,
+                onClick = { onSelect(InsulationType.MINERAL_WOOL) },
+            )
+        }
     }
 }
 

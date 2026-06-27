@@ -378,3 +378,18 @@ P1 stories first (US1 → US2 → US5 → US6), then P2 stories (US3 → US4 →
 - [X] T072 [FIX] Verify app launches successfully after database regeneration: (1) Uninstall old APK from device/emulator via `adb uninstall com.poultry.broiler`, (2) Install latest APK from `app/build/outputs/apk/dev/debug/app-dev-debug.apk`, (3) Launch app and verify it reaches the home screen without crash, (4) Confirm database schema validation passes in logcat.
 
 **Checkpoint**: App launches successfully with zero `FATAL EXCEPTION` in logcat, home screen displays correctly.
+
+---
+
+## Phase 15: Iteration - 2026-06-27 (3)
+
+**Purpose**: Fix wizard and dashboard screen access/navigation trap issues.
+
+- [X] T073 [FIX-UI] Hide `BottomNavBar` in `MainActivity` for non-tab destinations (`NavRoute.Wizard` and `NavRoute.Dashboard`) in `app/src/main/java/com/poultry/broiler/MainActivity.kt`.
+- [X] T074 [FIX-UI] Create custom Top App Bar inside `WizardScreen` containing a close `IconButton` (using `Icons.Default.Close`), the wizard title `R.string.screen_wizard`, and the `WizardStepIndicator` badge in `app/src/main/java/com/poultry/broiler/presentation/wizard/WizardScreen.kt`.
+- [X] T075 [FIX] Replace the buggy `LaunchedEffect` in `WizardScreen` with Compose `BackHandler` that goes to the previous step if `currentStep > 1`, otherwise calls `onNavigateBack()` in `app/src/main/java/com/poultry/broiler/presentation/wizard/WizardScreen.kt`.
+- [X] T076 [FIX] Update `DashboardScreen` to accept `projectId` and `onNavigateBack` callback, and wrap it in a `Scaffold` with a custom Top App Bar containing a back arrow `IconButton` (using `Icons.AutoMirrored.Filled.ArrowBack`) and the dashboard title `R.string.screen_dashboard` in `app/src/main/java/com/poultry/broiler/presentation/dashboard/DashboardScreen.kt`.
+- [X] T077 [FIX] Pass `onNavigateBack` and `projectId` from navigation graph to `DashboardScreen` in `app/src/main/java/com/poultry/broiler/presentation/navigation/PoultryNavHost.kt`.
+
+**Checkpoint**: App builds and runs successfully. Navigation to wizard and dashboard hides the bottom navigation bar. Visual close/back buttons in top bars and system back button return to the Home screen cleanly.
+

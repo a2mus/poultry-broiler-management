@@ -25,20 +25,24 @@ class MainActivity : ComponentActivity() {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
 
+                val showBottomBar = currentRoute in NavRoute.bottomNavItems.map { it.route }
+
                 Scaffold(
                     bottomBar = {
-                        BottomNavBar(
-                            currentRoute = currentRoute,
-                            onNavigate = { route ->
-                                navController.navigate(route.route) {
-                                    popUpTo(NavRoute.Projects.route) {
-                                        saveState = true
+                        if (showBottomBar) {
+                            BottomNavBar(
+                                currentRoute = currentRoute,
+                                onNavigate = { route ->
+                                    navController.navigate(route.route) {
+                                        popUpTo(NavRoute.Projects.route) {
+                                            saveState = true
+                                        }
+                                        launchSingleTop = true
+                                        restoreState = true
                                     }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            },
-                        )
+                                },
+                            )
+                        }
                     },
                 ) { innerPadding ->
                     PoultryNavHost(

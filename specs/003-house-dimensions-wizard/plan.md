@@ -466,3 +466,37 @@ App crashes on startup with `java.lang.IllegalStateException: Pre-packaged datab
 - Art 1.2.2 (Offline-First Data Flow): PASS — alignment of seed database with Room expectations ensures correct offline data access.
 - All other articles: unaffected.
 
+## Iteration Session 2026-06-27 (3)
+
+### User Feedback
+
+The user reports that there is no way to go back or access the home screen or dashboard screen from the wizard or dashboard.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | UX / UI  | P0       | Nested bottom bars: MainActivity displays BottomNavBar unconditionally, showing it simultaneously with WizardNavigationBar on the wizard screen. |
+| 2 | UX       | P1       | Missing exit/close button: WizardScreen has no visual button in the UI to exit the wizard. |
+| 3 | FUNCTIONAL | P1       | BackHandler bug: The back navigation logic in WizardScreen is a no-op LaunchedEffect (`runCatching { onNavigateBack }`). |
+| 4 | UX / FUNCTIONAL | P1 | Dashboard navigation stub: DashboardScreen is a simple text component without Hilt/ViewModel or Scaffold top bar, trapping the user. |
+
+### Amendments
+
+None to existing analytical/architectural sections.
+
+### New Tasks
+
+- T073 [FIX-UI] Hide `BottomNavBar` in `MainActivity` for non-tab destinations (`NavRoute.Wizard` and `NavRoute.Dashboard`).
+- T074 [FIX-UI] Create custom Top App Bar inside `WizardScreen` containing a close `IconButton` (using `Icons.Default.Close`), the wizard title `R.string.screen_wizard`, and the `WizardStepIndicator` badge.
+- T075 [FIX] Replace the buggy `LaunchedEffect` in `WizardScreen` with Compose `BackHandler`: go to the previous step if `currentStep > 1`, otherwise call `onNavigateBack()`.
+- T076 [FIX] Update `DashboardScreen` and its navigation route: accept `projectId` and `onNavigateBack` callback, wrap in a `Scaffold` with a custom Top App Bar containing a back arrow `IconButton` (using `Icons.AutoMirrored.Filled.ArrowBack`) and the dashboard title `R.string.screen_dashboard`.
+
+### Constitution Compliance
+
+- Art 3.1 (Design tokens): PASS — Top App Bars, icons, text, spacing, and buttons will use tokens from Theme.kt and Spacing.kt.
+- Art 3.3 (Touch targets): PASS — All Top App Bar navigation and close buttons will be `IconButton` components with minimum 48dp touch targets and clear `contentDescription` resources.
+- Art 1.2.4 (UDF via StateFlow): PASS — Wizard navigation and state remains managed cleanly.
+- All other articles: unaffected.
+
+

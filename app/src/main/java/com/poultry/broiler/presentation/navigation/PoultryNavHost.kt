@@ -82,8 +82,14 @@ fun PoultryNavHost(
                 listOf(
                     navArgument(NavRoute.ARG_PROJECT_ID) { type = NavType.StringType },
                 ),
-        ) {
-            DashboardScreen()
+        ) { backStackEntry ->
+            val projectId =
+                backStackEntry.arguments
+                    ?.getString(NavRoute.ARG_PROJECT_ID).orEmpty()
+            DashboardScreen(
+                projectId = projectId,
+                onNavigateBack = { navController.popBackStack() },
+            )
         }
 
         // ── Legacy Routes ───────────────────────────────────────

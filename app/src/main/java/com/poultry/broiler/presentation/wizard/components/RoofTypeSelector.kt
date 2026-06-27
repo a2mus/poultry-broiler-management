@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Hexagon
-import androidx.compose.material.icons.filled.Terrain
-import androidx.compose.material.icons.filled.TrendingFlat
+import androidx.compose.material.icons.filled.HorizontalRule
+import androidx.compose.material.icons.filled.Roofing
+import androidx.compose.material.icons.filled.Warehouse
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -43,21 +43,21 @@ fun RoofTypeSelector(
         SelectableCardRow(
             modifier = Modifier.weight(1f),
             label = stringResource(R.string.wizard_roof_type_flat),
-            icon = Icons.Filled.TrendingFlat,
+            icon = Icons.Filled.HorizontalRule,
             selected = selectedType == RoofType.FLAT,
             onClick = { onSelect(RoofType.FLAT) },
         )
         SelectableCardRow(
             modifier = Modifier.weight(1f),
             label = stringResource(R.string.wizard_roof_type_pitched),
-            icon = Icons.Filled.Terrain,
+            icon = Icons.Filled.Roofing,
             selected = selectedType == RoofType.PITCHED,
             onClick = { onSelect(RoofType.PITCHED) },
         )
         SelectableCardRow(
             modifier = Modifier.weight(1f),
             label = stringResource(R.string.wizard_roof_type_arched),
-            icon = Icons.Filled.Hexagon,
+            icon = Icons.Filled.Warehouse,
             selected = selectedType == RoofType.ARCHED,
             onClick = { onSelect(RoofType.ARCHED) },
         )
