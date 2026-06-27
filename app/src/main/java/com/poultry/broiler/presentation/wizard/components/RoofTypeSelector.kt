@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChangeHistory
 import androidx.compose.material.icons.filled.HorizontalRule
-import androidx.compose.material.icons.filled.Roofing
 import androidx.compose.material.icons.filled.Warehouse
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -50,7 +50,7 @@ fun RoofTypeSelector(
         SelectableCardRow(
             modifier = Modifier.weight(1f),
             label = stringResource(R.string.wizard_roof_type_pitched),
-            icon = Icons.Filled.Roofing,
+            icon = Icons.Filled.ChangeHistory,
             selected = selectedType == RoofType.PITCHED,
             onClick = { onSelect(RoofType.PITCHED) },
         )

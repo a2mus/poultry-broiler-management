@@ -17,9 +17,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.poultry.broiler.R
+import com.poultry.broiler.presentation.theme.InterFontFamily
 import com.poultry.broiler.presentation.theme.CardCornerRadius
 import com.poultry.broiler.presentation.theme.LocalSpacing
 
@@ -43,16 +46,17 @@ fun FlockCyclesSimulator(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(
-                    text = "Cycles de Bandes par An",
+                    text = stringResource(R.string.financial_cycles_title),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.weight(1f),
                 )
                 Text(
-                    text = "$currentCycles cycles / an",
+                    text = stringResource(R.string.financial_cycles_value, currentCycles),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface,
+                    fontFamily = InterFontFamily,
                 )
             }
             Spacer(modifier = Modifier.height(spacing.sm))
@@ -67,7 +71,7 @@ fun FlockCyclesSimulator(
             )
 
             Text(
-                text = "Faites glisser pour simuler l'impact des rotations de bandes sur les profits annuels.",
+                text = stringResource(R.string.financial_cycles_hint),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

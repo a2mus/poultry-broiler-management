@@ -14,9 +14,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.poultry.broiler.R
+import com.poultry.broiler.presentation.theme.InterFontFamily
 import com.poultry.broiler.presentation.theme.CardCornerRadius
 import com.poultry.broiler.presentation.theme.LocalSpacing
 
@@ -38,18 +41,18 @@ fun FinancialSummaryGrid(
             horizontalArrangement = Arrangement.spacedBy(spacing.md),
         ) {
             FinancialCard(
-                title = "Investissement CapEx",
+                title = stringResource(R.string.financial_capex_title),
                 value = capex,
                 modifier = Modifier.weight(1f),
             )
             FinancialCard(
-                title = "Charges OpEx / Cycle",
+                title = stringResource(R.string.financial_opex_title),
                 value = opex,
                 modifier = Modifier.weight(1f),
             )
         }
         FinancialCard(
-            title = "Bénéfice Net Annuel Estimé",
+            title = stringResource(R.string.financial_net_profit_title),
             value = netProfit,
             valueColor = MaterialTheme.colorScheme.primary,
             modifier = Modifier.fillMaxWidth(),
@@ -84,6 +87,7 @@ private fun FinancialCard(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = valueColor,
+                fontFamily = InterFontFamily,
             )
         }
     }

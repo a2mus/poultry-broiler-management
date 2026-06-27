@@ -20,12 +20,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.poultry.broiler.R
 import com.poultry.broiler.presentation.theme.CardCornerRadius
 import com.poultry.broiler.presentation.theme.LocalSpacing
 
 data class WelfareCheckItem(
     val id: Int,
-    val description: String,
+    val descriptionResId: Int,
     val isChecked: Boolean,
 )
 
@@ -45,7 +47,7 @@ fun WelfareChecklist(
     ) {
         Column(modifier = Modifier.padding(spacing.md)) {
             Text(
-                text = "Liste de Contrôle Conformité UE",
+                text = stringResource(R.string.welfare_checklist_title),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.primary,
             )
@@ -63,7 +65,7 @@ fun WelfareChecklist(
                         )
                         Spacer(modifier = Modifier.width(spacing.xs))
                         Text(
-                            text = item.description,
+                            text = stringResource(item.descriptionResId),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                         )

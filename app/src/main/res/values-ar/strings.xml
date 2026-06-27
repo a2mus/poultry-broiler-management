@@ -196,4 +196,70 @@
     <string name="cd_wizard_next_button">الانتقال إلى الخطوة التالية</string>
     <string name="cd_wizard_preview_canvas">معاينة 2D للمبنى</string>
     <string name="cd_wizard_compass">بوصلة الاتجاه</string>
+
+    <!-- Blueprint Legend -->
+    <string name="blueprint_legend_title">دليل الرموز الفنية (ثنائي الأبعاد)</string>
+    <string name="blueprint_legend_fans">مراوح التهوية</string>
+    <string name="blueprint_legend_heaters">أجهزة تدفئة</string>
+    <string name="blueprint_legend_cooling_pads">ألواح التبريد</string>
+    <string name="blueprint_legend_feeders">خطوط التغذية</string>
+    <string name="blueprint_legend_drinkers">خطوط المياه</string>
+
+    <!-- Health / Risk Screen -->
+    <string name="welfare_checklist_title">قائمة الامتثال لمعايير الاتحاد الأوروبي</string>
+    <string name="welfare_item_1">وصول مستمر لمياه نظيفة وعذبة</string>
+    <string name="welfare_item_2">فرشة جافة، قابلة للتفتت وذات جودة مرضية</string>
+    <string name="welfare_item_3">إضاءة لا تقل عن 20 لوكس مع دورة يومية</string>
+    <string name="welfare_item_4">مستوى ضوضاء مستمر أقل من 85 ديسيبل</string>
+    <string name="welfare_item_5">تهوية دنيا فعالة لتجديد الهواء</string>
+
+    <string name="sensor_title_temperature">درجة الحرارة</string>
+    <string name="sensor_title_humidity">الرطوبة</string>
+    <string name="sensor_title_co2">جودة الهواء (CO₂)</string>
+    <string name="sensor_status_normal">طبيعي</string>
+    <string name="sensor_status_warning">تحذير</string>
+
+    <string name="risk_status_conforming">مطابق</string>
+    <string name="risk_status_warning">بحاجة لمراقبة</string>
+    <string name="risk_status_danger">خطر مرتفع</string>
+
+    <!-- Financial / Simulation Screen -->
+    <string name="financial_title">التحليل والمحاكاة المالية</string>
+    <string name="financial_upgrades_title">التحسينات الفنية الموصى بها</string>
+    <string name="financial_opex_format">%1$s / دورة</string>
+    <string name="financial_profit_format">%1$s / سنة</string>
+    <string name="financial_capex_title">الاستثمار الرأسمالي (CapEx)</string>
+    <string name="financial_opex_title">التكاليف التشغيلية (OpEx) / دورة</string>
+    <string name="financial_net_profit_title">صافي الربح السنوي المتوقع</string>
+    <string name="financial_cycles_title">دورات الأفواج في السنة</string>
+    <string name="financial_cycles_value">%1$d دورات / سنة</string>
+    <string name="financial_cycles_hint">اسحب للمحاكاة وتأثير عدد دورات الأفواج على الأرباح السنوية.</string>
+    <string name="financial_roi_chart_title">تطور التدفق النقدي والعائد على الاستثمار</string>
+    <string name="financial_roi_year_label">سنة %1$d</string>
+
+    <string name="upgrade_1_title">عزل السقف عالي الأداء</string>
+    <string name="upgrade_1_current">R-12 بوليسترين (قديم)</string>
+    <string name="upgrade_1_proposed">R-28 بولي يوريثان مرشوش</string>
+    <string name="upgrade_1_cost">450,000 د.ج</string>
+    <string name="upgrade_1_payback">1.5 سنة</string>
+
+    <string name="upgrade_2_title">تهوية ديناميكية بمروحة EC</string>
+    <string name="upgrade_2_current">١٠x مراوح قياسية ١.٥ حصان</string>
+    <string name="upgrade_2_proposed">٨x مروحة EC تدريجية ١.٢ حصان</string>
+    <string name="upgrade_2_cost">600,000 د.ج</string>
+    <string name="upgrade_2_payback">2.1 سنة</string>
+
+    <string name="upgrade_3_title">إضاءة LED متغيرة الشدة</string>
+    <string name="upgrade_3_current">أنابيب فلوريسنت</string>
+    <string name="upgrade_3_proposed">LED ٢٠ لوكس قابل للتعتيم</string>
+    <string name="upgrade_3_cost">180,000 د.ج</string>
+    <string name="upgrade_3_payback">0.8 سنة</string>
+
+    <!-- Upgrades / Recommendations -->
+    <string name="upgrade_priority_critical">حرج</string>
+    <string name="upgrade_priority_high">عالي</string>
+    <string name="upgrade_priority_medium">متوسط</string>
+    <string name="upgrade_label_current">الحالي</string>
+    <string name="upgrade_label_proposed">المقترح</string>
+    <string name="upgrade_cost_roi_format">التكلفة: %1$s | العائد: %2$s</string>
 </resources>

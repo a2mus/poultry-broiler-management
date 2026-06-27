@@ -68,10 +68,10 @@
 
 **Independent Test**: Enter width and length values, verifying that the floor area updates and the outline canvas resizes under 300ms.
 
-- [ ] T013 [P] [US3] Redesign segmented buttons for wall insulation in app/src/main/java/com/poultry/broiler/presentation/wizard/components/InsulationSelector.kt
-- [ ] T014 [P] [US3] Redesign segmented buttons for roof types in app/src/main/java/com/poultry/broiler/presentation/wizard/components/RoofTypeSelector.kt
-- [ ] T015 [P] [US3] Redesign live building outline preview in app/src/main/java/com/poultry/broiler/presentation/wizard/components/DimensionPreviewCanvas.kt
-- [ ] T016 [US3] Adapt step 1 layout structure to a 2-column bento form in app/src/main/java/com/poultry/broiler/presentation/wizard/HouseDimensionsStep.kt
+- [x] T013 [P] [US3] Redesign segmented buttons for wall insulation in app/src/main/java/com/poultry/broiler/presentation/wizard/components/InsulationSelector.kt
+- [x] T014 [P] [US3] Redesign segmented buttons for roof types in app/src/main/java/com/poultry/broiler/presentation/wizard/components/RoofTypeSelector.kt
+- [x] T015 [P] [US3] Redesign live building outline preview in app/src/main/java/com/poultry/broiler/presentation/wizard/components/DimensionPreviewCanvas.kt
+- [x] T016 [US3] Adapt step 1 layout structure to a 2-column bento form in app/src/main/java/com/poultry/broiler/presentation/wizard/HouseDimensionsStep.kt
 
 **Checkpoint**: House Dimensions wizard screen is fully functional and responsive.
 
@@ -97,9 +97,9 @@
 
 **Independent Test**: Pan and pinch-to-zoom on the blueprint grid to verify smooth scaling (0.5x to 4.0x) and crisp symbol drawing.
 
-- [ ] T020 [P] [US5] Implement exhaust fan and heater vectorized symbols in app/src/main/java/com/poultry/broiler/presentation/design/components/BlueprintSymbols.kt
-- [ ] T021 [P] [US5] Update blueprint canvas interaction and scale matrix in app/src/main/java/com/poultry/broiler/presentation/design/components/BlueprintCanvas.kt
-- [ ] T022 [US5] Redesign blueprint legend and details footer in app/src/main/java/com/poultry/broiler/presentation/design/BlueprintScreen.kt
+- [x] T020 [P] [US5] Implement exhaust fan and heater vectorized symbols in app/src/main/java/com/poultry/broiler/presentation/design/components/BlueprintSymbols.kt
+- [x] T021 [P] [US5] Update blueprint canvas interaction and scale matrix in app/src/main/java/com/poultry/broiler/presentation/design/components/BlueprintCanvas.kt
+- [x] T022 [US5] Redesign blueprint legend and details footer in app/src/main/java/com/poultry/broiler/presentation/design/BlueprintScreen.kt
 
 **Checkpoint**: The interactive Blueprint tab rendering matches the Stitch specification.
 
@@ -111,10 +111,10 @@
 
 **Independent Test**: Toggle compliance checkboxes and check that risk percentage and compliance metrics recalculate dynamically.
 
-- [ ] T023 [P] [US6] Implement radial risk progress gauge in app/src/main/java/com/poultry/broiler/presentation/health/components/RiskScoreGauge.kt
-- [ ] T024 [P] [US6] Redesign environmental sensor metrics cards in app/src/main/java/com/poultry/broiler/presentation/health/components/SensorGrid.kt
-- [ ] T025 [P] [US6] Redesign EU compliance checklist card in app/src/main/java/com/poultry/broiler/presentation/health/components/WelfareChecklist.kt
-- [ ] T026 [US6] Update risk screen layout in app/src/main/java/com/poultry/broiler/presentation/health/RiskScreen.kt
+- [x] T023 [P] [US6] Implement radial risk progress gauge in app/src/main/java/com/poultry/broiler/presentation/health/components/RiskScoreGauge.kt
+- [x] T024 [P] [US6] Redesign environmental sensor metrics cards in app/src/main/java/com/poultry/broiler/presentation/health/components/SensorGrid.kt
+- [x] T025 [P] [US6] Redesign EU compliance checklist card in app/src/main/java/com/poultry/broiler/presentation/health/components/WelfareChecklist.kt
+- [x] T026 [US6] Update risk screen layout in app/src/main/java/com/poultry/broiler/presentation/health/RiskScreen.kt
 
 **Checkpoint**: The Risk Assessment tab displays environmental telemetry and checks compliance scores.
 
@@ -126,11 +126,11 @@
 
 **Independent Test**: Drag flock slider and check that annual profit calculates dynamically. Confirm that improvement cards show ROI details.
 
-- [ ] T027 [P] [US7] Implement CapEx/OpEx summary cards in app/src/main/java/com/poultry/broiler/presentation/reports/components/FinancialSummaryGrid.kt
-- [ ] T028 [P] [US7] Implement ROI payback area chart in app/src/main/java/com/poultry/broiler/presentation/reports/components/RoiPaybackChart.kt
-- [ ] T029 [P] [US7] Implement flock cycles slider simulator in app/src/main/java/com/poultry/broiler/presentation/reports/components/FlockCyclesSimulator.kt
-- [ ] T030 [P] [US7] Implement side-by-side technical improvements comparison cards in app/src/main/java/com/poultry/broiler/presentation/catalog/components/UpgradeRecommendationCard.kt
-- [ ] T031 [US7] Update financial analysis screen layout in app/src/main/java/com/poultry/broiler/presentation/reports/FinancialScreen.kt
+- [x] T027 [P] [US7] Implement CapEx/OpEx summary cards in app/src/main/java/com/poultry/broiler/presentation/reports/components/FinancialSummaryGrid.kt
+- [x] T028 [P] [US7] Implement ROI payback area chart in app/src/main/java/com/poultry/broiler/presentation/reports/components/RoiPaybackChart.kt
+- [x] T029 [P] [US7] Implement flock cycles slider simulator in app/src/main/java/com/poultry/broiler/presentation/reports/components/FlockCyclesSimulator.kt
+- [x] T030 [P] [US7] Implement side-by-side technical improvements comparison cards in app/src/main/java/com/poultry/broiler/presentation/catalog/components/UpgradeRecommendationCard.kt
+- [x] T031 [US7] Update financial analysis screen layout in app/src/main/java/com/poultry/broiler/presentation/reports/FinancialScreen.kt
 
 **Checkpoint**: Financial dashboard metrics and technical upgrades calculations are fully integrated.
 
@@ -140,9 +140,9 @@
 
 **Purpose**: Performance, accessibility verification, and end-to-end validation.
 
-- [ ] T032 Performance auditing of Composable recomposition counts
-- [ ] T033 Verify accessibility labels and touch target areas are >= 48dp
-- [ ] T034 Run quickstart.md validation scenarios
+- [x] T032 Performance auditing of Composable recomposition counts
+- [x] T033 Verify accessibility labels and touch target areas are >= 48dp
+- [x] T034 Run quickstart.md validation scenarios
 
 ---
 

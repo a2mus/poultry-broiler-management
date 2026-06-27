@@ -23,8 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.poultry.broiler.R
 import com.poultry.broiler.domain.model.HouseOrientation
+import com.poultry.broiler.presentation.theme.InterFontFamily
 import com.poultry.broiler.presentation.theme.LocalSpacing
 import kotlin.math.cos
+
 import kotlin.math.min
 import kotlin.math.sin
 
@@ -81,7 +83,7 @@ fun DimensionPreviewCanvas(
 
         val paddingPx = dpPx(spacing.lg)
         val minDimPx = dpPx(40.dp)
-        val labelStyle = TextStyle(fontSize = 11.sp, color = colorScheme.onSurface)
+        val labelStyle = TextStyle(fontFamily = InterFontFamily, fontSize = 11.sp, color = colorScheme.onSurface)
 
         // Background
         drawRect(color = colorScheme.surfaceVariant, topLeft = Offset.Zero, size = size)

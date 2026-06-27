@@ -34,8 +34,12 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.poultry.broiler.R
+import com.poultry.broiler.presentation.theme.InterFontFamily
 import com.poultry.broiler.presentation.theme.CardCornerRadius
 import com.poultry.broiler.presentation.theme.LocalSpacing
+
 
 @Composable
 fun SensorGrid(modifier: Modifier = Modifier) {
@@ -50,24 +54,24 @@ fun SensorGrid(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.spacedBy(spacing.md),
         ) {
             SensorCard(
-                title = "Température",
+                title = stringResource(R.string.sensor_title_temperature),
                 value = "24.8 °C",
-                statusText = "NORMAL",
+                statusText = stringResource(R.string.sensor_status_normal),
                 statusColor = Color(0xFF2ECC71),
                 modifier = Modifier.weight(1f),
             )
             SensorCard(
-                title = "Humidité",
+                title = stringResource(R.string.sensor_title_humidity),
                 value = "62.4 %",
-                statusText = "NORMAL",
+                statusText = stringResource(R.string.sensor_status_normal),
                 statusColor = Color(0xFF2ECC71),
                 modifier = Modifier.weight(1f),
             )
         }
         SensorCard(
-            title = "Qualité de l'Air (CO₂)",
+            title = stringResource(R.string.sensor_title_co2),
             value = "1,150 ppm",
-            statusText = "ATTENTION",
+            statusText = stringResource(R.string.sensor_status_warning),
             statusColor = Color(0xFFF1C40F),
             modifier = Modifier.fillMaxWidth(),
         )
@@ -129,6 +133,7 @@ private fun SensorCard(
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
                         color = statusColor,
+                        fontFamily = InterFontFamily,
                     )
                 }
             }
@@ -138,6 +143,7 @@ private fun SensorCard(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurface,
+                fontFamily = InterFontFamily,
             )
         }
     }

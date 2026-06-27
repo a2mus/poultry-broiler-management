@@ -25,8 +25,12 @@ import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.poultry.broiler.R
+import com.poultry.broiler.presentation.theme.InterFontFamily
 import com.poultry.broiler.presentation.theme.CardCornerRadius
 import com.poultry.broiler.presentation.theme.LocalSpacing
+
 
 @Composable
 fun RoiPaybackChart(
@@ -37,6 +41,7 @@ fun RoiPaybackChart(
     val spacing = LocalSpacing.current
     val colorScheme = MaterialTheme.colorScheme
     val textMeasurer = rememberTextMeasurer()
+    val yearLabelFormat = stringResource(R.string.financial_roi_year_label)
 
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -46,7 +51,7 @@ fun RoiPaybackChart(
     ) {
         Column(modifier = Modifier.padding(spacing.md)) {
             Text(
-                text = "Évolution du Cash-Flow & Retour sur Investissement",
+                text = stringResource(R.string.financial_roi_chart_title),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.primary,
             )
@@ -135,7 +140,7 @@ fun RoiPaybackChart(
                 )
 
                 // Draw Dots & Year Labels
-                val labelStyle = TextStyle(fontSize = 10.sp, color = colorScheme.onSurfaceVariant)
+                val labelStyle = TextStyle(fontFamily = InterFontFamily, fontSize = 10.sp, color = colorScheme.onSurfaceVariant)
                 for (i in 0..5) {
                     val cx = toCanvasX(i)
                     val cy = toCanvasY(values[i])
@@ -153,7 +158,7 @@ fun RoiPaybackChart(
                     )
 
                     // Draw Year Label below
-                    val yearLabel = "An $i"
+                    val yearLabel = yearLabelFormat.format(i)
                     val textLayout = textMeasurer.measure(yearLabel, labelStyle)
                     drawText(
                         textLayoutResult = textLayout,

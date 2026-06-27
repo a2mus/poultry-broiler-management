@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.poultry.broiler.R
 import com.poultry.broiler.presentation.health.components.RiskScoreGauge
 import com.poultry.broiler.presentation.health.components.SensorGrid
 import com.poultry.broiler.presentation.health.components.WelfareCheckItem
@@ -31,11 +32,11 @@ fun RiskScreen(modifier: Modifier = Modifier) {
     var checklistItems by remember {
         mutableStateOf(
             listOf(
-                WelfareCheckItem(1, "Accès permanent à de l'eau propre et fraîche", true),
-                WelfareCheckItem(2, "Litière sèche, friable et de qualité satisfaisante", true),
-                WelfareCheckItem(3, "Éclairage minimum de 20 lux avec cycle nycthéméral", false),
-                WelfareCheckItem(4, "Niveau sonore continu inférieur à 85 dB", true),
-                WelfareCheckItem(5, "Ventilation minimale de renouvellement d'air opérationnelle", false),
+                WelfareCheckItem(1, R.string.welfare_item_1, true),
+                WelfareCheckItem(2, R.string.welfare_item_2, true),
+                WelfareCheckItem(3, R.string.welfare_item_3, false),
+                WelfareCheckItem(4, R.string.welfare_item_4, true),
+                WelfareCheckItem(5, R.string.welfare_item_5, false),
             ),
         )
     }

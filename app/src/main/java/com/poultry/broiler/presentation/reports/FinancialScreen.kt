@@ -18,6 +18,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.poultry.broiler.R
 import com.poultry.broiler.presentation.catalog.components.UpgradePriority
 import com.poultry.broiler.presentation.catalog.components.UpgradeProposal
 import com.poultry.broiler.presentation.catalog.components.UpgradeRecommendationCard
@@ -38,46 +40,46 @@ fun FinancialScreen(modifier: Modifier = Modifier) {
     val baseProfitPerCycle = 1200000.0
 
     // Simulation states
+    // Simulation states
     var flockCycles by remember { mutableStateOf(5) }
-    var upgradeProposals by remember {
-        mutableStateOf(
-            listOf(
-                UpgradeProposal(
-                    id = 1,
-                    title = "Isolation de toiture haute perf.",
-                    priority = UpgradePriority.CRITICAL,
-                    currentState = "R-12 Polystyrène (vétuste)",
-                    proposedState = "R-28 Polyuréthane projeté",
-                    cost = "450,000 DZD",
-                    payback = "1.5 ans",
-                ),
-                UpgradeProposal(
-                    id = 2,
-                    title = "Ventilation dynamique EC Fan",
-                    priority = UpgradePriority.HIGH,
-                    currentState = "10x Ventilateurs standard 1.5 CV",
-                    proposedState = "8x EC Fan progressif 1.2 CV",
-                    cost = "600,000 DZD",
-                    payback = "2.1 ans",
-                ),
-                UpgradeProposal(
-                    id = 3,
-                    title = "Éclairage LED à intensité variable",
-                    priority = UpgradePriority.MEDIUM,
-                    currentState = "Néons fluorescents",
-                    proposedState = "LED 20 lux gradable",
-                    cost = "180,000 DZD",
-                    payback = "0.8 ans",
-                ),
-            ),
+    var selectedUpgrades by remember { mutableStateOf(setOf<Int>()) }
+
+    val p1Title = stringResource(R.string.upgrade_1_title)
+    val p1Current = stringResource(R.string.upgrade_1_current)
+    val p1Proposed = stringResource(R.string.upgrade_1_proposed)
+    val p1Cost = stringResource(R.string.upgrade_1_cost)
+    val p1Payback = stringResource(R.string.upgrade_1_payback)
+
+    val p2Title = stringResource(R.string.upgrade_2_title)
+    val p2Current = stringResource(R.string.upgrade_2_current)
+    val p2Proposed = stringResource(R.string.upgrade_2_proposed)
+    val p2Cost = stringResource(R.string.upgrade_2_cost)
+    val p2Payback = stringResource(R.string.upgrade_2_payback)
+
+    val p3Title = stringResource(R.string.upgrade_3_title)
+    val p3Current = stringResource(R.string.upgrade_3_current)
+    val p3Proposed = stringResource(R.string.upgrade_3_proposed)
+    val p3Cost = stringResource(R.string.upgrade_3_cost)
+    val p3Payback = stringResource(R.string.upgrade_3_payback)
+
+    val upgradeProposals = remember(
+        p1Title, p1Current, p1Proposed, p1Cost, p1Payback,
+        p2Title, p2Current, p2Proposed, p2Cost, p2Payback,
+        p3Title, p3Current, p3Proposed, p3Cost, p3Payback,
+        selectedUpgrades
+    ) {
+        listOf(
+            UpgradeProposal(1, p1Title, UpgradePriority.CRITICAL, p1Current, p1Proposed, p1Cost, p1Payback, 1 in selectedUpgrades),
+            UpgradeProposal(2, p2Title, UpgradePriority.HIGH, p2Current, p2Proposed, p2Cost, p2Payback, 2 in selectedUpgrades),
+            UpgradeProposal(3, p3Title, UpgradePriority.MEDIUM, p3Current, p3Proposed, p3Cost, p3Payback, 3 in selectedUpgrades)
         )
     }
 
     // Calculations
     val annualProfit = flockCycles * baseProfitPerCycle
     val formattedCapex = formatDzd(baseCapex)
-    val formattedOpex = "${formatDzd(baseOpexPerCycle)} / cycle"
-    val formattedProfit = "${formatDzd(annualProfit)} / an"
+    val formattedOpex = stringResource(R.string.financial_opex_format, formatDzd(baseOpexPerCycle))
+    val formattedProfit = stringResource(R.string.financial_profit_format, formatDzd(annualProfit))
 
     Column(
         modifier =
@@ -88,7 +90,7 @@ fun FinancialScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(spacing.md),
     ) {
         Text(
-            text = "Analyse & Simulation Financière",
+            text = stringResource(R.string.financial_title),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.primary,
         )
@@ -115,7 +117,7 @@ fun FinancialScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(spacing.xxs))
 
         Text(
-            text = "Améliorations Techniques Recommandées",
+            text = stringResource(R.string.financial_upgrades_title),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.primary,
         )
@@ -125,10 +127,11 @@ fun FinancialScreen(modifier: Modifier = Modifier) {
             UpgradeRecommendationCard(
                 proposal = proposal,
                 onToggled = { isSelected ->
-                    upgradeProposals =
-                        upgradeProposals.map { item ->
-                            if (item.id == proposal.id) item.copy(isSelected = isSelected) else item
-                        }
+                    selectedUpgrades = if (isSelected) {
+                        selectedUpgrades + proposal.id
+                    } else {
+                        selectedUpgrades - proposal.id
+                    }
                 },
             )
         }

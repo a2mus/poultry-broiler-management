@@ -38,9 +38,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.poultry.broiler.R
 import com.poultry.broiler.presentation.design.components.BlueprintCanvas
 import com.poultry.broiler.presentation.theme.CardCornerRadius
 import com.poultry.broiler.presentation.theme.LocalSpacing
+
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -131,7 +134,7 @@ fun BlueprintScreen(modifier: Modifier = Modifier) {
         ) {
             Column(modifier = Modifier.padding(spacing.md)) {
                 Text(
-                    text = "Légende Technique (2D)",
+                    text = stringResource(R.string.blueprint_legend_title),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary,
                 )
@@ -141,11 +144,11 @@ fun BlueprintScreen(modifier: Modifier = Modifier) {
                     verticalArrangement = Arrangement.spacedBy(spacing.sm),
                     modifier = Modifier.fillMaxWidth(),
                 ) {
-                    LegendItem(color = MaterialTheme.colorScheme.onSurface, label = "Ventilateurs")
-                    LegendItem(color = Color(0xFFD35400), label = "Radiants (Chauffage)")
-                    LegendItem(color = MaterialTheme.colorScheme.secondary, label = "Panneaux Cool")
-                    LegendItem(color = Color(0xFFC0392B), label = "Mangeoires")
-                    LegendItem(color = Color(0xFF2980B9), label = "Pipettes (Eau)")
+                    LegendItem(color = MaterialTheme.colorScheme.onSurface, label = stringResource(R.string.blueprint_legend_fans))
+                    LegendItem(color = Color(0xFFD35400), label = stringResource(R.string.blueprint_legend_heaters))
+                    LegendItem(color = MaterialTheme.colorScheme.secondary, label = stringResource(R.string.blueprint_legend_cooling_pads))
+                    LegendItem(color = Color(0xFFC0392B), label = stringResource(R.string.blueprint_legend_feeders))
+                    LegendItem(color = Color(0xFF2980B9), label = stringResource(R.string.blueprint_legend_drinkers))
                 }
             }
         }

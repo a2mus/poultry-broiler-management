@@ -27,8 +27,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.poultry.broiler.R
+import com.poultry.broiler.presentation.theme.InterFontFamily
 import com.poultry.broiler.presentation.theme.CardCornerRadius
 import com.poultry.broiler.presentation.theme.LocalSpacing
+
 
 enum class UpgradePriority {
     CRITICAL,
@@ -64,9 +68,9 @@ fun UpgradeRecommendationCard(
 
     val priorityText =
         when (proposal.priority) {
-            UpgradePriority.CRITICAL -> "CRITIQUE"
-            UpgradePriority.HIGH -> "ÉLEVÉ"
-            UpgradePriority.MEDIUM -> "MOYEN"
+            UpgradePriority.CRITICAL -> stringResource(R.string.upgrade_priority_critical)
+            UpgradePriority.HIGH -> stringResource(R.string.upgrade_priority_high)
+            UpgradePriority.MEDIUM -> stringResource(R.string.upgrade_priority_medium)
         }
 
     Card(
@@ -117,6 +121,7 @@ fun UpgradeRecommendationCard(
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
                             color = priorityColor,
+                            fontFamily = InterFontFamily,
                         )
                     }
                 }
@@ -128,12 +133,12 @@ fun UpgradeRecommendationCard(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     ComparisonBox(
-                        label = "Actuel",
+                        label = stringResource(R.string.upgrade_label_current),
                         value = proposal.currentState,
                         modifier = Modifier.weight(1f),
                     )
                     ComparisonBox(
-                        label = "Proposé",
+                        label = stringResource(R.string.upgrade_label_proposed),
                         value = proposal.proposedState,
                         modifier = Modifier.weight(1f),
                     )
@@ -148,9 +153,10 @@ fun UpgradeRecommendationCard(
                 ) {
                     Column {
                         Text(
-                            text = "Coût: ${proposal.cost} | ROI: ${proposal.payback}",
+                            text = stringResource(R.string.upgrade_cost_roi_format, proposal.cost, proposal.payback),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            fontFamily = InterFontFamily,
                         )
                     }
                     Switch(
@@ -188,6 +194,7 @@ private fun ComparisonBox(
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.Medium,
+                fontFamily = InterFontFamily,
             )
         }
     }

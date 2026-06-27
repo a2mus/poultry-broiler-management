@@ -18,8 +18,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.poultry.broiler.R
+import com.poultry.broiler.presentation.theme.InterFontFamily
+
 
 /**
  * Radial compliance risk progress gauge (FR-016).
@@ -84,16 +88,17 @@ fun RiskScoreGauge(
                 fontSize = 36.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurface,
+                fontFamily = InterFontFamily,
                 style = MaterialTheme.typography.headlineLarge,
             )
             Text(
                 text =
                     if (score >= 80) {
-                        "CONFORME"
+                        stringResource(R.string.risk_status_conforming)
                     } else if (score >= 50) {
-                        "À SURVEILLER"
+                        stringResource(R.string.risk_status_warning)
                     } else {
-                        "RISQUE ÉLEVÉ"
+                        stringResource(R.string.risk_status_danger)
                     },
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Bold,
