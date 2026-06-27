@@ -17,14 +17,22 @@ import com.poultry.broiler.domain.usecase.ValidateHouseDimensionsUseCase
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class WizardViewModelTest {
     private val appContext: Context = mockk(relaxed = true)
     private val getUseCase: GetHouseDimensionsUseCase = mockk()
@@ -63,6 +71,18 @@ class WizardViewModelTest {
         // Mockk returns "" for any string resource lookup when relaxed.
         every { appContext.getString(any()) } returns ""
         every { appContext.getString(any(), *anyVararg<Any>()) } returns ""
+    }
+
+    @BeforeEach
+    fun setUpMainDispatcher() {
+        // viewModelScope dispatches to Dispatchers.Main, which is absent in a plain
+        // JVM unit test. Bind a test dispatcher so launches run synchronously.
+        Dispatchers.setMain(UnconfinedTestDispatcher())
+    }
+
+    @AfterEach
+    fun resetMainDispatcher() {
+        Dispatchers.resetMain()
     }
 
     @Test
@@ -135,6 +155,8 @@ class WizardViewModelTest {
     fun onIntent_goNextValid_advancesStep() =
         runTest {
             every { getUseCase("p-1") } returns flowOf(null)
+            // Valid form triggers autoSave on the last field change.
+            coEvery { saveUseCase(any()) } returns Result.success(existingDimensions)
             val vm = viewModel()
             vm.load("p-1")
             fillValidForm(vm)

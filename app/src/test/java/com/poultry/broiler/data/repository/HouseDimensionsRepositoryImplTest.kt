@@ -101,6 +101,6 @@ class HouseDimensionsRepositoryImplTest {
         org.junit.jupiter.api.Assertions.assertEquals(expected.id, actual.id)
         org.junit.jupiter.api.Assertions.assertEquals(expected.projectId, actual.projectId)
         org.junit.jupiter.api.Assertions.assertEquals(expected.orientation, actual.orientation.name)
-        org.junit.jupiter.api.Assertions.assertEquals(expected.roofType, RoofType.valueOf(expected.roofType))
+        org.junit.jupiter.api.Assertions.assertEquals(expected.roofType, actual.roofType.name)
     }
 }

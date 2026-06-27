@@ -54,6 +54,10 @@ android {
     }
 }
 
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
+}
+
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
 }
