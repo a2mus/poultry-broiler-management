@@ -6,6 +6,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -50,7 +51,7 @@ fun HouseDimensionsStep(
 ) {
     val spacing = LocalSpacing.current
 
-    Column(
+    BoxWithConstraints(
         modifier =
             modifier
                 .fillMaxWidth()
@@ -61,94 +62,205 @@ fun HouseDimensionsStep(
                     top = spacing.md,
                     bottom = spacing.xxl,
                 ),
-        verticalArrangement = Arrangement.spacedBy(spacing.md),
     ) {
-        SectionCard(title = stringResource(R.string.wizard_section_structure)) {
-            Column(verticalArrangement = Arrangement.spacedBy(spacing.md)) {
-                NumericInputField(
-                    value = formState.length,
-                    onValueChange = { onIntent(WizardIntent.UpdateLength(it)) },
-                    label = stringResource(R.string.wizard_field_length),
-                    unitLabel = stringResource(R.string.wizard_unit_meters),
-                    errorMessage = formState.fieldErrors[DimensionField.LENGTH],
-                )
-                NumericInputField(
-                    value = formState.width,
-                    onValueChange = { onIntent(WizardIntent.UpdateWidth(it)) },
-                    label = stringResource(R.string.wizard_field_width),
-                    unitLabel = stringResource(R.string.wizard_unit_meters),
-                    errorMessage = formState.fieldErrors[DimensionField.WIDTH],
-                )
-                NumericInputField(
-                    value = formState.wallHeight,
-                    onValueChange = { onIntent(WizardIntent.UpdateWallHeight(it)) },
-                    label = stringResource(R.string.wizard_field_wall_height),
-                    unitLabel = stringResource(R.string.wizard_unit_meters),
-                    errorMessage = formState.fieldErrors[DimensionField.WALL_HEIGHT],
-                )
-                FloorAreaRow(formState)
-            }
-        }
+        val isWide = maxWidth >= 600.dp
 
-        SectionCard(title = stringResource(R.string.wizard_section_preview)) {
-            DimensionPreviewCanvas(
-                length = formState.length.toDoubleOrNull(),
-                width = formState.width.toDoubleOrNull(),
-                orientation = formState.orientation,
-            )
-        }
-
-        SectionCard(title = stringResource(R.string.wizard_section_roof)) {
-            Column(verticalArrangement = Arrangement.spacedBy(spacing.md)) {
-                RoofTypeSelector(
-                    selectedType = formState.roofType,
-                    onSelect = { onIntent(WizardIntent.SelectRoofType(it)) },
-                )
-                AnimatedVisibility(
-                    visible = formState.roofType == RoofType.PITCHED,
-                    enter = fadeIn() + expandVertically(),
-                    exit = fadeOut() + shrinkVertically(),
+        if (isWide) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(spacing.md),
+            ) {
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(spacing.md),
                 ) {
-                    NumericInputField(
-                        value = formState.ridgeHeight,
-                        onValueChange = { onIntent(WizardIntent.UpdateRidgeHeight(it)) },
-                        label = stringResource(R.string.wizard_field_ridge_height),
-                        unitLabel = stringResource(R.string.wizard_unit_meters),
-                        errorMessage = formState.fieldErrors[DimensionField.RIDGE_HEIGHT],
+                    SectionCard(title = stringResource(R.string.wizard_section_structure)) {
+                        Column(verticalArrangement = Arrangement.spacedBy(spacing.md)) {
+                            NumericInputField(
+                                value = formState.length,
+                                onValueChange = { onIntent(WizardIntent.UpdateLength(it)) },
+                                label = stringResource(R.string.wizard_field_length),
+                                unitLabel = stringResource(R.string.wizard_unit_meters),
+                                errorMessage = formState.fieldErrors[DimensionField.LENGTH],
+                            )
+                            NumericInputField(
+                                value = formState.width,
+                                onValueChange = { onIntent(WizardIntent.UpdateWidth(it)) },
+                                label = stringResource(R.string.wizard_field_width),
+                                unitLabel = stringResource(R.string.wizard_unit_meters),
+                                errorMessage = formState.fieldErrors[DimensionField.WIDTH],
+                            )
+                            NumericInputField(
+                                value = formState.wallHeight,
+                                onValueChange = { onIntent(WizardIntent.UpdateWallHeight(it)) },
+                                label = stringResource(R.string.wizard_field_wall_height),
+                                unitLabel = stringResource(R.string.wizard_unit_meters),
+                                errorMessage = formState.fieldErrors[DimensionField.WALL_HEIGHT],
+                            )
+                            FloorAreaRow(formState)
+                        }
+                    }
+
+                    SectionCard(title = stringResource(R.string.wizard_section_preview)) {
+                        DimensionPreviewCanvas(
+                            length = formState.length.toDoubleOrNull(),
+                            width = formState.width.toDoubleOrNull(),
+                            orientation = formState.orientation,
+                        )
+                    }
+
+                    SectionCard(title = stringResource(R.string.wizard_section_orientation)) {
+                        OrientationSelector(
+                            selectedOrientation = formState.orientation,
+                            onSelect = { onIntent(WizardIntent.SelectOrientation(it)) },
+                        )
+                    }
+                }
+
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(spacing.md),
+                ) {
+                    SectionCard(title = stringResource(R.string.wizard_section_roof)) {
+                        Column(verticalArrangement = Arrangement.spacedBy(spacing.md)) {
+                            RoofTypeSelector(
+                                selectedType = formState.roofType,
+                                onSelect = { onIntent(WizardIntent.SelectRoofType(it)) },
+                            )
+                            AnimatedVisibility(
+                                visible = formState.roofType == RoofType.PITCHED,
+                                enter = fadeIn() + expandVertically(),
+                                exit = fadeOut() + shrinkVertically(),
+                            ) {
+                                NumericInputField(
+                                    value = formState.ridgeHeight,
+                                    onValueChange = { onIntent(WizardIntent.UpdateRidgeHeight(it)) },
+                                    label = stringResource(R.string.wizard_field_ridge_height),
+                                    unitLabel = stringResource(R.string.wizard_unit_meters),
+                                    errorMessage = formState.fieldErrors[DimensionField.RIDGE_HEIGHT],
+                                )
+                            }
+                        }
+                    }
+
+                    SectionCard(title = stringResource(R.string.wizard_section_walls)) {
+                        WallMaterialSelector(
+                            selectedMaterial = formState.wallMaterial,
+                            onSelect = { onIntent(WizardIntent.SelectWallMaterial(it)) },
+                        )
+                    }
+
+                    SectionCard(title = stringResource(R.string.wizard_section_floor)) {
+                        FloorTypeSelector(
+                            selectedType = formState.floorType,
+                            onSelect = { onIntent(WizardIntent.SelectFloorType(it)) },
+                        )
+                    }
+
+                    SectionCard(title = stringResource(R.string.wizard_section_insulation)) {
+                        InsulationConfigSection(
+                            selectedType = formState.insulationType,
+                            onSelectType = { onIntent(WizardIntent.SelectInsulationType(it)) },
+                            thickness = formState.insulationThickness,
+                            onThicknessChange = { onIntent(WizardIntent.UpdateInsulationThickness(it)) },
+                            thicknessError = formState.fieldErrors[DimensionField.INSULATION_THICKNESS],
+                        )
+                    }
+                }
+            }
+        } else {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(spacing.md),
+            ) {
+                SectionCard(title = stringResource(R.string.wizard_section_structure)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(spacing.md)) {
+                        NumericInputField(
+                            value = formState.length,
+                            onValueChange = { onIntent(WizardIntent.UpdateLength(it)) },
+                            label = stringResource(R.string.wizard_field_length),
+                            unitLabel = stringResource(R.string.wizard_unit_meters),
+                            errorMessage = formState.fieldErrors[DimensionField.LENGTH],
+                        )
+                        NumericInputField(
+                            value = formState.width,
+                            onValueChange = { onIntent(WizardIntent.UpdateWidth(it)) },
+                            label = stringResource(R.string.wizard_field_width),
+                            unitLabel = stringResource(R.string.wizard_unit_meters),
+                            errorMessage = formState.fieldErrors[DimensionField.WIDTH],
+                        )
+                        NumericInputField(
+                            value = formState.wallHeight,
+                            onValueChange = { onIntent(WizardIntent.UpdateWallHeight(it)) },
+                            label = stringResource(R.string.wizard_field_wall_height),
+                            unitLabel = stringResource(R.string.wizard_unit_meters),
+                            errorMessage = formState.fieldErrors[DimensionField.WALL_HEIGHT],
+                        )
+                        FloorAreaRow(formState)
+                    }
+                }
+
+                SectionCard(title = stringResource(R.string.wizard_section_preview)) {
+                    DimensionPreviewCanvas(
+                        length = formState.length.toDoubleOrNull(),
+                        width = formState.width.toDoubleOrNull(),
+                        orientation = formState.orientation,
+                    )
+                }
+
+                SectionCard(title = stringResource(R.string.wizard_section_roof)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(spacing.md)) {
+                        RoofTypeSelector(
+                            selectedType = formState.roofType,
+                            onSelect = { onIntent(WizardIntent.SelectRoofType(it)) },
+                        )
+                        AnimatedVisibility(
+                            visible = formState.roofType == RoofType.PITCHED,
+                            enter = fadeIn() + expandVertically(),
+                            exit = fadeOut() + shrinkVertically(),
+                        ) {
+                            NumericInputField(
+                                value = formState.ridgeHeight,
+                                onValueChange = { onIntent(WizardIntent.UpdateRidgeHeight(it)) },
+                                label = stringResource(R.string.wizard_field_ridge_height),
+                                unitLabel = stringResource(R.string.wizard_unit_meters),
+                                errorMessage = formState.fieldErrors[DimensionField.RIDGE_HEIGHT],
+                            )
+                        }
+                    }
+                }
+
+                SectionCard(title = stringResource(R.string.wizard_section_orientation)) {
+                    OrientationSelector(
+                        selectedOrientation = formState.orientation,
+                        onSelect = { onIntent(WizardIntent.SelectOrientation(it)) },
+                    )
+                }
+
+                SectionCard(title = stringResource(R.string.wizard_section_walls)) {
+                    WallMaterialSelector(
+                        selectedMaterial = formState.wallMaterial,
+                        onSelect = { onIntent(WizardIntent.SelectWallMaterial(it)) },
+                    )
+                }
+
+                SectionCard(title = stringResource(R.string.wizard_section_floor)) {
+                    FloorTypeSelector(
+                        selectedType = formState.floorType,
+                        onSelect = { onIntent(WizardIntent.SelectFloorType(it)) },
+                    )
+                }
+
+                SectionCard(title = stringResource(R.string.wizard_section_insulation)) {
+                    InsulationConfigSection(
+                        selectedType = formState.insulationType,
+                        onSelectType = { onIntent(WizardIntent.SelectInsulationType(it)) },
+                        thickness = formState.insulationThickness,
+                        onThicknessChange = { onIntent(WizardIntent.UpdateInsulationThickness(it)) },
+                        thicknessError = formState.fieldErrors[DimensionField.INSULATION_THICKNESS],
                     )
                 }
             }
-        }
-
-        SectionCard(title = stringResource(R.string.wizard_section_orientation)) {
-            OrientationSelector(
-                selectedOrientation = formState.orientation,
-                onSelect = { onIntent(WizardIntent.SelectOrientation(it)) },
-            )
-        }
-
-        SectionCard(title = stringResource(R.string.wizard_section_walls)) {
-            WallMaterialSelector(
-                selectedMaterial = formState.wallMaterial,
-                onSelect = { onIntent(WizardIntent.SelectWallMaterial(it)) },
-            )
-        }
-
-        SectionCard(title = stringResource(R.string.wizard_section_floor)) {
-            FloorTypeSelector(
-                selectedType = formState.floorType,
-                onSelect = { onIntent(WizardIntent.SelectFloorType(it)) },
-            )
-        }
-
-        SectionCard(title = stringResource(R.string.wizard_section_insulation)) {
-            InsulationConfigSection(
-                selectedType = formState.insulationType,
-                onSelectType = { onIntent(WizardIntent.SelectInsulationType(it)) },
-                thickness = formState.insulationThickness,
-                onThicknessChange = { onIntent(WizardIntent.UpdateInsulationThickness(it)) },
-                thicknessError = formState.fieldErrors[DimensionField.INSULATION_THICKNESS],
-            )
         }
     }
 }

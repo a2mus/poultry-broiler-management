@@ -1,3 +1,5 @@
+@file:Suppress("LongMethod")
+
 package com.poultry.broiler.presentation.home.components
 
 import androidx.compose.animation.core.animateFloatAsState
@@ -218,11 +220,12 @@ private fun StatusIndicator(status: ProjectStatus) {
             ProjectStatus.COMPLETED -> MaterialTheme.colorScheme.tertiary
         }
 
-    val statusText = when (status) {
-        ProjectStatus.DRAFT -> stringResource(R.string.status_draft)
-        ProjectStatus.IN_PROGRESS -> stringResource(R.string.status_in_progress)
-        ProjectStatus.COMPLETED -> stringResource(R.string.status_completed)
-    }.uppercase(Locale.getDefault())
+    val statusText =
+        when (status) {
+            ProjectStatus.DRAFT -> stringResource(R.string.status_draft)
+            ProjectStatus.IN_PROGRESS -> stringResource(R.string.status_in_progress)
+            ProjectStatus.COMPLETED -> stringResource(R.string.status_completed)
+        }.uppercase(Locale.getDefault())
 
     Row(verticalAlignment = Alignment.CenterVertically) {
         Box(

@@ -108,14 +108,15 @@ fun WizardScreen(
                 topBar = {
                     val spacing = LocalSpacing.current
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp)
-                            .padding(horizontal = spacing.md),
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .height(56.dp)
+                                .padding(horizontal = spacing.md),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         IconButton(
-                            onClick = onNavigateBack
+                            onClick = onNavigateBack,
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Close,

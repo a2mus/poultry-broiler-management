@@ -16,16 +16,17 @@ import androidx.compose.ui.graphics.Color
 data class CustomColors(
     val success: Color,
     val warning: Color,
-    val danger: Color
+    val danger: Color,
 )
 
-val LocalCustomColors = staticCompositionLocalOf {
-    CustomColors(
-        success = Color.Unspecified,
-        warning = Color.Unspecified,
-        danger = Color.Unspecified
-    )
-}
+val LocalCustomColors =
+    staticCompositionLocalOf {
+        CustomColors(
+            success = Color.Unspecified,
+            warning = Color.Unspecified,
+            danger = Color.Unspecified,
+        )
+    }
 
 val MaterialTheme.customColors: CustomColors
     @Composable
@@ -102,24 +103,25 @@ fun PoultryTheme(
     content: @Composable () -> Unit,
 ) {
     val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
-    
-    val customColors = if (darkTheme) {
-        CustomColors(
-            success = SleekCarbonDarkSuccess,
-            warning = SleekCarbonDarkWarning,
-            danger = SleekCarbonDarkDanger
-        )
-    } else {
-        CustomColors(
-            success = ForestTealLightSuccess,
-            warning = ForestTealLightWarning,
-            danger = ForestTealLightDanger
-        )
-    }
+
+    val customColors =
+        if (darkTheme) {
+            CustomColors(
+                success = SleekCarbonDarkSuccess,
+                warning = SleekCarbonDarkWarning,
+                danger = SleekCarbonDarkDanger,
+            )
+        } else {
+            CustomColors(
+                success = ForestTealLightSuccess,
+                warning = ForestTealLightWarning,
+                danger = ForestTealLightDanger,
+            )
+        }
 
     CompositionLocalProvider(
         LocalSpacing provides PoultrySpacing(),
-        LocalCustomColors provides customColors
+        LocalCustomColors provides customColors,
     ) {
         MaterialTheme(
             colorScheme = colorScheme,

@@ -1,3 +1,5 @@
+@file:Suppress("LongMethod")
+
 package com.poultry.broiler.presentation.navigation
 
 import androidx.compose.foundation.layout.padding
@@ -11,16 +13,13 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import java.util.Locale
 
 /**
  * Top-level navigation scaffold that wraps the app in a layout direction
  * provider to ensure proper RTL layout mirroring for Arabic locale (FR-020).
  */
 @Composable
-fun MainNavigation(
-    modifier: Modifier = Modifier,
-) {
+fun MainNavigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -29,11 +28,12 @@ fun MainNavigation(
 
     // Resolve current layout direction dynamically from the locale configuration
     val configuration = LocalConfiguration.current
-    val layoutDirection = if (configuration.locales[0].language == "ar") {
-        LayoutDirection.Rtl
-    } else {
-        LayoutDirection.Ltr
-    }
+    val layoutDirection =
+        if (configuration.locales[0].language == "ar") {
+            LayoutDirection.Rtl
+        } else {
+            LayoutDirection.Ltr
+        }
 
     CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
         Scaffold(

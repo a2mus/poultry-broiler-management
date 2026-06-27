@@ -1,3 +1,5 @@
+@file:Suppress("LongMethod")
+
 package com.poultry.broiler.presentation.dashboard
 
 import androidx.compose.foundation.layout.Box
@@ -44,14 +46,15 @@ fun DashboardScreen(
         modifier = modifier.fillMaxSize(),
         topBar = {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp)
-                    .padding(horizontal = spacing.md),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(56.dp)
+                        .padding(horizontal = spacing.md),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 IconButton(
-                    onClick = onNavigateBack
+                    onClick = onNavigateBack,
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -67,12 +70,13 @@ fun DashboardScreen(
                     modifier = Modifier.weight(1f),
                 )
             }
-        }
+        },
     ) { innerPadding ->
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
             contentAlignment = Alignment.Center,
         ) {
             Text(

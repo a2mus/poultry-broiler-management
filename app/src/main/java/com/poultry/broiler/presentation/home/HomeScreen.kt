@@ -274,7 +274,7 @@ private fun ProjectBentoGrid(
         if (projects.isNotEmpty()) {
             item {
                 PerformanceSummaryCard(
-                    onOpenReports = { onProjectClick(projects.first()) }
+                    onOpenReports = { onProjectClick(projects.first()) },
                 )
             }
         }
