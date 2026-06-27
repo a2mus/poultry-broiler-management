@@ -363,6 +363,18 @@ P1 stories first (US1 → US2 → US5 → US6), then P2 stories (US3 → US4 →
 
 **Purpose**: Verify database fix by reinstalling the app on the device.
 
-- [ ] T069 [FIX] Verify app launches successfully: (1) Uninstall old APK from device/emulator via `adb uninstall com.poultry.broiler`, (2) Install latest APK from `app/build/outputs/apk/dev/debug/app-dev-debug.apk`, (3) Launch app and verify it reaches the home screen without crash, (4) Confirm database schema validation passes in logcat.
+- [X] T069 [FIX] Verify app launches successfully: (1) Uninstall old APK from device/emulator via `adb uninstall com.poultry.broiler`, (2) Install latest APK from `app/build/outputs/apk/dev/debug/app-dev-debug.apk`, (3) Launch app and verify it reaches the home screen without crash, (4) Confirm database schema validation passes in logcat. — re-opened/superseded by Phase 14 because Room threw a new schema mismatch on the autoindex.
+
+**Checkpoint**: App launches successfully with zero `FATAL EXCEPTION` in logcat, home screen displays correctly.
+
+---
+
+## Phase 14: Iteration - 2026-06-27 (2)
+
+**Purpose**: Fix Room Database Schema Mismatch (breed_profiles autoindex conflict) in the pre-packaged seed database.
+
+- [X] T070 [FIX] Update `scripts/build-seed-db.sh` to remove the redundant `UNIQUE` column constraint.
+- [X] T071 [FIX] Regenerate the `poultry.db` using the corrected script (via a cross-platform Python script `build-seed-db.py` to ensure correct carriage return line endings and execution on Windows).
+- [ ] T072 [FIX] Verify app launches successfully after database regeneration: (1) Uninstall old APK from device/emulator via `adb uninstall com.poultry.broiler`, (2) Install latest APK from `app/build/outputs/apk/dev/debug/app-dev-debug.apk`, (3) Launch app and verify it reaches the home screen without crash, (4) Confirm database schema validation passes in logcat.
 
 **Checkpoint**: App launches successfully with zero `FATAL EXCEPTION` in logcat, home screen displays correctly.

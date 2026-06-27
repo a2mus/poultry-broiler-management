@@ -19,7 +19,7 @@ PRAGMA foreign_keys=OFF;
 
 CREATE TABLE IF NOT EXISTS breed_profiles (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    breed_name TEXT NOT NULL UNIQUE,
+    breed_name TEXT NOT NULL,
     supplier TEXT NOT NULL,
     growth_targets_json TEXT NOT NULL,
     min_density_kg_m2 REAL NOT NULL,

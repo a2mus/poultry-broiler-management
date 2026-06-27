@@ -434,3 +434,35 @@ None — no architecture or design changes needed. The fix is complete; this is 
 
 - All articles: unaffected — this is a deployment issue, not a code or architecture problem
 - Art 1.2.2 (Offline-First Data Flow): PASS — once the correct APK is installed, the schema will match exactly
+
+---
+
+## Iteration Session 2026-06-27 (2)
+
+### User Feedback
+
+App crashes on startup with `java.lang.IllegalStateException: Pre-packaged database has an invalid schema: breed_profiles(...)` due to index mismatch.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | DATA | P0 | Redundant UNIQUE constraint in table definition creating autoindex conflict |
+
+**Root Cause**: The seed database script `scripts/build-seed-db.sh` defined `breed_name TEXT NOT NULL UNIQUE` on the table column, which caused SQLite to automatically create a unique index named `sqlite_autoindex_breed_profiles_1` for that column. Additionally, the script explicitly ran `CREATE UNIQUE INDEX index_breed_profiles_breed_name`. Room compared the pre-packaged SQLite database against the Room entity specification, which only expects `index_breed_profiles_breed_name` and no autoindexes, leading to schema verification failure.
+
+### Amendments
+
+- **scripts/build-seed-db.sh**: Removed the `UNIQUE` keyword from the `breed_name` column definition in the `CREATE TABLE` query. Uniqueness is fully and correctly enforced by the explicit `index_breed_profiles_breed_name` index.
+
+### New Tasks
+
+- T070 [FIX] Update `scripts/build-seed-db.sh` to remove the redundant `UNIQUE` column constraint.
+- T071 [FIX] Regenerate the `poultry.db` using the corrected script (via a cross-platform Python script `build-seed-db.py` to ensure correct carriage return line endings and execution on Windows).
+- T072 [FIX] Perform clean uninstall of the old app from the device (`adb uninstall com.poultry.broiler`), rebuild the APK, and reinstall.
+
+### Constitution Compliance
+
+- Art 1.2.2 (Offline-First Data Flow): PASS — alignment of seed database with Room expectations ensures correct offline data access.
+- All other articles: unaffected.
+
