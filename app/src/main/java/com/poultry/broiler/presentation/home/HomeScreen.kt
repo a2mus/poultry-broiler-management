@@ -35,6 +35,7 @@ import com.poultry.broiler.presentation.home.components.DeleteConfirmationDialog
 import com.poultry.broiler.presentation.home.components.EditProjectDialog
 import com.poultry.broiler.presentation.home.components.NewProjectDialog
 import com.poultry.broiler.presentation.home.components.NewProjectPlaceholderCard
+import com.poultry.broiler.presentation.home.components.PerformanceSummaryCard
 import com.poultry.broiler.presentation.home.components.ProjectCard
 import com.poultry.broiler.presentation.home.components.ProjectContextMenu
 import com.poultry.broiler.presentation.home.components.ProjectSearchBar
@@ -269,6 +270,13 @@ private fun ProjectBentoGrid(
     ) {
         item {
             NewProjectPlaceholderCard(onClick = onNewProject)
+        }
+        if (projects.isNotEmpty()) {
+            item {
+                PerformanceSummaryCard(
+                    onOpenReports = { onProjectClick(projects.first()) }
+                )
+            }
         }
         items(
             items = projects,

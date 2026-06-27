@@ -75,7 +75,7 @@ fun ProjectCard(
     val spacing = LocalSpacing.current
     var isPressed by remember { mutableStateOf(false) }
     val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.95f else 1f,
+        targetValue = if (isPressed) 0.98f else 1f,
         animationSpec = tween(durationMillis = 100),
         label = "cardScale",
     )
@@ -200,7 +200,7 @@ private fun TypeBadge(type: ProjectType) {
                 .semantics { contentDescription = badgeContentDescription },
     ) {
         Text(
-            text = type.badgeText,
+            text = badgeContentDescription,
             style = MaterialTheme.typography.labelSmall,
             fontWeight = FontWeight.Bold,
             color = contentColor,
@@ -218,6 +218,12 @@ private fun StatusIndicator(status: ProjectStatus) {
             ProjectStatus.COMPLETED -> MaterialTheme.colorScheme.tertiary
         }
 
+    val statusText = when (status) {
+        ProjectStatus.DRAFT -> stringResource(R.string.status_draft)
+        ProjectStatus.IN_PROGRESS -> stringResource(R.string.status_in_progress)
+        ProjectStatus.COMPLETED -> stringResource(R.string.status_completed)
+    }.uppercase(Locale.getDefault())
+
     Row(verticalAlignment = Alignment.CenterVertically) {
         Box(
             modifier =
@@ -228,7 +234,7 @@ private fun StatusIndicator(status: ProjectStatus) {
         )
         Spacer(modifier = Modifier.width(spacing.xxs))
         Text(
-            text = status.displayNameFr,
+            text = statusText,
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

@@ -45,6 +45,11 @@
     <string name="cd_reports_nav">Onglet Rapports</string>
     <string name="cd_health_nav">Onglet Santé</string>
 
+    <!-- Project Status -->
+    <string name="status_draft">Brouillon</string>
+    <string name="status_in_progress">En cours</string>
+    <string name="status_completed">Terminé</string>
+
     <!-- Home Screen -->
     <string name="screen_projects">Projets</string>
     <string name="home_empty_title">Aucun projet</string>

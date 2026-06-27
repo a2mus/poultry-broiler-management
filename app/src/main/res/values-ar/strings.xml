@@ -43,6 +43,11 @@
     <string name="cd_reports_nav">تبويب التقارير</string>
     <string name="cd_health_nav">تبويب الصحة</string>
 
+    <!-- Project Status -->
+    <string name="status_draft">مسودة</string>
+    <string name="status_in_progress">قيد التنفيذ</string>
+    <string name="status_completed">مكتمل</string>
+
     <!-- Home Screen -->
     <string name="screen_projects">المشاريع</string>
     <string name="home_empty_title">لا توجد مشاريع</string>

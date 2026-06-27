@@ -10,6 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.poultry.broiler.presentation.theme.BadgeCornerRadius
+import com.poultry.broiler.presentation.theme.LocalSpacing
 import com.poultry.broiler.presentation.theme.PoultryTheme
 
 @Composable
@@ -18,6 +20,7 @@ fun StatusBadge(
     color: Color = MaterialTheme.colorScheme.primaryContainer,
     modifier: Modifier = Modifier,
 ) {
+    val spacing = LocalSpacing.current
     Text(
         text = text,
         style = MaterialTheme.typography.labelSmall,
@@ -26,9 +29,9 @@ fun StatusBadge(
             modifier
                 .background(
                     color = color,
-                    shape = RoundedCornerShape(8.dp),
+                    shape = RoundedCornerShape(BadgeCornerRadius),
                 )
-                .padding(vertical = 4.dp, horizontal = 8.dp),
+                .padding(vertical = spacing.micro, horizontal = spacing.small),
     )
 }
 
@@ -39,3 +42,4 @@ private fun StatusBadgePreview() {
         StatusBadge(text = "Actif")
     }
 }
+

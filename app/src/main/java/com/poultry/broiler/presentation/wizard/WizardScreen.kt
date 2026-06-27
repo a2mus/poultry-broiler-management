@@ -104,6 +104,7 @@ fun WizardScreen(
             }
             Scaffold(
                 modifier = modifier.fillMaxSize(),
+                containerColor = MaterialTheme.colorScheme.background,
                 topBar = {
                     val spacing = LocalSpacing.current
                     Row(

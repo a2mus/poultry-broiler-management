@@ -41,8 +41,8 @@
 
 **Independent Test**: Verify correct colors/fonts are active in both light and dark mode on base app views.
 
-- [ ] T008 [US1] Update common custom component padding and spacing references in app/src/main/java/com/poultry/broiler/presentation/components/
-- [ ] T009 [US1] Update wizard layout scaffold to use the new Theme.kt color scheme in app/src/main/java/com/poultry/broiler/presentation/wizard/WizardScreen.kt
+- [x] T008 [US1] Update common custom component padding and spacing references in app/src/main/java/com/poultry/broiler/presentation/components/
+- [x] T009 [US1] Update wizard layout scaffold to use the new Theme.kt color scheme in app/src/main/java/com/poultry/broiler/presentation/wizard/WizardScreen.kt
 
 **Checkpoint**: At this point, the baseline theme and styling are verified.
 
@@ -54,9 +54,9 @@
 
 **Independent Test**: Verify that the project dashboard is styled in Bento layout and has the 98% scale long-press animation.
 
-- [ ] T010 [P] [US2] Redesign project item card composable in app/src/main/java/com/poultry/broiler/presentation/home/components/ProjectCard.kt
-- [ ] T011 [P] [US2] Implement active statistics summary banner in app/src/main/java/com/poultry/broiler/presentation/home/components/PerformanceSummaryCard.kt
-- [ ] T012 [US2] Update home screen layout to Bento Grid in app/src/main/java/com/poultry/broiler/presentation/home/HomeScreen.kt
+- [x] T010 [P] [US2] Redesign project item card composable in app/src/main/java/com/poultry/broiler/presentation/home/components/ProjectCard.kt
+- [x] T011 [P] [US2] Implement active statistics summary banner in app/src/main/java/com/poultry/broiler/presentation/home/components/PerformanceSummaryCard.kt
+- [x] T012 [US2] Update home screen layout to Bento Grid in app/src/main/java/com/poultry/broiler/presentation/home/HomeScreen.kt
 
 **Checkpoint**: Bento Grid Home Screen should be fully functional and visually aligned.
 
@@ -83,9 +83,9 @@
 
 **Independent Test**: Switch system language to Arabic and check that the navigation menu, layout orientation, and wizard buttons are mirrored.
 
-- [ ] T017 [US4] Implement layout direction wrapper for RTL support in app/src/main/java/com/poultry/broiler/presentation/navigation/MainNavigation.kt
-- [ ] T018 [P] [US4] Translate and add Arabic string properties in app/src/main/res/values-ar/strings.xml
-- [ ] T019 [P] [US4] Translate and add French string properties in app/src/main/res/values-fr/strings.xml
+- [x] T017 [US4] Implement layout direction wrapper for RTL support in app/src/main/java/com/poultry/broiler/presentation/navigation/MainNavigation.kt
+- [x] T018 [P] [US4] Translate and add Arabic string properties in app/src/main/res/values-ar/strings.xml
+- [x] T019 [P] [US4] Translate and add French string properties in app/src/main/res/values-fr/strings.xml
 
 **Checkpoint**: App localization and RTL mirroring behave correctly.
 
