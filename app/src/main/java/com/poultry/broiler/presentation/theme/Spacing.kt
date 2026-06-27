@@ -15,6 +15,13 @@ import androidx.compose.ui.unit.dp
  * - lg  = 24dp
  * - xl  = 32dp
  * - xxl = 48dp
+ *
+ * Aliases for design system alignment:
+ * - micro = 4dp
+ * - small = 8dp
+ * - medium = 16dp
+ * - large = 24dp
+ * - baseline = 8dp
  */
 data class PoultrySpacing(
     val xxs: Dp = 4.dp,
@@ -24,6 +31,13 @@ data class PoultrySpacing(
     val lg: Dp = 24.dp,
     val xl: Dp = 32.dp,
     val xxl: Dp = 48.dp,
+
+    // Design system alignments
+    val micro: Dp = 4.dp,
+    val small: Dp = 8.dp,
+    val medium: Dp = 16.dp,
+    val large: Dp = 24.dp,
+    val baseline: Dp = 8.dp
 )
 
 val LocalSpacing = staticCompositionLocalOf { PoultrySpacing() }

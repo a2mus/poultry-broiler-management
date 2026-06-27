@@ -6,6 +6,31 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
+
+/**
+ * Custom functional colors not covered by standard Material 3 color schemes.
+ */
+data class CustomColors(
+    val success: Color,
+    val warning: Color,
+    val danger: Color
+)
+
+val LocalCustomColors = staticCompositionLocalOf {
+    CustomColors(
+        success = Color.Unspecified,
+        warning = Color.Unspecified,
+        danger = Color.Unspecified
+    )
+}
+
+val MaterialTheme.customColors: CustomColors
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalCustomColors.current
 
 private val LightColorScheme =
     lightColorScheme(
@@ -77,8 +102,25 @@ fun PoultryTheme(
     content: @Composable () -> Unit,
 ) {
     val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+    
+    val customColors = if (darkTheme) {
+        CustomColors(
+            success = SleekCarbonDarkSuccess,
+            warning = SleekCarbonDarkWarning,
+            danger = SleekCarbonDarkDanger
+        )
+    } else {
+        CustomColors(
+            success = ForestTealLightSuccess,
+            warning = ForestTealLightWarning,
+            danger = ForestTealLightDanger
+        )
+    }
 
-    CompositionLocalProvider(LocalSpacing provides PoultrySpacing()) {
+    CompositionLocalProvider(
+        LocalSpacing provides PoultrySpacing(),
+        LocalCustomColors provides customColors
+    ) {
         MaterialTheme(
             colorScheme = colorScheme,
             typography = PoultryTypography,
