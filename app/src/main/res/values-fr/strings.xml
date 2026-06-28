@@ -45,6 +45,11 @@
     <string name="cd_reports_nav">Onglet Rapports</string>
     <string name="cd_health_nav">Onglet Santé</string>
 
+    <!-- Project Status -->
+    <string name="status_draft">Brouillon</string>
+    <string name="status_in_progress">En cours</string>
+    <string name="status_completed">Terminé</string>
+
     <!-- Home Screen -->
     <string name="screen_projects">Projets</string>
     <string name="home_empty_title">Aucun projet</string>
@@ -103,4 +108,160 @@
     <string name="screen_design_stub">Conception\nBientôt disponible</string>
     <string name="screen_reports_stub">Rapports\nBientôt disponible</string>
     <string name="screen_health_stub">Santé\nBientôt disponible</string>
+
+    <!-- Wizard (Feature #003) -->
+    <string name="wizard_step_indicator">Étape %1$d/%2$d</string>
+    <string name="wizard_button_previous">Précédent</string>
+    <string name="wizard_button_next">Suivant</string>
+
+    <!-- Wizard Step 1: House Dimensions -->
+    <string name="wizard_step1_title">Dimensions du bâtiment</string>
+    <string name="wizard_section_structure">Structure</string>
+    <string name="wizard_section_roof">Toiture</string>
+    <string name="wizard_section_walls">Murs</string>
+    <string name="wizard_section_floor">Sol</string>
+    <string name="wizard_section_insulation">Isolation</string>
+    <string name="wizard_section_orientation">Orientation</string>
+    <string name="wizard_section_preview">Aperçu 2D</string>
+
+    <string name="wizard_field_length">Longueur</string>
+    <string name="wizard_field_width">Largeur</string>
+    <string name="wizard_field_wall_height">Hauteur des murs</string>
+    <string name="wizard_field_ridge_height">Hauteur de faîtage</string>
+    <string name="wizard_field_insulation_thickness">Épaisseur</string>
+    <string name="wizard_field_floor_area">Surface au sol</string>
+
+    <string name="wizard_unit_meters">m</string>
+    <string name="wizard_unit_millimeters">mm</string>
+    <string name="wizard_unit_square_meters">m²</string>
+
+    <string name="wizard_floor_area_format">%1$.2f m²</string>
+
+    <!-- Wizard Roof Type Selectors -->
+    <string name="wizard_roof_type_flat">Toit plat</string>
+    <string name="wizard_roof_type_pitched">Toit à pignon</string>
+    <string name="wizard_roof_type_arched">Toit voûté</string>
+
+    <!-- Wizard Wall Material Selectors -->
+    <string name="wizard_wall_material_block">Parpaing</string>
+    <string name="wizard_wall_material_steel">Acier</string>
+    <string name="wizard_wall_material_prefab">Préfabriqué</string>
+
+    <!-- Wizard Floor Type Selectors -->
+    <string name="wizard_floor_type_concrete">Béton</string>
+    <string name="wizard_floor_type_dirt">Terre</string>
+    <string name="wizard_floor_type_slat">Caillebotis</string>
+
+    <!-- Wizard Insulation Type Selectors -->
+    <string name="wizard_insulation_type_none">Aucune</string>
+    <string name="wizard_insulation_type_polystyrene">Polystyrène</string>
+    <string name="wizard_insulation_type_polyurethane">Polyuréthane</string>
+    <string name="wizard_insulation_type_mineral_wool">Laine minérale</string>
+
+    <!-- Wizard Orientation -->
+    <string name="wizard_orientation_n">N</string>
+    <string name="wizard_orientation_ne">NE</string>
+    <string name="wizard_orientation_e">E</string>
+    <string name="wizard_orientation_se">SE</string>
+    <string name="wizard_orientation_s">S</string>
+    <string name="wizard_orientation_sw">SW</string>
+    <string name="wizard_orientation_w">W</string>
+    <string name="wizard_orientation_nw">NW</string>
+    <string name="wizard_orientation_selector">Sélecteur d\'orientation</string>
+
+    <!-- Wizard Validation Errors -->
+    <string name="wizard_error_length_required">La longueur est requise</string>
+    <string name="wizard_error_width_required">La largeur est requise</string>
+    <string name="wizard_error_wall_height_required">La hauteur des murs est requise</string>
+    <string name="wizard_error_ridge_height_required">La hauteur de faîtage est requise pour les toits à pignon</string>
+    <string name="wizard_error_ridge_height_not_allowed">La hauteur de faîtage ne s\'applique qu\'aux toits à pignon</string>
+    <string name="wizard_error_insulation_thickness_required">L\'épaisseur d\'isolation est requise</string>
+    <string name="wizard_error_insulation_thickness_not_allowed">Aucune épaisseur n\'est requise pour le type « Aucune »</string>
+    <string name="wizard_error_roof_type_required">Le type de toiture est requis</string>
+    <string name="wizard_error_wall_material_required">Le matériau des murs est requis</string>
+    <string name="wizard_error_floor_type_required">Le type de sol est requis</string>
+    <string name="wizard_error_insulation_type_required">Le type d\'isolation est requis</string>
+    <string name="wizard_error_orientation_required">L\'orientation est requise</string>
+    <string name="wizard_error_value_must_be_positive">La valeur doit être supérieure à 0</string>
+    <string name="wizard_error_length_exceeds_max">La valeur ne doit pas dépasser 500m</string>
+    <string name="wizard_error_width_exceeds_max">La valeur ne doit pas dépasser 100m</string>
+    <string name="wizard_error_wall_height_exceeds_max">La hauteur des murs ne doit pas dépasser 15m</string>
+    <string name="wizard_error_ridge_height_exceeds_max">La hauteur de faîtage ne doit pas dépasser 20m</string>
+    <string name="wizard_error_insulation_thickness_exceeds_max">L\'épaisseur ne doit pas dépasser 500mm</string>
+
+    <!-- Wizard Persistence Errors -->
+    <string name="wizard_save_error">Échec de l\'enregistrement. Réessayez.</string>
+
+    <!-- Wizard Content Descriptions -->
+    <string name="cd_wizard_step_indicator">Étape actuelle du wizard</string>
+    <string name="cd_wizard_previous_button">Revenir à l\'étape précédente</string>
+    <string name="cd_wizard_next_button">Passer à l\'étape suivante</string>
+    <string name="cd_wizard_preview_canvas">Aperçu 2D du bâtiment</string>
+    <string name="cd_wizard_compass">Boussole d\'orientation</string>
+
+    <!-- Blueprint Legend -->
+    <string name="blueprint_legend_title">Légende Technique (2D)</string>
+    <string name="blueprint_legend_fans">Ventilateurs</string>
+    <string name="blueprint_legend_heaters">Radiants (Chauffage)</string>
+    <string name="blueprint_legend_cooling_pads">Panneaux Cool</string>
+    <string name="blueprint_legend_feeders">Mangeoires</string>
+    <string name="blueprint_legend_drinkers">Pipettes (Eau)</string>
+
+    <!-- Health / Risk Screen -->
+    <string name="welfare_checklist_title">Liste de Contrôle Conformité UE</string>
+    <string name="welfare_item_1">Accès permanent à de l\'eau propre et fraîche</string>
+    <string name="welfare_item_2">Litière sèche, friable et de qualité satisfaisante</string>
+    <string name="welfare_item_3">Éclairage minimum de 20 lux avec cycle nycthéméral</string>
+    <string name="welfare_item_4">Niveau sonore continu inférieur à 85 dB</string>
+    <string name="welfare_item_5">Ventilation minimale de renouvellement d\'air opérationnelle</string>
+
+    <string name="sensor_title_temperature">Température</string>
+    <string name="sensor_title_humidity">Humidité</string>
+    <string name="sensor_title_co2">Qualité de l\'Air (CO₂)</string>
+    <string name="sensor_status_normal">NORMAL</string>
+    <string name="sensor_status_warning">ATTENTION</string>
+
+    <string name="risk_status_conforming">CONFORME</string>
+    <string name="risk_status_warning">À SURVEILLER</string>
+    <string name="risk_status_danger">RISQUE ÉLEVÉ</string>
+
+    <!-- Financial / Simulation Screen -->
+    <string name="financial_title">Analyse &amp; Simulation Financière</string>
+    <string name="financial_upgrades_title">Améliorations Techniques Recommandées</string>
+    <string name="financial_opex_format">%1$s / cycle</string>
+    <string name="financial_profit_format">%1$s / an</string>
+    <string name="financial_capex_title">Investissement CapEx</string>
+    <string name="financial_opex_title">Charges OpEx / Cycle</string>
+    <string name="financial_net_profit_title">Bénéfice Net Annuel Estimé</string>
+    <string name="financial_cycles_title">Cycles de Bandes par An</string>
+    <string name="financial_cycles_value">%1$d cycles / an</string>
+    <string name="financial_cycles_hint">Faites glisser pour simuler l\'impact des rotations de bandes sur les profits annuels.</string>
+    <string name="financial_roi_chart_title">Évolution du Cash-Flow &amp; Retour sur Investissement</string>
+    <string name="financial_roi_year_label">An %1$d</string>
+
+    <string name="upgrade_1_title">Isolation de toiture haute perf.</string>
+    <string name="upgrade_1_current">R-12 Polystyrène (vétuste)</string>
+    <string name="upgrade_1_proposed">R-28 Polyuréthane projeté</string>
+    <string name="upgrade_1_cost">450 000 DZD</string>
+    <string name="upgrade_1_payback">1.5 ans</string>
+
+    <string name="upgrade_2_title">Ventilation dynamique EC Fan</string>
+    <string name="upgrade_2_current">10x Ventilateurs standard 1.5 CV</string>
+    <string name="upgrade_2_proposed">8x EC Fan progressif 1.2 CV</string>
+    <string name="upgrade_2_cost">600 000 DZD</string>
+    <string name="upgrade_2_payback">2.1 ans</string>
+
+    <string name="upgrade_3_title">Éclairage LED à intensité variable</string>
+    <string name="upgrade_3_current">Néons fluorescents</string>
+    <string name="upgrade_3_proposed">LED 20 lux gradable</string>
+    <string name="upgrade_3_cost">180 000 DZD</string>
+    <string name="upgrade_3_payback">0.8 ans</string>
+
+    <!-- Upgrades / Recommendations -->
+    <string name="upgrade_priority_critical">CRITIQUE</string>
+    <string name="upgrade_priority_high">ÉLEVÉ</string>
+    <string name="upgrade_priority_medium">MOYEN</string>
+    <string name="upgrade_label_current">Actuel</string>
+    <string name="upgrade_label_proposed">Proposé</string>
+    <string name="upgrade_cost_roi_format">Coût : %1$s | ROI : %2$s</string>
 </resources>

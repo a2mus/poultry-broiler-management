@@ -8,7 +8,6 @@ import com.poultry.broiler.domain.model.ProjectType
  * Events flow from UI → ViewModel via [HomeViewModel.onIntent].
  */
 sealed class HomeIntent {
-
     /** Create a new project (FR-002). */
     data class CreateProject(
         val name: String,

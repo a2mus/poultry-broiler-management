@@ -10,11 +10,12 @@ import javax.inject.Inject
  *
  * Delegates to [ProjectRepository.getAllProjectsSortedByModified].
  */
-class GetProjectsUseCase @Inject constructor(
-    private val repository: ProjectRepository,
-) {
-
-    operator fun invoke(): Flow<List<Project>> {
-        return repository.getAllProjectsSortedByModified()
+class GetProjectsUseCase
+    @Inject
+    constructor(
+        private val repository: ProjectRepository,
+    ) {
+        operator fun invoke(): Flow<List<Project>> {
+            return repository.getAllProjectsSortedByModified()
+        }
     }
-}

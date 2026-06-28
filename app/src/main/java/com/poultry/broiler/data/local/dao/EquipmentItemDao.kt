@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface EquipmentItemDao {
-
     @Query("SELECT * FROM equipment_items ORDER BY category ASC, name ASC")
     fun getAll(): Flow<List<EquipmentItemEntity>>
 

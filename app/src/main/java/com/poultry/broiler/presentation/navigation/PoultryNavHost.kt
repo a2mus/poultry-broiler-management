@@ -62,12 +62,14 @@ fun PoultryNavHost(
 
         composable(
             route = NavRoute.Wizard.route,
-            arguments = listOf(
-                navArgument(NavRoute.ARG_PROJECT_ID) { type = NavType.StringType },
-            ),
+            arguments =
+                listOf(
+                    navArgument(NavRoute.ARG_PROJECT_ID) { type = NavType.StringType },
+                ),
         ) { backStackEntry ->
-            val projectId = backStackEntry.arguments
-                ?.getString(NavRoute.ARG_PROJECT_ID).orEmpty()
+            val projectId =
+                backStackEntry.arguments
+                    ?.getString(NavRoute.ARG_PROJECT_ID).orEmpty()
             WizardScreen(
                 projectId = projectId,
                 onNavigateBack = { navController.popBackStack() },
@@ -76,11 +78,18 @@ fun PoultryNavHost(
 
         composable(
             route = NavRoute.Dashboard.route,
-            arguments = listOf(
-                navArgument(NavRoute.ARG_PROJECT_ID) { type = NavType.StringType },
-            ),
-        ) {
-            DashboardScreen()
+            arguments =
+                listOf(
+                    navArgument(NavRoute.ARG_PROJECT_ID) { type = NavType.StringType },
+                ),
+        ) { backStackEntry ->
+            val projectId =
+                backStackEntry.arguments
+                    ?.getString(NavRoute.ARG_PROJECT_ID).orEmpty()
+            DashboardScreen(
+                projectId = projectId,
+                onNavigateBack = { navController.popBackStack() },
+            )
         }
 
         // ── Legacy Routes ───────────────────────────────────────

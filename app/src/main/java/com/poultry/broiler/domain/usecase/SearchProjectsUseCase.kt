@@ -12,11 +12,12 @@ import javax.inject.Inject
  * Delegates to [ProjectRepository.searchProjects].
  * The ViewModel applies a 300 ms debounce before invoking this UseCase.
  */
-class SearchProjectsUseCase @Inject constructor(
-    private val repository: ProjectRepository,
-) {
-
-    operator fun invoke(query: String): Flow<List<Project>> {
-        return repository.searchProjects(query)
+class SearchProjectsUseCase
+    @Inject
+    constructor(
+        private val repository: ProjectRepository,
+    ) {
+        operator fun invoke(query: String): Flow<List<Project>> {
+            return repository.searchProjects(query)
+        }
     }
-}

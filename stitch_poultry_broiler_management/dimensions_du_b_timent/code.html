@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriManage Pro - Dimensions du Bâtiment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#6e4300",
+                    "warning": "#D4AC0D",
+                    "tertiary-fixed-dim": "#6edc8f",
+                    "on-tertiary-fixed-variant": "#005228",
+                    "tertiary-fixed": "#8af9a9",
+                    "dark-background": "#0C1013",
+                    "surface-tint": "#006b5f",
+                    "outline-variant": "#bdc9c5",
+                    "on-surface-variant": "#3e4946",
+                    "primary-container": "#1e8275",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#131d24",
+                    "secondary-container": "#fcae49",
+                    "on-secondary-fixed-variant": "#663e00",
+                    "light-surface-variant": "#E1E4E7",
+                    "dark-success": "#27AE60",
+                    "outline": "#6e7976",
+                    "secondary": "#865300",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#99f3e3",
+                    "dark-primary": "#2ECC71",
+                    "dark-surface": "#171F26",
+                    "secondary-fixed-dim": "#ffb963",
+                    "on-primary-fixed-variant": "#005047",
+                    "primary-fixed-dim": "#7dd6c7",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#dae3ee",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#e6effa",
+                    "surface-bright": "#f7f9ff",
+                    "inverse-primary": "#7dd6c7",
+                    "inverse-surface": "#28313a",
+                    "on-surface": "#131d24",
+                    "dark-warning": "#F1C40F",
+                    "surface-container-low": "#ecf4ff",
+                    "on-secondary-fixed": "#2b1700",
+                    "surface": "#f7f9ff",
+                    "tertiary": "#006a35",
+                    "dark-secondary": "#F39C12",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#d2dbe6",
+                    "dark-danger": "#E74C3C",
+                    "on-tertiary-fixed": "#00210c",
+                    "on-primary-container": "#f2fffb",
+                    "tertiary-container": "#008645",
+                    "background": "#f7f9ff",
+                    "primary": "#00685c",
+                    "on-tertiary-container": "#f4fff2",
+                    "error": "#ba1a1a",
+                    "light-surface": "#EDEFF1",
+                    "dark-surface-variant": "#242F3A",
+                    "secondary-fixed": "#ffddb9",
+                    "on-primary-fixed": "#00201c",
+                    "light-background": "#F5F7F8",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dae3ee",
+                    "inverse-on-surface": "#e8f2fd",
+                    "danger": "#CB4335",
+                    "surface-container-high": "#e0e9f4",
+                    "success": "#229954"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "large": "24px",
+                    "small": "8px",
+                    "medium": "16px",
+                    "micro": "4px",
+                    "baseline": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "numeric-data": ["Inter"],
+                    "title-md": ["Outfit"],
+                    "display-lg": ["Outfit"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "numeric-data": ["15px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "title-md": ["20px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "22px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .ripple-effect:active {
+            background-size: 100%;
+            transition: background 0s;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background min-h-screen pb-24">
+<!-- Top Navigation Anchor -->
+<header class="w-full top-0 sticky z-50 bg-surface shadow-sm flex justify-between items-center px-large py-medium">
+<div class="flex items-center gap-medium">
+<button class="material-symbols-outlined text-primary hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-150">menu</button>
+<h1 class="font-display-lg text-display-lg text-primary">AgriManage Pro</h1>
+</div>
+<div class="flex items-center gap-medium">
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1 rounded-full">Étape 1/4</span>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a modern agricultural manager in a clean, high-tech office environment. The person is wearing a subtle tech-wear vest over a white shirt, looking confident. The lighting is soft and natural with a shallow depth of field, highlighting the crisp UI aesthetic of the AgriManage Pro system. The background is a blurred farm vista seen through a large window." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClTyMlQZfcGikCZWTw_vSAzn2D1BZr_mOkEWUBK9rRaauEEy_HKslD6Qo4_BNi-sgXQJWKGAQ8gca4DxhLcXRBN0FsfDXHvuYaOaZ6SpMQC4uX5VxgX46vSqGvDDp3pg_E6vhesSZ_8jt7UHQOJdqDExtqVNEC93WTpi-iFs7wdXEgxrVTZVy9-J9ODWtkCHf6gHdhw1BVbOorfX2pzgpDF8BbvfZyHfPO_rMTD5Q18zj0xl8EZQFg1FGK4VDWIIfA3nx2WKz9qArc"/>
+</div>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-medium py-large">
+<div class="mb-large">
+<h2 class="font-display-lg text-display-lg text-on-surface mb-2">Dimensions du Bâtiment</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Veuillez saisir les mesures structurelles pour l'analyse de capacité.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-medium">
+<!-- Main Input Section: Bento Grid Left -->
+<div class="md:col-span-8 flex flex-col gap-medium">
+<!-- Dimensions Card -->
+<div class="glass-card rounded-xl p-large shadow-sm">
+<div class="flex items-center gap-small mb-medium">
+<span class="material-symbols-outlined text-primary">straighten</span>
+<h3 class="font-title-md text-title-md">Mesures Structurelles</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-medium">
+<div class="flex flex-col gap-micro">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Longueur</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-outline-variant rounded-lg px-medium py-3 text-numeric-data focus:ring-2 focus:ring-primary focus:border-primary transition-all" id="longueur" type="number" value="120"/>
+<span class="absolute right-medium top-3 text-on-surface-variant font-numeric-data">m</span>
+</div>
+</div>
+<div class="flex flex-col gap-micro">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Largeur</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-outline-variant rounded-lg px-medium py-3 text-numeric-data focus:ring-2 focus:ring-primary focus:border-primary transition-all" id="largeur" type="number" value="20"/>
+<span class="absolute right-medium top-3 text-on-surface-variant font-numeric-data">m</span>
+</div>
+</div>
+<div class="flex flex-col gap-micro">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Hauteur des murs</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-outline-variant rounded-lg px-medium py-3 text-numeric-data focus:ring-2 focus:ring-primary focus:border-primary transition-all" id="hauteur" step="0.1" type="number" value="4.5"/>
+<span class="absolute right-medium top-3 text-on-surface-variant font-numeric-data">m</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Isolation & Roof: Bento Grid Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-medium">
+<!-- Isolation -->
+<div class="bg-surface rounded-xl p-medium border border-outline-variant">
+<div class="flex items-center gap-small mb-medium">
+<span class="material-symbols-outlined text-secondary">layers</span>
+<h3 class="font-title-md text-title-md">Isolation des Murs</h3>
+</div>
+<div class="flex flex-col gap-small">
+<label class="flex items-center p-3 rounded-lg border border-outline-variant bg-surface-container-lowest cursor-pointer hover:bg-surface-container-low transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary-container/10">
+<input checked="" class="text-primary focus:ring-primary mr-3" name="insulation" type="radio" value="pref"/>
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface font-bold">Préfabriqué</span>
+<span class="text-xs text-on-surface-variant">Panneaux sandwich isolés</span>
+</div>
+</label>
+<label class="flex items-center p-3 rounded-lg border border-outline-variant bg-surface-container-lowest cursor-pointer hover:bg-surface-container-low transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary-container/10">
+<input class="text-primary focus:ring-primary mr-3" name="insulation" type="radio" value="bloc"/>
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface font-bold">Bloc</span>
+<span class="text-xs text-on-surface-variant">Béton cellulaire ou brique</span>
+</div>
+</label>
+<label class="flex items-center p-3 rounded-lg border border-outline-variant bg-surface-container-lowest cursor-pointer hover:bg-surface-container-low transition-colors has-[:checked]:border-primary has-[:checked]:bg-primary-container/10">
+<input class="text-primary focus:ring-primary mr-3" name="insulation" type="radio" value="acier"/>
+<div class="flex flex-col">
+<span class="font-body-md text-on-surface font-bold">Acier</span>
+<span class="text-xs text-on-surface-variant">Tôle sans isolation thermique</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Roof Type -->
+<div class="bg-surface rounded-xl p-medium border border-outline-variant">
+<div class="flex items-center gap-small mb-medium">
+<span class="material-symbols-outlined text-secondary">roofing</span>
+<h3 class="font-title-md text-title-md">Type de Toit</h3>
+</div>
+<div class="grid grid-cols-1 gap-small">
+<button class="flex items-center gap-medium p-4 rounded-xl border-2 border-primary bg-primary-container/10 text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined text-3xl">change_history</span>
+<div class="text-left">
+<span class="block font-bold">À Pignon</span>
+<span class="text-xs text-on-surface-variant">Standard incliné</span>
+</div>
+</button>
+<button class="flex items-center gap-medium p-4 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:border-primary/50 transition-all active:scale-95">
+<span class="material-symbols-outlined text-3xl">horizontal_rule</span>
+<div class="text-left">
+<span class="block font-bold">Plat</span>
+<span class="text-xs">Toiture horizontale</span>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Visualization: Bento Grid Right (Sticky) -->
+<div class="md:col-span-4">
+<div class="sticky top-24 flex flex-col gap-medium">
+<!-- Surface Estimate -->
+<div class="bg-primary text-on-primary rounded-2xl p-large shadow-lg flex flex-col items-center justify-center text-center">
+<span class="font-label-sm text-label-sm opacity-80 uppercase tracking-widest mb-2">Surface Totale Estimée</span>
+<div class="flex items-baseline gap-micro">
+<span class="font-display-lg text-5xl" id="surface-val">2,400</span>
+<span class="font-title-md text-title-md">m²</span>
+</div>
+<div class="mt-large w-full h-1 bg-on-primary/20 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-fixed w-3/4 transition-all duration-500" id="capacity-indicator"></div>
+</div>
+<span class="mt-2 text-xs opacity-75 font-body-md">Capacité optimale pour ~36,000 unités</span>
+</div>
+<!-- 3D/2D Preview Box -->
+<div class="bg-surface-variant rounded-xl aspect-square overflow-hidden relative shadow-inner border border-outline-variant flex items-center justify-center">
+<div class="absolute top-4 left-4 z-10 bg-surface/80 backdrop-blur px-2 py-1 rounded-md text-[10px] font-bold uppercase text-on-surface-variant">Aperçu 2D</div>
+<!-- Canvas Visual Component -->
+<div class="bg-primary/20 border-2 border-primary relative transition-all duration-300 flex items-center justify-center" id="building-box" style="width: 180px; height: 60px;">
+<span class="text-[10px] font-numeric-data text-primary">Vue en plan</span>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-numeric-data text-on-surface-variant">120m</div>
+<div class="absolute -right-10 top-1/2 -translate-y-1/2 text-xs font-numeric-data text-on-surface-variant rotate-90">20m</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant z-50 py-medium px-large shadow-lg">
+<div class="max-w-4xl mx-auto flex justify-between items-center">
+<button class="flex items-center gap-small text-on-surface-variant font-title-md hover:bg-surface-container-low px-medium py-small rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined">arrow_back</span>
+                Précédent
+            </button>
+<div class="flex gap-micro">
+<div class="w-8 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<button class="bg-primary text-on-primary font-title-md px-large py-small rounded-full shadow-md flex items-center gap-small hover:bg-primary-container transition-all active:scale-95 ripple-effect">
+                Suivant
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</nav>
+<script>
+        // Simple reactive calculator for the UI
+        const longueurInput = document.getElementById('longueur');
+        const largeurInput = document.getElementById('largeur');
+        const surfaceDisplay = document.getElementById('surface-val');
+        const buildingBox = document.getElementById('building-box');
+        const capacityBar = document.getElementById('capacity-indicator');
+
+        function updateCalculations() {
+            const L = parseFloat(longueurInput.value) || 0;
+            const W = parseFloat(largeurInput.value) || 0;
+            const area = L * W;
+            
+            // Format with thousand separator
+            surfaceDisplay.textContent = area.toLocaleString('fr-FR');
+
+            // Dynamic UI update for the building preview box
+            const ratio = L / W;
+            if (ratio > 1) {
+                buildingBox.style.width = '180px';
+                buildingBox.style.height = `${Math.max(20, 180 / ratio)}px`;
+            } else {
+                buildingBox.style.height = '140px';
+                buildingBox.style.width = `${Math.max(20, 140 * ratio)}px`;
+            }
+
+            // Dynamic capacity bar (simulated logic)
+            const cap = Math.min(100, (area / 3000) * 100);
+            capacityBar.style.width = `${cap}%`;
+            
+            // Color shifts for "Capacity Slider" logic mentioned in prompt
+            if (cap > 90) {
+                capacityBar.classList.remove('bg-tertiary-fixed', 'bg-warning');
+                capacityBar.classList.add('bg-danger');
+            } else if (cap > 70) {
+                capacityBar.classList.remove('bg-tertiary-fixed', 'bg-danger');
+                capacityBar.classList.add('bg-warning');
+            } else {
+                capacityBar.classList.remove('bg-warning', 'bg-danger');
+                capacityBar.classList.add('bg-tertiary-fixed');
+            }
+        }
+
+        longueurInput.addEventListener('input', updateCalculations);
+        largeurInput.addEventListener('input', updateCalculations);
+        
+        // Initial run
+        updateCalculations();
+    </script>
+</body></html>

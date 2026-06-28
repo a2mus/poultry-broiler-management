@@ -1,0 +1,44 @@
+schema_version: "1.0"
+
+extension:
+  id: git
+  name: "Git Auto-Commit"
+  version: "1.0.0"
+  description: "Automatically stage and commit changes after Spec Kit commands complete, with per-event enablement and messages."
+  author: local
+  license: MIT
+
+requires:
+  speckit_version: ">=0.2.0"
+
+provides:
+  commands:
+    - name: speckit.git.commit
+      file: commands/speckit.git.commit.md
+      description: "Stage and commit all changes using the message for the triggering event (or a provided override)."
+
+hooks:
+  after_specify:
+    command: speckit.git.commit
+    optional: true
+    description: "Auto-commit after specification"
+  after_plan:
+    command: speckit.git.commit
+    optional: true
+    description: "Auto-commit after planning"
+  after_tasks:
+    command: speckit.git.commit
+    optional: true
+    description: "Auto-commit after task breakdown"
+  after_implement:
+    command: speckit.git.commit
+    optional: true
+    description: "Auto-commit after implementation"
+  after_iterate:
+    command: speckit.git.commit
+    optional: true
+    description: "Auto-commit after iteration"
+
+tags:
+  - "git"
+  - "vcs"

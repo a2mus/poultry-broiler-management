@@ -1,0 +1,32 @@
+# Git Auto-Commit configuration
+#
+# Per-event overrides take precedence over `default`. Each event key accepts:
+#   enabled: <bool>      # whether to auto-commit for this event
+#   message: <string>    # commit message (use %s for the feature slug)
+#
+# Events: after_specify, after_plan, after_tasks, after_implement, after_iterate
+#
+# To enable for all events at once, set `default: true` and leave the
+# event-specific keys unset.
+
+auto_commit:
+  default: false
+
+  after_specify:
+    enabled: true
+    message: "docs(spec): add specification for %s"
+
+  after_plan:
+    enabled: true
+    message: "docs(plan): add implementation plan for %s"
+
+  after_tasks:
+    enabled: false
+
+  after_implement:
+    enabled: true
+    message: "feat(%s): implement tasks"
+
+  after_iterate:
+    enabled: true
+    message: "fix(%s): apply iteration fixes"

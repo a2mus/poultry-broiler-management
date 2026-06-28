@@ -215,6 +215,7 @@
 
 - [X] T064 [REOPEN] [FIX] Move `room { schemaDirectory("$projectDir/schemas") }` block from inside `android { }` to the top level of `app/build.gradle.kts` (same level as `android { }`, `dependencies { }`, `detekt { }`) so the Room Gradle Plugin extension is in scope — re-opened: Room Gradle Plugin approach is not viable in CI environment
 - [X] T065 [FIX] Switch Room schema directory configuration to KSP argument: (1) Remove `room {}` block from `app/build.gradle.kts`, (2) Remove `alias(libs.plugins.room)` from `app/build.gradle.kts`, (3) Remove `alias(libs.plugins.room) apply false` from root `build.gradle.kts`, (4) Remove `room` plugin entry from `gradle/libs.versions.toml`, (5) Add `ksp { arg("room.schemaLocation", "$projectDir/schemas") }` to top level of `app/build.gradle.kts`
+- [X] T066 [FIX] Move `app/src/main/res/font/README.md` out of the `res/` directory hierarchy (e.g., to `app/FONTS.md` or `app/README.md`) so AAPT2 no longer rejects it during `:app:mergeDevDebugResources`
 
 **Checkpoint**: Run `./gradlew assembleDevDebug --no-daemon` — build must pass configuration phase without `Unresolved reference: room` or `Unresolved reference: schemaDirectory` errors.
 
@@ -356,3 +357,49 @@ P1 stories first (US1 → US2 → US5 → US6), then P2 stories (US3 → US4 →
 - Domain layer MUST NOT import Android framework classes (Constitution Art 7.3)
 - All interactive elements MUST have 48dp touch targets (Constitution Art 3.3)
 - NumericInputField enhancement (T023) is backward-compatible — verify no regressions in existing usages
+
+## Phase 12: Iteration - 2026-06-26
+
+**Purpose**: Fix Room Database Schema Mismatch in the pre-packaged seed database.
+
+- [X] T067 [FIX] Updated scripts/build-seed-db.sh: equipment_items category index renamed from `idx_equipment_category` to `index_equipment_items_category` to match Room schema 3.json. (breed_profiles index and both `id` NOT NULL constraints were already correct in the working tree; only the equipment_items index name was outstanding.)
+- [X] T068 [FIX] Regenerated the pre-packaged database app/src/main/assets/seed/poultry.db by running scripts/build-seed-db.sh. Verified indices (`index_breed_profiles_breed_name`, `index_equipment_items_category`) and row counts (2 breed profiles, 6 equipment items) match Room schema 3.json.
+
+**Checkpoint**: Run `./gradlew assembleDevDebug` — APK builds successfully with corrected seed database.
+
+---
+
+## Phase 13: Iteration - 2026-06-27
+
+**Purpose**: Verify database fix by reinstalling the app on the device.
+
+- [X] T069 [FIX] Verify app launches successfully: (1) Uninstall old APK from device/emulator via `adb uninstall com.poultry.broiler`, (2) Install latest APK from `app/build/outputs/apk/dev/debug/app-dev-debug.apk`, (3) Launch app and verify it reaches the home screen without crash, (4) Confirm database schema validation passes in logcat. — re-opened/superseded by Phase 14 because Room threw a new schema mismatch on the autoindex.
+
+**Checkpoint**: App launches successfully with zero `FATAL EXCEPTION` in logcat, home screen displays correctly.
+
+---
+
+## Phase 14: Iteration - 2026-06-27 (2)
+
+**Purpose**: Fix Room Database Schema Mismatch (breed_profiles autoindex conflict) in the pre-packaged seed database.
+
+- [X] T070 [FIX] Update `scripts/build-seed-db.sh` to remove the redundant `UNIQUE` column constraint.
+- [X] T071 [FIX] Regenerate the `poultry.db` using the corrected script (via a cross-platform Python script `build-seed-db.py` to ensure correct carriage return line endings and execution on Windows).
+- [X] T072 [FIX] Verify app launches successfully after database regeneration: (1) Uninstall old APK from device/emulator via `adb uninstall com.poultry.broiler`, (2) Install latest APK from `app/build/outputs/apk/dev/debug/app-dev-debug.apk`, (3) Launch app and verify it reaches the home screen without crash, (4) Confirm database schema validation passes in logcat.
+
+**Checkpoint**: App launches successfully with zero `FATAL EXCEPTION` in logcat, home screen displays correctly.
+
+---
+
+## Phase 15: Iteration - 2026-06-27 (3)
+
+**Purpose**: Fix wizard and dashboard screen access/navigation trap issues.
+
+- [X] T073 [FIX-UI] Hide `BottomNavBar` in `MainActivity` for non-tab destinations (`NavRoute.Wizard` and `NavRoute.Dashboard`) in `app/src/main/java/com/poultry/broiler/MainActivity.kt`.
+- [X] T074 [FIX-UI] Create custom Top App Bar inside `WizardScreen` containing a close `IconButton` (using `Icons.Default.Close`), the wizard title `R.string.screen_wizard`, and the `WizardStepIndicator` badge in `app/src/main/java/com/poultry/broiler/presentation/wizard/WizardScreen.kt`.
+- [X] T075 [FIX] Replace the buggy `LaunchedEffect` in `WizardScreen` with Compose `BackHandler` that goes to the previous step if `currentStep > 1`, otherwise calls `onNavigateBack()` in `app/src/main/java/com/poultry/broiler/presentation/wizard/WizardScreen.kt`.
+- [X] T076 [FIX] Update `DashboardScreen` to accept `projectId` and `onNavigateBack` callback, and wrap it in a `Scaffold` with a custom Top App Bar containing a back arrow `IconButton` (using `Icons.AutoMirrored.Filled.ArrowBack`) and the dashboard title `R.string.screen_dashboard` in `app/src/main/java/com/poultry/broiler/presentation/dashboard/DashboardScreen.kt`.
+- [X] T077 [FIX] Pass `onNavigateBack` and `projectId` from navigation graph to `DashboardScreen` in `app/src/main/java/com/poultry/broiler/presentation/navigation/PoultryNavHost.kt`.
+
+**Checkpoint**: App builds and runs successfully. Navigation to wizard and dashboard hides the bottom navigation bar. Visual close/back buttons in top bars and system back button return to the Home screen cleanly.
+

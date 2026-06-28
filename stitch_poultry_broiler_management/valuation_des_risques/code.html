@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriManage Pro - Évaluation des Risques</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Outfit:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .gauge-container {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .gauge-svg {
+            transform: rotate(-180deg);
+            transform-origin: 50% 50%;
+        }
+
+        .gauge-path-bg {
+            fill: none;
+            stroke: #E1E4E7;
+            stroke-width: 20;
+            stroke-linecap: round;
+        }
+
+        .gauge-path-active {
+            fill: none;
+            stroke: #F39C12; /* Vibrant Orange for MOYEN */
+            stroke-width: 20;
+            stroke-linecap: round;
+            stroke-dasharray: 282.7; /* half of 2*pi*r where r=90 */
+            stroke-dashoffset: 141.35; /* 50% for MOYEN */
+            transition: stroke-dashoffset 1s ease-out;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .status-pulse {
+            animation: pulse-slow 2s infinite ease-in-out;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#6e4300",
+                        "warning": "#D4AC0D",
+                        "tertiary-fixed-dim": "#6edc8f",
+                        "on-tertiary-fixed-variant": "#005228",
+                        "tertiary-fixed": "#8af9a9",
+                        "dark-background": "#0C1013",
+                        "surface-tint": "#006b5f",
+                        "outline-variant": "#bdc9c5",
+                        "on-surface-variant": "#3e4946",
+                        "primary-container": "#1e8275",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#131d24",
+                        "secondary-container": "#fcae49",
+                        "on-secondary-fixed-variant": "#663e00",
+                        "light-surface-variant": "#E1E4E7",
+                        "dark-success": "#27AE60",
+                        "outline": "#6e7976",
+                        "secondary": "#865300",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#99f3e3",
+                        "dark-primary": "#2ECC71",
+                        "dark-surface": "#171F26",
+                        "secondary-fixed-dim": "#ffb963",
+                        "on-primary-fixed-variant": "#005047",
+                        "primary-fixed-dim": "#7dd6c7",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#dae3ee",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#e6effa",
+                        "surface-bright": "#f7f9ff",
+                        "inverse-primary": "#7dd6c7",
+                        "inverse-surface": "#28313a",
+                        "on-surface": "#131d24",
+                        "dark-warning": "#F1C40F",
+                        "surface-container-low": "#ecf4ff",
+                        "on-secondary-fixed": "#2b1700",
+                        "surface": "#f7f9ff",
+                        "tertiary": "#006a35",
+                        "dark-secondary": "#F39C12",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d2dbe6",
+                        "dark-danger": "#E74C3C",
+                        "on-tertiary-fixed": "#00210c",
+                        "on-primary-container": "#f2fffb",
+                        "tertiary-container": "#008645",
+                        "background": "#f7f9ff",
+                        "primary": "#00685c",
+                        "on-tertiary-container": "#f4fff2",
+                        "error": "#ba1a1a",
+                        "light-surface": "#EDEFF1",
+                        "dark-surface-variant": "#242F3A",
+                        "secondary-fixed": "#ffddb9",
+                        "on-primary-fixed": "#00201c",
+                        "light-background": "#F5F7F8",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#dae3ee",
+                        "inverse-on-surface": "#e8f2fd",
+                        "danger": "#CB4335",
+                        "surface-container-high": "#e0e9f4",
+                        "success": "#229954"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "large": "24px",
+                        "small": "8px",
+                        "medium": "16px",
+                        "micro": "4px",
+                        "baseline": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "numeric-data": ["Inter"],
+                        "title-md": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "numeric-data": ["15px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "title-md": ["20px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["16px", {"lineHeight": "22px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-20">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-dark-surface w-full top-0 sticky shadow-sm flex justify-between items-center px-large py-medium z-50">
+<div class="flex items-center gap-medium">
+<button class="material-symbols-outlined text-primary dark:text-dark-primary active:scale-95 duration-150 p-small rounded-full hover:bg-surface-container-high dark:hover:bg-dark-surface-variant transition-colors">menu</button>
+<h1 class="font-display-lg text-display-lg text-primary dark:text-dark-primary">AgriManage Pro</h1>
+</div>
+<div class="flex items-center gap-small">
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a farm manager wearing a tactical outdoors jacket and a cap, set against a blurred background of a modern automated greenhouse with soft natural lighting and high-tech agricultural sensors. The aesthetic is clean, professional, and corporate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCinpcDP-QkIe6wQVR3qzeH26eRMaVp5QXHmzR2kM8D5Z5rRWDzI0a-MzOsnB6uyKOrFxNP7T4MWS3kWifuvSWKy6rjWRyD73qjS6JX2qVS29H2CqVyTCE6zJjYzsmWe_fhMWcklDtI8AnpJyx29qQP00AwHnb8Zd4bCeO3XVo5-TW_W19FmFJI3mS1UDlYZmfSE0hd4ciELzcdWsFsoySBsmsRmkAoX5j2VjGs1i8rxshyxuQs-_dP3T9BBx-V62PjV9p0gJOZwVXp"/>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-large py-large grid grid-cols-1 md:grid-cols-12 gap-large">
+<!-- Header Section -->
+<div class="md:col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-medium border-b border-outline-variant pb-medium mb-small">
+<div>
+<span class="text-primary font-label-sm uppercase tracking-wider">Tableau de bord</span>
+<h2 class="font-display-lg text-display-lg mt-micro text-on-surface">Analyse de Risque</h2>
+</div>
+<div class="flex gap-small">
+<button class="flex items-center gap-micro bg-primary-container text-on-primary-container px-medium py-small rounded-full font-label-sm hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                    Actualiser
+                </button>
+<button class="flex items-center gap-micro border border-outline text-on-surface-variant px-medium py-small rounded-full font-label-sm hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Rapport PDF
+                </button>
+</div>
+</div>
+<!-- Left Column: Global Risk Gauge -->
+<section class="md:col-span-4 flex flex-col gap-large">
+<div class="bg-surface-container-lowest rounded-xl p-large shadow-sm border border-outline-variant flex flex-col items-center">
+<h3 class="font-title-md text-title-md mb-large text-center">Risque Global</h3>
+<div class="gauge-container mb-medium">
+<svg class="gauge-svg" viewbox="0 0 200 120">
+<path class="gauge-path-bg" d="M 10 110 A 90 90 0 0 1 190 110"></path>
+<path class="gauge-path-active" d="M 10 110 A 90 90 0 0 1 190 110"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-end pb-2">
+<span class="font-display-lg text-display-lg text-secondary">MOYEN</span>
+<span class="font-label-sm text-on-surface-variant">Score: 54/100</span>
+</div>
+</div>
+<div class="w-full flex justify-between px-small text-on-surface-variant font-label-sm">
+<span>Faible</span>
+<span>Élevé</span>
+</div>
+<div class="mt-large p-medium bg-secondary-container rounded-lg w-full flex items-start gap-small">
+<span class="material-symbols-outlined text-on-secondary-container">warning</span>
+<p class="text-body-md text-on-secondary-container leading-tight">
+                        Alerte: L'humidité dépasse le seuil optimal dans le Secteur B.
+                    </p>
+</div>
+</div>
+<!-- Risks of Mortality -->
+<div class="bg-surface-container-lowest rounded-xl p-large shadow-sm border border-outline-variant">
+<h3 class="font-title-md text-title-md mb-medium flex items-center gap-small">
+<span class="material-symbols-outlined text-danger">heart_broken</span>
+                    Risques de Mortalité
+                </h3>
+<div class="space-y-medium">
+<div class="flex justify-between items-center p-medium bg-surface rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface">Stress Thermique</span>
+<span class="text-label-sm text-on-surface-variant">Fluctuation de ±4°C</span>
+</div>
+<span class="px-small py-micro bg-secondary-container text-on-secondary-container rounded-full font-label-sm">Modéré</span>
+</div>
+<div class="flex justify-between items-center p-medium bg-surface rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface">Infection Virale</span>
+<span class="text-label-sm text-on-surface-variant">Contrôles sanitaires OK</span>
+</div>
+<span class="px-small py-micro bg-surface-container-high text-on-surface-variant rounded-full font-label-sm">Faible</span>
+</div>
+<div class="flex justify-between items-center p-medium bg-surface rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface">Qualité de l'Eau</span>
+<span class="text-label-sm text-on-surface-variant">Filtration active</span>
+</div>
+<span class="px-small py-micro bg-surface-container-high text-on-surface-variant rounded-full font-label-sm">Faible</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Factors & EU Checklist -->
+<section class="md:col-span-8 flex flex-col gap-large">
+<!-- Environmental Factors Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-medium">
+<div class="bg-surface-container-low p-medium rounded-xl border border-outline-variant">
+<div class="flex justify-between items-center mb-small">
+<span class="material-symbols-outlined text-primary">thermostat</span>
+<span class="status-pulse w-2 h-2 rounded-full bg-success"></span>
+</div>
+<span class="text-on-surface-variant font-label-sm">Température</span>
+<div class="flex items-baseline gap-micro mt-micro">
+<span class="font-display-lg text-display-lg font-numeric-data">24.5</span>
+<span class="text-on-surface-variant font-label-sm">°C</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-medium rounded-xl border border-outline-variant">
+<div class="flex justify-between items-center mb-small">
+<span class="material-symbols-outlined text-secondary">water_drop</span>
+<span class="status-pulse w-2 h-2 rounded-full bg-warning"></span>
+</div>
+<span class="text-on-surface-variant font-label-sm">Humidité</span>
+<div class="flex items-baseline gap-micro mt-micro">
+<span class="font-display-lg text-display-lg font-numeric-data">68</span>
+<span class="text-on-surface-variant font-label-sm">%</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-medium rounded-xl border border-outline-variant">
+<div class="flex justify-between items-center mb-small">
+<span class="material-symbols-outlined text-primary">air</span>
+<span class="status-pulse w-2 h-2 rounded-full bg-success"></span>
+</div>
+<span class="text-on-surface-variant font-label-sm">Qualité de l'Air</span>
+<div class="flex items-baseline gap-micro mt-micro">
+<span class="font-display-lg text-display-lg font-numeric-data">92</span>
+<span class="text-on-surface-variant font-label-sm">AQI</span>
+</div>
+</div>
+</div>
+<!-- EU Checklist Card -->
+<div class="bg-surface-container-lowest rounded-xl p-large shadow-sm border border-outline-variant flex-1">
+<div class="flex justify-between items-center mb-large">
+<div class="flex items-center gap-small">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<h3 class="font-title-md text-title-md">Liste de Contrôle UE (Conformité)</h3>
+</div>
+<span class="bg-tertiary-container text-on-tertiary-container px-medium py-micro rounded-full font-label-sm">
+                        85% Conforme
+                    </span>
+</div>
+<div class="space-y-medium">
+<label class="flex items-start gap-medium p-medium hover:bg-surface-container transition-all cursor-pointer rounded-lg group">
+<input checked="" class="mt-micro h-5 w-5 text-primary border-outline-variant rounded focus:ring-primary-container" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-body-lg text-on-surface group-hover:text-primary transition-colors">Contrôle de la Biosécurité des Entrées</span>
+<span class="text-label-sm text-on-surface-variant">Directive 2024/EC - Section 4.2</span>
+</div>
+</label>
+<label class="flex items-start gap-medium p-medium hover:bg-surface-container transition-all cursor-pointer rounded-lg group">
+<input checked="" class="mt-micro h-5 w-5 text-primary border-outline-variant rounded focus:ring-primary-container" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-body-lg text-on-surface group-hover:text-primary transition-colors">Registre de Médication et Vaccins</span>
+<span class="text-label-sm text-on-surface-variant">Mis à jour il y a 2 heures</span>
+</div>
+</label>
+<label class="flex items-start gap-medium p-medium hover:bg-surface-container transition-all cursor-pointer rounded-lg group">
+<input class="mt-micro h-5 w-5 text-primary border-outline-variant rounded focus:ring-primary-container" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-body-lg text-on-surface group-hover:text-primary transition-colors">Normes d'Espace et Densité Animale</span>
+<span class="text-label-sm text-danger">Action requise: Surpopulation détectée dans le lot 09</span>
+</div>
+</label>
+<label class="flex items-start gap-medium p-medium hover:bg-surface-container transition-all cursor-pointer rounded-lg group">
+<input checked="" class="mt-micro h-5 w-5 text-primary border-outline-variant rounded focus:ring-primary-container" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-body-lg text-on-surface group-hover:text-primary transition-colors">Systèmes de Ventilation de Secours</span>
+<span class="text-label-sm text-on-surface-variant">Test mensuel réussi (01/10)</span>
+</div>
+</label>
+</div>
+<div class="mt-large flex justify-end">
+<button class="bg-primary text-on-primary px-large py-medium rounded-full font-label-sm shadow-md hover:bg-opacity-90 active:scale-95 transition-all">
+                        Soumettre la Déclaration
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface dark:bg-dark-surface border-t border-outline-variant dark:border-dark-surface-variant shadow-lg md:hidden">
+<div class="flex justify-around items-center h-16 w-full max-w-md mx-auto">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-medium py-micro hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="font-label-sm text-label-sm">Projects</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-medium py-micro hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">architecture</span>
+<span class="font-label-sm text-label-sm">Design</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-medium py-micro hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">finance_mode</span>
+<span class="font-label-sm text-label-sm">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-tertiary-container text-on-primary-container dark:text-on-tertiary-container rounded-full px-medium py-micro active:scale-98 duration-200" href="#">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="font-label-sm text-label-sm">Health</span>
+</a>
+</div>
+</nav>
+<!-- Interactive Elements Script -->
+<script>
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+                const totalCount = document.querySelectorAll('input[type="checkbox"]').length;
+                const percentage = Math.round((checkedCount / totalCount) * 100);
+                
+                const complianceBadge = document.querySelector('.bg-tertiary-container');
+                if (complianceBadge) {
+                    complianceBadge.textContent = `${percentage}% Conforme`;
+                }
+            });
+        });
+
+        // Simple scale effect on gauge for interactivity
+        const gauge = document.querySelector('.gauge-path-active');
+        if (gauge) {
+            gauge.addEventListener('mouseenter', () => {
+                gauge.style.strokeWidth = '24';
+            });
+            gauge.addEventListener('mouseleave', () => {
+                gauge.style.strokeWidth = '20';
+            });
+        }
+    </script>
+</body></html>

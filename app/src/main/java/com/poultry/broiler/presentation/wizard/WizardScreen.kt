@@ -1,10 +1,19 @@
 package com.poultry.broiler.presentation.wizard
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -12,13 +21,16 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.poultry.broiler.R
+import com.poultry.broiler.presentation.theme.LocalSpacing
 import com.poultry.broiler.presentation.wizard.components.WizardNavigationBar
 import com.poultry.broiler.presentation.wizard.components.WizardStepIndicator
 
@@ -59,43 +71,71 @@ fun WizardScreen(
         }
     }
 
-    when (state) {
-        WizardUiState.Loading -> Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(
-                text = "…",
-                color = MaterialTheme.colorScheme.onBackground,
-            )
-        }
-        is WizardUiState.Error -> Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center,
-        ) {
-            Text(
-                text = state.message,
-                color = MaterialTheme.colorScheme.error,
-            )
-        }
+    val currentState = state
+    when (currentState) {
+        WizardUiState.Loading ->
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(
+                    text = "…",
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
+            }
+        is WizardUiState.Error ->
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(
+                    text = currentState.message,
+                    color = MaterialTheme.colorScheme.error,
+                )
+            }
         is WizardUiState.Active -> {
-            val active = state
-            // If the user navigates back to Step 1 from a future step
-            // (currently unreachable; closed scaffolding for forward-compat),
-            // we surface the system back handler.
-            LaunchedEffect(active.currentStep) {
-                if (active.currentStep <= 1) {
-                    runCatching { onNavigateBack }
+            val active = currentState
+            BackHandler(enabled = true) {
+                if (active.currentStep > 1) {
+                    viewModel.onIntent(WizardIntent.GoPrevious, projectId)
+                } else {
+                    onNavigateBack()
                 }
             }
             Scaffold(
                 modifier = modifier.fillMaxSize(),
+                containerColor = MaterialTheme.colorScheme.background,
                 topBar = {
-                    WizardStepIndicator(
-                        currentStep = active.currentStep,
-                        totalSteps = active.totalSteps,
-                        modifier = Modifier.fillMaxWidth(),
-                    )
+                    val spacing = LocalSpacing.current
+                    Row(
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .height(56.dp)
+                                .padding(horizontal = spacing.md),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        IconButton(
+                            onClick = onNavigateBack,
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                contentDescription = stringResource(R.string.action_cancel),
+                                tint = MaterialTheme.colorScheme.onSurface,
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(spacing.xs))
+                        Text(
+                            text = stringResource(R.string.screen_wizard),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.weight(1f),
+                        )
+                        WizardStepIndicator(
+                            currentStep = active.currentStep,
+                            totalSteps = active.totalSteps,
+                        )
+                    }
                 },
                 bottomBar = {
                     WizardNavigationBar(
@@ -111,13 +151,15 @@ fun WizardScreen(
                 },
             ) { padding ->
                 when (active.currentStep) {
-                    1 -> HouseDimensionsStep(
-                        formState = active.dimensions,
-                        onIntent = { intent -> viewModel.onIntent(intent, projectId) },
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(padding),
-                    )
+                    1 ->
+                        HouseDimensionsStep(
+                            formState = active.dimensions,
+                            onIntent = { intent -> viewModel.onIntent(intent, projectId) },
+                            modifier =
+                                Modifier
+                                    .fillMaxSize()
+                                    .padding(padding),
+                        )
                     else -> PlaceholderStep(contentPadding = padding)
                 }
             }
@@ -128,9 +170,10 @@ fun WizardScreen(
 @Composable
 private fun PlaceholderStep(contentPadding: PaddingValues) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(contentPadding),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(contentPadding),
         contentAlignment = Alignment.Center,
     ) {
         Text(

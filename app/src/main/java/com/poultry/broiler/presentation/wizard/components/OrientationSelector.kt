@@ -28,28 +28,31 @@ fun OrientationSelector(
     modifier: Modifier = Modifier,
 ) {
     val spacing = LocalSpacing.current
-    val labels: Map<HouseOrientation, Int> = mapOf(
-        HouseOrientation.N to R.string.wizard_orientation_n,
-        HouseOrientation.NE to R.string.wizard_orientation_ne,
-        HouseOrientation.E to R.string.wizard_orientation_e,
-        HouseOrientation.SE to R.string.wizard_orientation_se,
-        HouseOrientation.S to R.string.wizard_orientation_s,
-        HouseOrientation.SW to R.string.wizard_orientation_sw,
-        HouseOrientation.W to R.string.wizard_orientation_w,
-        HouseOrientation.NW to R.string.wizard_orientation_nw,
-    )
-    val topRow = listOf(
-        HouseOrientation.NW,
-        HouseOrientation.N,
-        HouseOrientation.NE,
-        HouseOrientation.E,
-    )
-    val bottomRow = listOf(
-        HouseOrientation.W,
-        HouseOrientation.S,
-        HouseOrientation.SW,
-        HouseOrientation.SE,
-    )
+    val labels: Map<HouseOrientation, Int> =
+        mapOf(
+            HouseOrientation.N to R.string.wizard_orientation_n,
+            HouseOrientation.NE to R.string.wizard_orientation_ne,
+            HouseOrientation.E to R.string.wizard_orientation_e,
+            HouseOrientation.SE to R.string.wizard_orientation_se,
+            HouseOrientation.S to R.string.wizard_orientation_s,
+            HouseOrientation.SW to R.string.wizard_orientation_sw,
+            HouseOrientation.W to R.string.wizard_orientation_w,
+            HouseOrientation.NW to R.string.wizard_orientation_nw,
+        )
+    val topRow =
+        listOf(
+            HouseOrientation.NW,
+            HouseOrientation.N,
+            HouseOrientation.NE,
+            HouseOrientation.E,
+        )
+    val bottomRow =
+        listOf(
+            HouseOrientation.W,
+            HouseOrientation.S,
+            HouseOrientation.SW,
+            HouseOrientation.SE,
+        )
 
     androidx.compose.foundation.layout.Column(
         modifier = modifier.fillMaxWidth(),

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriManage Pro - Blueprint</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Outfit:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#6e4300",
+                    "warning": "#D4AC0D",
+                    "tertiary-fixed-dim": "#6edc8f",
+                    "on-tertiary-fixed-variant": "#005228",
+                    "tertiary-fixed": "#8af9a9",
+                    "dark-background": "#0C1013",
+                    "surface-tint": "#006b5f",
+                    "outline-variant": "#bdc9c5",
+                    "on-surface-variant": "#3e4946",
+                    "primary-container": "#1e8275",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#131d24",
+                    "secondary-container": "#fcae49",
+                    "on-secondary-fixed-variant": "#663e00",
+                    "light-surface-variant": "#E1E4E7",
+                    "dark-success": "#27AE60",
+                    "outline": "#6e7976",
+                    "secondary": "#865300",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#99f3e3",
+                    "dark-primary": "#2ECC71",
+                    "dark-surface": "#171F26",
+                    "secondary-fixed-dim": "#ffb963",
+                    "on-primary-fixed-variant": "#005047",
+                    "primary-fixed-dim": "#7dd6c7",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#dae3ee",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#e6effa",
+                    "surface-bright": "#f7f9ff",
+                    "inverse-primary": "#7dd6c7",
+                    "inverse-surface": "#28313a",
+                    "on-surface": "#131d24",
+                    "dark-warning": "#F1C40F",
+                    "surface-container-low": "#ecf4ff",
+                    "on-secondary-fixed": "#2b1700",
+                    "surface": "#f7f9ff",
+                    "tertiary": "#006a35",
+                    "dark-secondary": "#F39C12",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#d2dbe6",
+                    "dark-danger": "#E74C3C",
+                    "on-tertiary-fixed": "#00210c",
+                    "on-primary-container": "#f2fffb",
+                    "tertiary-container": "#008645",
+                    "background": "#f7f9ff",
+                    "primary": "#00685c",
+                    "on-tertiary-container": "#f4fff2",
+                    "error": "#ba1a1a",
+                    "light-surface": "#EDEFF1",
+                    "dark-surface-variant": "#242F3A",
+                    "secondary-fixed": "#ffddb9",
+                    "on-primary-fixed": "#00201c",
+                    "light-background": "#F5F7F8",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#dae3ee",
+                    "inverse-on-surface": "#e8f2fd",
+                    "danger": "#CB4335",
+                    "success": "#229954"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "large": "24px",
+                    "small": "8px",
+                    "medium": "16px",
+                    "micro": "4px",
+                    "baseline": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "numeric-data": ["Inter"],
+                    "title-md": ["Outfit"],
+                    "display-lg": ["Outfit"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "numeric-data": ["15px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "title-md": ["20px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "22px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .blueprint-grid {
+            background-image: 
+                linear-gradient(to right, rgba(189, 201, 197, 0.2) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(189, 201, 197, 0.2) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .blueprint-inner-grid {
+            background-image: 
+                linear-gradient(to right, rgba(189, 201, 197, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(189, 201, 197, 0.1) 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+        .ripple-effect:active {
+            background-size: 100%;
+            transition: background 0s;
+        }
+        .canvas-container {
+            cursor: grab;
+        }
+        .canvas-container:active {
+            cursor: grabbing;
+        }
+        @keyframes pulse-green {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 153, 84, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 153, 84, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 153, 84, 0); }
+        }
+        .animate-pulse-green {
+            animation: pulse-green 2s infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-surface selection:bg-primary-container">
+<!-- Top Navigation Bar -->
+<header class="w-full top-0 sticky z-40 bg-surface shadow-sm flex justify-between items-center px-large py-medium">
+<div class="flex items-center gap-medium">
+<button class="material-symbols-outlined text-primary hover:bg-surface-container-high transition-colors p-small rounded-full active:scale-95 duration-150">menu</button>
+<h1 class="font-display-lg text-display-lg text-primary">AgriManage Pro</h1>
+</div>
+<div class="flex items-center gap-medium">
+<div class="hidden md:flex items-center bg-surface-container-low px-medium py-micro rounded-full border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-success animate-pulse-green mr-small"></span>
+<span class="font-label-sm text-label-sm text-on-surface">En Direct</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden border-2 border-primary">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a senior agricultural manager with short gray hair and a confident expression. He is wearing a clean, dark teal polo shirt. The background is a blurred office with technical agricultural charts. High-quality lighting, professional corporate photography style, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADBsZSJLWhQmhSu9BG_T6Rgj4Od6ezAeBngTjRpvTobgelwdImrJTxJK00GNQT5sDU-aS-HqqdKM0mnfHXqcmtaLF6UkL4iYT5GIqKa6R_FTAwSNFJYaBZBlAxAos3fLQHza14NPh9PKBmPL7_WInt8sdXlhcZNJzEVfXR1lfgvsnUHxfBAulwYDMPoQSStRJnpQriftFG-zPBlfSQZniAM7e2a_WelNd6OBA-7WbuY947bZX_d_n-HicDe1RX87ZYaQHRn15DYEIK"/>
+</div>
+</div>
+</header>
+<main class="flex flex-col h-[calc(100vh-64px-64px)] md:h-[calc(100vh-80px)] overflow-hidden">
+<!-- Content Area: Blueprint Canvas -->
+<div class="relative flex-grow bg-white overflow-hidden canvas-container">
+<!-- Blueprint Background Grid -->
+<div class="absolute inset-0 blueprint-grid">
+<div class="absolute inset-0 blueprint-inner-grid"></div>
+</div>
+<!-- Blueprint Canvas Content -->
+<div class="relative w-[3000px] h-[1000px] transition-transform duration-300 origin-center p-large flex items-center justify-center translate-x-[-800px]" id="canvas">
+<!-- The Building Structure (120m x 10m scaled) -->
+<div class="relative bg-white border-4 border-outline text-on-surface shadow-lg" style="width: 2400px; height: 200px;">
+<!-- Ruler Markers -->
+<div class="absolute -top-10 left-0 w-full flex justify-between px-micro text-outline font-numeric-data text-label-sm">
+<span>0m</span>
+<span>30m</span>
+<span>60m</span>
+<span>90m</span>
+<span>120m</span>
+</div>
+<div class="absolute -left-12 top-0 h-full flex flex-col justify-between py-micro text-outline font-numeric-data text-label-sm">
+<span>10m</span>
+<span>0m</span>
+</div>
+<!-- Internal Layout Elements -->
+<div class="absolute inset-0 grid grid-cols-12 gap-0">
+<!-- Exhaust Fans (Left Side) -->
+<div class="col-span-1 border-r border-dashed border-outline-variant flex flex-col justify-around items-center bg-surface-container-lowest">
+<span class="material-symbols-outlined text-primary text-[32px]">cyclone</span>
+<span class="material-symbols-outlined text-primary text-[32px]">cyclone</span>
+<span class="material-symbols-outlined text-primary text-[32px]">cyclone</span>
+</div>
+<!-- Main Feeding/Water Area -->
+<div class="col-span-10 relative">
+<!-- Feeding Lines -->
+<div class="absolute top-1/4 w-full h-1 bg-on-secondary-container opacity-30 flex justify-around">
+<div class="w-4 h-4 -mt-1.5 rounded-full bg-secondary-container border border-secondary"></div>
+<div class="w-4 h-4 -mt-1.5 rounded-full bg-secondary-container border border-secondary"></div>
+<div class="w-4 h-4 -mt-1.5 rounded-full bg-secondary-container border border-secondary"></div>
+<div class="w-4 h-4 -mt-1.5 rounded-full bg-secondary-container border border-secondary"></div>
+<div class="w-4 h-4 -mt-1.5 rounded-full bg-secondary-container border border-secondary"></div>
+</div>
+<!-- Watering Lines -->
+<div class="absolute top-3/4 w-full h-1 bg-blue-500 opacity-30 flex justify-around">
+<div class="w-3 h-3 -mt-1 rounded-full bg-blue-100 border border-blue-500"></div>
+<div class="w-3 h-3 -mt-1 rounded-full bg-blue-100 border border-blue-500"></div>
+<div class="w-3 h-3 -mt-1 rounded-full bg-blue-100 border border-blue-500"></div>
+<div class="w-3 h-3 -mt-1 rounded-full bg-blue-100 border border-blue-500"></div>
+<div class="w-3 h-3 -mt-1 rounded-full bg-blue-100 border border-blue-500"></div>
+</div>
+<!-- Heaters (Distributed) -->
+<div class="absolute inset-0 flex items-center justify-around px-large">
+<div class="p-small bg-error-container rounded-lg border border-error flex items-center gap-small shadow-sm">
+<span class="material-symbols-outlined text-danger" style="font-variation-settings: 'FILL' 1;">mode_fan_off</span>
+<span class="font-numeric-data text-label-sm text-danger">H1</span>
+</div>
+<div class="p-small bg-error-container rounded-lg border border-error flex items-center gap-small shadow-sm ring-2 ring-blue-400">
+<span class="material-symbols-outlined text-danger" style="font-variation-settings: 'FILL' 1;">mode_fan_off</span>
+<span class="font-numeric-data text-label-sm text-danger">H2</span>
+<!-- Selection Ring Handle -->
+<div class="absolute -top-2 -right-2 w-4 h-4 bg-white border-2 border-blue-500 rounded-full"></div>
+</div>
+<div class="p-small bg-error-container rounded-lg border border-error flex items-center gap-small shadow-sm">
+<span class="material-symbols-outlined text-danger" style="font-variation-settings: 'FILL' 1;">mode_fan_off</span>
+<span class="font-numeric-data text-label-sm text-danger">H3</span>
+</div>
+</div>
+</div>
+<!-- Technical Room -->
+<div class="col-span-1 border-l border-outline flex items-center justify-center bg-light-surface-variant">
+<span class="material-symbols-outlined text-outline">settings</span>
+</div>
+</div>
+<!-- Dimension Tag -->
+<div class="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-surface px-medium py-micro border border-outline-variant rounded-full font-numeric-data text-label-sm">
+                        Bâtiment A1 : 120.0m x 10.0m
+                    </div>
+</div>
+</div>
+<!-- Floating Controls (Left Bottom) - Zoom & Edit -->
+<div class="absolute bottom-large left-large flex flex-col gap-medium">
+<div class="flex flex-col bg-surface shadow-lg rounded-xl border border-outline-variant overflow-hidden">
+<button class="p-medium hover:bg-surface-container-high active:bg-surface-container-highest transition-colors border-b border-outline-variant" onclick="zoomIn()">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="p-medium hover:bg-surface-container-high active:bg-surface-container-highest transition-colors border-b border-outline-variant" onclick="zoomOut()">
+<span class="material-symbols-outlined">zoom_out</span>
+</button>
+<button class="p-medium hover:bg-surface-container-high active:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">recenter</span>
+</button>
+</div>
+<button class="p-medium bg-primary text-on-primary rounded-xl shadow-xl flex items-center justify-center hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined mr-small">edit</span>
+<span class="font-label-sm">Modifier le plan</span>
+</button>
+</div>
+<!-- Legend Panel (Right Top) -->
+<div class="absolute top-large right-large w-64 bg-surface/90 backdrop-blur-md border border-outline-variant rounded-xl shadow-lg p-medium">
+<h3 class="font-title-md text-title-md mb-small border-b border-outline-variant pb-micro">Légende</h3>
+<div class="space-y-medium">
+<div class="flex items-center gap-medium">
+<span class="material-symbols-outlined text-primary">cyclone</span>
+<span class="text-body-md font-body-md">Ventilateur d'extraction</span>
+</div>
+<div class="flex items-center gap-medium">
+<span class="material-symbols-outlined text-danger" style="font-variation-settings: 'FILL' 1;">mode_fan_off</span>
+<span class="text-body-md font-body-md">Chauffage</span>
+</div>
+<div class="flex items-center gap-medium">
+<div class="w-4 h-4 rounded-full bg-secondary-container border border-secondary"></div>
+<span class="text-body-md font-body-md">Alimentation/Eau</span>
+</div>
+<div class="pt-small mt-small border-t border-outline-variant">
+<div class="flex items-center justify-between">
+<span class="text-label-sm text-outline uppercase">Précision</span>
+<span class="font-numeric-data text-label-sm text-success">± 0.05m</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Info Bar (Desktop) / Status Bar -->
+<div class="hidden md:flex bg-surface-container-high px-large py-small justify-between items-center border-t border-outline-variant">
+<div class="flex gap-large">
+<div class="flex flex-col">
+<span class="text-label-sm text-outline uppercase">Capacité max</span>
+<span class="font-numeric-data text-body-lg">24,000 unités</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-sm text-outline uppercase">Densité act.</span>
+<span class="font-numeric-data text-body-lg">18.5 / m²</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-sm text-outline uppercase">Dernière MaJ</span>
+<span class="font-numeric-data text-body-lg">Il y a 2 min</span>
+</div>
+</div>
+<div class="flex gap-medium">
+<button class="px-medium py-micro border border-primary text-primary rounded-full font-label-sm hover:bg-primary-container/10 transition-colors">Exporter PDF</button>
+<button class="px-medium py-micro bg-primary text-on-primary rounded-full font-label-sm hover:shadow-md transition-shadow">Sauvegarder</button>
+</div>
+</div>
+</main>
+<!-- Mobile Navigation Bar -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface shadow-lg border-t border-outline-variant h-16 flex justify-around items-center">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-medium py-micro hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="font-label-sm text-label-sm">Projects</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-medium py-micro">
+<span class="material-symbols-outlined">architecture</span>
+<span class="font-label-sm text-label-sm">Design</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-medium py-micro hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">finance_mode</span>
+<span class="font-label-sm text-label-sm">Reports</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-medium py-micro hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="font-label-sm text-label-sm">Health</span>
+</button>
+</nav>
+<script>
+        let scale = 1;
+        const canvas = document.getElementById('canvas');
+        
+        function zoomIn() {
+            scale = Math.min(scale + 0.1, 2);
+            updateTransform();
+        }
+
+        function zoomOut() {
+            scale = Math.max(scale - 0.1, 0.5);
+            updateTransform();
+        }
+
+        function updateTransform() {
+            canvas.style.transform = `scale(${scale}) translate(-800px)`;
+        }
+
+        // Basic Pan logic for UX feel
+        let isDragging = false;
+        let startX, startY, scrollLeft, scrollTop;
+        const container = canvas.parentElement;
+
+        container.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX - container.offsetLeft;
+            startY = e.pageY - container.offsetTop;
+            scrollLeft = container.scrollLeft;
+            scrollTop = container.scrollTop;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isDragging = false;
+        });
+
+        container.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const y = e.pageY - container.offsetTop;
+            const walkX = (x - startX) * 1.5;
+            const walkY = (y - startY) * 1.5;
+            container.scrollLeft = scrollLeft - walkX;
+            container.scrollTop = scrollTop - walkY;
+        });
+    </script>
+</body></html>

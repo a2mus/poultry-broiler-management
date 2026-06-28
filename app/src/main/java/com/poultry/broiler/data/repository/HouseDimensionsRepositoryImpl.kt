@@ -21,21 +21,22 @@ import javax.inject.Singleton
  * @property houseDimensionsDao Room DAO performing the actual reads and writes.
  */
 @Singleton
-class HouseDimensionsRepositoryImpl @Inject constructor(
-    private val houseDimensionsDao: HouseDimensionsDao,
-) : HouseDimensionsRepository {
+class HouseDimensionsRepositoryImpl
+    @Inject
+    constructor(
+        private val houseDimensionsDao: HouseDimensionsDao,
+    ) : HouseDimensionsRepository {
+        override fun getDimensionsByProjectId(projectId: String): Flow<HouseDimensions?> {
+            return houseDimensionsDao.getByProjectId(projectId).map { entity ->
+                entity?.toDomain()
+            }
+        }
 
-    override fun getDimensionsByProjectId(projectId: String): Flow<HouseDimensions?> {
-        return houseDimensionsDao.getByProjectId(projectId).map { entity ->
-            entity?.toDomain()
+        override suspend fun saveDimensions(dimensions: HouseDimensions) {
+            houseDimensionsDao.upsert(dimensions.toEntity())
+        }
+
+        override suspend fun deleteDimensionsByProjectId(projectId: String) {
+            houseDimensionsDao.deleteByProjectId(projectId)
         }
     }
-
-    override suspend fun saveDimensions(dimensions: HouseDimensions) {
-        houseDimensionsDao.upsert(dimensions.toEntity())
-    }
-
-    override suspend fun deleteDimensionsByProjectId(projectId: String) {
-        houseDimensionsDao.deleteByProjectId(projectId)
-    }
-}

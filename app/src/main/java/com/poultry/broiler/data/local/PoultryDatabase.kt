@@ -27,7 +27,6 @@ import com.poultry.broiler.data.local.entity.ProjectEntity
 )
 @TypeConverters(GrowthTargetListConverter::class)
 abstract class PoultryDatabase : RoomDatabase() {
-
     abstract fun breedProfileDao(): BreedProfileDao
 
     abstract fun equipmentItemDao(): EquipmentItemDao
@@ -44,27 +43,28 @@ abstract class PoultryDatabase : RoomDatabase() {
          * index on `updatedAt` to support the default most-recently-modified
          * sort order.
          */
-        val MIGRATION_1_2: Migration = object : Migration(1, 2) {
-            override fun migrate(db: SupportSQLiteDatabase) {
-                db.execSQL(
-                    """
-                    CREATE TABLE IF NOT EXISTS projects (
-                        id TEXT NOT NULL PRIMARY KEY,
-                        name TEXT NOT NULL,
-                        type TEXT NOT NULL,
-                        status TEXT NOT NULL DEFAULT 'DRAFT',
-                        location TEXT,
-                        createdAt INTEGER NOT NULL,
-                        updatedAt INTEGER NOT NULL,
-                        syncTimestamp INTEGER
+        val MIGRATION_1_2: Migration =
+            object : Migration(1, 2) {
+                override fun migrate(db: SupportSQLiteDatabase) {
+                    db.execSQL(
+                        """
+                        CREATE TABLE IF NOT EXISTS projects (
+                            id TEXT NOT NULL PRIMARY KEY,
+                            name TEXT NOT NULL,
+                            type TEXT NOT NULL,
+                            status TEXT NOT NULL DEFAULT 'DRAFT',
+                            location TEXT,
+                            createdAt INTEGER NOT NULL,
+                            updatedAt INTEGER NOT NULL,
+                            syncTimestamp INTEGER
+                        )
+                        """.trimIndent(),
                     )
-                    """.trimIndent(),
-                )
-                db.execSQL(
-                    "CREATE INDEX IF NOT EXISTS index_projects_updatedAt ON projects(updatedAt)",
-                )
+                    db.execSQL(
+                        "CREATE INDEX IF NOT EXISTS index_projects_updatedAt ON projects(updatedAt)",
+                    )
+                }
             }
-        }
 
         /**
          * Migration from database version 2 → 3.
@@ -74,33 +74,35 @@ abstract class PoultryDatabase : RoomDatabase() {
          * `projectId` enforcing the 1:1 relationship. `CASCADE` delete keeps
          * dimensions tidy when a project is removed.
          */
-        val MIGRATION_2_3: Migration = object : Migration(2, 3) {
-            override fun migrate(db: SupportSQLiteDatabase) {
-                db.execSQL(
-                    """
-                    CREATE TABLE IF NOT EXISTS `house_dimensions` (
-                        `id` TEXT NOT NULL PRIMARY KEY,
-                        `projectId` TEXT NOT NULL,
-                        `length` REAL NOT NULL,
-                        `width` REAL NOT NULL,
-                        `wallHeight` REAL NOT NULL,
-                        `roofType` TEXT NOT NULL,
-                        `ridgeHeight` REAL,
-                        `wallMaterial` TEXT NOT NULL,
-                        `floorType` TEXT NOT NULL,
-                        `insulationType` TEXT NOT NULL,
-                        `insulationThickness` REAL,
-                        `orientation` TEXT NOT NULL,
-                        `createdAt` INTEGER NOT NULL,
-                        `updatedAt` INTEGER NOT NULL,
-                        FOREIGN KEY(`projectId`) REFERENCES `projects`(`id`) ON DELETE CASCADE
+        val MIGRATION_2_3: Migration =
+            object : Migration(2, 3) {
+                override fun migrate(db: SupportSQLiteDatabase) {
+                    db.execSQL(
+                        """
+                        CREATE TABLE IF NOT EXISTS `house_dimensions` (
+                            `id` TEXT NOT NULL PRIMARY KEY,
+                            `projectId` TEXT NOT NULL,
+                            `length` REAL NOT NULL,
+                            `width` REAL NOT NULL,
+                            `wallHeight` REAL NOT NULL,
+                            `roofType` TEXT NOT NULL,
+                            `ridgeHeight` REAL,
+                            `wallMaterial` TEXT NOT NULL,
+                            `floorType` TEXT NOT NULL,
+                            `insulationType` TEXT NOT NULL,
+                            `insulationThickness` REAL,
+                            `orientation` TEXT NOT NULL,
+                            `createdAt` INTEGER NOT NULL,
+                            `updatedAt` INTEGER NOT NULL,
+                            FOREIGN KEY(`projectId`) REFERENCES `projects`(`id`) ON DELETE CASCADE
+                        )
+                        """.trimIndent(),
                     )
-                    """.trimIndent(),
-                )
-                db.execSQL(
-                    "CREATE UNIQUE INDEX IF NOT EXISTS `index_house_dimensions_projectId` ON `house_dimensions` (`projectId`)",
-                )
+                    db.execSQL(
+                        "CREATE UNIQUE INDEX IF NOT EXISTS `index_house_dimensions_projectId` " +
+                            "ON `house_dimensions` (`projectId`)",
+                    )
+                }
             }
-        }
     }
 }

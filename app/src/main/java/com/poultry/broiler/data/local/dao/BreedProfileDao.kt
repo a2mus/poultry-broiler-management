@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BreedProfileDao {
-
     @Query("SELECT * FROM breed_profiles ORDER BY breed_name ASC")
     fun getAll(): Flow<List<BreedProfileEntity>>
 

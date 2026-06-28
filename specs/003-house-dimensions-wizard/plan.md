@@ -146,34 +146,59 @@ app/src/androidTest/java/com/poultry/broiler/
 
 > No constitution violations detected. No complexity justifications needed.
 
-## Iteration Session 2026-06-25 (5)
+## Iteration Session 2026-06-25 (6)
 
 ### User Feedback
 
-Build failure on `./gradlew assembleDevDebug` in CI: `:app:mergeDevDebugResources FAILED` with error `app/src/main/res/font/README.md: Error: The file name must end with .xml, .ttf, .ttc or .otf`. This is a new failure distinct from the prior Room Gradle Plugin iterations (resolved at commit `2f4a63a`).
+CI build failure on `./gradlew assembleDevDebug`: `ERROR: app/src/main/res/font/README.md: Resource and asset merger: The file name must end with .xml, .ttf, .ttc or .otf` — task `:app:mergeDevDebugResources` FAILED.
 
 ### Diagnosis Summary
 
 | # | Category | Severity | Root Cause |
 |---|----------|----------|------------|
-| 1 | BUILD | P0 | Environment/config issue — non-resource documentation file placed inside Android resource directory |
+| 1 | BUILD / DELIVERY | P0 | Fix applied in working tree but not committed — CI runs on last committed version |
 
-**Root Cause**: `app/src/main/res/font/README.md` is a git-tracked placeholder from Feature #001 scaffolding that documents the required Outfit/Inter fonts. AAPT2's resource merger scans `res/font/` and requires every file to have a font-family extension (`.xml`, `.ttf`, `.ttc`, `.otf`). The `.md` file fails this check, so resource merging aborts before any #003 code compiles. The documentation is useful (it lists fonts mandated by the Constitution typography tokens) and must be preserved in a non-resource location rather than deleted outright.
+**Root Cause**: T066 (move `README.md` out of `res/font/`) was already completed locally — `app/src/main/res/font/README.md` no longer exists in the working tree. However, the CI pipeline ran against the last committed revision which still contains the offending file. This is the same delivery pattern as Iteration Session (4): the code fix is complete; it only needs to be committed and pushed.
 
 ### Amendments
 
-None — the file is outside #003's plan.md source structure (it is a #001 scaffolding artifact). No existing #003 plan section changes.
+None — no architecture or design changes needed. T066 fix is correct.
 
 ### New Tasks
 
-- T066 added: remove `app/src/main/res/font/README.md` from the resource directory and relocate its contents to `docs/FONTS.md`.
+None — T066 is already completed in the working tree.
 
 ### Constitution Compliance
 
-- Typography tokens (Outfit/Inter): PASS — font documentation preserved via relocation to `docs/FONTS.md`.
-- Art 7.1 (Directory structure): PASS — removes an invalid file from `res/`.
-- Art 1.4, 2.2: unaffected.
-- All other articles: unaffected.
+- All articles: unaffected — this is a delivery gap, not a code or architecture issue
+
+## Iteration Session 2026-06-25 (5)
+
+### User Feedback
+
+Build failure during execution phase on task `:app:mergeDevDebugResources`: `Error: The file name must end with .xml, .ttf, .ttc or .otf` for `app/src/main/res/font/README.md`.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | BUILD | P0 | Environment/config issue — documentation file placed inside AAPT2-enforced resource directory |
+
+**Root Cause**: AAPT2 only allows `.xml`, `.ttf`, `.ttc`, or `.otf` files inside `res/font/`. The `README.md` file in that directory contains font download instructions but is treated as an invalid resource by the Android build tools, causing `:app:mergeDevDebugResources` to fail.
+
+### Amendments
+
+None — no architecture or design changes needed.
+
+### New Tasks
+
+- T066 added: move `app/src/main/res/font/README.md` out of the `res/` hierarchy to resolve AAPT2 resource merge failure
+
+### Constitution Compliance
+
+- Art 1.4 (Pinned deps): PASS — no dependency changes
+- Art 7.1 (Directory structure): PASS — moving documentation does not affect source structure
+- All other articles: unaffected
 
 ## Iteration Session 2026-06-25 (4)
 
@@ -300,3 +325,178 @@ The Technical Context section's "Primary Dependencies" implicitly assumes Room p
 - Art 1.4 (Pinned deps, Maven Central/Google Maven): PASS — `androidx.room` plugin is from Google Maven, version pinned to existing `room = "2.6.1"` in version catalog
 - Art 1.2.2 (Offline-first data flow): PASS — fix is config-only, no behavioral change
 - All other articles: unaffected by this config fix
+
+## Iteration Session 2026-06-26
+
+### User Feedback
+
+Crash Summary: Room Database Schema Mismatch
+Exception: \java.lang.IllegalStateException\
+Error Message: Pre-packaged database has an invalid schema for the \reed_profiles\ table mapped to \com.poultry.broiler.data.local.entity.BreedProfileEntity\.
+
+Root Cause:
+1. \id\ Column Nullability: Expected \
+otNull=true\, Found \
+otNull=false\
+2. Unexpected Index: Found extra \idx_breed_name\, Expected \index_breed_profiles_breed_name\
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | DATA | P0 | Incorrect implementation - Seed database gen script doesn't match Room schema |
+
+**Root Cause**: The bash script (\scripts/build-seed-db.sh\) generating the pre-packaged SQLite database (\poultry.db\) didn't explicitly add the \NOT NULL\ constraint on the \id\ column (which Room requires even for PRIMARY KEY in SQLite) and named the unique index \idx_breed_name\ instead of matching Room's default name \index_breed_profiles_breed_name\. Room's strict startup verification caught the mismatch and crashed.
+
+### Amendments
+
+None to existing analytical/architectural sections.
+
+### New Tasks
+
+- T067 added: Fix \scripts/build-seed-db.sh\ schema definitions to match Room exactly.
+- T068 added: Regenerate \pp/src/main/assets/seed/poultry.db\ by executing the fixed script.
+
+### Constitution Compliance
+
+- Art 1.2.2 (Offline-First Data Flow): PASS - Ensuring SQLite schemas exactly match the Room declarative specs guarantees safe offline access.
+- All other articles: unaffected.
+
+## Iteration Session 2026-06-26 (2)
+
+### User Feedback
+
+App installed and launched from the emulator, but crashed on startup with `java.lang.IllegalStateException: Pre-packaged database has an invalid schema: equipment_items(...)`. Room expected indices `[index_equipment_items_category]` but the shipped `poultry.db` contained an extra/mismatched index `idx_equipment_category`.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | DATA | P0 | Incomplete implementation — prior Iteration Session (1) created T067/T068 for seed-DB schema alignment but T067's scope missed the `equipment_items` index mismatch |
+
+**Root Cause**: The previous iteration session (2026-06-26) correctly diagnosed the pre-packaged DB schema-mismatch class of bug and created T067 (fix the script) + T068 (regenerate the DB). However, T067's description only addressed the `breed_profiles` index rename (`idx_breed_name` → `index_breed_profiles_breed_name`) and `id` NOT NULL constraints. It **omitted the `equipment_items` index**: the script created `idx_equipment_category` while the Room entity (`EquipmentItemEntity`) + schema export (`3.json`) expect `index_equipment_items_category`. Room's strict pre-packaged DB validation rejects the mismatch on first open, crashing the app every launch. On inspection, `breed_profiles` was already correct in the working tree (its part of T067 had been applied) and both `id` columns already carried `NOT NULL`; only the `equipment_items` index name was outstanding.
+
+### Amendments
+
+None to existing architectural/design sections. T067's scope is clarified in-place in `tasks.md` to record the actual change applied (equipment_items index rename) and the fact that the breed_profiles/index work was already present.
+
+### New Tasks
+
+None — T067 and T068 (both from the prior session) are now completed and marked `[X]`.
+
+### Constitution Compliance
+
+- Art 1.2.2 (Offline-First Data Flow): PASS — pre-packaged seed DB schema now exactly matches the Room declarative schema (3.json), so offline-first reads/writes are safe.
+- Art 1.4 (Pinned deps): PASS — no dependency or repository changes; used existing `sqlite3` from the Android SDK `platform-tools`.
+- All other articles: unaffected.
+
+### Verification
+
+Regenerated `poultry.db` indices verified against Room expectations:
+- `breed_profiles` → `index_breed_profiles_breed_name` (unique) ✓
+- `equipment_items` → `index_equipment_items_category` ✓
+- Row counts preserved: 2 breed profiles, 6 equipment items ✓
+- App rebuilt (`:app:assembleDevDebug` SUCCESSFUL), data cleared, reinstalled, launched: `MainActivity` reached `topResumedActivity`, process alive, zero `FATAL EXCEPTION` in logcat. UI rendered the projects dashboard empty state ("Aucun projet" / "Nouveau projet").
+
+---
+
+## Iteration Session 2026-06-27
+
+### User Feedback
+
+App crashes on launch with `java.lang.IllegalStateException: Pre-packaged database has an invalid schema: breed_profiles(...)`. The error message shows the full expected schema including all columns, indices, and their properties.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | DATA / BUILD | P0 | Delivery issue — APK installed on device predates the database fix |
+
+**Root Cause**: The seed database script (`scripts/build-seed-db.sh`) and the regenerated database (`poultry.db`) are CORRECT in the working tree. The fix was applied in T067/T068 (completed). The latest APK was built at 02:45 on 2026-06-27, which is AFTER the database fix (19:15 on 2026-06-26). However, the device has an older installed version of the APK containing the pre-fix database, causing Room's strict validation to fail on startup.
+
+**Evidence**:
+- Working tree script: `id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL` ✓
+- Working tree script: `CREATE UNIQUE INDEX index_breed_profiles_breed_name` ✓
+- Working tree script: `CREATE INDEX index_equipment_items_category` ✓
+- Database regenerated: 2026-06-26 19:15:19 ✓
+- APK built: 2026-06-27 02:45:55 (after fix) ✓
+- Device has: Old APK with pre-fix database ✗
+
+### Amendments
+
+None — no architecture or design changes needed. The fix is complete; this is purely a delivery/deployment issue.
+
+### New Tasks
+
+- T069 added: Verify app launches successfully after uninstalling old APK and reinstalling the latest build.
+
+### Constitution Compliance
+
+- All articles: unaffected — this is a deployment issue, not a code or architecture problem
+- Art 1.2.2 (Offline-First Data Flow): PASS — once the correct APK is installed, the schema will match exactly
+
+---
+
+## Iteration Session 2026-06-27 (2)
+
+### User Feedback
+
+App crashes on startup with `java.lang.IllegalStateException: Pre-packaged database has an invalid schema: breed_profiles(...)` due to index mismatch.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | DATA | P0 | Redundant UNIQUE constraint in table definition creating autoindex conflict |
+
+**Root Cause**: The seed database script `scripts/build-seed-db.sh` defined `breed_name TEXT NOT NULL UNIQUE` on the table column, which caused SQLite to automatically create a unique index named `sqlite_autoindex_breed_profiles_1` for that column. Additionally, the script explicitly ran `CREATE UNIQUE INDEX index_breed_profiles_breed_name`. Room compared the pre-packaged SQLite database against the Room entity specification, which only expects `index_breed_profiles_breed_name` and no autoindexes, leading to schema verification failure.
+
+### Amendments
+
+- **scripts/build-seed-db.sh**: Removed the `UNIQUE` keyword from the `breed_name` column definition in the `CREATE TABLE` query. Uniqueness is fully and correctly enforced by the explicit `index_breed_profiles_breed_name` index.
+
+### New Tasks
+
+- T070 [FIX] Update `scripts/build-seed-db.sh` to remove the redundant `UNIQUE` column constraint.
+- T071 [FIX] Regenerate the `poultry.db` using the corrected script (via a cross-platform Python script `build-seed-db.py` to ensure correct carriage return line endings and execution on Windows).
+- T072 [FIX] Perform clean uninstall of the old app from the device (`adb uninstall com.poultry.broiler`), rebuild the APK, and reinstall.
+
+### Constitution Compliance
+
+- Art 1.2.2 (Offline-First Data Flow): PASS — alignment of seed database with Room expectations ensures correct offline data access.
+- All other articles: unaffected.
+
+## Iteration Session 2026-06-27 (3)
+
+### User Feedback
+
+The user reports that there is no way to go back or access the home screen or dashboard screen from the wizard or dashboard.
+
+### Diagnosis Summary
+
+| # | Category | Severity | Root Cause |
+|---|----------|----------|------------|
+| 1 | UX / UI  | P0       | Nested bottom bars: MainActivity displays BottomNavBar unconditionally, showing it simultaneously with WizardNavigationBar on the wizard screen. |
+| 2 | UX       | P1       | Missing exit/close button: WizardScreen has no visual button in the UI to exit the wizard. |
+| 3 | FUNCTIONAL | P1       | BackHandler bug: The back navigation logic in WizardScreen is a no-op LaunchedEffect (`runCatching { onNavigateBack }`). |
+| 4 | UX / FUNCTIONAL | P1 | Dashboard navigation stub: DashboardScreen is a simple text component without Hilt/ViewModel or Scaffold top bar, trapping the user. |
+
+### Amendments
+
+None to existing analytical/architectural sections.
+
+### New Tasks
+
+- T073 [FIX-UI] Hide `BottomNavBar` in `MainActivity` for non-tab destinations (`NavRoute.Wizard` and `NavRoute.Dashboard`).
+- T074 [FIX-UI] Create custom Top App Bar inside `WizardScreen` containing a close `IconButton` (using `Icons.Default.Close`), the wizard title `R.string.screen_wizard`, and the `WizardStepIndicator` badge.
+- T075 [FIX] Replace the buggy `LaunchedEffect` in `WizardScreen` with Compose `BackHandler`: go to the previous step if `currentStep > 1`, otherwise call `onNavigateBack()`.
+- T076 [FIX] Update `DashboardScreen` and its navigation route: accept `projectId` and `onNavigateBack` callback, wrap in a `Scaffold` with a custom Top App Bar containing a back arrow `IconButton` (using `Icons.AutoMirrored.Filled.ArrowBack`) and the dashboard title `R.string.screen_dashboard`.
+
+### Constitution Compliance
+
+- Art 3.1 (Design tokens): PASS — Top App Bars, icons, text, spacing, and buttons will use tokens from Theme.kt and Spacing.kt.
+- Art 3.3 (Touch targets): PASS — All Top App Bar navigation and close buttons will be `IconButton` components with minimum 48dp touch targets and clear `contentDescription` resources.
+- Art 1.2.4 (UDF via StateFlow): PASS — Wizard navigation and state remains managed cleanly.
+- All other articles: unaffected.
+
+

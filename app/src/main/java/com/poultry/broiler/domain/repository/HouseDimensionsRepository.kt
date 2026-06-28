@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow
  * depends on this interface — never on Room directly (Constitution Art 7.3).
  */
 interface HouseDimensionsRepository {
-
     /**
      * Emits the dimensions for [projectId], or `null` while none are stored.
      */

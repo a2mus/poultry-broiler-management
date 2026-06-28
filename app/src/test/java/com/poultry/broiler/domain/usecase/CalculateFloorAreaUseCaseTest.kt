@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class CalculateFloorAreaUseCaseTest {
-
     private val useCase = CalculateFloorAreaUseCase()
 
     @org.junit.jupiter.api.DisplayName("area is length times width")

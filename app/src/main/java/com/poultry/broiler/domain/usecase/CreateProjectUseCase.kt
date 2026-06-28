@@ -17,46 +17,48 @@ import javax.inject.Inject
  * @return [Result.success] with the created [Project], or
  *         [Result.failure] with a [ProjectValidationException].
  */
-class CreateProjectUseCase @Inject constructor(
-    private val repository: ProjectRepository,
-) {
+class CreateProjectUseCase
+    @Inject
+    constructor(
+        private val repository: ProjectRepository,
+    ) {
+        suspend operator fun invoke(
+            name: String,
+            type: ProjectType,
+            location: String?,
+        ): Result<Project> {
+            val trimmedName = name.trim()
+            val trimmedLocation = location?.trim()?.takeIf { it.isNotEmpty() }
 
-    suspend operator fun invoke(
-        name: String,
-        type: ProjectType,
-        location: String?,
-    ): Result<Project> {
-        val trimmedName = name.trim()
-        val trimmedLocation = location?.trim()?.takeIf { it.isNotEmpty() }
+            if (trimmedName.isEmpty()) {
+                return Result.failure(ProjectValidationException.EmptyName)
+            }
+            if (trimmedName.length > MAX_NAME_LENGTH) {
+                return Result.failure(ProjectValidationException.NameTooLong)
+            }
+            if (trimmedLocation != null && trimmedLocation.length > MAX_LOCATION_LENGTH) {
+                return Result.failure(ProjectValidationException.LocationTooLong)
+            }
 
-        if (trimmedName.isEmpty()) {
-            return Result.failure(ProjectValidationException.EmptyName)
+            val now = System.currentTimeMillis()
+            val project =
+                Project(
+                    id = UUID.randomUUID().toString(),
+                    name = trimmedName,
+                    type = type,
+                    status = ProjectStatus.DRAFT,
+                    location = trimmedLocation,
+                    createdAt = now,
+                    updatedAt = now,
+                    syncTimestamp = null,
+                )
+
+            repository.insertProject(project)
+            return Result.success(project)
         }
-        if (trimmedName.length > MAX_NAME_LENGTH) {
-            return Result.failure(ProjectValidationException.NameTooLong)
-        }
-        if (trimmedLocation != null && trimmedLocation.length > MAX_LOCATION_LENGTH) {
-            return Result.failure(ProjectValidationException.LocationTooLong)
-        }
 
-        val now = System.currentTimeMillis()
-        val project = Project(
-            id = UUID.randomUUID().toString(),
-            name = trimmedName,
-            type = type,
-            status = ProjectStatus.DRAFT,
-            location = trimmedLocation,
-            createdAt = now,
-            updatedAt = now,
-            syncTimestamp = null,
-        )
-
-        repository.insertProject(project)
-        return Result.success(project)
+        companion object {
+            const val MAX_NAME_LENGTH = 200
+            const val MAX_LOCATION_LENGTH = 300
+        }
     }
-
-    companion object {
-        const val MAX_NAME_LENGTH = 200
-        const val MAX_LOCATION_LENGTH = 300
-    }
-}

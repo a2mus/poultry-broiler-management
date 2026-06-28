@@ -6,7 +6,6 @@ package com.poultry.broiler.presentation.home
  * Consumed via [HomeViewModel.navigationEvent] Flow in [HomeScreen].
  */
 sealed interface HomeNavigation {
-
     /** Navigate to the design wizard for a New Installation project. */
     data class ToWizard(val projectId: String) : HomeNavigation
 

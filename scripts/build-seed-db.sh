@@ -18,8 +18,8 @@ PRAGMA journal_mode=WAL;
 PRAGMA foreign_keys=OFF;
 
 CREATE TABLE IF NOT EXISTS breed_profiles (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    breed_name TEXT NOT NULL UNIQUE,
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    breed_name TEXT NOT NULL,
     supplier TEXT NOT NULL,
     growth_targets_json TEXT NOT NULL,
     min_density_kg_m2 REAL NOT NULL,
@@ -31,10 +31,10 @@ CREATE TABLE IF NOT EXISTS breed_profiles (
     description TEXT
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS idx_breed_name ON breed_profiles(breed_name);
+CREATE UNIQUE INDEX IF NOT EXISTS index_breed_profiles_breed_name ON breed_profiles(breed_name);
 
 CREATE TABLE IF NOT EXISTS equipment_items (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name TEXT NOT NULL,
     category TEXT NOT NULL,
     brand TEXT,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS equipment_items (
     description TEXT
 );
 
-CREATE INDEX IF NOT EXISTS idx_equipment_category ON equipment_items(category);
+CREATE INDEX IF NOT EXISTS index_equipment_items_category ON equipment_items(category);
 
 -- Ross 308 breed profile with weekly growth targets
 INSERT INTO breed_profiles (breed_name, supplier, growth_targets_json, min_density_kg_m2, max_density_kg_m2, target_fcr, cycle_duration_days, target_weight_g, mortality_rate_pct, description)

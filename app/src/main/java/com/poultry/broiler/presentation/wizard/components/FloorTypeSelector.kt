@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Agriculture
 import androidx.compose.material.icons.filled.Foundation
-import androidx.compose.material.icons.filled.TileWork
+import androidx.compose.material.icons.filled.GridOn
+import androidx.compose.material.icons.filled.Terrain
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -46,14 +46,14 @@ fun FloorTypeSelector(
         FloorCard(
             modifier = Modifier.weight(1f),
             label = stringResource(R.string.wizard_floor_type_dirt),
-            icon = Icons.Filled.Agriculture,
+            icon = Icons.Filled.Terrain,
             selected = selectedType == FloorType.DIRT,
             onClick = { onSelect(FloorType.DIRT) },
         )
         FloorCard(
             modifier = Modifier.weight(1f),
             label = stringResource(R.string.wizard_floor_type_slat),
-            icon = Icons.Filled.TileWork,
+            icon = Icons.Filled.GridOn,
             selected = selectedType == FloorType.SLAT,
             onClick = { onSelect(FloorType.SLAT) },
         )

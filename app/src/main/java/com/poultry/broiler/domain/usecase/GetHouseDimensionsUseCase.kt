@@ -10,13 +10,14 @@ import javax.inject.Inject
  * while none have been saved yet. A thin pass-through over the repository
  * that keeps the presentation layer decoupled from Room (Constitution Art 7.3).
  */
-class GetHouseDimensionsUseCase @Inject constructor(
-    private val repository: HouseDimensionsRepository,
-) {
-    /**
-     * @param projectId Foreign key referencing the owning project.
-     * @return A [Flow] emitting the dimensions, or `null` while absent.
-     */
-    operator fun invoke(projectId: String): Flow<HouseDimensions?> =
-        repository.getDimensionsByProjectId(projectId)
-}
+class GetHouseDimensionsUseCase
+    @Inject
+    constructor(
+        private val repository: HouseDimensionsRepository,
+    ) {
+        /**
+         * @param projectId Foreign key referencing the owning project.
+         * @return A [Flow] emitting the dimensions, or `null` while absent.
+         */
+        operator fun invoke(projectId: String): Flow<HouseDimensions?> = repository.getDimensionsByProjectId(projectId)
+    }

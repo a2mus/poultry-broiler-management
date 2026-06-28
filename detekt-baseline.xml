@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>ComplexCondition:DimensionPreviewCanvas.kt$length != null &amp;&amp; width != null &amp;&amp; length &gt; 0.0 &amp;&amp; width &gt; 0.0</ID>
+    <ID>ComplexCondition:WizardViewModel.kt$WizardViewModel$length == null || width == null || wallHeight == null || roofType == null || wallMaterial == null || floorType == null || insulationType == null || orientation == null</ID>
+    <ID>LongMethod:BottomSheet.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun BottomSheet( title: String? = null, modifier: Modifier = Modifier, content: @Composable ColumnScope.() -&gt; Unit, )</ID>
+    <ID>LongMethod:DeleteConfirmationDialog.kt$@Composable fun DeleteConfirmationDialog( projectName: String, onConfirm: () -&gt; Unit, onDismiss: () -&gt; Unit, )</ID>
+    <ID>LongMethod:DimensionPreviewCanvas.kt$@Composable fun DimensionPreviewCanvas( length: Double?, width: Double?, orientation: HouseOrientation?, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:EditProjectDialog.kt$@Composable fun EditProjectDialog( project: Project, onDismiss: () -&gt; Unit, onConfirm: (name: String, location: String?) -&gt; Unit, )</ID>
+    <ID>LongMethod:HomeScreen.kt$@Composable fun HomeScreen( onNavigateToWizard: (projectId: String) -&gt; Unit, onNavigateToDashboard: (projectId: String) -&gt; Unit, modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewModel(), )</ID>
+    <ID>LongMethod:HomeScreen.kt$@Composable private fun ProjectBentoGrid( projects: List&lt;Project&gt;, onProjectClick: (Project) -&gt; Unit, onEdit: (Project) -&gt; Unit, onDuplicate: (Project) -&gt; Unit, onDelete: (Project) -&gt; Unit, onNewProject: () -&gt; Unit, )</ID>
+    <ID>LongMethod:HouseDimensionsMapperTest.kt$HouseDimensionsMapperTest$@Test fun toEntity_thenToDomain_roundTripsAllFields()</ID>
+    <ID>LongMethod:HouseDimensionsStep.kt$@Composable fun HouseDimensionsStep( formState: DimensionsFormState, onIntent: (WizardIntent) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:InsulationConfigSection.kt$@Composable private fun InsulationTypeRow( selectedType: InsulationType?, onSelect: (InsulationType) -&gt; Unit, )</ID>
+    <ID>LongMethod:MainActivity.kt$MainActivity$override fun onCreate(savedInstanceState: Bundle?)</ID>
+    <ID>LongMethod:NewProjectDialog.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun NewProjectDialog( onDismiss: () -&gt; Unit, onConfirm: (name: String, type: ProjectType, location: String?) -&gt; Unit, )</ID>
+    <ID>LongMethod:NewProjectPlaceholderCard.kt$@Composable fun NewProjectPlaceholderCard( onClick: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:NumericInputField.kt$@Composable fun NumericInputField( value: String, onValueChange: (String) -&gt; Unit, label: String, unitLabel: String, errorMessage: String? = null, enabled: Boolean = true, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:OrientationSelector.kt$@Composable fun OrientationSelector( selectedOrientation: HouseOrientation?, onSelect: (HouseOrientation) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:PoultryNavHost.kt$@Composable fun PoultryNavHost( navController: NavHostController, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:ProjectCard.kt$@Composable private fun TypeBadge(type: ProjectType)</ID>
+    <ID>LongMethod:ProjectCard.kt$@OptIn(ExperimentalFoundationApi::class) @Composable fun ProjectCard( project: Project, onClick: () -&gt; Unit, onLongClick: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:ProjectContextMenu.kt$@Composable fun ProjectContextMenu( expanded: Boolean, onDismiss: () -&gt; Unit, onEdit: () -&gt; Unit, onDuplicate: () -&gt; Unit, onDelete: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:ProjectSearchBar.kt$@Composable fun ProjectSearchBar( query: String, onQueryChange: (String) -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:SelectableCard.kt$@Composable internal fun SelectableCard( label: String, selected: Boolean, icon: ImageVector?, onClick: () -&gt; Unit, modifier: Modifier = Modifier, contentDescription: String? = null, )</ID>
+    <ID>LongMethod:ValidateHouseDimensionsUseCase.kt$ValidateHouseDimensionsUseCase$operator fun invoke(dimensions: HouseDimensions): DimensionValidationResult</ID>
+    <ID>LongMethod:WizardNavigationBar.kt$@Composable fun WizardNavigationBar( canGoNext: Boolean, canGoPrevious: Boolean, onNext: () -&gt; Unit, onPrevious: () -&gt; Unit, modifier: Modifier = Modifier, )</ID>
+    <ID>LongMethod:WizardScreen.kt$@Composable fun WizardScreen( projectId: String, onNavigateBack: () -&gt; Unit, modifier: Modifier = Modifier, viewModel: WizardViewModel = hiltViewModel(), )</ID>
+    <ID>LongMethod:WizardViewModel.kt$WizardViewModel$fun load(projectId: String)</ID>
+    <ID>LongMethod:WizardViewModel.kt$WizardViewModel$fun onIntent( intent: WizardIntent, projectId: String, )</ID>
+    <ID>LongMethod:WizardViewModel.kt$WizardViewModel$private fun autoSave( form: DimensionsFormState, projectId: String, )</ID>
+    <ID>LongMethod:WizardViewModel.kt$WizardViewModel$private fun composeFieldErrors( intent: WizardIntent, form: DimensionsFormState, ): Map&lt;DimensionField, String&gt;</ID>
+    <ID>LongMethod:WizardViewModel.kt$WizardViewModel$private fun domainFieldErrors(form: DimensionsFormState): Map&lt;DimensionField, String&gt;</ID>
+    <ID>MagicNumber:HouseOrientation.kt$HouseOrientation.E$90</ID>
+    <ID>MagicNumber:HouseOrientation.kt$HouseOrientation.NE$45</ID>
+    <ID>MagicNumber:HouseOrientation.kt$HouseOrientation.NW$315</ID>
+    <ID>MagicNumber:HouseOrientation.kt$HouseOrientation.S$180</ID>
+    <ID>MagicNumber:HouseOrientation.kt$HouseOrientation.SE$135</ID>
+    <ID>MagicNumber:HouseOrientation.kt$HouseOrientation.SW$225</ID>
+    <ID>MagicNumber:HouseOrientation.kt$HouseOrientation.W$270</ID>
+    <ID>TooGenericExceptionCaught:WizardViewModel.kt$WizardViewModel$t: Throwable</ID>
+  </CurrentIssues>
+</SmellBaseline>

@@ -13,6 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.poultry.broiler.presentation.theme.DialogCornerRadius
+import com.poultry.broiler.presentation.theme.LocalSpacing
+import com.poultry.broiler.presentation.theme.PoultryElevation
 import com.poultry.broiler.presentation.theme.PoultryTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,18 +26,20 @@ fun BottomSheet(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val sheetState = rememberModalBottomSheetState()
+    val spacing = LocalSpacing.current
 
     ModalBottomSheet(
         onDismissRequest = {},
         sheetState = sheetState,
-        shape = RoundedCornerShape(
-            topStart = 28.dp,
-            topEnd = 28.dp,
-            bottomStart = 0.dp,
-            bottomEnd = 0.dp,
-        ),
+        shape =
+            RoundedCornerShape(
+                topStart = DialogCornerRadius,
+                topEnd = DialogCornerRadius,
+                bottomStart = 0.dp,
+                bottomEnd = 0.dp,
+            ),
         containerColor = MaterialTheme.colorScheme.surface,
-        tonalElevation = 12.dp,
+        tonalElevation = PoultryElevation.modal,
         dragHandle = {},
         modifier = modifier,
     ) {
@@ -43,10 +48,11 @@ fun BottomSheet(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .padding(top = 24.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = spacing.medium)
+                        .padding(top = spacing.large),
             )
         }
         content()
@@ -58,10 +64,11 @@ fun BottomSheet(
 @Composable
 private fun BottomSheetPreview() {
     PoultryTheme {
+        val spacing = LocalSpacing.current
         BottomSheet(title = "Détails") {
             Text(
                 text = "Contenu de la fiche",
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier.padding(spacing.medium),
             )
         }
     }

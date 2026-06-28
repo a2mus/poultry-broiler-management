@@ -26,132 +26,133 @@ import javax.inject.Inject
  * Enum fields are non-null by the type system; the use case still returns
  * `REQUIRED` keys for completeness if any are null defensively.
  */
-class ValidateHouseDimensionsUseCase @Inject constructor() {
+class ValidateHouseDimensionsUseCase
+    @Inject
+    constructor() {
+        /**
+         * Validates [dimensions] and returns the result.
+         *
+         * Always returns [DimensionValidationResult.Valid] when all rules pass,
+         * otherwise returns [DimensionValidationResult.Invalid] with one entry
+         * per failing rule.
+         */
+        operator fun invoke(dimensions: HouseDimensions): DimensionValidationResult {
+            val errors = mutableMapOf<DimensionField, DimensionErrorCode>()
 
-    /**
-     * Validates [dimensions] and returns the result.
-     *
-     * Always returns [DimensionValidationResult.Valid] when all rules pass,
-     * otherwise returns [DimensionValidationResult.Invalid] with one entry
-     * per failing rule.
-     */
-    operator fun invoke(dimensions: HouseDimensions): DimensionValidationResult {
-        val errors = mutableMapOf<DimensionField, DimensionErrorCode>()
+            validateMeters(
+                value = dimensions.length.value,
+                maxValue = LENGTH_MAX,
+                field = DimensionField.LENGTH,
+                exceedsMaxCode = DimensionErrorCode.LENGTH_EXCEEDS_MAX,
+                errors = errors,
+            )
+            validateMeters(
+                value = dimensions.width.value,
+                maxValue = WIDTH_MAX,
+                field = DimensionField.WIDTH,
+                exceedsMaxCode = DimensionErrorCode.WIDTH_EXCEEDS_MAX,
+                errors = errors,
+            )
+            validateMeters(
+                value = dimensions.wallHeight.value,
+                maxValue = WALL_HEIGHT_MAX,
+                field = DimensionField.WALL_HEIGHT,
+                exceedsMaxCode = DimensionErrorCode.WALL_HEIGHT_EXCEEDS_MAX,
+                errors = errors,
+            )
+            validateRidgeHeight(
+                roofType = dimensions.roofType,
+                ridgeHeight = dimensions.ridgeHeight,
+                errors = errors,
+            )
+            validateInsulationThickness(
+                insulationType = dimensions.insulationType,
+                thickness = dimensions.insulationThickness,
+                errors = errors,
+            )
 
-        validateMeters(
-            value = dimensions.length.value,
-            maxValue = LENGTH_MAX,
-            field = DimensionField.LENGTH,
-            exceedsMaxCode = DimensionErrorCode.LENGTH_EXCEEDS_MAX,
-            errors = errors,
-        )
-        validateMeters(
-            value = dimensions.width.value,
-            maxValue = WIDTH_MAX,
-            field = DimensionField.WIDTH,
-            exceedsMaxCode = DimensionErrorCode.WIDTH_EXCEEDS_MAX,
-            errors = errors,
-        )
-        validateMeters(
-            value = dimensions.wallHeight.value,
-            maxValue = WALL_HEIGHT_MAX,
-            field = DimensionField.WALL_HEIGHT,
-            exceedsMaxCode = DimensionErrorCode.WALL_HEIGHT_EXCEEDS_MAX,
-            errors = errors,
-        )
-        validateRidgeHeight(
-            roofType = dimensions.roofType,
-            ridgeHeight = dimensions.ridgeHeight,
-            errors = errors,
-        )
-        validateInsulationThickness(
-            insulationType = dimensions.insulationType,
-            thickness = dimensions.insulationThickness,
-            errors = errors,
-        )
-
-        return if (errors.isEmpty()) {
-            DimensionValidationResult.Valid
-        } else {
-            DimensionValidationResult.Invalid(fieldErrors = errors.toMap())
-        }
-    }
-
-    private fun validateMeters(
-        value: Double,
-        maxValue: Double,
-        field: DimensionField,
-        exceedsMaxCode: DimensionErrorCode,
-        errors: MutableMap<DimensionField, DimensionErrorCode>,
-    ) {
-        if (value <= 0.0) {
-            errors[field] = DimensionErrorCode.MUST_BE_POSITIVE
-            return
-        }
-        if (value > maxValue) {
-            errors[field] = exceedsMaxCode
-        }
-    }
-
-    private fun validateRidgeHeight(
-        roofType: RoofType,
-        ridgeHeight: Meters?,
-        errors: MutableMap<DimensionField, DimensionErrorCode>,
-    ) {
-        when (roofType) {
-            RoofType.PITCHED -> {
-                val v = ridgeHeight?.value
-                if (v == null) {
-                    errors[DimensionField.RIDGE_HEIGHT] =
-                        DimensionErrorCode.RIDGE_HEIGHT_REQUIRED_FOR_PITCHED
-                } else if (v <= 0.0) {
-                    errors[DimensionField.RIDGE_HEIGHT] = DimensionErrorCode.MUST_BE_POSITIVE
-                } else if (v > RIDGE_HEIGHT_MAX) {
-                    errors[DimensionField.RIDGE_HEIGHT] =
-                        DimensionErrorCode.RIDGE_HEIGHT_EXCEEDS_MAX
-                }
-            }
-            else -> {
-                if (ridgeHeight != null) {
-                    errors[DimensionField.RIDGE_HEIGHT] =
-                        DimensionErrorCode.RIDGE_HEIGHT_NOT_ALLOWED_WHEN_NOT_PITCHED
-                }
+            return if (errors.isEmpty()) {
+                DimensionValidationResult.Valid
+            } else {
+                DimensionValidationResult.Invalid(fieldErrors = errors.toMap())
             }
         }
-    }
 
-    private fun validateInsulationThickness(
-        insulationType: InsulationType,
-        thickness: Millimeters?,
-        errors: MutableMap<DimensionField, DimensionErrorCode>,
-    ) {
-        when (insulationType) {
-            InsulationType.NONE -> {
-                if (thickness != null) {
-                    errors[DimensionField.INSULATION_THICKNESS] =
-                        DimensionErrorCode.INSULATION_THICKNESS_NOT_ALLOWED_WHEN_NONE
-                }
+        private fun validateMeters(
+            value: Double,
+            maxValue: Double,
+            field: DimensionField,
+            exceedsMaxCode: DimensionErrorCode,
+            errors: MutableMap<DimensionField, DimensionErrorCode>,
+        ) {
+            if (value <= 0.0) {
+                errors[field] = DimensionErrorCode.MUST_BE_POSITIVE
+                return
             }
-            else -> {
-                val v = thickness?.value
-                if (v == null) {
-                    errors[DimensionField.INSULATION_THICKNESS] =
-                        DimensionErrorCode.INSULATION_THICKNESS_REQUIRED_WHEN_NOT_NONE
-                } else if (v <= 0.0) {
-                    errors[DimensionField.INSULATION_THICKNESS] = DimensionErrorCode.MUST_BE_POSITIVE
-                } else if (v > INSULATION_THICKNESS_MAX) {
-                    errors[DimensionField.INSULATION_THICKNESS] =
-                        DimensionErrorCode.LENGTH_EXCEEDS_MAX
+            if (value > maxValue) {
+                errors[field] = exceedsMaxCode
+            }
+        }
+
+        private fun validateRidgeHeight(
+            roofType: RoofType,
+            ridgeHeight: Meters?,
+            errors: MutableMap<DimensionField, DimensionErrorCode>,
+        ) {
+            when (roofType) {
+                RoofType.PITCHED -> {
+                    val v = ridgeHeight?.value
+                    if (v == null) {
+                        errors[DimensionField.RIDGE_HEIGHT] =
+                            DimensionErrorCode.RIDGE_HEIGHT_REQUIRED_FOR_PITCHED
+                    } else if (v <= 0.0) {
+                        errors[DimensionField.RIDGE_HEIGHT] = DimensionErrorCode.MUST_BE_POSITIVE
+                    } else if (v > RIDGE_HEIGHT_MAX) {
+                        errors[DimensionField.RIDGE_HEIGHT] =
+                            DimensionErrorCode.RIDGE_HEIGHT_EXCEEDS_MAX
+                    }
+                }
+                else -> {
+                    if (ridgeHeight != null) {
+                        errors[DimensionField.RIDGE_HEIGHT] =
+                            DimensionErrorCode.RIDGE_HEIGHT_NOT_ALLOWED_WHEN_NOT_PITCHED
+                    }
                 }
             }
         }
-    }
 
-    companion object {
-        const val LENGTH_MAX = 500.0
-        const val WIDTH_MAX = 100.0
-        const val WALL_HEIGHT_MAX = 15.0
-        const val RIDGE_HEIGHT_MAX = 20.0
-        const val INSULATION_THICKNESS_MAX = 500.0
+        private fun validateInsulationThickness(
+            insulationType: InsulationType,
+            thickness: Millimeters?,
+            errors: MutableMap<DimensionField, DimensionErrorCode>,
+        ) {
+            when (insulationType) {
+                InsulationType.NONE -> {
+                    if (thickness != null) {
+                        errors[DimensionField.INSULATION_THICKNESS] =
+                            DimensionErrorCode.INSULATION_THICKNESS_NOT_ALLOWED_WHEN_NONE
+                    }
+                }
+                else -> {
+                    val v = thickness?.value
+                    if (v == null) {
+                        errors[DimensionField.INSULATION_THICKNESS] =
+                            DimensionErrorCode.INSULATION_THICKNESS_REQUIRED_WHEN_NOT_NONE
+                    } else if (v <= 0.0) {
+                        errors[DimensionField.INSULATION_THICKNESS] = DimensionErrorCode.MUST_BE_POSITIVE
+                    } else if (v > INSULATION_THICKNESS_MAX) {
+                        errors[DimensionField.INSULATION_THICKNESS] =
+                            DimensionErrorCode.LENGTH_EXCEEDS_MAX
+                    }
+                }
+            }
+        }
+
+        companion object {
+            const val LENGTH_MAX = 500.0
+            const val WIDTH_MAX = 100.0
+            const val WALL_HEIGHT_MAX = 15.0
+            const val RIDGE_HEIGHT_MAX = 20.0
+            const val INSULATION_THICKNESS_MAX = 500.0
+        }
     }
-}

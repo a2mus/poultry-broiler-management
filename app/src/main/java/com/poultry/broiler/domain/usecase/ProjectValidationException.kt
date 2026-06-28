@@ -4,7 +4,6 @@ package com.poultry.broiler.domain.usecase
  * Validation errors that can occur during project operations.
  */
 sealed class ProjectValidationException(message: String) : Exception(message) {
-
     /** The project name is empty after trimming. */
     data object EmptyName : ProjectValidationException("Project name is required")
 

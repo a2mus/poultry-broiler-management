@@ -17,38 +17,39 @@ import javax.inject.Singleton
  * and the domain-layer [Project] using [ProjectMapper] extensions.
  */
 @Singleton
-class ProjectRepositoryImpl @Inject constructor(
-    private val projectDao: ProjectDao,
-) : ProjectRepository {
+class ProjectRepositoryImpl
+    @Inject
+    constructor(
+        private val projectDao: ProjectDao,
+    ) : ProjectRepository {
+        override fun getAllProjectsSortedByModified(): Flow<List<Project>> {
+            return projectDao.getAllSortedByUpdatedAt().map { entities ->
+                entities.map { it.toDomain() }
+            }
+        }
 
-    override fun getAllProjectsSortedByModified(): Flow<List<Project>> {
-        return projectDao.getAllSortedByUpdatedAt().map { entities ->
-            entities.map { it.toDomain() }
+        override fun searchProjects(query: String): Flow<List<Project>> {
+            return projectDao.searchByNameOrLocation(query).map { entities ->
+                entities.map { it.toDomain() }
+            }
+        }
+
+        override fun getProjectById(id: String): Flow<Project?> {
+            return projectDao.getById(id).map { entity ->
+                entity?.toDomain()
+            }
+        }
+
+        override suspend fun insertProject(project: Project): String {
+            projectDao.insert(project.toEntity())
+            return project.id
+        }
+
+        override suspend fun updateProject(project: Project) {
+            projectDao.update(project.toEntity())
+        }
+
+        override suspend fun deleteProject(id: String) {
+            projectDao.deleteById(id)
         }
     }
-
-    override fun searchProjects(query: String): Flow<List<Project>> {
-        return projectDao.searchByNameOrLocation(query).map { entities ->
-            entities.map { it.toDomain() }
-        }
-    }
-
-    override fun getProjectById(id: String): Flow<Project?> {
-        return projectDao.getById(id).map { entity ->
-            entity?.toDomain()
-        }
-    }
-
-    override suspend fun insertProject(project: Project): String {
-        projectDao.insert(project.toEntity())
-        return project.id
-    }
-
-    override suspend fun updateProject(project: Project) {
-        projectDao.update(project.toEntity())
-    }
-
-    override suspend fun deleteProject(id: String) {
-        projectDao.deleteById(id)
-    }
-}

@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 interface HouseDimensionsDao {
-
     /**
      * Observes the dimensions record for [projectId], emitting `null` while no
      * record has been persisted yet and the populated entity thereafter.

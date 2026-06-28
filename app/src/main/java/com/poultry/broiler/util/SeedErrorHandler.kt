@@ -2,6 +2,7 @@ package com.poultry.broiler.util
 
 sealed class SeedLoadResult {
     data object Success : SeedLoadResult()
+
     data class Error(
         val exception: Exception,
         val retryCount: Int,
