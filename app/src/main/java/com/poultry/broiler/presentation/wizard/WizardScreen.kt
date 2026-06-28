@@ -12,6 +12,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -59,7 +60,8 @@ fun WizardScreen(
         }
     }
 
-    when (state) {
+    val currentState = state
+    when (currentState) {
         WizardUiState.Loading -> Box(
             modifier = modifier.fillMaxSize(),
             contentAlignment = Alignment.Center,
@@ -74,12 +76,12 @@ fun WizardScreen(
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = state.message,
+                text = currentState.message,
                 color = MaterialTheme.colorScheme.error,
             )
         }
         is WizardUiState.Active -> {
-            val active = state
+            val active = currentState
             // If the user navigates back to Step 1 from a future step
             // (currently unreachable; closed scaffolding for forward-compat),
             // we surface the system back handler.

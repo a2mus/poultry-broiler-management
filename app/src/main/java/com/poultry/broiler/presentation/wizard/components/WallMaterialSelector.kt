@@ -11,7 +11,7 @@ import com.poultry.broiler.domain.model.WallMaterial
 import com.poultry.broiler.presentation.theme.LocalSpacing
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Apartment
-import androidx.compose.material.icons.filled.Backyard
+import androidx.compose.material.icons.filled.Domain
 import androidx.compose.material.icons.filled.Gavel
 
 /**
@@ -52,7 +52,7 @@ fun WallMaterialSelector(
         MaterialCard(
             modifier = Modifier.weight(1f),
             label = stringResource(R.string.wizard_wall_material_prefab),
-            icon = Icons.Filled.Backyard,
+            icon = Icons.Filled.Domain,
             selected = selectedMaterial == WallMaterial.PREFAB,
             onClick = { onSelect(WallMaterial.PREFAB) },
         )

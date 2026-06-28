@@ -87,7 +87,7 @@ fun DimensionPreviewCanvas(
         val usableHeight = canvasHeightPx - 2 * paddingPx
 
         val rect: Rect = if (length != null && width != null && length > 0.0 && width > 0.0) {
-            val aspect = length / width
+            val aspect = (length / width).toFloat()
             var rectWidth = usableWidth
             var rectHeight = usableWidth / aspect
             if (rectHeight > usableHeight) {

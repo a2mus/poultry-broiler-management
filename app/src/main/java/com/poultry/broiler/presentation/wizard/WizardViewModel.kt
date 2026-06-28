@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.poultry.broiler.R
 import com.poultry.broiler.domain.model.HouseDimensions
 import com.poultry.broiler.domain.model.Meters
+import com.poultry.broiler.domain.model.Millimeters
 import com.poultry.broiler.domain.model.SquareMeters
 import com.poultry.broiler.domain.usecase.CalculateFloorAreaUseCase
 import com.poultry.broiler.domain.usecase.GetHouseDimensionsUseCase
@@ -91,7 +92,7 @@ class WizardViewModel @Inject constructor(
                     currentStep = STEP_HOUSE_DIMENSIONS,
                     totalSteps = WIZARD_TOTAL_STEPS,
                     dimensions = formState,
-                    canGoNext = computeCanGoNext(formState),
+                    canGoNext = computeCanGoNext(formState, emptyMap()),
                     canGoPrevious = false,
                     saveError = null,
                 )
@@ -158,6 +159,13 @@ class WizardViewModel @Inject constructor(
         }
 
         val stepAdjustedForm: DimensionsFormState = updatedForm
+
+        // Merge Compose-layer field validation with domain-layer validation.
+        val composeErrors = composeFieldErrors(intent, updatedForm)
+        val domainErrors = domainFieldErrors(updatedForm)
+        val fieldErrors: Map<DimensionField, String> = (composeErrors + domainErrors)
+            .mapValues { it.value }
+
         val canAdvance = when (intent) {
             WizardIntent.GoNext -> computeCanGoNext(stepAdjustedForm, fieldErrors)
             WizardIntent.GoPrevious -> true
@@ -173,12 +181,6 @@ class WizardViewModel @Inject constructor(
             else -> active.currentStep
         }
 
-        // Merge Compose-layer field validation with domain-layer validation.
-        val composeErrors = composeFieldErrors(intent, updatedForm)
-        val domainErrors = domainFieldErrors(updatedForm)
-        val fieldErrors: Map<DimensionField, String> = (composeErrors + domainErrors)
-            .mapValues { it.value }
-
 val nextActive = active.copy(
             currentStep = targetStep,
             dimensions = stepAdjustedForm.copy(fieldErrors = fieldErrors),
@@ -191,8 +193,6 @@ val nextActive = active.copy(
             if (fieldErrors.isEmpty()) {
                 autoSave(nextActive.dimensions, projectId)
             }
-        }
-    }
         }
     }
 
@@ -312,7 +312,7 @@ val nextActive = active.copy(
 
         val ridgeHeight = form.ridgeHeight.toDoubleOrNull()?.let(::Meters)
         val insulationThickness = form.insulationThickness.toDoubleOrNull()?.let(
-            com.poultry.broiler.domain.model::Millimeters,
+            ::Millimeters,
         )
         val dimension = HouseDimensions(
             id = dimensionsId ?: UUID.randomUUID().toString(),
@@ -427,7 +427,7 @@ val nextActive = active.copy(
             floorType = floorType,
             insulationType = insulationType,
             insulationThickness = form.insulationThickness.toDoubleOrNull()?.let(
-                com.poultry.broiler.domain.model::Millimeters,
+                ::Millimeters,
             ),
             orientation = orientation,
             createdAt = System.currentTimeMillis(),
@@ -454,4 +454,6 @@ val nextActive = active.copy(
                         }
                     }
                 }
+        }
+    }
 }

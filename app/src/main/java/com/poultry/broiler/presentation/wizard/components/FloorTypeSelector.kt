@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Agriculture
 import androidx.compose.material.icons.filled.Foundation
-import androidx.compose.material.icons.filled.TileWork
+import androidx.compose.material.icons.filled.GridView
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -53,7 +53,7 @@ fun FloorTypeSelector(
         FloorCard(
             modifier = Modifier.weight(1f),
             label = stringResource(R.string.wizard_floor_type_slat),
-            icon = Icons.Filled.TileWork,
+            icon = Icons.Filled.GridView,
             selected = selectedType == FloorType.SLAT,
             onClick = { onSelect(FloorType.SLAT) },
         )
